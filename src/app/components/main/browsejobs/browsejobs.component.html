@@ -1,0 +1,298 @@
+<div >
+  <div class="h-16 bg-gray-200">
+    <div class="w-[80%] mx-auto flex justify-between items-center py-5">
+      <div class="ml-2">
+        <p class="font-bold">Browse jobs</p>
+      </div>
+      <div class="mr-7">
+        <p>Home / <span class="font-bold"> Browse jobs</span></p>
+      </div>
+    </div>
+  </div>
+  
+  <section class="w-full">
+    <div class="w-[80%] mx-auto">
+      <div class="flex items-center mt-10 shadow-md border border-gray-200 p-3">
+        <span class="mr-5">
+          <fa-icon [icon]="search" size="xl" class="text-[#3094FF]"></fa-icon>
+        </span>
+        <div class="w-full mr-5">
+          <input
+            type="text"
+            placeholder="Search by: Job title, Keywords..."
+            class="outline-none p-2 w-full"
+          />
+        </div>
+        <div
+          class="p-2 w-32 text-center relative bg-gray-200 font-bold mr-4 h-10 rounded-full"
+        >
+          <button class="flex justify-between items-center space-x-2" (click)="showFilterBar()">
+            <fa-icon
+              [icon]="filter"
+              size="sm"
+              class="text-[#3094FF] ml-3"
+            ></fa-icon>
+            <p class="text-[#3094FF]">Filters</p>
+          </button>
+        </div>
+        <div
+          class="bg-[#6BA1FF] text-white p-2 md:w-36 w-72 text-center relative text-[14px] lg:left-2 h-10 rounded-full cursor-pointer"
+        >
+          <button>Browse Jobs</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- filter section -->
+  <section *ngIf="showFilter">
+    <div class="absolute top-0 w-[20%] h-[100dvh] bg-[#6BA1FF] text-white ">
+      <div class="my-5 mx-10 flex justify-between items-center">
+        <div>
+          <h2 class="text-[24px] font-bold text-[#2f4f70]">Filters</h2>
+        </div>
+        <div class="cursor-pointer " (click)="showFilterBar()">
+          <fa-icon
+              [icon]="close"
+              size="xl"
+              class="text-[#2f4f70] cursor-pointer"
+            ></fa-icon>
+        </div>
+      </div>
+      <hr>
+  
+      <div class="my-5 job-filter">
+          <div>
+            <h1 class="font-bold text-[20px] mx-10 text-[#2f4f70]">Job Title</h1>
+            <div class="space-y-2 mx-7">
+              <p>Frontend Developer</p>
+              <p>Backend Developer</p>
+              <p>Angular Developer</p>
+              <p>.NET Developer</p>
+              <p>Data Analyst</p>
+              <p>Data Scientist</p>
+              <p>Software Developer</p>
+            </div>
+          </div>
+      </div>
+      <hr>
+      <div class="my-5 mx-10">
+        <div class="text-[14px]">
+            <label for="" class="font-bold text-[20px] text-[#2f4f70]">Job Type</label>
+            <div class="space-y-3">
+              <div class="flex items-center space-x-2">
+                  <input type="checkbox" name="Full-Time" value="Full-Time" class="">         
+                  <p class="text-white">Full-Time</p>
+              </div>
+            <div class="flex items-center space-x-2">
+                <input type="checkbox" name="Part-Time" value="Part-Time"/>        
+                <p class="text-white">Part-Time</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <input type="checkbox" name="Contract" value="Contract"/>        
+              <p class="text-white">Contract</p>
+          </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="my-5 mx-10">
+      <div class="text-[14px]">
+          <label for="" class="font-bold text-[20px] text-[#2f4f70]">Job Level</label>
+          <div class="space-y-3">
+            <div class="flex items-center space-x-2">
+                <input type="checkbox" name="Junior" value="Junior">         
+                <p class="text-white">Junior</p>
+            </div>
+            <div class="flex items-center space-x-2">
+                <input type="checkbox" name="Mid-Level" value="Mid-Level"/>        
+                <p class="text-white">Mid-Level</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <input type="checkbox" name="Senior" value="Senior"/>        
+             <p class="text-white">Senior</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <input type="checkbox" name="Senior" value="Associate"/>        
+             <p class="text-white">Associate</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <input type="checkbox" name="Trainee" value="Trainee"/>        
+             <p class="text-white">Trainee</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <input type="checkbox" name="Internship" value="Internship"/>        
+             <p class="text-white">Internship</p>
+            </div>
+          </div>
+      </div>
+  </div>
+      <hr>
+      <div class="flex">
+        <div class="bg-[#2f4f70] p-2 w-36 ml-10 mr-5 mt-10 text-center font-semi text-[13px] rounded-full cursor-pointer drop-shadow-xl">
+          <button>Apply Filter</button>
+      </div>
+      <div class="bg-transparent border border-blue-900 p-2 w-36 mt-10 text-center font-semi text-[13px] rounded-full cursor-pointer drop-shadow-xl" (click)="showFilterBar()">
+        <button>Cancel</button>
+      </div>
+  
+      </div>
+    </div>
+  </section>
+
+  <!-- JOBS SECTION -->
+  <div class="w-[80%] mx-auto my-20 space-y-14" >
+    <div class="border border-gray-100 shadow-2xl p-8 space-y-3">
+      <div class="flex items-center space-x-4 ">
+          <div>
+            <fa-icon [icon] = "user" size="xl"></fa-icon>
+          </div>
+          <div>
+            <h1 class="text-[23px] font-bold text-[#3094FF]">Frontend Developer</h1>
+            <p>jenish_pokhrel</p>
+          </div>
+      </div>
+      <hr>
+      <div class="flex justify-between">
+        <div class="space-y-2 ml-8 text-justify">
+          <p><span class="font-bold text-[#2f4f70]">JobType: </span>Full-Time</p>
+          <p><span class="font-bold text-[#2f4f70]">JobLevel: </span>Junior</p>
+          <p><span class="font-bold text-[#2f4f70]">Experience required: </span> 0 - 1 years</p>
+          <p><span class="font-bold text-[#2f4f70]">No. of openings: </span>4</p>
+          <p><span class="font-bold text-[#2f4f70]">Location: </span>Pulchowk, Lalitpur</p>
+        </div>
+        <div class="content-end space-y-5">
+          <div class="bg-gray-200 p-2 md:w-36 w-72 text-center relative text-[14px] lg:left-2 h-10 rounded-full cursor-pointer">
+            <button>View Job</button>
+          </div>
+          <div class="bg-[#6BA1FF] text-white p-2 md:w-36 w-72 text-center relative text-[14px] lg:left-2 h-10 rounded-full cursor-pointer">
+            <button>Apply now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border border-gray-100 shadow-2xl p-8 space-y-3">
+      <div class="flex items-center space-x-4 ">
+          <div>
+            <fa-icon [icon] = "user" size="xl"></fa-icon>
+          </div>
+          <div>
+            <h1 class="text-[23px] font-bold text-[#3094FF]">Backend Developer</h1>
+            <p>jenish_pokhrel</p>
+          </div>
+      </div>
+      <hr>
+      <div class="flex justify-between">
+        <div class="space-y-2 ml-8 text-justify">
+          <p><span class="font-bold ">JobType: </span>Full-Time</p>
+          <p><span class="font-bold ">JobLevel: </span>Junior</p>
+          <p><span class="font-bold">Experience required: </span> 0 - 1 years</p>
+          <p><span class="font-bold ">No. of openings: </span>4</p>
+          <p><span class="font-bold ">Location: </span>Pulchowk, Lalitpur</p>
+        </div>
+        <div class="content-end space-y-5">
+          <div class="bg-gray-200 p-2 md:w-36 w-72 text-center relative text-[14px] lg:left-2 h-10 rounded-full cursor-pointer">
+            <button>View Job</button>
+          </div>
+          <div class="bg-[#6BA1FF] text-white p-2 md:w-36 w-72 text-center relative text-[14px] lg:left-2 h-10 rounded-full cursor-pointer">
+            <button>Apply now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border border-gray-100 shadow-2xl p-8 space-y-3">
+      <div class="flex items-center space-x-4 ">
+          <div>
+            <fa-icon [icon] = "user" size="xl"></fa-icon>
+          </div>
+          <div>
+            <h1 class="text-[23px] font-bold text-[#3094FF]">FullStack Developer</h1>
+            <p>jenish_pokhrel</p>
+          </div>
+      </div>
+      <hr>
+      <div class="flex justify-between">
+        <div class="space-y-2 ml-8 text-justify">
+          <p><span class="font-bold ">JobType: </span>Full-Time</p>
+          <p><span class="font-bold ">JobLevel: </span>Junior</p>
+          <p><span class="font-bold">Experience required: </span> 0 - 1 years</p>
+          <p><span class="font-bold ">No. of openings: </span>4</p>
+          <p><span class="font-bold ">Location: </span>Pulchowk, Lalitpur</p>
+        </div>
+        <div class="content-end space-y-5">
+          <div class="bg-gray-200 p-2 md:w-36 w-72 text-center relative text-[14px] lg:left-2 h-10 rounded-full cursor-pointer">
+            <button>View Job</button>
+          </div>
+          <div class="bg-[#6BA1FF] text-white p-2 md:w-36 w-72 text-center relative text-[14px] lg:left-2 h-10 rounded-full cursor-pointer">
+            <button>Apply now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border border-gray-100 shadow-2xl p-8 space-y-3">
+      <div class="flex items-center space-x-4 ">
+          <div>
+            <fa-icon [icon] = "user" size="xl"></fa-icon>
+          </div>
+          <div>
+            <h1 class="text-[23px] font-bold text-[#3094FF]">Frontend Developer</h1>
+            <p>jenish_pokhrel</p>
+          </div>
+      </div>
+      <hr>
+      <div class="flex justify-between">
+        <div class="space-y-2 ml-8 text-justify">
+          <p><span class="font-bold ">JobType: </span>Full-Time</p>
+          <p><span class="font-bold ">JobLevel: </span>Junior</p>
+          <p><span class="font-bold">Experience required: </span> 0 - 1 years</p>
+          <p><span class="font-bold ">No. of openings: </span>4</p>
+          <p><span class="font-bold ">Location: </span>Pulchowk, Lalitpur</p>
+        </div>
+        <div class="content-end space-y-5">
+          <div class="bg-gray-200 p-2 md:w-36 w-72 text-center relative text-[14px] lg:left-2 h-10 rounded-full cursor-pointer">
+            <button>View Job</button>
+          </div>
+          <div class="bg-[#6BA1FF] text-white p-2 md:w-36 w-72 text-center relative text-[14px] lg:left-2 h-10 rounded-full cursor-pointer">
+            <button>Apply now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border border-gray-100 shadow-2xl p-8 space-y-3">
+      <div class="flex items-center space-x-4 ">
+          <div>
+            <fa-icon [icon] = "user" size="xl"></fa-icon>
+          </div>
+          <div>
+            <h1 class="text-[23px] font-bold text-[#3094FF]">Frontend Developer</h1>
+            <p>jenish_pokhrel</p>
+          </div>
+      </div>
+      <hr>
+      <div class="flex justify-between">
+        <div class="space-y-2 ml-8 text-justify">
+          <p><span class="font-bold ">JobType: </span>Full-Time</p>
+          <p><span class="font-bold ">JobLevel: </span>Junior</p>
+          <p><span class="font-bold">Experience required: </span> 0 - 1 years</p>
+          <p><span class="font-bold ">No. of openings: </span>4</p>
+          <p><span class="font-bold ">Location: </span>Pulchowk, Lalitpur</p>
+        </div>
+        <div class="content-end space-y-5">
+          <div class="bg-gray-200 p-2 md:w-36 w-72 text-center relative text-[14px] lg:left-2 h-10 rounded-full cursor-pointer">
+            <button>View Job</button>
+          </div>
+          <div class="bg-[#6BA1FF] text-white p-2 md:w-36 w-72 text-center relative text-[14px] lg:left-2 h-10 rounded-full cursor-pointer">
+            <button>Apply now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,121 @@
+<div class="mx-7 md:mx-auto my-20 md:w-[50%] ">
+    <div>
+        <h1 class="text-3xl font-semibold">Registration Form</h1>
+    </div>
+    <div>
+        <p class="font-light mt-1">Register yourself and connect with us || Already have an account? 
+            <span class="font-bold text-[#3094FF] cursor-pointer" routerLink="/login">Login here</span>
+        </p>
+    </div>
+    <div class="mt-12">
+        <form action="">
+            <div class="mb-8">
+                <label for="" class="font-bold">Are you a?</label>
+                <div class="flex space-x-8 mt-1">
+                    <div class="flex items-center space-x-2 text-center">
+                        <input type="radio" name="userRole" value="Candidate" checked>         
+                        <p class="text-slate-500">Candidate</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-500">or</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input type="radio" name="userRole" value="Employer">         
+                        <p class="text-slate-500">Employer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="md:mb-7 md:w-full md:flex md:space-x-10">
+                <div class="mb-3 md:w-1/2">
+                    <label for="" class="font-bold">First Name</label>
+                    <input type="text" placeholder="Enter your first name" class="border-2 p-4 w-full">
+                </div>
+                <div class="mb-3 md:w-1/2">
+                    <label for="" class="font-bold">Last Name</label>
+                    <input type="text" placeholder="Enter your last name" class="border-2 p-4 w-full">
+                </div>
+            </div>
+            <div class="md:mb-7 md:w-full md:flex md:space-x-10">
+                <div class="mb-3 md:w-1/2">
+                    <label for="" class="font-bold">Username</label>
+                    <input type="text" placeholder="Enter your username" class="border-2 p-4 w-full">
+                </div>
+                <div class=" mb-3 md:w-1/2">
+                    <label for="" class="font-bold">Address</label>
+                    <input type="text" placeholder="Enter your address" class="border-2 p-4 w-full">
+                </div>
+            </div>
+            <div class="md:mb-7 mb-3">
+                <label for="" class="font-bold">Email Address</label>
+                <input type="text" placeholder="Enter your email address" class="border-2 p-4 w-full">
+                <p class="text-slate-400 mt-2">Job Application Update will be sent to you on this email id</p>
+            </div>
+            <div class="md:mb-8 mb-3">
+                <label for="" class="font-bold">Mobile Number</label>
+                <input type="text" placeholder="Enter your mobile number" class="border-2 p-4 w-full">
+                <p class="text-slate-400 mt-2">Recruiters will contact you on this number</p>
+            </div>
+            <div class="md:mb-8 mb-3">
+                <label for="" class="font-bold">Are you?</label>
+                <div class="flex space-x-8 mt-1">
+                    <div class="flex items-center space-x-2">
+                        <input type="radio" name="userType" value="Candidate" checked>         
+                        <p class="text-slate-500">Male</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-500">or</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input type="radio" name="userType" value="Employer">         
+                        <p class="text-slate-500">Female</p>
+                    </div>
+                </div>
+            </div>
+            <div class="md:mb-7 md:w-full md:flex md:space-x-10">
+                <div class="mb-3 md:w-1/2">
+                    <label for="" class="font-bold">Position</label>
+                    <input type="text" placeholder="Enter your current position" class="border-2 p-4 w-full">
+                </div>
+                <div class="mb-3 md:w-1/2">
+                    <label for="" class="font-bold">Years of experience</label>
+                    <input type="text" placeholder="Enter your experience in years" class="border-2 p-4 w-full">
+                </div>
+            </div>
+
+            <div class="md:mb-8 mb-3">
+                <label for="" class="font-bold">Select Profile Photo</label>
+                <!-- <img [src] = "selectedImage" alt="selected-Image"> -->
+                <input type="file" (change) = "onFileSelected($event)" accept="image/**" class="md:w-full">
+                <p class="text-slate-400 mt-2">Only .jpg or .png file is accepted</p>
+            </div>
+            <div *ngIf="selectedImage" class="mb-8">
+                <img [src]="selectedImage" alt="Selected Image" width="250">
+              </div>
+
+            <div class="mb-10">
+                <label for="" class="font-bold">Password</label>
+                <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter password" class="border-2 p-4 w-full">
+                <div class="flex">
+                    <input type="checkbox" id="showPassword" (click)="togglePasswordVisibility()" value="Show your password">
+                    <label for="showPassword" class="ml-2">Show your password</label>
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <p class="text-slate-600">By Registring, you agree to the <span class="text-[#3094FF]">Terms and Conditions</span> & 
+                        <span class="text-[#3094FF]">Privacy Policy
+                    </span> of Career Dev</p>
+                </div>
+                <div class="bg-[#6BA1FF] p-4 w-32 mt-10 text-center font-bold text-[14px] text-white cursor-pointer rounded-full">
+                    <button>Register now</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<app-footer></app-footer>
+
+
+<router-outlet></router-outlet>

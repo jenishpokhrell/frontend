@@ -1,0 +1,12 @@
+.job-filter p{
+    cursor: pointer;
+    font-size: 14px;
+    padding-left: 12px;
+    padding-top: 5px;
+    padding-bottom:  5px;
+}
+
+.job-filter p:hover{
+    background-color: #2f4f70;
+    transition: 1s ease;
+}

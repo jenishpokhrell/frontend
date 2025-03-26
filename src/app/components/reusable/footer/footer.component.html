@@ -1,0 +1,92 @@
+<footer class="bg-gradient-to-r from-[#5FA8F5] via-[#3094FF] to-blue-600 ... md:h-[45vh] h-[108vh] contain-content">
+    <div class="md:w-[80%] md:mx-auto">
+      <div
+        class="md:flex md:justify-around md:items-start mb-5 pt-14 md:h-[32vh] text-center md:text-left"
+      >
+        <!-- Logo and Contact Info -->
+        <div class="md:flex md:flex-col md:items-start -mt-5 mb-5">
+          <img src="./assets/logo.png" alt="" width="300" class="mx-auto mb-6" />
+          <div class="text-gray-800 md:mt-5 md:ml-5">
+            <p>Call now: <span class="font-bold">+977 9825413699</span></p>
+            <p>DurbarMarg, Kathmandu, 44600</p>
+          </div>
+        </div>
+  
+        <!-- Quick Links -->
+        <div class="md:flex md:flex-col md:items-start mb-5">
+          <h3 class="text-[17px] font-bold md:mb-5">Quick Link</h3>
+          <div class="text-gray-800 flex flex-col gap-y-2">
+            <p class="cursor-pointer">About</p>
+            <p class="cursor-pointer">Contact</p>
+          </div>
+        </div>
+  
+        <!-- Candidates Section -->
+        <div class="md:flex md:flex-col md:items-start mb-5">
+          <h3 class="text-[17px] font-bold md:mb-5">Candidates</h3>
+          <div class="text-gray-800 flex flex-col gap-y-2">
+            <p class="cursor-pointer">Candidate Dashboard</p>
+            <p
+              class="cursor-pointer"
+              routerLink="/browsejobs"
+              routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              Browse Jobs
+            </p>
+            <p class="cursor-pointer">Applied Jobs</p>
+            <p class="cursor-pointer">Saved Jobs</p>
+          </div>
+        </div>
+  
+        <!-- Employers Section -->
+        <div class="md:flex md:flex-col md:items-start mb-5">
+          <h3 class="text-[17px] font-bold md:mb-5">Employers</h3>
+          <div class="text-gray-800 flex flex-col gap-y-2">
+            <p class="cursor-pointer">Employers Dashboard</p>
+            <p
+              class="cursor-pointer"
+              routerLink="/postjobs"
+              routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              Post Job
+            </p>
+            <p class="cursor-pointer">Saved Candidates</p>
+            <p class="cursor-pointer">Posted Jobs</p>
+          </div>
+        </div>
+  
+        <!-- Support Section -->
+        <div class="md:flex md:flex-col md:items-start mb-5">
+          <h3 class="text-[17px] font-bold md:mb-5">Support</h3>
+          <div class="text-gray-800 flex flex-col gap-y-2">
+            <p class="cursor-pointer">FAQs</p>
+            <p class="cursor-pointer" routerLink="/notfound">Privacy Policy</p>
+            <p class="cursor-pointer">Terms & Conditions</p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div
+        class="mx-5 md:flex md:items-center md:justify-between md:p-5 md:ml-24 text-gray-800"
+      >
+        <div class="text-center md:mt-0 mt-5">
+          <p>&copy;career dev - Job Portal Application. All rights reserved.</p>
+        </div>
+        <div class="flex items-center justify-around md:mr-16 md:mt-1 mt-4">
+          <div class="md:mr-7 hover:scale-125 transition">
+            <img src="./assets/facebook.png" alt="" width="27" />
+          </div>
+          <div class="md:mr-7 hover:scale-125 transition">
+            <img src="./assets/instagram.png" alt="" width="27" />
+          </div>
+          <div class="md:mr-7 hover:scale-125 transition">
+            <img src="./assets/linkedin.png" alt="" width="27" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<router-outlet></router-outlet>
