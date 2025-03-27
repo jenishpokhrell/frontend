@@ -6,6 +6,10 @@ import { PostjobsComponent } from './components/main/postjobs/postjobs.component
 import { PagenotfoundComponent } from './components/public/pagenotfound/pagenotfound.component';
 import { BrowsejobsComponent } from './components/main/browsejobs/browsejobs.component';
 import { AboutUsComponent } from './components/public/about-us/about-us.component';
+import { AdminComponent } from './components/main/dashboard/admin/admin.component';
+import { EmployerComponent } from './components/main/dashboard/employer/employer.component';
+import { CandidateComponent } from './components/main/dashboard/candidate/candidate.component';
+import { ViewjobComponent } from './components/main/viewjob/viewjob.component';
 
 export const routes: Routes = [
     {
@@ -35,5 +39,21 @@ export const routes: Routes = [
     {
         path:'notfound',
         component: PagenotfoundComponent
-    }
+    },
+    {
+        path: 'admindashboard',
+        component: AdminComponent
+    },
+    {
+        path: 'employerdashboard',
+        component: EmployerComponent
+    },
+    {
+        path: 'candidatedashboard',
+        component: CandidateComponent
+    },
+    {
+        path: 'viewjob',
+        component: ViewjobComponent
+    },
 ];

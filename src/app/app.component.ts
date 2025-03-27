@@ -18,8 +18,9 @@ export class AppComponent {
 
   constructor(private router: Router){
     this.router.events.subscribe(() => {
-      this.showNavbar = this.router.url !== '/notfound'
+      this.showNavbar = this.router.url !== '/admindashboard' 
     })
+
   }
 
   toggleMenu(){
