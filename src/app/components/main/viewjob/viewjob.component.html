@@ -1,79 +1,180 @@
 <div>
-    <div class="h-16 bg-gray-200">
-        <div class="w-[80%] mx-auto flex justify-between items-center py-5">
-          <div class="ml-2">
-            <p class="font-bold">Job Details</p>
-          </div>
-          <div class="mr-7 text-[14px]">
-            <p>Home / Browse Jobs / <span class="font-bold">Job Details</span></p>
+  <div class="h-16 bg-gray-200">
+    <div class="w-[80%] mx-auto flex justify-between items-center py-5">
+      <div class="ml-2">
+        <p class="font-bold">Job Details</p>
+      </div>
+      <div class="mr-7 text-[14px]">
+        <p>Home / Browse Jobs / <span class="font-bold">Job Details</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-[80%] mx-auto drop-shadow-2xl my-14">
+    <img
+      src="../assets/teams.jpg"
+      alt="teams"
+      class="rounded-lg bg-slate-200 mx-auto opacity-60"
+    />
+  </div>
+
+  <div class="w-[80%] mx-auto">
+    <div
+      *ngFor="let job of job"
+      class="flex items-center justify-between my-10"
+    >
+      <div class="">
+        <h1 class="text-3xl font-bold text-blue-900 uppercase">
+          {{ job.jobTitle }}
+        </h1>
+        <div class="flex space-x-10 font-extralight text-[14px]">
+          <p>{{ job.jobType }}</p>
+          <p>{{ job.openings }} Vacancies</p>
+        </div>
+      </div>
+      @if (job.isActive == true) {
+        <div
+          class=" flex items-center space-x-8 relative text-[14px] lg:left-2 h-10  cursor-pointer"
+        >
+          <button class="bg-gray-100 w-12 p-3 rounded-full text-black text-center">
+              <fa-icon [icon] = 'save' size="lg" ></fa-icon>
+          </button>
+            <div>
+              <button class="cursor-pointer bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" (click)="JobApply()">
+                Apply now
+              </button>
           </div>
         </div>
-    </div>
-
-    <div class="w-[80%] mx-auto drop-shadow-2xl my-16">
-        <img src="../assets/teams.jpg" alt="teams" class="rounded-lg bg-slate-200 mx-auto opacity-60">
-    </div>
-
-    <div class="w-[80%] mx-auto ">
-        <div class="flex items-center justify-between my-10">
-            <div class="">
-                <h1 class="text-3xl font-bold text-blue-900 uppercase">Frontend Developer</h1>
-                <div class="flex space-x-10 font-extralight text-[14px]">
-                    <p>Full-Time</p>
-                    <p>4 Vacancies</p>
-                </div>
+        }@else {
+          <div
+          class=" flex space-x-6 relative text-[14px] lg:left-2 h-10 cursor-not-allowed"
+        >
+          <div>
+            <button class="bg-gray-100 opacity-60 w-12 p-3 rounded-full text-black text-center cursor-not-allowed">
+                <fa-icon [icon] = 'save' size="lg" ></fa-icon>
+            </button>
             </div>
+            <div>
+              <button class="cursor-not-allowed opacity-60 bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" (click)="JobApply()" disabled>
+                Apply now
+              </button>
+          </div>
+        </div>
+        }
+    </div>
+
+    <hr />
+
+    <div *ngFor="let job of job" class="my-10 flex items-start space-x-20">
+      <div class="my-10 w-[70%]">
+        <div class="border border-gray-300 rounded-xl px-10 py-5">
+          <div class="my-5">
+            <h2 class="text-2xl font-bold text-blue-900">Job Information</h2>
+          </div>
+          <hr />
+          <div>
+            <div class="flex justify-between mt-5">
+              <div class="space-y-5">
+                <p>
+                  Job Type: <span>{{ job.jobType }}</span>
+                </p>
+                <p>
+                  Job Level: <span>{{ job.jobLevel }}</span>
+                </p>
+                <p>
+                  No. of openings: <span>{{ job.openings }}</span>
+                </p>
+                <p>
+                  Salary:
+                  <span>Nrs. {{ job.minSalary }} to {{ job.maxSalary }}</span>
+                </p>
+              </div>
+              <div class="space-y-5">
+                <p>
+                  Experience required: {{ job.minExp }} to
+                  {{ job.maxExp }} years
+                </p>
+                <p>Location: Pulchowk, Lalitpur</p>
+                @if (job.isActive == true) {
+                <p>Status: <span class="text-green-600">Active</span></p>
+                }@else{
+                <p>Status: <span class="text-red-600">Closed </span></p>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="my-10 border border-gray-300 rounded-xl px-10 py-5 space-y-4"
+        >
+          <h2 class="text-2xl font-bold text-blue-900">Description</h2>
+          <hr />
+          <p class="text-justify leading-8">{{ job.jobDescription }}</p>
+        </div>
+        <div
+          class="my-10 border border-gray-300 rounded-xl px-10 py-5 space-y-4"
+        >
+          <h2 class="text-2xl font-bold text-blue-900">Requirements</h2>
+          <hr />
+          <p class="text-justify leading-8">{{ job.requirements }}</p>
+        </div>
+        <div class="my-10">
+          @if (job.isActive == true) {
+          <div
+            class=" flex space-x-6 relative text-[14px] lg:left-2 h-10  cursor-pointer"
+          >
+            <div>
+              <button class="cursor-pointer bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" (click)="JobApply()">
+                Apply now
+              </button>
+            </div>
+            <div>
+              <button class="cursor-pointer bg-gray-100  p-3 md:w-36 w-72 rounded-full">
+                Save Job
+              </button>
+            </div>
+          </div>
+          }@else {
             <div
-                 class="bg-[#6BA1FF] text-white p-2 md:w-36 w-72 text-center relative text-[14px] lg:left-2 h-10 rounded-full cursor-pointer"
-               >
-                 <button>Apply now</button>
-               </div>
-        </div>
-
-        <hr>
-
-        <div class="my-10 flex items-start space-x-20">
-            <div class="my-10 w-[70%] border border-gray-300 rounded-xl px-10 py-5">
-                <div class="my-5">
-                    <h2 class="text-2xl font-bold text-blue-900">Job Information</h2>
-                </div>
-                <hr>
-                <div>
-                    <div class="flex justify-between mt-5">
-                        <div class="space-y-5">
-                            <p>Job Type: Full Time</p>
-                            <p>Job Level: Junior</p>
-                            <p>No. of openings: 4</p>
-                            <p>Salary: Nrs. 30000 to 40000</p>
-                        </div>
-                        <div class="space-y-5">
-                            <p>Experience required: 1 to 2 years</p>
-                            <p>Location: Pulchowk, Lalitpur</p>
-                            <p>Status: <span class="text-green-500">Active</span></p>
-                        </div>
-                    </div>
-                    <div>
-    
-                    </div>
-                </div>
+            class=" flex space-x-6 relative text-[14px] lg:left-2 h-10 cursor-not-allowed"
+          >
+            <div>
+              <button class="cursor-not-allowed opacity-60 bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" (click)="JobApply()" disabled>
+                Apply now
+              </button>
             </div>
-            <div class="w-[30%] my-10 border border-gray-300 rounded-xl px-10 py-5 space-y-5">
-                <div>
-                    <h2 class="text-2xl font-bold text-blue-900 text-center">Employer</h2>
-                    <hr class="my-5">
-                    <img src="../assets/nina.jpg" alt="" class="rounded-full size-40 object-cover ">
-                    <p class="font-bold text-blue-900 text-[20px] mt-5">Nina Dobrev</p>
-                </div>
-                <div class="space-y-7">
-                    <p>Position: Senior HR Manager</p>
-                    <p>Years of experience: 6 years</p>
-                    <p>Contact: 9874125691</p>
-                    <p>Email: ninadobrev123gmail.com</p>
-                    <p></p>
-                </div>
+            <div>
+              <button class=" bg-gray-100 opacity-60  p-3 md:w-36 w-72 cursor-not-allowed rounded-full" disabled>
+                Save Job
+              </button>
             </div>
+          </div>
+          }
         </div>
+      </div>
+      <div
+        class="w-[30%] my-10 border border-gray-300 rounded-xl px-10 py-5 space-y-5"
+      >
+        <div>
+          <h2 class="text-2xl font-bold text-blue-900 text-center">Employer</h2>
+          <hr class="my-5" />
+          <img
+            src="../assets/nina.jpg"
+            alt=""
+            class="rounded-full size-40 object-cover "
+          />
+          <p class="font-bold text-blue-900 text-[20px] mt-5">Nina Dobrev</p>
+        </div>
+        <div class="space-y-7">
+          <p>Position: Senior HR Manager</p>
+          <p>Years of experience: 6 years</p>
+          <p>Contact: 9874125691</p>
+          <p>Email: ninadobrev123gmail.com</p>
+          <p></p>
+        </div>
+      </div>
     </div>
-</div>  
+  </div>
+</div>
 
 <app-footer></app-footer>

@@ -1,0 +1,41 @@
+<header class=" bg-gray-100 dark:bg-gray-800 shadow-sm">
+    <div class="flex items-center justify-between px-6 py-4">
+      <!-- Left Side -->
+      <div class="flex items-center space-x-4">
+        <button (click)="toggleSidebar.emit()" class="text-gray-600 dark:text-gray-300 hover:text-blue-600">
+          <!-- <i class="fas fa-bars"></i> -->
+          <fa-icon [icon] = 'bars'></fa-icon>
+        </button>
+        <h1 class="text-xl font-semibold text-gray-800 dark:text-white">{{ title }}</h1>
+      </div>
+  
+      <!-- Right Side -->
+      <div class="flex items-center space-x-4">
+        <!-- Theme Toggle -->
+        <button (click)=toggleTheme() class="text-gray-600 dark:text-gray-300 hover:text-blue-600">
+          @if (themeService.isDarkMode()) {
+            <fa-icon [icon] = 'sun' size="xl"></fa-icon>
+          }@else {
+            <fa-icon [icon] = 'moon' size="xl"></fa-icon>
+          }
+        </button>
+  
+        <!-- Notifications -->
+        <div class="relative" *ngIf="notifications.length > 0">
+          <button class="text-gray-600 dark:text-gray-300 hover:text-blue-600 relative">
+            <fa-icon [icon] = 'bell' size="xl"></fa-icon>
+            <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+              {{ notifications.length }}
+            </span>
+          </button>
+        </div>
+  
+        <!-- User Profile -->
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
+            U
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>

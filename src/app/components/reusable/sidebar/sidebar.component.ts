@@ -2,6 +2,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faChevronRight, faChevronLeft, faSignOut } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,6 +13,9 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 })
 export class SidebarComponent {
 
+  right = faChevronRight
+  left = faChevronLeft
+  signout = faSignOut
 
   @Input() user: any;
   @Input() menuItems: any = [];

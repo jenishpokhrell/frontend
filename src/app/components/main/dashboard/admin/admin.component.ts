@@ -3,11 +3,12 @@ import { SidebarComponent } from "../../../reusable/sidebar/sidebar.component";
 import { faTachometerAlt, faUserAlt, faUser, faUserClock, faBriefcase, faClipboardList } from '@fortawesome/free-solid-svg-icons';
 import { NgFor } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { HeaderComponent } from '../../../reusable/header/header.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [SidebarComponent, NgFor, FaIconComponent],
+  imports: [SidebarComponent, HeaderComponent, NgFor, FaIconComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 }) 
@@ -65,6 +66,5 @@ export class AdminComponent {
 
   logout(): void {
     console.log('Logout clicked');
-    // Implement logout logic
   }
 }

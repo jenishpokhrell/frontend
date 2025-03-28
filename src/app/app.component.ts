@@ -15,10 +15,11 @@ export class AppComponent {
 
   showNavbar : boolean = true;
   isMenuOpen = false
-
+  
   constructor(private router: Router){
+    const hiddenRoutes = new Set(['/admindashboard', '/candidatedashboard', '/employerdashboard', '/notfound', '/unauthorized'])
     this.router.events.subscribe(() => {
-      this.showNavbar = this.router.url !== '/admindashboard' 
+      this.showNavbar = !hiddenRoutes.has(this.router.url) 
     })
 
   }
