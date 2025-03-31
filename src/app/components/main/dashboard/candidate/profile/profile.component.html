@@ -1,0 +1,85 @@
+<div class="flex h-screen bg-gray-100 dark:bg-gray-900">
+    <app-sidebar [user]="user" 
+                 [menuItems]="menuItems" 
+                 [collapsed]="collapsed"
+                 (toggleCollapse)="toggleSidebar()"
+                 (logout)="logout()"></app-sidebar>
+  
+    <div class="flex-1 flex flex-col overflow-hidden" [class.ml-14]="!collapsed" [class.ml-5]="collapsed">
+      <app-header [title]="'Profile'"
+                  (toggleSidebar)="toggleSidebar()"></app-header>
+  
+      <main class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-800">
+        <div class="w-full">
+            <div> 
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Personal Information</h2>
+            </div>
+            <div class="mt-7 flex items-center justify-between">
+                <div class="flex items-center space-x-20">
+                    <div>
+                        <img src="https://res.cloudinary.com/dnu3li5lc/image/upload/v1741761573/ulcxftilugyiss04prt5.jpg" alt="profile picture" width="200" class="rounded-full">
+                    </div>
+                    <div class="space-y-5">
+                        <div>
+                            <button class="p-2 bg-blue-900 rounded-full w-20 text-[13px] text-white">Update</button>
+                        </div>
+                        <div>
+                            <button class="p-2 dark:bg-gray-400 text-[13px] bg-red-800 rounded-full w-20">Remove</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-900 p-10 mr-32 w-[35%] drop-shadow-2xl">
+                    <div class="mb-5">
+                        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Contact Information</h2>
+                    </div>
+                    <hr class="mb-5">
+                    <div class="text-gray-50 space-y-4">
+                        <p><span class="mr-7"><fa-icon [icon]='location'></fa-icon></span> Anamnagar, Kathmandu</p>
+                        <p><span class="mr-7"><fa-icon [icon]='mail'></fa-icon></span> janedoe123&#64;gmail.com</p>
+                        <p><span class="mr-7"><fa-icon [icon]='contact'></fa-icon></span> 9874521453</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="dark:text-gray-50 flex justify-between space-x-20 mt-10 w-[50%]">
+                    <div class="w-1/2 space-y-2">
+                        <p class="font-bold">Firstname</p>
+                        <p class="bg-gray-700 py-2 pl-4 rounded-3xl">Jane</p>
+                    </div>
+                    <div class="w-1/2 space-y-2">
+                        <p class="font-bold">Lastname</p>
+                        <p class="bg-gray-700 py-2 pl-4 rounded-3xl">Doe</p>
+                    </div>
+                </div>
+                <div class="dark:text-gray-50 flex justify-between space-x-20 mt-10 w-[50%]">
+                    <div class="w-1/2 space-y-2">
+                        <p class="font-bold">Username</p>
+                        <p class="bg-gray-700 py-2 pl-4 rounded-3xl">jane_doe</p>
+                    </div>
+                    <div class="w-1/2 space-y-2">
+                        <p class="font-bold">Gender</p>
+                        <p class="bg-gray-700 py-2 pl-4 rounded-3xl">Female</p>
+                    </div>
+                </div>
+                <div class="dark:text-gray-50 flex justify-between space-x-20 mt-10 w-[50%]">
+                    <div class="w-1/2 space-y-2">
+                        <p class="font-bold">Position</p>
+                        <p class="bg-gray-700 py-2 pl-4 rounded-3xl">Jr. Backend Developer</p>
+                    </div>
+                    <div class="w-1/2 space-y-2">
+                        <p class="font-bold">YOE</p>
+                        <p class="bg-gray-700 py-2 pl-4 rounded-3xl">1 years</p>
+                    </div>
+                </div>
+                <div class="dark:text-gray-50 flex justify-between space-x-20 mt-10 w-[50%]">
+                    <div >
+                        <button class="p-4 bg-blue-900 rounded-full w-36 text-[13px] text-white">Update Profile</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+      </main>
+    </div> 
+  </div>

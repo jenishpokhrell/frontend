@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FooterComponent } from "../../reusable/footer/footer.component";
 import { NgFor } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faBookmark } from '@fortawesome/free-solid-svg-icons';
+// import { faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-viewjob',
@@ -13,7 +14,8 @@ import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 })
 export class ViewjobComponent {
 
-  save = faBookmark
+  aftersave = faBookmark
+  beforesave = faBookmark
 
   job = [{
     jobTitle: '.NET Developer with angular', jobType: 'Full-Time', jobLevel: 'Junior', openings: 4, minExp : 1, maxExp: 2, minSalary: 30000, maxSalary: 40000, location: 'Pulchowk, Lalitpur',
