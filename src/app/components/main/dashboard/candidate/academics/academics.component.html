@@ -14,6 +14,57 @@
             <div> 
                 <h2 class="text-lg font-semibold text-gray-800 dark:text-white">My Academics</h2>
             </div>
+          
+            <div class="text-gray-50 mt-10 text-[14px] w-[50%]">
+              <form [formGroup]="editForm" (submit)="editForm">
+                  <div class="mb-6">
+                      <label for="" class="font-bold">Institution Name</label>
+                      <input type="text" placeholder="Enter your institution name" class="w-full p-3 bg-gray-700 outline-none " formControlName="institutionName">
+                  </div>
+                  <div class="mb-6">
+                    <label for="" class="font-bold">Stream</label>
+                    <input type="text" placeholder="Enter your stream" class="w-full p-3 bg-gray-700 outline-none " formControlName="stream">
+                </div>
+                  <div class="flex space-x-10 w-full mb-6">
+                      <div class="w-1/2">
+                          <label for="" class="font-bold">Start Year</label>
+                          <input type="text" placeholder="Enter starting year (eg. 2024)" class="w-full p-3 bg-gray-700 outline-none " formControlName="startYear">
+                      </div>
+                      <div class="w-1/2">
+                          <label for="" class="font-bold">Graduation Year</label>
+                          <input type="text" placeholder="Enter graduation year (eg. 2028)" class="w-full p-3 bg-gray-700 outline-none " formControlName="graduationYear">
+                      </div>
+                  </div>
+                  <div class="mb-6">
+                      <label for="" class="font-bold">Degree Type</label>
+                      <select name="DegreeType" id="" class=" p-4 w-full bg-gray-700" formControlName="degreeType">
+                        <option value="Bachelor's" class="">Bachelors</option>
+                        <option value="Masters">Masters</option>
+                    </select>
+                  </div>
+                  <div class="mb-6">
+                    <label for="" class="font-bold">Current Semester</label>
+                    <select name="DegreeType" id="" class="p-4 w-full bg-gray-700" formControlName="currentSemester">
+                      <option value="1st">1st</option>
+                      <option value="2nd">2nd</option>
+                      <option value="3rd">3rd</option>
+                      <option value="4th">4th</option>
+                      <option value="5th">5th</option>
+                      <option value="6th">6th</option>
+                      <option value="7th">7th</option>
+                      <option value="8th">8th</option>
+                  </select>
+                </div>
+                  <div class="flex items-center space-x-5">
+                      <div>
+                          <button type="submit" class="rounded-full bg-blue-900 w-36 text-[13px] p-4 font-semibold">Save</button>
+                      </div>
+                      <div>
+                        <button class="rounded-full bg-gray-200 text-black w-36 text-[13px] p-4 font-semibold">Delete</button>
+                    </div>
+                  </div>
+              </form>
+              </div>
         </div>
         
       </main>

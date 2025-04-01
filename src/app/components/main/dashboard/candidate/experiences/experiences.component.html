@@ -1,1 +1,89 @@
-<p>experiences works!</p>
+<div class="flex h-screen bg-gray-100 dark:bg-gray-900">
+    <app-sidebar [user]="user" 
+                 [menuItems]="menuItems" 
+                 [collapsed]="collapsed"
+                 (toggleCollapse)="toggleSidebar()"
+                 (logout)="logout()"></app-sidebar>
+  
+    <div class="flex-1 flex flex-col overflow-hidden" [class.ml-14]="!collapsed" [class.ml-5]="collapsed">
+      <app-header [title]="'Experiences'"
+                  (toggleSidebar)="toggleSidebar()"></app-header>
+  
+      <main class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-800">
+        <div class="w-full">
+            <div> 
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">My Experiences</h2>
+            </div>
+            <div class="flex w-full space-x-20">
+                <div class="w-1/2">
+                    <div *ngFor="let experience of experiences" class="text-gray-50 mt-14 bg-gray-900 p-7 rounded-[50px] drop-shadow-2xl">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h2 class="text-xl font-semibold text-gray-800 dark:text-white">{{experience.jobTitle}}</h2>
+                            </div>
+                            <div class="space-x-5">
+                                <fa-icon [icon] = 'edit' size="lg" class="cursor-pointer"></fa-icon>
+                                <fa-icon [icon] = 'delete' size="lg" class="cursor-pointer" ></fa-icon>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="font-light text-[14px]">{{experience.companyName}}</p>
+                        </div>
+                        @if(experience.isCurrentlyWoring == false){
+                            <div>
+                                <p class="font-light text-[14px]">{{experience.from}} - {{experience.to}}</p>
+                            </div>
+                        }@else {
+                            <div>
+                                <p class="font-light text-[14px]">{{experience.from}} - <span class="italic">Present</span></p>
+                            </div>
+                        }
+                        <div class="mt-7 text-[14px]">
+                            <p>{{experience.jobDescription}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-gray-50 mt-10 text-[14px] w-1/2 mr-20 bg-gray-900 p-7 rounded-[50px] drop-shadow-2xl">
+                    <form>
+                        <div class="mb-6">
+                            <label for="" class="font-bold">Job Title</label>
+                            <input type="text" placeholder="Enter your institution name" class="w-full p-3 bg-gray-700 outline-none ">
+                        </div>
+                        <div class="mb-6">
+                          <label for="" class="font-bold">Company Name</label>
+                          <input type="text" placeholder="Enter your stream" class="w-full p-3 bg-gray-700 outline-none ">
+                      </div>
+                        <div class="flex space-x-10 w-full mb-6">
+                            <div class="w-1/2">
+                                <label for="" class="font-bold">From</label>
+                                <input type="text" placeholder="Enter starting year (eg. 2024)" class="w-full p-3 bg-gray-700 outline-none " >
+                            </div>
+                            <div class="w-1/2">
+                                <label for="" class="font-bold">To</label>
+                                <input type="text" placeholder="Enter graduation year (eg. 2028)" class="w-full p-3 bg-gray-700 outline-none ">
+                                <div class="flex items-center space-x-3">
+                                    <input type="checkbox" name="isWorking" value="I am currently working here.">
+                                    <p>I am currently working here</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="" class="font-bold">Job Description</label>
+                            <textarea name="" id="" cols="30" rows="10" placeholder="Add your description..." class=" w-full p-3 bg-gray-700 outline-none"></textarea>
+                        </div>
+                        <div class="flex items-center space-x-5 mt-5">
+                            <div>
+                                <button type="submit" class="rounded-full bg-blue-900 w-36 text-[13px] p-4 font-semibold">Save</button>
+                            </div>
+                            <!-- <div>
+                              <button class="rounded-full bg-gray-200 text-black w-36 text-[13px] p-4 font-semibold">Delete</button>
+                          </div> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+      </main>
+    </div> 
+  </div>

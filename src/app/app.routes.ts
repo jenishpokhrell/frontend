@@ -20,6 +20,7 @@ import { ExperiencesComponent } from './components/main/dashboard/candidate/expe
 import { ProjectsComponent } from './components/main/dashboard/candidate/projects/projects.component';
 import { AppliedJobsComponent } from './components/main/dashboard/candidate/applied-jobs/applied-jobs.component';
 import { SavedJobsComponent } from './components/main/dashboard/candidate/saved-jobs/saved-jobs.component';
+import { ChangePasswordComponent } from './components/main/dashboard/candidate/change-password/change-password.component';
 
 export const routes: Routes = [
     {
@@ -75,7 +76,8 @@ export const routes: Routes = [
             { path: 'experiences', loadComponent: () => ExperiencesComponent},
             { path: 'projects', loadComponent: () => ProjectsComponent},
             { path: 'applied-jobs', loadComponent: () => AppliedJobsComponent},
-            { path: 'saved-jobs', loadComponent: () => SavedJobsComponent}
+            { path: 'saved-jobs', loadComponent: () => SavedJobsComponent},
+            { path: 'change-password', loadComponent: () => ChangePasswordComponent},
         ]
     },
     {

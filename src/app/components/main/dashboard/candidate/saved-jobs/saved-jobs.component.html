@@ -1,1 +1,108 @@
-<p>saved-jobs works!</p>
+<div class="flex h-screen bg-gray-100 dark:bg-gray-900">
+    <app-sidebar [user]="user" 
+                 [menuItems]="menuItems" 
+                 [collapsed]="collapsed"
+                 (toggleCollapse)="toggleSidebar()"
+                 (logout)="logout()"></app-sidebar>
+  
+    <div class="flex-1 flex flex-col overflow-hidden" [class.ml-14]="!collapsed" [class.ml-5]="collapsed">
+      <app-header [title]="'Saved Jobs'"
+                  (toggleSidebar)="toggleSidebar()"></app-header>
+  
+      <main class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-800">
+        <div class="w-full">
+            <div> 
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">My Saved Jobs</h2>
+            </div>
+            <div class="overflow-x-auto mt-10">
+                <table
+                  class="min-w-full divide-y divide-gray-200 dark:divide-gray-600"
+                >
+                  <thead class="bg-gray-50 dark:bg-gray-600">
+                    <tr>
+                      <!-- <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        JobId
+                      </th> -->
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        Job Title
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        Job Type
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        Job Level
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        Posted By
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                       Active
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600 cursor-pointer"
+                  >
+                    <tr
+                      *ngFor="let job of savedJobs"
+                      class="hover:bg-gray-50 dark:hover:bg-gray-600"
+                    >
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                      >
+                        {{ job.jobTitle}}
+                      </td>
+                      <td
+                      class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                    >
+                      {{ job.jobType}}
+                    </td>
+                    <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                      >
+                        {{ job.jobLevel}}
+                      </td>
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                      >
+                        {{ job.postedBy}}
+                      </td>
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                      >
+                        @if(job.Status === true){
+                            <span class="text-green-200">Active</span>
+                        }@else {
+                            <span class="text-red-300">Closed</span>
+                        }
+                      </td>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-300 space-x-4"
+                    >
+                      <button class="p-4 bg-blue-900 rounded-full w-24 text-[12px]">View Job</button>
+                    </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+        </div>
+      </main>
+    </div> 
+  </div>

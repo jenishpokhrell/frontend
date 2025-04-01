@@ -1,30 +1,31 @@
 import { Component } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
-import { faUser, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook,
+   faMailForward, faUserEdit, faEdit, faTrash, faEyeSlash, faEye} from '@fortawesome/free-solid-svg-icons';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, FaIconComponent],
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.css']
+  imports: [SidebarComponent, HeaderComponent, NgIf, ReactiveFormsModule, FaIconComponent],
+  templateUrl: './change-password.component.html',
+  styleUrls: ['./change-password.component.css']
 })
-export class ProjectsComponent {
+export class ChangePasswordComponent {
 
-  title = 'My Academics'
-
-  checkCircle = faCheckCircle; excCircle = faExclamationCircle; location = faLocationArrow; contact = faContactBook; mail = faMailForward; edit = faEdit; delete = faTrash
+  checkCircle = faCheckCircle; excCircle = faExclamationCircle; location = faLocationArrow; contact = faContactBook; mail = faMailForward; edit = faEdit; delete = faTrash; 
+  eyeSlash = faEyeSlash; eye = faEye
 
   collapsed = false;
   user = {
     name: 'Jane Doe',
     role: 'Candidate'
   };
+
+  showPassword: boolean = false
 
   menuItems = [
     { label: 'Dashboard', link: '/candidate/dashboard', icon: faDashboard},
@@ -39,10 +40,10 @@ export class ProjectsComponent {
 
   ];
 
-  projects = [
-    {projectTitle: 'Employee Managment System', projectURL: 'https://github.com/', projectDescription: 'I worked as an frontend intern. My task was to develop a user friendly website. Also I was tasked to integrate API from backend.'},
-    {projectTitle: 'TODO List', projectURL: 'https://github.com/', projectDescription: 'I worked as an frontend intern. My task was to develop a user friendly website. Also I was tasked to integrate API from backend.'},
-  ]
+
+  togglePasswordVisibility() : void{
+    this.showPassword = !this.showPassword
+  }
 
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;

@@ -3,7 +3,7 @@ import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { NgFor } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faUser, faGraduationCap, faBriefcase, faUserCheck, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard  } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faGraduationCap, faBriefcase, faUserCheck, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faUserEdit, faEdit  } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-candidate',
@@ -29,7 +29,9 @@ export class CandidateDashboardComponent {
     { label: 'Experiences', link: '/candidate/experiences', icon: faBriefcase },
     { label: 'Projects', link: '/candidate/projects', icon: faProjectDiagram },
     { label: 'Applied Jobs', link: '/candidate/applied-jobs', icon: faFileAlt },
-    { label: 'Saved Jobs', link: '/candidate/saved-jobs', icon: faBookmark }
+    { label: 'Saved Jobs', link: '/candidate/saved-jobs', icon: faBookmark },
+    { label: 'Update Profile', link: '/candidate/update-profile', icon: faUserEdit},
+    { label: 'Change Password', link: '/candidate/change-password', icon: faEdit}
   ];
 
   stats = [

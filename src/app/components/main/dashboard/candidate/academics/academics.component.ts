@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
-import { NgFor } from '@angular/common';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faUser, faGraduationCap, faBriefcase, faUserCheck, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, FaIconComponent],
+  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule],
   templateUrl: './academics.component.html',
   styleUrls: ['./academics.component.css']
 })
 export class AcademicsComponent {
+
+  title = 'My Academics'
 
   checkCircle = faCheckCircle; excCircle = faExclamationCircle; location = faLocationArrow; contact = faContactBook; mail = faMailForward;
 
@@ -21,12 +22,6 @@ export class AcademicsComponent {
     name: 'Jane Doe',
     role: 'Candidate'
   };
-
-  userDetails = 
-  {
-    firstName: 'Jane', lastName: 'Doe', username: 'jane_doe', emailAddress: 'janedoe123@gmail.com', address: 'Anamnagar, Kathmandu', contact: '9854132541', 
-    profilePhoto: 'MyImage', gender: 'Female', jobTitle: 'Jr. Backend Developer', years_of_experience : 1, 
-  }
 
   menuItems = [
     { label: 'Dashboard', link: '/candidate/dashboard', icon: faDashboard},
@@ -41,26 +36,14 @@ export class AcademicsComponent {
 
   ];
 
-  stats = [
-    { title: 'Available Jobs', value: 1245, icon: faBriefcase, color: 'bg-blue-100 text-blue-600' },
-    { title: 'Applied Jobs', value: 12, icon: faFileAlt, color: 'bg-green-100 text-green-600' },
-    { title: 'Saved Jobs', value: 8, icon: faBookmark, color: 'bg-yellow-100 text-yellow-600' },
-    { title: 'Shortlisted', value: 3, icon: faUserCheck, color: 'bg-purple-100 text-purple-600' }
-  ];
-
-  recentApplications = [
-    { id: 1, title: 'Senior Angular Developer', company: 'Tech Solutions', status: 'Shortlisted', applied: '2 days ago' },
-    { id: 2, title: 'UX Designer', company: 'Creative Minds', status: 'Applied', applied: '1 week ago' },
-    { id: 3, title: 'Backend Developer', company: 'Data Systems', status: 'Rejected', applied: '2 weeks ago' },
-    { id: 4, title: 'Product Manager', company: 'Innovate Inc', status: 'Interview', applied: '3 weeks ago' }
-  ];
-
-  recommendedJobs = [
-    { id: 1, title: 'Frontend Developer', company: 'WebTech', location: 'Remote', posted: '1 day ago' },
-    { id: 2, title: 'Full Stack Engineer', company: 'CodeCraft', location: 'New York', posted: '3 days ago' },
-    { id: 3, title: 'UI/UX Designer', company: 'DesignHub', location: 'San Francisco', posted: '5 days ago' },
-    { id: 4, title: 'JavaScript Developer', company: 'Script Masters', location: 'Chicago', posted: '1 week ago' }
-  ];
+  editForm: FormGroup = new FormGroup({
+    institutionName: new FormControl('ABC University'),
+    stream: new FormControl('MCS'),
+    startYear: new FormControl('2024'),
+    graduationYear: new FormControl('2026'),
+    degreeType: new FormControl('Masters'),
+    currentSemester: new FormControl('3rd'),
+  })
 
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;
