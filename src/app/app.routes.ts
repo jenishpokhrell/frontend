@@ -6,7 +6,6 @@ import { PostjobsComponent } from './components/main/postjobs/postjobs.component
 import { PagenotfoundComponent } from './components/public/pagenotfound/pagenotfound.component';
 import { BrowsejobsComponent } from './components/main/browsejobs/browsejobs.component';
 import { AboutUsComponent } from './components/public/about-us/about-us.component';
-import { EmployerComponent } from './components/main/dashboard/employer/employer.component';
 import { ViewjobComponent } from './components/main/viewjob/viewjob.component';
 import { AdminDashboardComponent } from './components/main/dashboard/admin/dashboard/dashboard.component';
 import { UsersComponent } from './components/main/dashboard/admin/users/users.component';
@@ -21,6 +20,13 @@ import { ProjectsComponent } from './components/main/dashboard/candidate/project
 import { AppliedJobsComponent } from './components/main/dashboard/candidate/applied-jobs/applied-jobs.component';
 import { SavedJobsComponent } from './components/main/dashboard/candidate/saved-jobs/saved-jobs.component';
 import { ChangePasswordComponent } from './components/main/dashboard/candidate/change-password/change-password.component';
+import { EmployerDashboardComponent } from './components/main/dashboard/employer/dashboard/dashboard.component';
+import { EmployerProfileComponent } from './components/main/dashboard/employer/profile/profile.component';
+import { EmployerExperiencesComponent } from './components/main/dashboard/employer/experiences/experiences.component';
+import { MyJobsComponent } from './components/main/dashboard/employer/jobs/jobs.component';
+import { JobApplicationsComponent } from './components/main/dashboard/employer/job-applications/job-applications.component';
+import { ShortlistedCandidatesComponent } from './components/main/dashboard/employer/shortlisted-candidates/shortlisted-candidates.component';
+import { EmployerChangePasswordComponent } from './components/main/dashboard/employer/change-password/change-password.component';
 
 export const routes: Routes = [
     {
@@ -63,8 +69,17 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'employerdashboard',
-        component: EmployerComponent
+        path: 'employer',
+        children: [
+            { path: '', redirectTo: 'dashboard', pathMatch:'full'},
+            { path: 'dashboard', loadComponent: () => EmployerDashboardComponent},
+            { path: 'profile', loadComponent: () => EmployerProfileComponent},
+            { path: 'experiences', loadComponent: () => EmployerExperiencesComponent},
+            { path: 'jobs', loadComponent: () => MyJobsComponent},
+            { path: 'job-applications', loadComponent: () => JobApplicationsComponent},
+            { path: 'shortlisted-candidates', loadComponent: () => ShortlistedCandidatesComponent},
+            { path: 'change-password', loadComponent: () => EmployerChangePasswordComponent},
+        ]
     },
     {
         path: 'candidate',

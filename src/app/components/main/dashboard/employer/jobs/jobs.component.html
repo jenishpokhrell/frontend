@@ -6,13 +6,13 @@
                  (logout)="logout()"></app-sidebar>
   
     <div class="flex-1 flex flex-col overflow-hidden" [class.ml-14]="!collapsed" [class.ml-5]="collapsed">
-      <app-header [title]="'Applied Jobs'"
+      <app-header [title]="'Posted Jobs'"
                   (toggleSidebar)="toggleSidebar()"></app-header>
   
       <main class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-800">
         <div class="w-full">
             <div> 
-                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">My Applied Jobs</h2>
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">My Jobs</h2>
             </div>
             <div class="overflow-x-auto mt-10">
                 <table
@@ -20,16 +20,11 @@
                 >
                   <thead class="bg-gray-50 dark:bg-gray-600">
                     <tr>
-                      <th
+                      <!-- <th
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                       >
                         JobId
-                      </th>
-                      <th
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
-                      >
-                        Job Status
-                      </th>
+                      </th> -->
                       <th
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                       >
@@ -38,16 +33,32 @@
                       <th
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                       >
-                        Posted By
+                        Job Type
                       </th>
                       <th
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                       >
-                        Message
+                        Job Level
                       </th>
                       <th
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                       >
+                        No. of openings
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        Experience required (in years)
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                       Active
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        
                       </th>
                     </tr>
                   </thead>
@@ -55,50 +66,47 @@
                     class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600 cursor-pointer"
                   >
                     <tr
-                      *ngFor="let appliedJob of appliedJobs"
+                      *ngFor="let job of savedJobs"
                       class="hover:bg-gray-50 dark:hover:bg-gray-600"
                     >
                       <td
                         class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
                       >
-                        {{ appliedJob.jobId }}
+                        {{ job.jobTitle}}
                       </td>
                       <td
-                        class="px-6 py-4 whitespace-nowrap text-[10px] font-medium text-gray-500 dark:text-gray-300"
-                      >
-                      @if(appliedJob.jobStatus === 'Pending'){
-                        <span class="bg-yellow-100 p-2 text-gray-900 rounded-full">{{appliedJob.jobStatus}}</span>
-                      }@else if(appliedJob.jobStatus === 'Shortlisted'){
-                        <span class="bg-green-200 p-2 text-gray-900 rounded-full">{{appliedJob.jobStatus}}</span>
-                      }@else {
-                        <span class="bg-red-200 p-2 text-gray-900 rounded-full">{{appliedJob.jobStatus}}</span>
-                      }     
-                      </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-300"
-                      >
-                        {{ appliedJob.jobTitle }}
-                      </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-300"
-                      >
-                        {{ appliedJob.postedBy }}
-                      </td>
-                      <td
-                      class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-300"
+                      class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
                     >
-                    @if(appliedJob.jobStatus === 'Pending'){
-                        <span class="text-yellow-100 ">{{appliedJob.Message}}</span>
-                      }@else if(appliedJob.jobStatus === 'Shortlisted'){
-                        <span class="text-green-200 ">{{appliedJob.Message}}</span>
-                      }@else {
-                        <span class="text-red-300 ">{{appliedJob.Message}}</span>
-                      }     
+                      {{ job.jobType}}
                     </td>
+                    <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                      >
+                        {{ job.jobLevel}}
+                      </td>
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                      >
+                        {{ job.noOfOpenings}}
+                      </td>
+                      <td
+                      class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                    >
+                      {{ job.experienceRequired}}
+                    </td>
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                      >
+                        @if(job.Status === true){
+                            <span class="text-green-200">Active</span>
+                        }@else {
+                            <span class="text-red-300">Closed</span>
+                        }
+                      </td>
                     <td
                       class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-300 space-x-4"
                     >
-                      <button class="p-4 bg-blue-900 rounded-full w-24 text-[12px]" routerLink="/viewjob">View Job</button>
+                      <button class="p-4 bg-blue-900 rounded-full w-fit text-[12px]" routerLink="/employer/job-applications">View Job Applications</button>
                     </td>
                     </tr>
                   </tbody>
@@ -109,4 +117,4 @@
     </div> 
   </div>
 
-  <router-outlet></router-outlet>
+  <!-- <router-outlet></router-outlet> -->

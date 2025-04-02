@@ -3,7 +3,7 @@ import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { NgFor } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faUser, faClose, faFilePdf, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faClose, faFilePdf,faBusinessTime, faBook, faBriefcase, faBookBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @Component({
@@ -13,33 +13,30 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
+export class EmployerProfileComponent {
 
   checkCircle = faCheckCircle; excCircle = faExclamationCircle; location = faLocationArrow; contact = faContactBook; mail = faMailForward; close = faClose; pdf = faFilePdf
 
   collapsed = false;
   user = {
-    name: 'Jane Doe',
-    role: 'Candidate'
+    name: 'Shristi Sharma',
+    role: 'Employer'
   };
 
   userDetails = 
   {
-    firstName: 'Jane', lastName: 'Doe', username: 'jane_doe', emailAddress: 'janedoe123@gmail.com', address: 'Anamnagar, Kathmandu', contact: '9854132541', 
-    profilePhoto: 'MyImage', gender: 'Female', jobTitle: 'Jr. Backend Developer', years_of_experience : 1, 
+    firstName: 'Shristi', lastName: 'Sharma', username: 'shristi_sharma', emailAddress: 'shristi_sharma123@gmail.com', address: 'New Baneshwor, Kathmandu', contact: '9874512536', 
+    profilePhoto: 'MyImage', gender: 'Female', jobTitle: 'Senior HR Maneger', years_of_experience : 6, 
   }
 
   menuItems = [
-    { label: 'Dashboard', link: '/candidate/dashboard', icon: faDashboard},
-    { label: 'Profile', link: '/candidate/profile', icon: faUser },
-    { label: 'Academics', link: '/candidate/academics', icon: faGraduationCap },
-    { label: 'Experiences', link: '/candidate/experiences', icon: faBriefcase },
-    { label: 'Projects', link: '/candidate/projects', icon: faProjectDiagram },
-    { label: 'Applied Jobs', link: '/candidate/applied-jobs', icon: faFileAlt },
-    { label: 'Saved Jobs', link: '/candidate/saved-jobs', icon: faBookmark },
-    { label: 'Update Profile', link: '/candidate/update-profile', icon: faUserEdit},
-    { label: 'Change Password', link: '/candidate/change-password', icon: faEdit}
-
+    { label: 'Dashboard', link: '/employer/dashboard', icon: faDashboard},
+    { label: 'Profile', link: '/employer/profile', icon: faUser },
+    { label: 'Experiences', link: '/employer/experiences', icon: faBriefcase },
+    { label: 'My Jobs', link: '/employer/jobs', icon: faBusinessTime },
+    { label: 'Job Applications', link: '/employer/job-applications', icon: faBook },
+    { label: 'Shortlisted Candidates', link: '/employer/shortlisted-candidates', icon: faBookBookmark},
+    { label: 'Change Password', link: '/employer/change-password', icon: faEdit}
   ];
 
   skills = [

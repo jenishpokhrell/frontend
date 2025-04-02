@@ -4,11 +4,12 @@ import { NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faSun, faMoon, faBell, faChartBar } from '@fortawesome/free-regular-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { RouterLink } from '@angular/router';
 
 @Component({ 
   selector: 'app-header',
   standalone: true,
-  imports: [NgIf, FaIconComponent],
+  imports: [NgIf, FaIconComponent, RouterLink],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })

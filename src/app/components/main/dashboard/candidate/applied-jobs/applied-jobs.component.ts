@@ -5,12 +5,12 @@ import { faUser, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBo
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { NgFor } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, FaIconComponent],
+  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, FaIconComponent, RouterOutlet, RouterLink],
   templateUrl: './applied-jobs.component.html',
   styleUrls: ['./applied-jobs.component.css']
 })

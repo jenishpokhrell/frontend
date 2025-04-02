@@ -6,13 +6,13 @@
                  (logout)="logout()"></app-sidebar>
   
     <div class="flex-1 flex flex-col overflow-hidden" [class.ml-14]="!collapsed" [class.ml-5]="collapsed">
-      <app-header [title]="'Applied Jobs'"
+      <app-header [title]="'Job Applications'"
                   (toggleSidebar)="toggleSidebar()"></app-header>
   
       <main class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-800">
         <div class="w-full">
             <div> 
-                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">My Applied Jobs</h2>
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Applications</h2>
             </div>
             <div class="overflow-x-auto mt-10">
                 <table
@@ -20,34 +20,45 @@
                 >
                   <thead class="bg-gray-50 dark:bg-gray-600">
                     <tr>
-                      <th
+                      <!-- <th
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                       >
                         JobId
+                      </th> -->
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        Status
                       </th>
                       <th
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                       >
-                        Job Status
+                        Candidate Name
                       </th>
                       <th
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                       >
-                        Job Title
+                        Position
                       </th>
                       <th
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                       >
-                        Posted By
+                        YOE
                       </th>
                       <th
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                       >
-                        Message
+                        Address
                       </th>
                       <th
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                       >
+                        Email
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        
                       </th>
                     </tr>
                   </thead>
@@ -55,50 +66,51 @@
                     class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600 cursor-pointer"
                   >
                     <tr
-                      *ngFor="let appliedJob of appliedJobs"
+                      *ngFor="let candidate of candidates"
                       class="hover:bg-gray-50 dark:hover:bg-gray-600"
                     >
                       <td
+                        class="px-6 py-4 whitespace-nowrap text-[10px] font-medium text-gray-800 dark:text-white"
+                      >
+                      @if(candidate.status === 'Pending'){
+                        <span class="bg-yellow-100 p-2 text-gray-900 rounded-full">{{candidate.status}}</span>
+                      }@else if(candidate.status === 'Shortlisted'){
+                        <span class="bg-green-200 p-2 text-gray-900 rounded-full">{{candidate.status}}</span>
+                      }@else {
+                        <span class="bg-red-200 p-2 text-gray-900 rounded-full">{{candidate.status}}</span>
+                      }     
+                      </td>
+                      <td
                         class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
                       >
-                        {{ appliedJob.jobId }}
+                        {{ candidate.name}}
                       </td>
                       <td
-                        class="px-6 py-4 whitespace-nowrap text-[10px] font-medium text-gray-500 dark:text-gray-300"
-                      >
-                      @if(appliedJob.jobStatus === 'Pending'){
-                        <span class="bg-yellow-100 p-2 text-gray-900 rounded-full">{{appliedJob.jobStatus}}</span>
-                      }@else if(appliedJob.jobStatus === 'Shortlisted'){
-                        <span class="bg-green-200 p-2 text-gray-900 rounded-full">{{appliedJob.jobStatus}}</span>
-                      }@else {
-                        <span class="bg-red-200 p-2 text-gray-900 rounded-full">{{appliedJob.jobStatus}}</span>
-                      }     
-                      </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-300"
-                      >
-                        {{ appliedJob.jobTitle }}
-                      </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-300"
-                      >
-                        {{ appliedJob.postedBy }}
-                      </td>
-                      <td
-                      class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-300"
+                      class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
                     >
-                    @if(appliedJob.jobStatus === 'Pending'){
-                        <span class="text-yellow-100 ">{{appliedJob.Message}}</span>
-                      }@else if(appliedJob.jobStatus === 'Shortlisted'){
-                        <span class="text-green-200 ">{{appliedJob.Message}}</span>
-                      }@else {
-                        <span class="text-red-300 ">{{appliedJob.Message}}</span>
-                      }     
+                      {{ candidate.position }}
                     </td>
+                      
+                    <td
+                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                  >
+                    {{ candidate.yoe }}
+                  </td>
+                  <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                      >
+                        {{ candidate.address}}
+                      </td>
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                      >
+                        {{ candidate.email }}
+                      </td>
                     <td
                       class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-300 space-x-4"
                     >
-                      <button class="p-4 bg-blue-900 rounded-full w-24 text-[12px]" routerLink="/viewjob">View Job</button>
+                      <button class="p-4 bg-blue-900 rounded-full w-fit text-[12px]">View Profile</button>
+                      <button class="p-4 bg-gray-200 text-gray-900 rounded-full w-fit text-[12px]">View Resume</button>
                     </td>
                     </tr>
                   </tbody>
@@ -108,5 +120,3 @@
       </main>
     </div> 
   </div>
-
-  <router-outlet></router-outlet>

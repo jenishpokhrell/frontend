@@ -30,7 +30,7 @@ export class BrowsejobsComponent {
   ]
 
   showFilter : boolean = false
-
+  
   private toggleBodyScroll(disable: boolean){
     if(disable){
       document.body.style.overflow = 'hidden'

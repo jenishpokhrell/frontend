@@ -19,7 +19,8 @@ export class AppComponent {
   constructor(private router: Router){
     const hiddenRoutes = new Set(['/admin/dashboard', '/admin/users','/admin/pending-employers','/admin/jobs','/admin/logs',
        '/candidate/dashboard', '/candidate/profile','/candidate/academics','/candidate/experiences','/candidate/projects','/candidate/applied-jobs','/candidate/saved-jobs','/candidate/change-password',
-       '/employerdashboard', '/notfound', '/unauthorized'])
+       '/employer/dashboard', '/employer/profile', '/employer/experiences', '/employer/jobs', '/employer/job-applications', '/employer/shortlisted-candidates', '/employer/change-password', 
+       '/notfound', '/unauthorized'])
     this.router.events.subscribe(() => {
       this.showNavbar = !hiddenRoutes.has(this.router.url) 
     })

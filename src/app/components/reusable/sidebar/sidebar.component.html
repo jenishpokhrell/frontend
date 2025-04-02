@@ -1,9 +1,10 @@
 <div class="flex h-[100dvh] px-2">
     <div class="flex flex-col h-full transition-all duration-300 ease-in-out" 
-         [class.w-60]="!collapsed" 
+         [class.w-64]="!collapsed" 
          [class.w-20]="collapsed"
          >
       
+         
       <div class="p-4 flex items-center space-x-3 border-b border-blue-400" *ngIf="!collapsed">
         <div class="w-10 h-10 rounded-full bg-blue-700 flex items-center justify-center text-white font-bold">
          {{user.name.charAt(0)}}
