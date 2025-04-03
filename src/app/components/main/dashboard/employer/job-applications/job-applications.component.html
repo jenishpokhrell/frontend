@@ -11,10 +11,83 @@
   
       <main class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-800">
         <div class="w-full">
-            <div> 
-                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Applications</h2>
+            <div class=" text-gray-50">
+              <div
+                *ngFor="let job of job"
+                class="flex items-center justify-between my-5"
+              >
+                <div class="">
+                  <h1 class="text-3xl font-bold text-gray-50 uppercase">
+                    {{ job.jobTitle }}
+                  </h1>
+                  <div class="flex space-x-10 font-extralight text-[14px]">
+                    <p>{{ job.jobType }}</p>
+                    <p>{{ job.openings }} Vacancies</p>
+                  </div>
+                </div>
+              </div>
+          
+              <hr />
+          
+              <div *ngFor="let job of job" class="my-5 flex items-start space-x-20">
+                <div class="my-5 w-[70%]">
+                  <div class="bg-gray-900 rounded-xl px-10 py-5">
+                    <div class="my-5">
+                      <h2 class="text-2xl font-bold text-gray-50">Job Information</h2>
+                    </div>
+                    <hr />
+                    <div>
+                      <div class="flex justify-between mt-5">
+                        <div class="space-y-5">
+                          <p>
+                            Job Type: <span>{{ job.jobType }}</span>
+                          </p>
+                          <p>
+                            Job Level: <span>{{ job.jobLevel }}</span>
+                          </p>
+                          <p>
+                            No. of openings: <span>{{ job.openings }}</span>
+                          </p>
+                          <p>
+                            Salary:
+                            <span>Nrs. {{ job.minSalary }} to {{ job.maxSalary }}</span>
+                          </p>
+                        </div>
+                        <div class="space-y-5">
+                          <p>
+                            Experience required: {{ job.minExp }} to
+                            {{ job.maxExp }} years
+                          </p>
+                          <p>Location: Pulchowk, Lalitpur</p>
+                          @if (job.isActive == true) {
+                          <p>Status: <span class="text-green-600">Active</span></p>
+                          }@else{
+                          <p>Status: <span class="text-red-600">Closed </span></p>
+                          }
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="my-10 bg-gray-900 rounded-xl px-10 py-5 space-y-4"
+                  >
+                    <h2 class="text-2xl font-bold text-gray-50">Description</h2>
+                    <hr />
+                    <p class="text-justify leading-8">{{ job.jobDescription }}</p>
+                  </div>
+                  <div
+                    class="mt-10 bg-gray-900 rounded-xl px-10 py-5 space-y-4"
+                  >
+                    <h2 class="text-2xl font-bold text-gray-50">Requirements</h2>
+                    <hr />
+                    <p class="text-justify leading-8">{{ job.requirements }}</p>
+                  </div>
+                </div>
             </div>
-            <div class="overflow-x-auto mt-10">
+            <div class="overflow-x-auto mb-10">
+              <div> 
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white mb-5 uppercase">Applications</h2>
+            </div>
                 <table
                   class="min-w-full divide-y divide-gray-200 dark:divide-gray-600"
                 >
@@ -109,13 +182,13 @@
                     <td
                       class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-300 space-x-4"
                     >
-                      <button class="p-4 bg-blue-900 rounded-full w-fit text-[12px]">View Profile</button>
-                      <button class="p-4 bg-gray-200 text-gray-900 rounded-full w-fit text-[12px]">View Resume</button>
+                      <button class="p-4 bg-blue-900 rounded-full w-fit text-[12px]" routerLink="/employer/candidate-profile">View Profile</button>
                     </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
+        </div>
         </div>
       </main>
     </div> 

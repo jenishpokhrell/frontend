@@ -1,1 +1,100 @@
-<p>shortlisted-candidates works!</p>
+<div class="flex h-screen bg-gray-100 dark:bg-gray-900">
+    <app-sidebar [user]="user" 
+                 [menuItems]="menuItems" 
+                 [collapsed]="collapsed"
+                 (toggleCollapse)="toggleSidebar()"
+                 (logout)="logout()"></app-sidebar>
+  
+    <div class="flex-1 flex flex-col overflow-hidden" [class.ml-14]="!collapsed" [class.ml-5]="collapsed">
+      <app-header [title]="'Shortlisted Candidates'"
+                  (toggleSidebar)="toggleSidebar()"></app-header>
+  
+      <main class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-800">
+        <div class="w-full">
+            <div> 
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Applications</h2>
+            </div>
+            <div>
+
+            </div>
+            <div class="overflow-x-auto mt-10">
+                <table
+                  class="min-w-full divide-y divide-gray-200 dark:divide-gray-600"
+                >
+                  <thead class="bg-gray-50 dark:bg-gray-600">
+                    <tr>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        JobId
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        Status
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        Job Title
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        Candidate Name
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                      >
+                        
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600 cursor-pointer"
+                  >
+                    <tr
+                      *ngFor="let candidate of shortlistedCandidates"
+                      class="hover:bg-gray-50 dark:hover:bg-gray-600"
+                    >
+                    <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                      >
+                        {{ candidate.jobId}}
+                      </td>
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-[10px] font-medium text-gray-800 dark:text-white"
+                      >
+                      @if(candidate.status === 'Pending'){
+                        <span class="bg-yellow-100 p-2 text-gray-900 rounded-full">{{candidate.status}}</span>
+                      }@else if(candidate.status === 'Shortlisted'){
+                        <span class="bg-green-200 p-2 text-gray-900 rounded-full">{{candidate.status}}</span>
+                      }@else {
+                        <span class="bg-red-200 p-2 text-gray-900 rounded-full">{{candidate.status}}</span>
+                      }     
+                      </td>
+                      
+                      <td
+                      class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                    >
+                      {{ candidate.jobTitle }}
+                    </td>
+                      
+                    <td
+                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
+                  >
+                    {{ candidate.name }}
+                  </td>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-300 space-x-4"
+                    >
+                      <button class="p-4 bg-blue-900 rounded-full w-fit text-[12px]" routerLink="/employer/candidate-profile">View Profile</button>
+                    </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+        </div>
+      </main>
+    </div> 
+  </div>

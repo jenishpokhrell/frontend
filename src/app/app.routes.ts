@@ -27,6 +27,9 @@ import { MyJobsComponent } from './components/main/dashboard/employer/jobs/jobs.
 import { JobApplicationsComponent } from './components/main/dashboard/employer/job-applications/job-applications.component';
 import { ShortlistedCandidatesComponent } from './components/main/dashboard/employer/shortlisted-candidates/shortlisted-candidates.component';
 import { EmployerChangePasswordComponent } from './components/main/dashboard/employer/change-password/change-password.component';
+import { CandidateProfileComponent } from './components/main/dashboard/employer/candidate-profile/candidate-profile.component';
+import { PostJobComponent } from './components/main/dashboard/employer/post-job/post-job.component';
+import { UnauthorizedPageComponent } from './components/public/unauthorized-page/unauthorized-page.component';
 
 export const routes: Routes = [
     {
@@ -58,6 +61,10 @@ export const routes: Routes = [
         component: PagenotfoundComponent
     },
     {
+        path:'unauthorized',
+        component: UnauthorizedPageComponent
+    },
+    {
         path: 'admin',
         children: [
             {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -77,6 +84,8 @@ export const routes: Routes = [
             { path: 'experiences', loadComponent: () => EmployerExperiencesComponent},
             { path: 'jobs', loadComponent: () => MyJobsComponent},
             { path: 'job-applications', loadComponent: () => JobApplicationsComponent},
+            { path: 'post-job', loadComponent: () => PostJobComponent},
+            { path: 'candidate-profile', loadComponent: () => CandidateProfileComponent},
             { path: 'shortlisted-candidates', loadComponent: () => ShortlistedCandidatesComponent},
             { path: 'change-password', loadComponent: () => EmployerChangePasswordComponent},
         ]

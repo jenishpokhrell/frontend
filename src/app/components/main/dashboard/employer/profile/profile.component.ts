@@ -33,8 +33,8 @@ export class EmployerProfileComponent {
     { label: 'Dashboard', link: '/employer/dashboard', icon: faDashboard},
     { label: 'Profile', link: '/employer/profile', icon: faUser },
     { label: 'Experiences', link: '/employer/experiences', icon: faBriefcase },
+    { label: 'Post Job', link: '/employer/post-job', icon: faBook },
     { label: 'My Jobs', link: '/employer/jobs', icon: faBusinessTime },
-    { label: 'Job Applications', link: '/employer/job-applications', icon: faBook },
     { label: 'Shortlisted Candidates', link: '/employer/shortlisted-candidates', icon: faBookBookmark},
     { label: 'Change Password', link: '/employer/change-password', icon: faEdit}
   ];

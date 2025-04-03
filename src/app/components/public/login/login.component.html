@@ -9,18 +9,18 @@
         </h1>
     </div>
     <div class="mt-12">
-        <form action="">
+        <form [formGroup] = "form" (submit)="login()">
           <div class="">
               <div class="mb-7 w-full">
                   <div>
                       <label for="" class="font-bold">Username</label>
-                      <input type="text" placeholder="Enter your username" class="border-2 p-4 w-full">
+                      <input type="text" placeholder="Enter your username" class="border-2 p-4 w-full" formControlName="username">
                   </div>
               </div>
               
               <div class="mb-10">
                   <label for="" class="font-bold">Password</label>
-                  <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter your password" class="border-2 p-4 w-full">
+                  <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter your password" class="border-2 p-4 w-full" formControlName="password">
                   <div class="flex">
                       <input type="checkbox" name="password" (click)="togglePasswordVisibility()" value="Show your password">
                       <label for="password" class="ml-2">Show your password</label>
@@ -28,8 +28,8 @@
               </div>
     
               <div>
-                <div class="bg-[#6BA1FF] p-4 w-32 mt-10 text-center font-bold text-[14px] text-white cursor-pointer rounded-full">
-                    <button>Login</button>
+                <div class=" mt-10 font-bold text-[14px] text-white ">
+                    <button type="submit" class="bg-[#6BA1FF] p-4 w-32 cursor-pointer rounded-full">Login</button>
                 </div>
               </div>
             </div>
