@@ -1,9 +1,11 @@
 import { NgClass, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { FontAwesomeModule, FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faBars, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faArrowDown, faSignOut } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from './services/auth/auth.service';
+import { UserModel } from './model/user';
+import { Token } from './model/token';
 
 @Component({
   selector: 'app-root',
@@ -12,19 +14,51 @@ import { AuthService } from './services/auth/auth.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Career Dev';
 
-  down = faArrowDown;
+  signout = faSignOut
 
   showNavbar : boolean = true;
   isMenuOpen = false
+  showDropdown : boolean = false
+
+  userModel : UserModel | null = null
+  token : Token | null = null
 
   authService = inject(AuthService)
   route = inject(Router)
 
   isLoggedIn(){
     return this.authService.isLoggedIn()
+
+  }
+
+
+  ngOnInit(): void {
+     this.getMyDetails()
+  }
+  
+  getMyDetails(){
+    const myToken = localStorage.getItem('token')
+    if(myToken){
+      this.authService.getMyDetails().subscribe({
+        next: (response) =>{
+          console.log(response)
+          this.userModel = response
+        },
+        error: (err) => {
+          console.error("Error fetching data", err)
+        }
+      })
+    }else{
+      console.error('No Token Found')
+    }
+  }
+
+  logout(){
+    return this.authService.logout()
+    
   }
   
   constructor(private router: Router){
@@ -41,5 +75,9 @@ export class AppComponent {
 
   toggleMenu(){
     this.isMenuOpen = !this.isMenuOpen
+  }
+
+  toggleDropdown(){
+    this.showDropdown = !this.showDropdown
   }
 }

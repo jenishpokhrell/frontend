@@ -1,7 +1,6 @@
 <div
   *ngIf="showNavbar"
-  class=" md:h-20 bg-gradient-to-r from-[#5FA8F5] via-[#3094FF] to-blue-600 ...  md:content-center"
->
+  class=" md:h-20 bg-gradient-to-r from-[#5FA8F5] via-[#3094FF] to-blue-600 ...  md:content-center" >
   <div class="md:w-[80%] md:p-0 lg:p-0 p-4 md:flex md:items-center md:justify-between md:mx-auto">
     <div>
       <img
@@ -42,53 +41,90 @@
             About
           </li>
           <hr class="md:hidden lg:hidden mt-4 w-32 mx-auto">
-          <li
+          @if( isLoggedIn()){
+            <li
+            *ngIf="userModel?.roles?.includes('CANDIDATE')"
             class="md:mr-14 my-4 cursor-pointer"
-            routerLink="/login"
-            
+            routerLink="/browsejobs" 
           >
             Browse Jobs
           </li>
-          <hr class="md:hidden lg:hidden mt-4 w-32 mx-auto">
-          <li
+          }@else {
+            <li
             class="md:mr-14 my-4 cursor-pointer"
             routerLink="/login"
           >
-            Post Job
+            Browse Jobs
           </li>
+          }
+          <hr class="md:hidden lg:hidden mt-4 w-32 mx-auto">
+          @if(isLoggedIn()){
+            <li
+            *ngIf="userModel?.roles?.includes('EMPLOYER')"
+              class="md:mr-14 my-4 cursor-pointer"
+              routerLink="/postjobs"
+            >
+              Post Job
+            </li>
+          }@else {
+            <li
+              class="md:mr-14 my-4 cursor-pointer"
+              routerLink="/login"
+            >
+              Post Job
+            </li>
+          }
           <hr class="md:hidden lg:hidden mt-4 m-4">
         </ul>
       </nav>
     </div>
-    <div [ngClass]="{'block': isMenuOpen, 'hidden' : !isMenuOpen}" class="md:flex md:items-center md:justify-center  md:space-x-4 flex space-x-10 justify-center" >
-      <div
-        class="bg-[#6BA1FF] text-white
-        border-none md:p-2 md:w-28 w-[20%] p-2 text-[13px] text-center rounded-full cursor-pointer drop-shadow-xl hover:drop-shadow-none transition-all"
-        routerLink="/login"
-      >
-        <button>Login</button>
+    @if(!isLoggedIn()){
+      <div [ngClass]="{'block': isMenuOpen, 'hidden' : !isMenuOpen}" class="md:flex md:items-center md:justify-center  md:space-x-4 flex space-x-10 justify-center" >
+        <div
+          class="bg-[#6BA1FF] text-white
+          border-none md:p-2 md:w-28 w-[20%] p-2 text-[13px] text-center rounded-full cursor-pointer drop-shadow-xl hover:drop-shadow-none transition-all"
+          routerLink="/login"
+        >
+          <button>Login</button>
+        </div>
+        <div
+          class="bg-[#6BA1FF] text-white
+          border-[] md:p-2 md:w-28 w-[25%] p-2 text-[13px] text-center rounded-full drop-shadow-xl hover:drop-shadow-none transition-all"
+          routerLink="/signup"
+        >
+          <button>Sign up</button>
+        </div>
       </div>
-      <div
-        class="bg-[#6BA1FF] text-white
-        border-[] md:p-2 md:w-28 w-[25%] p-2 text-[13px] text-center rounded-full drop-shadow-xl hover:drop-shadow-none transition-all"
-        routerLink="/signup"
-      >
-        <button>Sign up</button>
+    }@else{
+      <div *ngIf="userModel" class="m-3 p-2 bg-[#6BA1FF] rounded-full flex items-center justify-center space-x-2 transition-all cursor-pointer" 
+      (click) = "toggleDropdown()">
+        <div class="w-10 h-8 rounded-full flex items-center justify-center font-bold">
+          <img
+          [src]="userModel.profilePhoto"
+          alt="profile picture"
+          width="200"
+          class="rounded-full"
+        />
+        </div>
+        <div>
+          <p class="font-semibold text-white text-[14px]"> {{userModel.firstname}} {{userModel.lastname}}</p>
+        </div>
+
       </div>
-    </div>
-    <!-- <div class="m-3 p-2 bg-[#6BA1FF] hover:bg-transparent rounded-full flex items-center justify-center space-x-2 transition-all cursor-pointer">
-      <div class="w-10 h-8 rounded-full flex items-center justify-center font-bold">
-        <img
-        src="https://res.cloudinary.com/dnu3li5lc/image/upload/v1741777596/vyuqokraj8bvlcfh5vsx.jpg"
-        alt="profile picture"
-        width="200"
-        class="rounded-full"
-      />
+      <div *ngIf="showDropdown" class="absolute right-[11%] top-[6%] mt-2 w-48 bg-[#6BA1FF] rounded-lg shadow-lg transition-all">
+        <ul class="text-white">
+          @if(userModel?.roles?.includes('CANDIDATE')){
+            <li class="px-4 py-2  cursor-pointer" routerLink="/candidate">Dashboard</li>
+          }@else if(userModel?.roles?.includes('EMPLOYER')){
+            <li class="px-4 py-2  cursor-pointer" routerLink="/employer">Dashboard</li>
+          }
+          <li class="px-4 py-2 cursor-pointer" (click)="logout()">Logout</li>
+        </ul>
       </div>
-      <div>
-        <p class="font-semibold text-white text-[14px]">Shristi Sharma</p>
-      </div>
-    </div> -->
+      <!-- <div>
+        <button (click)="logout()"><fa-icon [icon] = 'signout'></fa-icon></button>
+      </div> -->
+    }
   </div>
 </div>
 

@@ -3,6 +3,7 @@ import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/rou
 import { FooterComponent } from "../../reusable/footer/footer.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
+import { UserModel } from '../../../model/user';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
     fb = inject(FormBuilder)
     authService = inject(AuthService)
     route = inject(Router)
+    userModel : UserModel | null = null
 
     togglePasswordVisibility(): void{
       this.showPassword = !this.showPassword
@@ -26,7 +28,8 @@ export class LoginComponent implements OnInit {
 
     login(){
       this.authService.login(this.form.value).subscribe((response) => {
-        console.log(response);
+        console.log(response)
+        location.replace("/")
       })
     }
 

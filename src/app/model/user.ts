@@ -1,4 +1,4 @@
-export class UserModel{
+export interface UserModel{
     newToken: string;
     firstname: string;
     lastname: string;
@@ -9,21 +9,7 @@ export class UserModel{
     profilePhoto: string;
     gender: string;
     jobTitle: string;
-    years_of_experience: number;
-    roles: string
-    
-    constructor(){
-        this.newToken = '',
-        this.firstname = ''
-        this.lastname = '',
-        this.username = ''
-        this.email = ''
-        this.address = ''
-        this.contact = ''
-        this.profilePhoto = ''
-        this.gender = ''
-        this.jobTitle = ''
-        this.years_of_experience = 0
-        this.roles = ''
-    }
+    years_Of_Experience: number;
+    roles: string[]
+
 }

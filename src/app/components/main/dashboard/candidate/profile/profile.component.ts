@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { NgFor } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faUser, faClose, faFilePdf, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { AuthService } from '../../../../../services/auth/auth.service';
+import { UserModel } from '../../../../../model/user';
 
 @Component({
   selector: 'app-candidate',
@@ -13,21 +15,21 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
   checkCircle = faCheckCircle; excCircle = faExclamationCircle; location = faLocationArrow; contact = faContactBook; mail = faMailForward; close = faClose; pdf = faFilePdf
 
   collapsed = false;
-  user = {
-    name: 'Jane Doe',
-    role: 'Candidate'
-  };
+  
 
-  userDetails = 
-  {
-    firstName: 'Jane', lastName: 'Doe', username: 'jane_doe', emailAddress: 'janedoe123@gmail.com', address: 'Anamnagar, Kathmandu', contact: '9854132541', 
-    profilePhoto: 'MyImage', gender: 'Female', jobTitle: 'Jr. Backend Developer', years_of_experience : 1, 
-  }
+  user : UserModel | null = null
+  authService = inject(AuthService)
+
+  // userDetails = 
+  // {
+  //   firstName: 'Jane', lastName: 'Doe', username: 'jane_doe', emailAddress: 'janedoe123@gmail.com', address: 'Anamnagar, Kathmandu', contact: '9854132541', 
+  //   profilePhoto: 'MyImage', gender: 'Female', jobTitle: 'Jr. Backend Developer', years_of_experience : 1, 
+  // }
 
   menuItems = [
     { label: 'Dashboard', link: '/candidate/dashboard', icon: faDashboard},
@@ -54,6 +56,27 @@ export class ProfileComponent {
     {id: 6, skill: 'Adaptability'},
     {id: 6, skill: 'Time management'},
   ]
+
+  ngOnInit(): void {
+    this.getMyDetails()
+  }
+
+  getMyDetails(){
+    const token = localStorage.getItem('token')
+    if(token){
+      this.authService.getMyDetails().subscribe({
+        next: (response) => {
+          this.user = response
+        },
+        error: (err) => {
+          console.error("Error fetching data", err)
+        }
+      })
+    }else{
+      console.error('Token not found')
+    }
+  }
+
 
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;

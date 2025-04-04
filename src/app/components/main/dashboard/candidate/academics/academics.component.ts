@@ -1,17 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { faUser, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { Academic } from '../../../../../model/academic';
+import { AcademicService } from '../../../../../services/academic/academic.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule],
+  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgIf],
   templateUrl: './academics.component.html',
   styleUrls: ['./academics.component.css']
 })
-export class AcademicsComponent {
+export class AcademicsComponent implements OnInit {
 
   title = 'My Academics'
 
@@ -22,6 +25,9 @@ export class AcademicsComponent {
     name: 'Jane Doe',
     role: 'Candidate'
   };
+
+  academics : Academic | null = null
+  academicServices = inject(AcademicService)
 
   menuItems = [
     { label: 'Dashboard', link: '/candidate/dashboard', icon: faDashboard},
@@ -37,13 +43,23 @@ export class AcademicsComponent {
   ];
 
   editForm: FormGroup = new FormGroup({
-    institutionName: new FormControl('ABC University'),
-    stream: new FormControl('MCS'),
-    startYear: new FormControl('2024'),
-    graduationYear: new FormControl('2026'),
-    degreeType: new FormControl('Masters'),
-    currentSemester: new FormControl('3rd'),
+    institutionName: new FormControl(''),
+    stream: new FormControl(''),
+    startYear: new FormControl(''),
+    graduationYear: new FormControl(''),
+    degreeType: new FormControl(''),
+    currentSemester: new FormControl(''),
   })
+
+  ngOnInit(): void {
+    this.getMyAcademics()
+  }
+
+  getMyAcademics(){
+    return this.academicServices.getMyAcademics().subscribe((response: any) => {
+      this.academics = response
+    })
+  }
 
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;

@@ -15,11 +15,11 @@
                 <h2 class="text-lg font-semibold text-gray-800 dark:text-white">My Academics</h2>
             </div>
           
-            <div class="text-gray-50 mt-10 text-[14px] w-[50%]">
+            <div *ngIf="academics" class="text-gray-50 mt-10 text-[14px] w-[50%]">
               <form [formGroup]="editForm" (submit)="editForm">
                   <div class="mb-6">
                       <label for="" class="font-bold">Institution Name</label>
-                      <input type="text" placeholder="Enter your institution name" class="w-full p-3 bg-gray-700 outline-none " formControlName="institutionName">
+                      <input type="text" placeholder="Enter your institution name" class="w-full p-3 bg-gray-700 outline-none" [value]="academics.institutionName" formControlName="institutionName">
                   </div>
                   <div class="mb-6">
                     <label for="" class="font-bold">Stream</label>
