@@ -26,14 +26,20 @@
         </div>
         <div class="mt-7 flex items-center justify-between">
           <div class="flex items-center space-x-20">
-            <div>
-              <img
+            @if(user?.profilePhoto === null){
+              <div class="bg-blue-900 text-white w-28 h-28 text-2xl font-bold p-2 text-center rounded-full ml-1 content-center">
+                {{user?.firstname?.charAt(0)}}
+              </div>
+            }@else {
+              <div class="w-40 h-40 rounded-full flex items-center justify-center font-bold">
+                <img
                 [src]="user?.profilePhoto"
                 alt="profile picture"
-                width="200"
+                width="300"
                 class="rounded-full"
               />
-            </div>
+              </div>
+            }
             <div class="space-y-5">
               <div>
                 <button

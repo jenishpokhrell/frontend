@@ -24,13 +24,7 @@ export class ProfileComponent implements OnInit {
 
   user : UserModel | null = null
   authService = inject(AuthService)
-
-  // userDetails = 
-  // {
-  //   firstName: 'Jane', lastName: 'Doe', username: 'jane_doe', emailAddress: 'janedoe123@gmail.com', address: 'Anamnagar, Kathmandu', contact: '9854132541', 
-  //   profilePhoto: 'MyImage', gender: 'Female', jobTitle: 'Jr. Backend Developer', years_of_experience : 1, 
-  // }
-
+  
   menuItems = [
     { label: 'Dashboard', link: '/candidate/dashboard', icon: faDashboard},
     { label: 'Profile', link: '/candidate/profile', icon: faUser },

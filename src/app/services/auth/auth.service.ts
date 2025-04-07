@@ -8,6 +8,8 @@ import { UserModel } from '../../model/user';
 import { jwtDecode } from 'jwt-decode';
 import { Token } from '../../model/token';
 import { Router } from '@angular/router';
+import { Register } from '../../model/register';
+import { GeneralResponse } from '../../model/response';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,6 @@ export class AuthService {
       }
       return response
     })) 
-
   }
 
   getMyDetails():Observable<UserModel>{
@@ -39,6 +40,11 @@ export class AuthService {
       map(response => response.userInfo)
     )
   }
+
+  register(formData: FormData):Observable<GeneralResponse>{
+    return this.http.post<GeneralResponse>(`${this.apiUrl}auth/createuser`, formData)
+  }
+
 
   isLoggedIn = () : boolean => {
     const token = this.getToken()
@@ -65,6 +71,6 @@ export class AuthService {
     location.replace("/login")
   }
 
-  private getToken = (): string | null => localStorage.getItem(this.TokenKey) || ''
+  getToken = (): string | null => localStorage.getItem(this.TokenKey) || ''
   
 }

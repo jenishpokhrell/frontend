@@ -1,4 +1,4 @@
-<div class="flex h-[100dvh] px-2">
+<div *ngIf="user" class="flex h-[100dvh] px-2">
     <div class="flex flex-col h-full transition-all duration-300 ease-in-out" 
          [class.w-64]="!collapsed" 
          [class.w-20]="collapsed"
@@ -10,14 +10,14 @@
          N
         </div>
         <div>
-          <p class="text-white font-medium">Nina</p>
-          <p class="text-blue-200 text-xs">Candidate</p>
+          <p class="text-white font-medium"> {{user?.firstname}} {{user?.lastname}} </p>
+          <p class="text-blue-200 text-xs">{{user?.roles}}</p>
         </div>  
       </div>
       
       <div class="p-4 flex items-center justify-center border-b border-blue-500" *ngIf="collapsed">
         <div class="w-10 h-10 rounded-full bg-blue-700 flex items-center justify-center text-white font-bold">
-          {{user.name.charAt(0)}}
+          {{user?.firstname?.charAt(0)}}
         </div>
       </div>
   

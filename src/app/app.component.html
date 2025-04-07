@@ -98,6 +98,11 @@
     }@else{
       <div *ngIf="userModel" class="m-3 p-2 bg-[#6BA1FF] rounded-full flex items-center justify-center space-x-2 transition-all cursor-pointer" 
       (click) = "toggleDropdown()">
+      @if(userModel.profilePhoto === null){
+        <div class="bg-blue-900 text-white font-bold p-2 w-10 text-center rounded-full ml-1">
+          {{userModel.firstname.charAt(0)}}
+        </div>
+      }@else {
         <div class="w-10 h-8 rounded-full flex items-center justify-center font-bold">
           <img
           [src]="userModel.profilePhoto"
@@ -106,6 +111,7 @@
           class="rounded-full"
         />
         </div>
+      }
         <div>
           <p class="font-semibold text-white text-[14px]"> {{userModel.firstname}} {{userModel.lastname}}</p>
         </div>

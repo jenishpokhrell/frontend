@@ -8,84 +8,72 @@
         </p>
     </div>
     <div class="mt-12">
-        <form action="">
+        <form [formGroup]="signUp" (submit)="register()">
             <div class="mb-8">
                 <label for="" class="font-bold">Are you a?</label>
                 <div class="flex space-x-8 mt-1">
-                    <div class="flex items-center space-x-2 text-center">
-                        <input type="radio" name="userRole" value="Candidate" checked>         
-                        <p class="text-slate-500">Candidate</p>
-                    </div>
-                    <div>
-                        <p class="text-slate-500">or</p>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <input type="radio" name="userRole" value="Employer">         
-                        <p class="text-slate-500">Employer</p>
-                    </div>
+                    <select id="roles" formControlName="roles" class="border-2 p-4 w-full bg-transparent">
+                        <option value="">-- Select Role --</option>
+                        <option value="Employer">Employer</option>
+                        <option value="Candidate">Candidate</option>
+                      </select>
                 </div>
             </div>
             <div class="md:mb-7 md:w-full md:flex md:space-x-10">
                 <div class="mb-3 md:w-1/2">
                     <label for="" class="font-bold">First Name</label>
-                    <input type="text" placeholder="Enter your first name" class="border-2 p-4 w-full">
+                    <input type="text" placeholder="Enter your first name" class="border-2 p-4 w-full" formControlName="firstname">
                 </div>
                 <div class="mb-3 md:w-1/2">
                     <label for="" class="font-bold">Last Name</label>
-                    <input type="text" placeholder="Enter your last name" class="border-2 p-4 w-full">
+                    <input type="text" placeholder="Enter your last name" class="border-2 p-4 w-full" formControlName="lastname">
                 </div>
             </div>
             <div class="md:mb-7 md:w-full md:flex md:space-x-10">
                 <div class="mb-3 md:w-1/2">
                     <label for="" class="font-bold">Username</label>
-                    <input type="text" placeholder="Enter your username" class="border-2 p-4 w-full">
+                    <input type="text" placeholder="Enter your username" class="border-2 p-4 w-full" formControlName="username">
                 </div>
                 <div class=" mb-3 md:w-1/2">
                     <label for="" class="font-bold">Address</label>
-                    <input type="text" placeholder="Enter your address" class="border-2 p-4 w-full">
+                    <input type="text" placeholder="Enter your address" class="border-2 p-4 w-full" formControlName="address">
                 </div>
             </div>
             <div class="md:mb-7 mb-3">
                 <label for="" class="font-bold">Email Address</label>
-                <input type="text" placeholder="Enter your email address" class="border-2 p-4 w-full">
+                <input type="text" placeholder="Enter your email address" class="border-2 p-4 w-full" formControlName="email">
                 <p class="text-slate-400 mt-2">Job Application Update will be sent to you on this email id</p>
             </div>
             <div class="md:mb-8 mb-3">
                 <label for="" class="font-bold">Mobile Number</label>
-                <input type="text" placeholder="Enter your mobile number" class="border-2 p-4 w-full">
+                <input type="text" placeholder="Enter your mobile number" class="border-2 p-4 w-full" formControlName="contact">
                 <p class="text-slate-400 mt-2">Recruiters will contact you on this number</p>
             </div>
             <div class="md:mb-8 mb-3">
                 <label for="" class="font-bold">Are you?</label>
                 <div class="flex space-x-8 mt-1">
-                    <div class="flex items-center space-x-2">
-                        <input type="radio" name="userType" value="Candidate" checked>         
-                        <p class="text-slate-500">Male</p>
-                    </div>
-                    <div>
-                        <p class="text-slate-500">or</p>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <input type="radio" name="userType" value="Employer">         
-                        <p class="text-slate-500">Female</p>
-                    </div>
+                    <select id="gender" formControlName="gender" class="border-2 p-4 w-full bg-transparent">
+                        <option value="">-- Select Role --</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
                 </div>
             </div>
             <div class="md:mb-7 md:w-full md:flex md:space-x-10">
                 <div class="mb-3 md:w-1/2">
                     <label for="" class="font-bold">Position</label>
-                    <input type="text" placeholder="Enter your current position" class="border-2 p-4 w-full">
+                    <input type="text" placeholder="Enter your current position" class="border-2 p-4 w-full" formControlName="jobtitle">
                 </div>
                 <div class="mb-3 md:w-1/2">
                     <label for="" class="font-bold">Years of experience</label>
-                    <input type="text" placeholder="Enter your experience in years" class="border-2 p-4 w-full">
+                    <input type="text" placeholder="Enter your experience in years" class="border-2 p-4 w-full" formControlName="years_of_experience">
                 </div>
             </div>
 
             <div class="md:mb-8 mb-3">
                 <label for="" class="font-bold">Select Profile Photo</label>
                 <!-- <img [src] = "selectedImage" alt="selected-Image"> -->
-                <input type="file" (change) = "onFileSelected($event)" accept="image/**" class="md:w-full">
+                <input type="file" (change) = "onFileSelected($event)" accept=".png, .jpg, .jpeg" class="md:w-full" formControlName="profilePhoto">
                 <p class="text-slate-400 mt-2">Only .jpg or .png file is accepted</p>
             </div>
             <div *ngIf="selectedImage" class="mb-8">
@@ -94,7 +82,7 @@
 
             <div class="mb-10">
                 <label for="" class="font-bold">Password</label>
-                <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter password" class="border-2 p-4 w-full">
+                <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter password" class="border-2 p-4 w-full" formControlName="password">
                 <div class="flex">
                     <input type="checkbox" id="showPassword" (click)="togglePasswordVisibility()" value="Show your password">
                     <label for="showPassword" class="ml-2">Show your password</label>

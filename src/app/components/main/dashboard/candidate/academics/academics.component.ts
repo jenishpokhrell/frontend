@@ -6,6 +6,8 @@ import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { Academic } from '../../../../../model/academic';
 import { AcademicService } from '../../../../../services/academic/academic.service';
 import { NgIf } from '@angular/common';
+import { GeneralResponse } from '../../../../../model/response';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-candidate',
@@ -42,7 +44,7 @@ export class AcademicsComponent implements OnInit {
 
   ];
 
-  editForm: FormGroup = new FormGroup({
+  academic: FormGroup = new FormGroup({
     institutionName: new FormControl(''),
     stream: new FormControl(''),
     startYear: new FormControl(''),
@@ -53,11 +55,44 @@ export class AcademicsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMyAcademics()
+
+    this.academicServices.getMyAcademics().subscribe((response: Academic) => {
+      this.academic.patchValue(response)
+    })
   }
 
+  academicId! : number
+
+  constructor(private activatedRoute: ActivatedRoute) {}
+
   getMyAcademics(){
-    return this.academicServices.getMyAcademics().subscribe((response: any) => {
-      this.academics = response
+    this.academicId = +this.activatedRoute.snapshot.paramMap.get('id')!
+    return this.academicServices.getMyAcademics().subscribe( {
+      next: (response) => {
+        this.academics = response
+      }
+    })
+  }
+
+  saveAcademics(){
+    const academic = this.academic.value
+    this.academicServices.saveAcademics(academic).subscribe((response : GeneralResponse) => { 
+      if(response.IsSuccess){
+        alert(response.Message)
+      }else{
+        alert("Failed to save academic experience.")
+      }
+    })
+  }
+
+  updateAcademics(): void{
+    const academic = this.academic.value
+    this.academicServices.editAcademics(academic, this.academicId).subscribe((response: GeneralResponse) => {
+      if(response.IsSuccess){
+        alert(response.Message)
+      }else{
+        alert("Failed to update academic experience.")
+      }
     })
   }
 

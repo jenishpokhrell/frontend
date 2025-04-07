@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faChevronRight, faChevronLeft, faSignOut } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ import { AuthService } from '../../../services/auth/auth.service';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
 
   right = faChevronRight
   left = faChevronLeft
@@ -26,6 +26,17 @@ export class SidebarComponent {
   @Output() toggleCollapse = new EventEmitter<void>();
   @Output() logout = new EventEmitter<void>();
 
+  ngOnInit(): void {
+    this.getMyDetails()
+  }
+
+  getMyDetails(){
+    return this.authService.getMyDetails().subscribe({
+      next: (response) => {
+        this.user = response
+      }
+    })
+  }
   // logout(){
   //   this.authService.logout()
   // }

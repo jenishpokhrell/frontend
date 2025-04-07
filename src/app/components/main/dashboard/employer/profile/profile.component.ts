@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faUser, faClose, faFilePdf,faBusinessTime, faBook, faBriefcase, faBookBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { AuthService } from '../../../../../services/auth/auth.service';
+import { UserModel } from '../../../../../model/user';
 
 @Component({
   selector: 'app-candidate',
@@ -13,21 +15,31 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class EmployerProfileComponent {
+export class EmployerProfileComponent implements OnInit { 
 
   checkCircle = faCheckCircle; excCircle = faExclamationCircle; location = faLocationArrow; contact = faContactBook; mail = faMailForward; close = faClose; pdf = faFilePdf
 
-  collapsed = false;
-  user = {
-    name: 'Shristi Sharma',
-    role: 'Employer'
-  };
+  authService = inject(AuthService)
 
-  userDetails = 
-  {
-    firstName: 'Shristi', lastName: 'Sharma', username: 'shristi_sharma', emailAddress: 'shristi_sharma123@gmail.com', address: 'New Baneshwor, Kathmandu', contact: '9874512536', 
-    profilePhoto: 'MyImage', gender: 'Female', jobTitle: 'Senior HR Maneger', years_of_experience : 6, 
+  collapsed = false;
+
+  user: UserModel | null = null
+
+  ngOnInit(): void {
+    this.getMyDetails()
   }
+
+  getMyDetails(){
+    const token = localStorage.getItem('token')
+    if(token){
+      this.authService.getMyDetails().subscribe({
+        next: (response) => {
+          this.user = response
+        }
+      })
+    }
+  }
+
 
   menuItems = [
     { label: 'Dashboard', link: '/employer/dashboard', icon: faDashboard},
