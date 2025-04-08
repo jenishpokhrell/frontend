@@ -1,29 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { faUser, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { Experience } from '../../../../../model/experience';
+import { ExperiencesService } from '../../../../../services/experiences/experiences.service';
+import { AuthService } from '../../../../../services/auth/auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { ThemeService } from '../../../../../services/theme/theme.service';
+import { GeneralResponse } from '../../../../../model/response';
 
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, FaIconComponent],
+  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, NgIf, FaIconComponent],
   templateUrl: './experiences.component.html',
-  styleUrls: ['./experiences.component.css']
+  styleUrls: ['./experiences.component.css'] 
 })
-export class ExperiencesComponent {
+export class ExperiencesComponent implements OnInit {
 
-  title = 'My Academics'
 
   checkCircle = faCheckCircle; excCircle = faExclamationCircle; location = faLocationArrow; contact = faContactBook; mail = faMailForward; edit = faEdit; delete = faTrash
 
   collapsed = false;
-  user = {
-    name: 'Jane Doe',
-    role: 'Candidate'
-  };
 
   menuItems = [
     { label: 'Dashboard', link: '/candidate/dashboard', icon: faDashboard},
@@ -38,32 +39,61 @@ export class ExperiencesComponent {
 
   ];
 
-  experiences = [
-    {jobTitle: 'Frontend Intern', companyName: 'Omega Tech', from: '2024-9-12', to: '2024-12-11', isCurrentlyWoring: false, jobDescription: 'I worked as an frontend intern. My task was to develop a user friendly website. Also I was tasked to integrate API from backend.'},
-    {jobTitle: 'Frontend Trainee', companyName: 'C&M Tech', from: '2024-12-27', to: '2025-1-12', isCurrentlyWoring: true, jobDescription: 'I am currently working as an frontend trainee. My task is to develop a user friendly website. Also I am tasked to integrate API from backend. I collaborate with my teams to develop a real world project.'},
-  ]
+  experiences : Experience[] = []
+  experienceService = inject(ExperiencesService)
+  authService = inject(AuthService)
+  id! : number
+
+  editExperience: FormGroup = new FormGroup({
+    jobTitle: new FormControl(''),
+    companyName: new FormControl(''),
+    jobDescription: new FormControl(''),
+    from: new FormControl(''),
+    to: new FormControl('')
+  })
+
+
+  ngOnInit(): void {
+    this.getMyExperiences()
+  }
+
+  getExperienceById(experienceId: number){
+    const id = experienceId
+    if(id){
+      this.experienceService.getExperienceById(id).subscribe((response: Experience) => {
+        this.editExperience.patchValue(response)
+        this.id = response.experienceId
+      })
+    }else{
+      console.log("ExperienceId not found")
+    }
+  }
+
+  getMyExperiences(){
+    this.experienceService.getMyExperiences().subscribe({
+      next: (response) => {
+        this.experiences = response
+      }
+    })
+  }
+
+  updateExperiences(){
+    const experience = this.editExperience.value
+    if(this.id){
+      this.experienceService.updateExperiences(this.id, experience).subscribe((response: GeneralResponse) => {
+        if(response.IsSuccess){
+          alert("Error updating experiences")
+        }else{
+          alert("Experience updated successfully")
+          location.reload()
+        }
+      })
+    }else{
+      console.log("Error fetching id")
+    }
+  }
 
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;
-  }
-
-  logout(): void {
-    console.log('Logout clicked');
-    // Implement logout logic
-  }
-
-  getStatusClass(status: string): string {
-    switch(status) {
-      case 'Shortlisted':
-        return 'bg-green-100 text-green-800';
-      case 'Applied':
-        return 'bg-blue-100 text-blue-800';
-      case 'Rejected':
-        return 'bg-red-100 text-red-800';
-      case 'Interview':
-        return 'bg-yellow-100 text-yellow-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
   }
 }

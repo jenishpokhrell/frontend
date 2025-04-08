@@ -2,8 +2,7 @@
     <app-sidebar [user]="user" 
                  [menuItems]="menuItems" 
                  [collapsed]="collapsed"
-                 (toggleCollapse)="toggleSidebar()"
-                 (logout)="logout()"></app-sidebar>
+                 (toggleCollapse)="toggleSidebar()"></app-sidebar>
   
     <div class="flex-1 flex flex-col overflow-hidden" [class.ml-14]="!collapsed" [class.ml-5]="collapsed">
       <app-header [title]="'Academics'"
@@ -16,7 +15,7 @@
             </div>
           
             <div class="text-gray-50 mt-10 text-[14px] w-[50%]">
-              <form [formGroup]="academic" (submit)="academics === null ? 'saveAcademics()' : 'updateAcademics()'"> 
+              <form [formGroup]="academic" (submit)="academics === null ? saveAcademics() : updateAcademics()"> 
                   <div class="mb-6">
                       <label for="" class="font-bold">Institution Name</label>
                       <input type="text" placeholder="Enter your institution name" class="w-full p-3 bg-gray-700 outline-none" formControlName="institutionName">
@@ -58,9 +57,19 @@
                   </select>
                 </div>
                   <div class="flex items-center space-x-5">
+                    @if(academics === null){
                       <div>
-                          <button type="submit" class="rounded-full bg-blue-900 w-36 text-[13px] p-4 font-semibold">{{academic === null ? 'Save' : 'Update'}}</button>
+                          <button type="submit" class="rounded-full bg-blue-900 w-36 text-[13px] p-4 font-semibold">Save</button>
                       </div>
+                    }@else if(academic.disabled) {
+                      <div>
+                        <button type="button" (click) = "enableForm()" class="rounded-full bg-blue-900 w-36 text-[13px] p-4 font-semibold">Edit</button>
+                    </div>
+                    }@else {
+                      <div>
+                        <button type="submit" class="rounded-full bg-blue-900 w-36 text-[13px] p-4 font-semibold">Update</button>
+                    </div>
+                    }
                       <div>
                         <button class="rounded-full bg-gray-200 text-black w-36 text-[13px] p-4 font-semibold">Delete</button>
                     </div>

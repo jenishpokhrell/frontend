@@ -7,7 +7,7 @@ import { Academic } from '../../../../../model/academic';
 import { AcademicService } from '../../../../../services/academic/academic.service';
 import { NgIf } from '@angular/common';
 import { GeneralResponse } from '../../../../../model/response';
-import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-candidate',
@@ -30,6 +30,7 @@ export class AcademicsComponent implements OnInit {
 
   academics : Academic | null = null
   academicServices = inject(AcademicService)
+  authService = inject(AuthService)
 
   menuItems = [
     { label: 'Dashboard', link: '/candidate/dashboard', icon: faDashboard},
@@ -52,24 +53,28 @@ export class AcademicsComponent implements OnInit {
     degreeType: new FormControl(''),
     currentSemester: new FormControl(''),
   })
+  
+  academicId! : number
 
   ngOnInit(): void {
     this.getMyAcademics()
-
     this.academicServices.getMyAcademics().subscribe((response: Academic) => {
-      this.academic.patchValue(response)
+      if(response){
+        this.academic.patchValue(response)
+        this.academic.disable()
+      }
     })
   }
 
-  academicId! : number
-
-  constructor(private activatedRoute: ActivatedRoute) {}
+  enableForm(){
+    this.academic.enable()
+  }
 
   getMyAcademics(){
-    this.academicId = +this.activatedRoute.snapshot.paramMap.get('id')!
     return this.academicServices.getMyAcademics().subscribe( {
       next: (response) => {
         this.academics = response
+        this.academicId = response.id
       }
     })
   }
@@ -87,23 +92,27 @@ export class AcademicsComponent implements OnInit {
 
   updateAcademics(): void{
     const academic = this.academic.value
-    this.academicServices.editAcademics(academic, this.academicId).subscribe((response: GeneralResponse) => {
-      if(response.IsSuccess){
-        alert(response.Message)
-      }else{
-        alert("Failed to update academic experience.")
-      }
-    })
+    if(this.academicId){
+      this.academicServices.updateAcademics(this.academicId, academic).subscribe((response: GeneralResponse) => {
+        if(response.IsSuccess){
+          alert(response.Message)
+          this.academic.disable()
+        }else{
+          alert("Failed to update academic experience.")
+        }
+      })
+    }else{
+      console.log("Error fetching id")
+    }
   }
 
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;
   }
 
-  logout(): void {
-    console.log('Logout clicked');
-    // Implement logout logic
-  }
+  // logout(): void {
+  //  this.authService.logout()
+  // }
 
   getStatusClass(status: string): string {
     switch(status) {

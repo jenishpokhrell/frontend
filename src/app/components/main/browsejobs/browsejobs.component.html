@@ -257,15 +257,21 @@
                  <span class="font-bold text-[#2f4f70]">JobLevel: </span
                  >{{ job.jobLevel }}
                </p>
-               <p>
+               <p *ngIf="job.max_Years_of_Experience_Required === 0">
                  <span class="font-bold text-[#2f4f70]"
                    >Experience required:
                  </span>
-                 {{ job.experience }}
+                 Freshers
                </p>
+               <p *ngIf="job.max_Years_of_Experience_Required > 0">
+                <span class="font-bold text-[#2f4f70]"
+                  >Experience required:
+                </span>
+                {{ job.min_Years_of_Experience_Required }} to {{job.max_Years_of_Experience_Required}}
+              </p>
                <p>
                  <span class="font-bold text-[#2f4f70]">No. of openings: </span>
-                 {{ job.noOfOpening }}
+                 {{ job.no_of_Openings }}
                </p>
                <p>
                  <span class="font-bold text-[#2f4f70]">Location: </span
@@ -274,9 +280,9 @@
              </div>
              <div class="content-end space-y-5">
                <div
-                 class="bg-gray-200 p-2 md:w-36 w-72 text-center relative text-[14px] lg:left-2 h-10 rounded-full cursor-pointer" routerLink="/viewjob"
+                 class="bg-gray-200  relative text-[14px] lg:left-2 h-10 rounded-full" routerLink="/viewjob/{{job.id}}"
                >
-                 <button>View Job</button>
+                 <button class="p-2 md:w-36 w-72 text-center cursor-pointer">View Job</button>
                </div>
                <div
                  class="bg-[#6BA1FF] text-white p-2 md:w-36 w-72 text-center relative text-[14px] lg:left-2 h-10 rounded-full cursor-pointer"
@@ -288,9 +294,6 @@
          </div>
          }
        </div>
-       <!-- @if (searchJob !== '' && jobs.some().toLowerCase().includes(searchJob)) {
-
-       } -->
      </div>
     </div>
 </div>

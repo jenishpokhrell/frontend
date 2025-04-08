@@ -21,7 +21,7 @@ export class AcademicService {
     return this.http.post<GeneralResponse>(`${this.apiUrl}academics/add-academics`, data)
   }
 
-  editAcademics(data: Academic, id: number ):Observable<GeneralResponse>{
+  updateAcademics(id: number, data: Academic ):Observable<GeneralResponse>{
     return this.http.put<GeneralResponse>(`${this.apiUrl}academics/updateacademics/${id}`, data)
-  }
+  } 
 }

@@ -24,7 +24,7 @@ export class SidebarComponent implements OnInit{
   @Input() menuItems: any = [];
   @Input() collapsed = false;
   @Output() toggleCollapse = new EventEmitter<void>();
-  @Output() logout = new EventEmitter<void>();
+  //@Output() logout = new EventEmitter<void>();
 
   ngOnInit(): void {
     this.getMyDetails()
@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit{
       }
     })
   }
-  // logout(){
-  //   this.authService.logout()
-  // }
+  logout(){
+    this.authService.logout()
+  }
 }

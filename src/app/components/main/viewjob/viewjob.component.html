@@ -20,7 +20,7 @@
 
   <div class="w-[80%] mx-auto">
     <div
-      *ngFor="let job of job"
+      *ngIf="job"
       class="flex items-center justify-between my-10"
     >
       <div class="">
@@ -29,7 +29,7 @@
         </h1>
         <div class="flex space-x-10 font-extralight text-[14px]">
           <p>{{ job.jobType }}</p>
-          <p>{{ job.openings }} Vacancies</p>
+          <p>{{ job.no_of_Openings }} Vacancies</p>
         </div>
       </div>
       @if (job.isActive == true) {
@@ -65,7 +65,7 @@
 
     <hr />
 
-    <div *ngFor="let job of job" class="my-10 flex items-start space-x-20">
+    <div *ngIf="job" class="my-10 flex items-start space-x-20">
       <div class="my-10 w-[70%]">
         <div class="border border-gray-300 rounded-xl px-10 py-5">
           <div class="my-5">
@@ -82,17 +82,17 @@
                   Job Level: <span>{{ job.jobLevel }}</span>
                 </p>
                 <p>
-                  No. of openings: <span>{{ job.openings }}</span>
+                  No. of openings: <span>{{ job.no_of_Openings }}</span>
                 </p>
                 <p>
                   Salary:
-                  <span>Nrs. {{ job.minSalary }} to {{ job.maxSalary }}</span>
+                  <span>Nrs. {{ job.minimumSalary }} to {{ job.maximumSalary }}</span>
                 </p>
               </div>
               <div class="space-y-5">
                 <p>
-                  Experience required: {{ job.minExp }} to
-                  {{ job.maxExp }} years
+                  Experience required: {{ job.min_Years_of_Experience_Required }} to
+                  {{ job.max_Years_of_Experience_Required }} years
                 </p>
                 <p>Location: Pulchowk, Lalitpur</p>
                 @if (job.isActive == true) {

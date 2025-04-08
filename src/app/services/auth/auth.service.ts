@@ -16,14 +16,14 @@ import { GeneralResponse } from '../../model/response';
 })
 export class AuthService {
 
-  apiUrl = 'https://localhost:44304/api/'
+  apiUrl = 'https://localhost:44304/api/auth/'
   private TokenKey = 'token'
   route = inject(Router)
 
   constructor(private http: HttpClient) { }
 
   login(data:Login):Observable<UserModel>{
-    return this.http.post<UserModel>(`${this.apiUrl}Auth/Login`, data).pipe(map((response) => {
+    return this.http.post<UserModel>(`${this.apiUrl}Login`, data).pipe(map((response) => {
       if(response.newToken){
         localStorage.setItem(this.TokenKey, response.newToken)
       }
@@ -36,13 +36,17 @@ export class AuthService {
     const body = {
       token: token
     }
-    return this.http.post<any>(`${this.apiUrl}Auth/Me`, body ).pipe(
+    return this.http.post<any>(`${this.apiUrl}Me`, body ).pipe(
       map(response => response.userInfo)
     )
   }
 
   register(formData: FormData):Observable<GeneralResponse>{
-    return this.http.post<GeneralResponse>(`${this.apiUrl}auth/createuser`, formData)
+    return this.http.post<GeneralResponse>(`${this.apiUrl}createuser`, formData)
+  }
+
+  getUserById(id: string){
+    return this.http.get<any>(`${this.apiUrl}getuserbyid/${id}`)
   }
 
 

@@ -1,27 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FooterComponent } from "../../reusable/footer/footer.component";
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 // import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark } from '@fortawesome/free-regular-svg-icons';
+import { GetJobForCandidate } from '../../../model/job';
+import { JobService } from '../../../services/job/job.service';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../../services/auth/auth.service';
+import { UserModel } from '../../../model/user';
 
 @Component({
   selector: 'app-viewjob',
   standalone: true,
-  imports: [FooterComponent, NgFor, FaIconComponent ],
+  imports: [FooterComponent, NgFor, FaIconComponent, NgIf ],
   templateUrl: './viewjob.component.html',
   styleUrl: './viewjob.component.css'
 })
-export class ViewjobComponent {
+export class ViewjobComponent implements OnInit  {
 
   aftersave = faBookmark
   beforesave = faBookmark
 
-  job = [{
-    jobTitle: '.NET Developer with angular', jobType: 'Full-Time', jobLevel: 'Junior', openings: 4, minExp : 1, maxExp: 2, minSalary: 30000, maxSalary: 40000, location: 'Pulchowk, Lalitpur',
-    isActive: true, jobDescription: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor reiciendis aspernatur quisquam sunt culpa soluta libero, debitis ipsum est rem itaque? Consectetur voluptate dolor explicabo amet quisquam earum atque impedit, ratione laudantium modi unde repellat quam, consequuntur cum accusantium deleniti delectus? Ad officia odit ex maiores magni, totam veritatis? Corrupti quo cumque possimus quis ullam laborum expedita delectus in quibusdam sapiente, voluptatibus tenetur mollitia commodi incidunt sint obcaecati accusamus culpa nulla exercitationem ad eum earum beatae ipsa quod! Temporibus voluptates pariatur cupiditate tempora animi consequatur. Autem ipsam perferendis voluptatum. Iste atque aspernatur est quae, vel earum beatae. Corporis maiores delectus, animi et quidem molestias nemo molestiae accusamus est soluta voluptates similique optio totam blanditiis sunt tempore magni nam aut eveniet fugit ipsam debitis doloribus modi? Totam, et modi. Voluptates, dicta?',
-    requirements: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor reiciendis aspernatur quisquam sunt culpa soluta libero, debitis ipsum est rem itaque? Consectetur voluptate dolor explicabo amet quisquam earum atque impedit, ratione laudantium modi unde repellat quam, consequuntur cum accusantium deleniti delectus? Ad officia odit ex maiores magni, totam veritatis? Corrupti quo cumque possimus quis ullam laborum expedita delectus in quibusdam sapiente, voluptatibus tenetur mollitia commodi incidunt sint obcaecati accusamus culpa nulla exercitationem ad eum earum beatae ipsa quod! Temporibus voluptates pariatur cupiditate tempora animi consequatur. Autem ipsam perferendis voluptatum. Iste atque aspernatur est quae, vel earum beatae. Corporis maiores delectus, animi et quidem molestias nemo molestiae accusamus est soluta voluptates similique optio totam blanditiis sunt tempore magni nam aut eveniet fugit ipsam debitis doloribus modi? Totam, et modi. Voluptates, dicta?'
-  }]
+  job: GetJobForCandidate | null = null
+  user: UserModel | null = null
+  jobService = inject(JobService)
+  authService = inject(AuthService)
+  jobId!: number
+  employerId!: string
+
+  constructor(private activatedRoute: ActivatedRoute){}
+ 
+  ngOnInit(): void {
+    this.getJobByIdForCandidate()
+    this.getUserById(this.employerId)
+  }
+  
+  getJobByIdForCandidate(){
+    this.jobId = +this.activatedRoute.snapshot.paramMap.get('id')!
+    if(this.jobId){
+      this.jobService.getJobByIdForCandidate(this.jobId).subscribe((response: GetJobForCandidate)=> {
+        this.job = response
+      })
+    }
+  }
+
+  getUserById(employerId: string){
+    const id = this.employerId
+    this.authService.getUserById(id).subscribe({
+      next: (response) => {
+        this.user = response
+      }
+    })
+  }
+
 
   JobApply(){
     window.confirm("thank you for applying")
