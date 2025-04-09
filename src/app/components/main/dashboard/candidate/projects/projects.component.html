@@ -1,9 +1,7 @@
 <div class="flex h-screen bg-gray-100 dark:bg-gray-900">
-    <app-sidebar [user]="user" 
-                 [menuItems]="menuItems" 
+    <app-sidebar [menuItems]="menuItems" 
                  [collapsed]="collapsed"
-                 (toggleCollapse)="toggleSidebar()"
-                 (logout)="logout()"></app-sidebar>
+                 (toggleCollapse)="toggleSidebar()"></app-sidebar>
   
     <div class="flex-1 flex flex-col overflow-hidden" [class.ml-14]="!collapsed" [class.ml-5]="collapsed">
       <app-header [title]="'Projects'"
@@ -16,19 +14,19 @@
             </div>
             <div class="flex w-full space-x-20">
                 <div class="w-1/2">
-                    <div *ngFor="let project of projects" class="text-gray-50 mt-14 bg-gray-900 p-7 rounded-[50px] drop-shadow-2xl">
+                    <div *ngFor="let project of projects" class="text-gray-50 mt-14 bg-gray-900 p-7  drop-shadow-2xl">
                         <div class="flex items-center justify-between">
                             <div>
-                                <h2 class="text-xl font-semibold text-gray-800 dark:text-white">{{project.projectTitle}}</h2>
+                                <h2 class="text-xl font-semibold text-gray-800 dark:text-white">{{project.projectName}}</h2>
                             </div>
                             <div class="space-x-5">
-                                <fa-icon [icon] = 'edit' size="lg" class="cursor-pointer"></fa-icon>
-                                <fa-icon [icon] = 'delete' size="lg" class="cursor-pointer" ></fa-icon>
+                                <fa-icon [icon] = 'edit' size="lg" class="cursor-pointer" (click) = "getProjectById(project.projectId)"></fa-icon>
+                                <fa-icon [icon] = 'delete' size="lg" class="cursor-pointer" (click) = "deleteProject(project.projectId)" ></fa-icon>
                             </div>
                         </div>
                         <div>
                             <p class="font-bold text-[14px]">Project URL: <span class="font-light cursor-pointer">
-                                <a [href]="project.projectURL" target="_parent">
+                                <a [href]="project.projectURL" target="_blank">
                                     {{project.projectURL}}
                                 </a>
                             </span></p>
@@ -40,23 +38,23 @@
                     </div>
                 </div>
                 <div class="text-gray-50 mt-10 text-[14px] w-1/2 mr-20 bg-gray-900 p-7 drop-shadow-2xl">
-                    <form>
+                    <form [formGroup]="projectForm" (submit)="editForm ? updateProject() : saveProject() ">
                         <div class="mb-6">
                             <label for="" class="font-bold">Project Title</label>
-                            <input type="text" placeholder="Enter your institution name" class="w-full p-3 bg-gray-700 outline-none ">
+                            <input type="text" placeholder="Enter your project name" class="w-full p-3 bg-gray-700 outline-none " formControlName="projectName">
                         </div>
                         <div class="mb-6">
                           <label for="" class="font-bold">Project URL</label>
-                          <input type="text" placeholder="Enter project url" class="w-full p-3 bg-gray-700 outline-none ">
+                          <input type="text" placeholder="Enter project url" class="w-full p-3 bg-gray-700 outline-none " formControlName="projectURL">
                         </div>
                         <div>
                             <label for="" class="font-bold">Project Description</label>
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Add your description..." class=" w-full p-3 bg-gray-700 outline-none"></textarea>
+                            <textarea name="" id="" cols="30" rows="10" placeholder="Describe your project..." class=" w-full p-3 bg-gray-700 outline-none" formControlName="projectDescription"></textarea>
                         </div>
                         <div class="flex items-center space-x-5 mt-5">
-                            <div>
-                                <button type="submit" class="rounded-full bg-blue-900 w-36 text-[13px] p-4 font-semibold">Save</button>
-                            </div>
+                                <button type="submit" class="rounded-full bg-blue-900 w-36 text-[13px] p-4 font-semibold">
+                                    {{editForm ? 'Update' : 'Save'}}
+                                </button>
                         </div>
                     </form>
                 </div>

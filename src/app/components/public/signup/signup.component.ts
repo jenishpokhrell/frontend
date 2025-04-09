@@ -58,7 +58,7 @@ export class SignupComponent {
 
     return this.authService.register(formData).subscribe({
       next: (response) => {
-        console.log(response.Message)
+        console.log(response.message)
         this.route.navigate(['/login'])
       },
       error: (err) => {

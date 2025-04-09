@@ -15,7 +15,6 @@ import { Token } from './model/token';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  title = 'Career Dev';
 
   signout = faSignOut
 
@@ -33,7 +32,6 @@ export class AppComponent implements OnInit {
     return this.authService.isLoggedIn()
 
   }
-
 
   ngOnInit(): void {
      this.getMyDetails()

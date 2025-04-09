@@ -82,8 +82,9 @@ export class AcademicsComponent implements OnInit {
   saveAcademics(){
     const academic = this.academic.value
     this.academicServices.saveAcademics(academic).subscribe((response : GeneralResponse) => { 
-      if(response.IsSuccess){
-        alert(response.Message)
+      if(response.isSuccess){
+        alert(response.message)
+        location.reload()
       }else{
         alert("Failed to save academic experience.")
       }
@@ -94,9 +95,10 @@ export class AcademicsComponent implements OnInit {
     const academic = this.academic.value
     if(this.academicId){
       this.academicServices.updateAcademics(this.academicId, academic).subscribe((response: GeneralResponse) => {
-        if(response.IsSuccess){
-          alert(response.Message)
+        if(response.isSuccess){
+          alert(response.message)
           this.academic.disable()
+          location.reload()
         }else{
           alert("Failed to update academic experience.")
         }
@@ -106,26 +108,22 @@ export class AcademicsComponent implements OnInit {
     }
   }
 
+  deleteAcademics(academicId: number){
+    const id = academicId
+    if(confirm('Are you sure you want to delete this academics?')){
+      this.academicServices.deleteAcademics(id).subscribe((response: GeneralResponse) => {
+        if(response.isSuccess){
+          alert(response.message)
+          location.reload()
+        }else{
+          console.log("Failed to delete academics")
+        }
+      })
+    }
+  }
+
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;
   }
 
-  // logout(): void {
-  //  this.authService.logout()
-  // }
-
-  getStatusClass(status: string): string {
-    switch(status) {
-      case 'Shortlisted':
-        return 'bg-green-100 text-green-800';
-      case 'Applied':
-        return 'bg-blue-100 text-blue-800';
-      case 'Rejected':
-        return 'bg-red-100 text-red-800';
-      case 'Interview':
-        return 'bg-yellow-100 text-yellow-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  }
 }

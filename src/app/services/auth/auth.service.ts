@@ -45,8 +45,8 @@ export class AuthService {
     return this.http.post<GeneralResponse>(`${this.apiUrl}createuser`, formData)
   }
 
-  getUserById(id: string){
-    return this.http.get<any>(`${this.apiUrl}getuserbyid/${id}`)
+  getUserById(id: string):Observable<UserModel>{
+    return this.http.get<UserModel>(`${this.apiUrl}getuserbyid/${id}`)
   }
 
 

@@ -1,9 +1,8 @@
 <div class="flex h-screen bg-gray-100 dark:bg-gray-900">
-    <app-sidebar [user]="user" 
-                 [menuItems]="menuItems" 
+    <app-sidebar [menuItems]="menuItems" 
                  [collapsed]="collapsed"
                  (toggleCollapse)="toggleSidebar()"
-                 (logout)="logout()"></app-sidebar>
+                 ></app-sidebar>
   
     <div class="flex-1 flex flex-col overflow-hidden" [class.ml-14]="!collapsed" [class.ml-5]="collapsed">
       <app-header [title]="'Saved Jobs'"
@@ -87,7 +86,7 @@
                       <td
                         class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
                       >
-                        @if(job.Status === true){
+                        @if(job.isActive === true){
                             <span class="text-green-200">Active</span>
                         }@else {
                             <span class="text-red-300">Closed</span>
@@ -96,7 +95,7 @@
                     <td
                       class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-300 space-x-4"
                     >
-                      <button class="p-4 bg-blue-900 rounded-full w-24 text-[12px]">View Job</button>
+                      <button class="p-4 bg-blue-900 rounded-full w-24 text-[12px]" routerLink="/viewjob/{{job.id}}" >View Job</button>
                     </td>
                     </tr>
                   </tbody>
@@ -106,3 +105,5 @@
       </main>
     </div> 
   </div>
+
+  <router-outlet></router-outlet>

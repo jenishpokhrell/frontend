@@ -4,15 +4,19 @@ import { FooterComponent } from "../../reusable/footer/footer.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserModel } from '../../../model/user';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [RouterOutlet, RouterLink, FooterComponent, ReactiveFormsModule],
+  standalone: true, 
+  imports: [RouterOutlet, RouterLink, FooterComponent, ReactiveFormsModule, FaIconComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
+
+  eye = faEye;  eyeSlash = faEyeSlash
 
     showPassword: boolean = false;
 

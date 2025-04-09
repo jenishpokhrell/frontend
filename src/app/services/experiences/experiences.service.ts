@@ -21,8 +21,16 @@ export class ExperiencesService {
     return this.http.get<Experience>(`${this.apiUrl}getexperiencebyid/${experienceId}`)
   } 
 
+  saveExperiences(data: Experience):Observable<GeneralResponse>{
+    return this.http.post<GeneralResponse>(`${this.apiUrl}add-experience`, data)
+  }
+
   updateExperiences(id: number, data: Experience):Observable<GeneralResponse>{
     return this.http.put<GeneralResponse>(`${this.apiUrl}update-experience/${id}`, data)
+  }
+
+  deleteExperiences(id: number):Observable<GeneralResponse>{
+    return this.http.delete<GeneralResponse>(`${this.apiUrl}delete-experience/${id}`)
   }
 
 }

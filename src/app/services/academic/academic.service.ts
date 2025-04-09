@@ -9,19 +9,23 @@ import { GeneralResponse } from '../../model/response';
 })
 export class AcademicService {
 
-  apiUrl = 'https://localhost:44304/api/'
+  apiUrl = 'https://localhost:44304/api/academics/'
 
   constructor(private http: HttpClient) { }
 
   getMyAcademics():Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}Academics/GetMyAcademics`)
+    return this.http.get<any>(`${this.apiUrl}GetMyAcademics`)
   }
 
   saveAcademics(data: Academic):Observable<GeneralResponse>{
-    return this.http.post<GeneralResponse>(`${this.apiUrl}academics/add-academics`, data)
+    return this.http.post<GeneralResponse>(`${this.apiUrl}add-academics`, data)
   }
 
   updateAcademics(id: number, data: Academic ):Observable<GeneralResponse>{
-    return this.http.put<GeneralResponse>(`${this.apiUrl}academics/updateacademics/${id}`, data)
+    return this.http.put<GeneralResponse>(`${this.apiUrl}updateacademics/${id}`, data)
   } 
+
+  deleteAcademics(id: number):Observable<GeneralResponse>{
+    return this.http.delete<GeneralResponse>(`${this.apiUrl}deleteacademics/${id}`)
+  }
 }

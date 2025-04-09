@@ -37,13 +37,6 @@ export class BrowsejobsComponent implements OnInit{
     })
   }
 
-  // jobs = [
-  //   {jobTitle: 'Frontend Developer', postedBy: 'jenish_pokhrel', jobType: 'Full-Time', jobLevel: 'Junior', experience: '0 - 1 years', noOfOpening: 4, location: 'Pulchowk, Lalitpur'},
-  //   {jobTitle: 'Backend Developer', postedBy: 'shristi_sharma', jobType: 'Full-Time', jobLevel: 'Junior', experience: '0 - 1 years', noOfOpening: 2, location: 'Pulchowk, Lalitpur'},
-  //   {jobTitle: 'FullStack Developer', postedBy: 'aman_dhakal', jobType: 'Full-Time', jobLevel: 'Junior', experience: '0 - 1 years', noOfOpening: 3, location: 'Pulchowk, Lalitpur'},
-  //   {jobTitle: 'Frontend Developer', postedBy: 'jenish_pokhrel', jobType: 'Full-Time', jobLevel: 'Junior', experience: '0 - 1 years', noOfOpening: 1, location: 'Pulchowk, Lalitpur'},
-  //   {jobTitle: 'Frontend Developer', postedBy: 'jenish_pokhrel', jobType: 'Full-Time', jobLevel: 'Junior', experience: '0 - 1 years', noOfOpening: 2, location: 'Pulchowk, Lalitpur'},
-  // ]
 
   showFilter : boolean = false
   

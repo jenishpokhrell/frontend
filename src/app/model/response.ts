@@ -1,5 +1,5 @@
 export interface GeneralResponse{
-    IsSuccess: boolean,
-    StatusCode: number,
-    Message: string
+    isSuccess: boolean,
+    statusCode: number,
+    message: string
 }

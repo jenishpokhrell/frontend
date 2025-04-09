@@ -27,13 +27,13 @@ export class ViewjobComponent implements OnInit  {
   jobService = inject(JobService)
   authService = inject(AuthService)
   jobId!: number
-  employerId!: string
+  id!: string
 
   constructor(private activatedRoute: ActivatedRoute){}
  
   ngOnInit(): void {
     this.getJobByIdForCandidate()
-    this.getUserById(this.employerId)
+    //this.getUserById(this.id)
   }
   
   getJobByIdForCandidate(){
@@ -41,13 +41,14 @@ export class ViewjobComponent implements OnInit  {
     if(this.jobId){
       this.jobService.getJobByIdForCandidate(this.jobId).subscribe((response: GetJobForCandidate)=> {
         this.job = response
+        this.getUserById(this.job.employerId)
       })
     }
   }
 
   getUserById(employerId: string){
-    const id = this.employerId
-    this.authService.getUserById(id).subscribe({
+    const id = employerId
+    this.authService.getUserById(id).subscribe( {
       next: (response) => {
         this.user = response
       }

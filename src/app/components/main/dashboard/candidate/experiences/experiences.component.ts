@@ -11,6 +11,7 @@ import { AuthService } from '../../../../../services/auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService } from '../../../../../services/theme/theme.service';
 import { GeneralResponse } from '../../../../../model/response';
+import { generate } from 'rxjs';
 
 @Component({
   selector: 'app-candidate',
@@ -43,6 +44,7 @@ export class ExperiencesComponent implements OnInit {
   experienceService = inject(ExperiencesService)
   authService = inject(AuthService)
   id! : number
+  editMode: boolean = false
 
   editExperience: FormGroup = new FormGroup({
     jobTitle: new FormControl(''),
@@ -58,6 +60,7 @@ export class ExperiencesComponent implements OnInit {
   }
 
   getExperienceById(experienceId: number){
+    this.editMode = true
     const id = experienceId
     if(id){
       this.experienceService.getExperienceById(id).subscribe((response: Experience) => {
@@ -77,19 +80,44 @@ export class ExperiencesComponent implements OnInit {
     })
   }
 
+  saveExperiences(){
+    const experience = this.editExperience.value;
+    this.experienceService.saveExperiences(experience).subscribe((response: GeneralResponse) => {
+      if(response.isSuccess){
+        alert(response.message)
+        location.reload()
+      }else{
+        alert("Failed to save academics")
+      }
+    })
+  }
+
   updateExperiences(){
     const experience = this.editExperience.value
     if(this.id){
       this.experienceService.updateExperiences(this.id, experience).subscribe((response: GeneralResponse) => {
-        if(response.IsSuccess){
-          alert("Error updating experiences")
-        }else{
-          alert("Experience updated successfully")
+        if(response.isSuccess){
+          alert(response.message)
           location.reload()
+        }else{
+          alert("Error updating experiences")
         }
       })
     }else{
       console.log("Error fetching id")
+    }
+  }
+
+  deleteExperiences(id: number){
+    if(confirm('Are you sure you want to delete this work experience?')){
+      this.experienceService.deleteExperiences(id).subscribe((response: GeneralResponse) => {
+        if(response.isSuccess){
+          alert(response.message)
+          location.reload()
+        }else{
+          alert("Failed to delete work experience.")
+        }
+      })
     }
   }
 

@@ -14,7 +14,7 @@
                 <h2 class="text-lg font-semibold text-gray-800 dark:text-white">My Academics</h2>
             </div>
           
-            <div class="text-gray-50 mt-10 text-[14px] w-[50%]">
+            <div *ngIf="academic" class="text-gray-50 mt-10 text-[14px] w-[50%]">
               <form [formGroup]="academic" (submit)="academics === null ? saveAcademics() : updateAcademics()"> 
                   <div class="mb-6">
                       <label for="" class="font-bold">Institution Name</label>
@@ -54,6 +54,7 @@
                       <option value="6th">6th</option>
                       <option value="7th">7th</option>
                       <option value="8th">8th</option>
+                      <option value="Graduated">Graduated</option>
                   </select>
                 </div>
                   <div class="flex items-center space-x-5">
@@ -71,7 +72,7 @@
                     </div>
                     }
                       <div>
-                        <button class="rounded-full bg-gray-200 text-black w-36 text-[13px] p-4 font-semibold">Delete</button>
+                        <button class="rounded-full bg-gray-200 text-black w-36 text-[13px] p-4 font-semibold" (click) = "deleteAcademics(academicId)" >Delete</button>
                     </div>
                   </div>
               </form>

@@ -6,8 +6,21 @@
       
          
       <div class="p-4 flex items-center space-x-3 border-b border-blue-400" *ngIf="!collapsed">
-        <div class="w-10 h-10 rounded-full bg-blue-700 flex items-center justify-center text-white font-bold">
-         N
+        <div class=" flex items-center justify-center text-white font-bold">
+          @if(user?.profilePhoto === null){
+            <div class="bg-blue-900 w-10 h-10 text-white font-bold p-2 text-center rounded-full ml-1 content-center">
+              {{user?.firstname?.charAt(0)}}
+            </div>
+          }@else {
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold">
+              <img
+              [src]="user?.profilePhoto"
+              alt="profile picture"
+              width="200"
+              class="rounded-full"
+            />
+            </div>
+          }
         </div>
         <div>
           <p class="text-white font-medium"> {{user?.firstname}} {{user?.lastname}} </p>
@@ -16,8 +29,21 @@
       </div>
       
       <div class="p-4 flex items-center justify-center border-b border-blue-500" *ngIf="collapsed">
-        <div class="w-10 h-10 rounded-full bg-blue-700 flex items-center justify-center text-white font-bold">
-          {{user?.firstname?.charAt(0)}}
+        <div class=" flex items-center justify-center text-white font-bold">
+          @if(user?.profilePhoto === null){
+            <div class="bg-blue-900 w-10 h-10 text-white font-bold p-2 text-center rounded-full ml-1 content-center">
+              {{user?.firstname?.charAt(0)}}
+            </div>
+          }@else {
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold">
+              <img
+              [src]="user?.profilePhoto"
+              alt="profile picture"
+              width="200"
+              class="rounded-full"
+            />
+            </div>
+          }
         </div>
       </div>
   

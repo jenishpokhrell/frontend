@@ -1,5 +1,6 @@
 export interface UserModel{
     newToken: string;
+    id: string,
     firstname: string;
     lastname: string;
     username: string;

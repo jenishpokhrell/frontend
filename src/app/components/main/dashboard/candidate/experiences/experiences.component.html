@@ -21,7 +21,7 @@
                             </div>
                             <div class="space-x-5">
                                 <fa-icon [icon] = 'edit' size="lg" class="cursor-pointer" (click) = "getExperienceById(experience.experienceId)"></fa-icon>
-                                <fa-icon [icon] = 'delete' size="lg" class="cursor-pointer" ></fa-icon>
+                                <fa-icon [icon] = 'delete' size="lg" class="cursor-pointer" (click) = "deleteExperiences(experience.experienceId)" ></fa-icon>
                             </div>
                         </div>
                         <div>
@@ -42,14 +42,14 @@
                     </div>
                 </div>
                 <div class="text-gray-50 mt-10 text-[14px] w-1/2 mr-20 bg-gray-900 p-7 rounded-[50px] drop-shadow-2xl">
-                    <form [formGroup]="editExperience" (submit)="updateExperiences()">
+                    <form [formGroup]="editExperience" (ngSubmit)="editMode ? updateExperiences() : saveExperiences()">
                         <div class="mb-6">
                             <label for="" class="font-bold">Job Title</label>
-                            <input type="text" placeholder="Enter your institution name" class="w-full p-3 bg-gray-700 outline-none " formControlName="jobTitle">
+                            <input type="text" placeholder="Enter job title" class="w-full p-3 bg-gray-700 outline-none " formControlName="jobTitle">
                         </div>
                         <div class="mb-6">
                           <label for="" class="font-bold">Company Name</label>
-                          <input type="text" placeholder="Enter your stream" class="w-full p-3 bg-gray-700 outline-none " formControlName="companyName">
+                          <input type="text" placeholder="Enter company name" class="w-full p-3 bg-gray-700 outline-none " formControlName="companyName">
                       </div>
                         <div class="flex space-x-10 w-full mb-6">
                             <div class="w-1/2">
@@ -72,10 +72,9 @@
                         <div class="flex items-center space-x-5 mt-5">
                             <div>
                                 <button type="submit" class="rounded-full bg-blue-900 w-36 text-[13px] p-4 font-semibold">
-                                    Save
+                                    {{editMode ? 'Update' : 'Save'}}
                                 </button>
                             </div>
-                            
                         </div>
                     </form>
                 </div>

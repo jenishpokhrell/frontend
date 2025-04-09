@@ -31,7 +31,7 @@
                 {{user?.firstname?.charAt(0)}}
               </div>
             }@else {
-              <div class="w-28 h-28 rounded-full flex items-center justify-center font-bold">
+              <div class="w-40 h-40 rounded-full flex items-center justify-center font-bold">
                 <img
                 [src]="user?.profilePhoto"
                 alt="profile picture"
@@ -130,40 +130,6 @@
                   Update Profile
                 </button>
               </div>
-            </div>
-          </div>
-          <div class=" mt-5 p-10 w-1/2 drop-shadow-2xl">
-            <div class="mb-5">
-              <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
-                Skills
-              </h2>
-            </div>
-            <hr class="mb-5" />
-            <div>
-                <div class="mb-5 text-gray-50 grid grid-rows-3 grid-flow-col gap-3 rounded-full text-[13px]">
-                    <div *ngFor="let skill of skills" class="bg-gray-900 h-fit w-fit rounded-full">
-                        <p class="p-3 ">{{skill.skill}}
-                          <fa-icon [icon]='close' class=" ml-2 text-gray-400 opacity-80 cursor-pointer" size="lg"></fa-icon>
-                        </p>
-                    </div>
-                    
-                </div>
-                <hr>
-                <div class="my-5">
-                    <div>
-                        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
-                          My Resume
-                        </h2>
-                    </div>
-                    <div class="my-2 w-fit">
-                        <a href="https://res.cloudinary.com/dnu3li5lc/raw/upload/v1741599125/resumes/85a9516d-ec33-40b7-9361-d13224f0a46e.pdf" target="_blank">
-                            <img src="./assets/pdf.png" alt="resume" class="w-20 ">
-                        </a>
-                    </div>
-                    <div>
-                        <p class="text-gray-50">Click to view resume</p>
-                    </div>
-                </div>
             </div>
           </div>
         </div>
