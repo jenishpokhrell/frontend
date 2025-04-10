@@ -27,4 +27,8 @@ export class JobService {
   getMyJobs():Observable<GetMyJob[]>{
     return this.http.get<any>(`${this.apiUrl}job/getmyjobs`)
   }
+
+  getMyJobById(id: number):Observable<GetMyJob>{
+    return this.http.get<any>(`${this.apiUrl}job/getmyjobbyid/${id}`)
+  }
 }

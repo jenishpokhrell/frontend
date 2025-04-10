@@ -17,6 +17,7 @@ export interface GetJobForCandidate {
 }
 
 export interface GetMyJob{
+    id: number,
     jobTitle: string,
     jobDescription: string,
     jobType: string,
@@ -30,5 +31,9 @@ export interface GetMyJob{
     location: string,
     isActive: boolean,
     employerId: string,
-    jobApplications: object[]
+    jobApplications: {
+        jobStatus: string,
+        candidateId: string,
+        candidateName : string
+    }[]
 }

@@ -5,4 +5,5 @@ export interface Experience{
     jobDescription: string,
     from: string,
     to: string,
+    userId: string
 }

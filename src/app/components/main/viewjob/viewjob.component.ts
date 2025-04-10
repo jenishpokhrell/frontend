@@ -27,13 +27,12 @@ export class ViewjobComponent implements OnInit  {
   jobService = inject(JobService)
   authService = inject(AuthService)
   jobId!: number
-  id!: string
+  //id!: string
 
   constructor(private activatedRoute: ActivatedRoute){}
  
   ngOnInit(): void {
     this.getJobByIdForCandidate()
-    //this.getUserById(this.id)
   }
   
   getJobByIdForCandidate(){

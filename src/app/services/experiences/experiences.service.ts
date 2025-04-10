@@ -13,6 +13,10 @@ export class ExperiencesService {
 
   constructor(private http: HttpClient) { } 
 
+  getAllExperiences():Observable<Experience[]>{
+    return this.http.get<Experience[]>(`${this.apiUrl}getallexperiences`)
+  }
+
   getMyExperiences():Observable<any>{
     return this.http.get<any>(`${this.apiUrl}getmyexperiences`)
   }

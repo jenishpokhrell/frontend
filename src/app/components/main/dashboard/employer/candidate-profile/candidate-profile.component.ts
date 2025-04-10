@@ -1,32 +1,68 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faUser, faTrash, faClose, faFilePdf,faBusinessTime, faBook, faBriefcase, faBookBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { UserModel } from '../../../../../model/user';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../../../../services/auth/auth.service';
+import { ExperiencesService } from '../../../../../services/experiences/experiences.service';
+import { AcademicService } from '../../../../../services/academic/academic.service';
+import { ProjectsService } from '../../../../../services/projects/projects.service';
+import { Experience } from '../../../../../model/experience';
 
 @Component({
   selector: 'app-candidate-profile',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, FaIconComponent, NgFor, PdfViewerModule],
+  imports: [SidebarComponent, HeaderComponent, FaIconComponent, NgFor, NgIf, PdfViewerModule],
   templateUrl: './candidate-profile.component.html',
   styleUrls: ['./candidate-profile.component.css']
 })
-export class CandidateProfileComponent {
+export class CandidateProfileComponent implements OnInit {
 
   checkCircle = faCheckCircle; excCircle = faExclamationCircle; location = faLocationArrow; contact = faContactBook; mail = faMailForward; close = faClose; pdf = faFilePdf
 
   collapsed = false;
-  user = {
-    name: 'Shristi Sharma',
-    role: 'Candidate'
-  };
+
+  candidate: UserModel | null = null
+  experiences: Experience[] = []
+  candidateId!: string
+  authService = inject(AuthService)
+  experienceService = inject(ExperiencesService)
+  academicService = inject(AcademicService)
+  projectService = inject(ProjectsService)
 
   userDetails = 
   {
     firstName: 'Jane', lastName: 'Doe', username: 'jane_doe', emailAddress: 'janedoe123@gmail.com', address: 'Anamnagar, Kathmandu', contact: '9854132541', 
     profilePhoto: 'MyImage', gender: 'Female', jobTitle: 'Jr. Backend Developer', years_of_experience : 1, 
+  }
+
+  constructor(private activatedRoute: ActivatedRoute){}
+
+  ngOnInit(): void {
+    this.getCandidateDetails()
+    this.getExperiences()
+  }
+
+
+  getCandidateDetails(){
+    this.candidateId = this.activatedRoute.snapshot.paramMap.get('id')! 
+    if(this.candidateId){
+      this.authService.getUserById(this.candidateId).subscribe({
+        next: (response) => {
+          this.candidate = response
+        }
+      })
+    }
+  }
+
+  getExperiences(){
+    this.experienceService.getAllExperiences().subscribe((response: Experience[]) =>{
+      this.experiences = response
+    })
   }
 
   menuItems = [
@@ -56,23 +92,5 @@ export class CandidateProfileComponent {
     this.collapsed = !this.collapsed;
   }
 
-  logout(): void {
-    console.log('Logout clicked');
-    // Implement logout logic
-  }
 
-  getStatusClass(status: string): string {
-    switch(status) {
-      case 'Shortlisted':
-        return 'bg-green-100 text-green-800';
-      case 'Applied':
-        return 'bg-blue-100 text-blue-800';
-      case 'Rejected':
-        return 'bg-red-100 text-red-800';
-      case 'Interview':
-        return 'bg-yellow-100 text-yellow-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  }
 }

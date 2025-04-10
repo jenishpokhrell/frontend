@@ -83,9 +83,9 @@ export const routes: Routes = [
             { path: 'profile', loadComponent: () => EmployerProfileComponent},
             { path: 'experiences', loadComponent: () => EmployerExperiencesComponent},
             { path: 'jobs', loadComponent: () => MyJobsComponent},
-            { path: 'job-applications', loadComponent: () => JobApplicationsComponent},
+            { path: 'job-applications/:id', loadComponent: () => JobApplicationsComponent},
             { path: 'post-job', loadComponent: () => PostJobComponent},
-            { path: 'candidate-profile', loadComponent: () => CandidateProfileComponent},
+            { path: 'candidate-profile/:id', loadComponent: () => CandidateProfileComponent},
             { path: 'shortlisted-candidates', loadComponent: () => ShortlistedCandidatesComponent},
             { path: 'change-password', loadComponent: () => EmployerChangePasswordComponent},
         ]

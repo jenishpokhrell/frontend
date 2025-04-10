@@ -1,10 +1,8 @@
 <div class="flex h-screen bg-gray-100 dark:bg-gray-900">
     <app-sidebar
-      [user]="user"
       [menuItems]="menuItems"
       [collapsed]="collapsed"
       (toggleCollapse)="toggleSidebar()"
-      (logout)="logout()"
     ></app-sidebar>
   
     <div
@@ -25,32 +23,22 @@
             </h2>
           </div>
           <div class="mt-7 flex items-center justify-between">
-            <div class="flex items-center space-x-20">
-              <div>
-                <img
-                  src="https://res.cloudinary.com/dnu3li5lc/image/upload/v1741761573/ulcxftilugyiss04prt5.jpg"
+            <div class="flex justify-between items-center space-x-20">
+              @if(candidate?.profilePhoto === null){
+                <div class="bg-blue-900 text-white w-28 h-28 text-2xl font-bold p-2 text-center rounded-full ml-1 content-center">
+                  {{candidate?.firstname?.charAt(0)}}
+                </div>
+              }@else{
+                <div class="w-40 h-40 rounded-full flex items-center justify-center font-bold">
+                  <img
+                  [src]="candidate?.profilePhoto"
                   alt="profile picture"
-                  width="200"
+                  width="300"
                   class="rounded-full"
                 />
+                </div>
+              }
               </div>
-              <!-- <div class="space-y-5">
-                <div>
-                  <button
-                    class="p-2 bg-blue-900 rounded-full w-20 text-[13px] text-white"
-                  >
-                    Update
-                  </button>
-                </div>
-                <div>
-                  <button
-                    class="p-2 dark:bg-gray-400 text-[13px] bg-red-800 rounded-full w-20"
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div> -->
-            </div>
             <div class="bg-gray-900 mr-10 p-10 w-[35%] drop-shadow-2xl">
               <div class="mb-5">
                 <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
@@ -61,31 +49,31 @@
               <div class="text-gray-50 space-y-4 text-[14px]">
                 <p>
                   <span class="mr-7"><fa-icon [icon]="location"></fa-icon></span>
-                  Anamnagar, Kathmandu
+                  {{candidate?.address}}
                 </p>
                 <p>
                   <span class="mr-7"><fa-icon [icon]="mail"></fa-icon></span>
-                  janedoe123&#64;gmail.com
+                  {{candidate?.email}}
                 </p>
                 <p>
                   <span class="mr-7"><fa-icon [icon]="contact"></fa-icon></span>
-                  9874521453
+                  {{candidate?.contact}}
                 </p>
               </div>
             </div>
           </div>
-          <div class="flex w-full space-x-10 mt-5 text-[14px]">
+          <div *ngIf="candidate" class="flex w-full space-x-10 mt-5 text-[14px]">
             <div class="w-1/2 p-4 ">
               <div
                 class="dark:text-gray-50 flex justify-between space-x-20 mt-10"
               >
                 <div class="w-1/2 space-y-2">
                   <p class="font-bold">Firstname</p>
-                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">Jane</p>
+                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">{{candidate.firstname}}</p>
                 </div>
                 <div class="w-1/2 space-y-2">
                   <p class="font-bold">Lastname</p>
-                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">Doe</p>
+                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">{{candidate.lastname}}</p>
                 </div>
               </div>
               <div
@@ -93,11 +81,11 @@
               >
                 <div class="w-1/2 space-y-2">
                   <p class="font-bold">Username</p>
-                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">jane_doe</p>
+                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">{{candidate.username}}</p>
                 </div>
                 <div class="w-1/2 space-y-2">
                   <p class="font-bold">Gender</p>
-                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">Female</p>
+                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">{{candidate.gender}}</p>
                 </div>
               </div>
               <div
@@ -106,32 +94,15 @@
                 <div class="w-1/2 space-y-2">
                   <p class="font-bold">Position</p>
                   <p class="bg-gray-700 py-2 pl-4 rounded-3xl">
-                    Jr. Backend Developer
+                    {{candidate.jobTitle}}
                   </p>
                 </div>
                 <div class="w-1/2 space-y-2">
                   <p class="font-bold">YOE</p>
-                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">1 years</p>
+                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">{{candidate.years_Of_Experience}} years</p>
                 </div>
               </div>
-              <div
-                class="dark:text-gray-50 flex space-x-14 mt-10 "
-              >
-                <div>
-                  <button
-                    class="p-4 bg-blue-900 rounded-full w-36 text-[13px] text-white"
-                  >
-                    Shortlist
-                  </button>
-                </div>
-                <div>
-                    <button
-                      class="p-4 bg-red-400 rounded-full w-36 text-[13px] text-white"
-                    >
-                      Reject
-                    </button>
-                  </div>
-              </div>
+              
             </div>
             <div class=" mt-5 p-10 w-1/2 drop-shadow-2xl">
               <div class="mb-5">
@@ -167,6 +138,57 @@
             </div>
           </div>
         </div>
+        <div>
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+              Work Experience
+            </h2>
+          </div>
+          <div *ngFor="let experience of experiences" class="text-gray-50 mt-14 bg-gray-900 p-7 rounded-[50px] drop-shadow-2xl">
+            <div class="flex items-center justify-between"> 
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-800 dark:text-white">{{experience.jobTitle}}</h2>
+                </div>
+                <!-- <div class="space-x-5">
+                    <fa-icon [icon] = 'edit' size="lg" class="cursor-pointer" (click) = "getExperienceById(experience.experienceId)"></fa-icon>
+                    <fa-icon [icon] = 'delete' size="lg" class="cursor-pointer" (click) = "deleteExperiences(experience.experienceId)" ></fa-icon>
+                </div> -->
+            </div>
+            <div>
+                <p class="font-light text-[14px]">{{experience.companyName}}</p>
+            </div> 
+            @if(experience.to !== null){
+                <div>
+                    <p class="font-light text-[14px]">{{experience.from}} - {{experience.to}}</p>
+                </div>
+            }@else {
+                <div>
+                    <p class="font-light text-[14px]">{{experience.from}} - <span class="italic">Present</span></p>
+                </div>
+            }
+            <div class="mt-7 text-[14px]">
+                <p>{{experience.jobDescription}}</p>
+            </div>
+        </div>
+        </div>
+        <div
+                class="dark:text-gray-50 flex space-x-14 mt-10 "
+              >
+                <div>
+                  <button
+                    class="p-4 bg-blue-900 rounded-full w-36 text-[13px] text-white"
+                  >
+                    Shortlist
+                  </button>
+                </div>
+                <div>
+                    <button
+                      class="p-4 bg-red-400 rounded-full w-36 text-[13px] text-white"
+                    >
+                      Reject
+                    </button>
+                  </div>
+              </div>
       </main>
     </div>
   </div>  
