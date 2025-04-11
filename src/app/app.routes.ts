@@ -30,6 +30,7 @@ import { EmployerChangePasswordComponent } from './components/main/dashboard/emp
 import { CandidateProfileComponent } from './components/main/dashboard/employer/candidate-profile/candidate-profile.component';
 import { PostJobComponent } from './components/main/dashboard/employer/post-job/post-job.component';
 import { UnauthorizedPageComponent } from './components/public/unauthorized-page/unauthorized-page.component';
+import { EditJobComponent } from './components/main/dashboard/employer/edit-job/edit-job.component';
 
 export const routes: Routes = [
     {
@@ -85,6 +86,7 @@ export const routes: Routes = [
             { path: 'jobs', loadComponent: () => MyJobsComponent},
             { path: 'job-applications/:id', loadComponent: () => JobApplicationsComponent},
             { path: 'post-job', loadComponent: () => PostJobComponent},
+            { path: 'edit-job/:id', loadComponent: () => EditJobComponent},
             { path: 'candidate-profile/:id', loadComponent: () => CandidateProfileComponent},
             { path: 'shortlisted-candidates', loadComponent: () => ShortlistedCandidatesComponent},
             { path: 'change-password', loadComponent: () => EmployerChangePasswordComponent},

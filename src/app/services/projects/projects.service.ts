@@ -21,6 +21,10 @@ export class ProjectsService {
     return this.http.get<Project>(`${this.apiUrl}getprojectbyid/${id}`)
   }
 
+  getProjectByCandidateId(id: string):Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}getprojectbycandidateid/${id}`)
+  }
+
   saveProject(data: Project):Observable<GeneralResponse>{
     return this.http.post<GeneralResponse>(`${this.apiUrl}add-project`, data)
   }

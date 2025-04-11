@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
-import { faUser, faTrash, faClose, faFilePdf,faBusinessTime, faBook, faBriefcase, faBookBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faTrash, faClose, faFilePdf, faBusinessTime, faBook, faBriefcase, faBookBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { NgFor } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -9,18 +9,16 @@ import { JobService } from '../../../../../services/job/job.service';
 import { GeneralResponse } from '../../../../../model/response';
 import { ActivatedRoute } from '@angular/router';
 import { GetMyJob, Job } from '../../../../../model/job';
-//import * as districts from '../../../../../../assets/en.json'
 
 @Component({
-  selector: 'app-candidate',
+  selector: 'app-edit-job',
   standalone: true,
   imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, FaIconComponent],
-  templateUrl: './post-job.component.html',
-  styleUrls: ['./post-job.component.css']
+  templateUrl: './edit-job.component.html',
+  styleUrls: ['./edit-job.component.css']
 })
-export class PostJobComponent implements OnInit {
+export class EditJobComponent implements OnInit {
 
-  title = 'My Academics'
 
   checkCircle = faCheckCircle; excCircle = faExclamationCircle; location = faLocationArrow; contact = faContactBook; mail = faMailForward; edit = faEdit; delete = faTrash
 
@@ -43,7 +41,6 @@ export class PostJobComponent implements OnInit {
 
   jobService = inject(JobService)
 
-  editMode: boolean = false
   id!: number
 
   menuItems = [
@@ -67,20 +64,7 @@ export class PostJobComponent implements OnInit {
     }
   }
 
-
-  postJobDetails(){
-    const data = this.postJob.value
-    this.jobService.postJob(data).subscribe((response: GeneralResponse) => {
-      if(response.isSuccess){
-        alert(response.message)
-      }else{
-        alert("Error posting job.")
-      }
-    })
-  }
-
   updateJob(){
-    this.editMode = true
     const data = this.postJob.value
     if(this.id){
       this.jobService.updateJob(this.id, data).subscribe((response: GeneralResponse) => {

@@ -5,19 +5,16 @@
                  (toggleCollapse)="toggleSidebar()"></app-sidebar>
   
     <div class="flex-1 flex flex-col overflow-hidden" [class.ml-14]="!collapsed" [class.ml-5]="collapsed">
-      <app-header [title]="'Post Job'"
+      <app-header [title]="'Edit Job'"
                   (toggleSidebar)="toggleSidebar()"></app-header>
   
       <main class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-800">
         <div class=" text-gray-50">
             <div>
-                <h1 class="text-2xl font-semibold">Post a Job</h1>
-            </div>
-            <div>
-                <p class="font-light text-[14px] mt-1">Find the best talent for your company</p>
+                <h1 class="text-2xl font-semibold">Change Job Details</h1>
             </div>
             <div class="mt-10 text-[14px]">
-                <form [formGroup]="postJob" (ngSubmit)="postJobDetails()">
+                <form [formGroup]="postJob" (ngSubmit)="updateJob()">
                     <div class="mb-5">
                         <label for="" class="font-bold">Job Title</label>
                         <input type="text" placeholder="Add Job title, role, vacancy, etc" class="w-full p-3 bg-gray-700 outline-none" formControlName = "jobTitle">
@@ -85,7 +82,7 @@
                     <div class="flex items-center space-x-5 mt-10">
                         <div>
                             <button type="submit" class="rounded-full bg-blue-900 w-36 text-[13px] p-4 font-semibold">
-                                {{editMode ? 'Update Job' : 'Post Job'}}
+                                Update Job
                             </button>
                         </div>
                         <div>

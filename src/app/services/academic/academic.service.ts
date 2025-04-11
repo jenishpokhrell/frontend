@@ -17,6 +17,10 @@ export class AcademicService {
     return this.http.get<any>(`${this.apiUrl}GetMyAcademics`)
   }
 
+  getCandidateAcademicsById(id: string):Observable<any[]>{
+    return this.http.get<any>(`${this.apiUrl}getacademicsbycandidateid/${id}`)
+  }
+
   saveAcademics(data: Academic):Observable<GeneralResponse>{
     return this.http.post<GeneralResponse>(`${this.apiUrl}add-academics`, data)
   }

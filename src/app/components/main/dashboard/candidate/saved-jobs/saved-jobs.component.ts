@@ -37,6 +37,8 @@ export class SavedJobsComponent implements OnInit {
 
   ];
 
+  
+
   // savedJobs = [
   //   {jobTitle: 'Frontend Intern', jobType: 'Full-Time', jobLevel: 'Internship', postedBy: 'shristi_sharma', Status: true},
   //   {jobTitle: 'Fullstack Intern', jobType: 'Full-Time',jobLevel: 'Internship', postedBy: 'john_doe', Status: true},

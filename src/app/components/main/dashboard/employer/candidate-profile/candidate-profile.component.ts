@@ -12,6 +12,10 @@ import { ExperiencesService } from '../../../../../services/experiences/experien
 import { AcademicService } from '../../../../../services/academic/academic.service';
 import { ProjectsService } from '../../../../../services/projects/projects.service';
 import { Experience } from '../../../../../model/experience';
+import { Project } from '../../../../../model/project';
+import { ResumeService } from '../../../../../services/resume/resume.service';
+import { Resume } from '../../../../../model/resume';
+import { Academic } from '../../../../../model/academic';
 
 @Component({
   selector: 'app-candidate-profile',
@@ -28,23 +32,24 @@ export class CandidateProfileComponent implements OnInit {
 
   candidate: UserModel | null = null
   experiences: Experience[] = []
+  projects: Project[] = []
+  academic: Academic | null = null
+  resume: Resume | null = null
+
   candidateId!: string
+
   authService = inject(AuthService)
   experienceService = inject(ExperiencesService)
   academicService = inject(AcademicService)
   projectService = inject(ProjectsService)
-
-  userDetails = 
-  {
-    firstName: 'Jane', lastName: 'Doe', username: 'jane_doe', emailAddress: 'janedoe123@gmail.com', address: 'Anamnagar, Kathmandu', contact: '9854132541', 
-    profilePhoto: 'MyImage', gender: 'Female', jobTitle: 'Jr. Backend Developer', years_of_experience : 1, 
-  }
+  resumeServices = inject(ResumeService)
 
   constructor(private activatedRoute: ActivatedRoute){}
 
+  //--------------------------FETCHING USER DETAILS--------------------------
   ngOnInit(): void {
     this.getCandidateDetails()
-    this.getExperiences()
+    //this.getExperiences()
   }
 
 
@@ -54,16 +59,67 @@ export class CandidateProfileComponent implements OnInit {
       this.authService.getUserById(this.candidateId).subscribe({
         next: (response) => {
           this.candidate = response
+          this.getCandidateExperiences(response.id)
+          this.getCandidateProjects(response.id)
+          this.getCandidateResume(response.id)
+          this.getCandidateAcademics(response.id)
         }
       })
     }
   }
 
-  getExperiences(){
-    this.experienceService.getAllExperiences().subscribe((response: Experience[]) =>{
-      this.experiences = response
-    })
+
+  //--------------------------------GETTING CANDIDATE EXPERIENCES------------------------
+  getCandidateExperiences(candidateId: string){
+    const cId = candidateId
+    if(cId){
+      this.experienceService.getCandidateExperienceById(cId).subscribe((response: any) =>{
+        this.experiences = response
+      })
+    }else{
+      console.error("Error fetching candidate id")
+    }
   }
+
+
+  //--------------------------------GETTING CANDIDATE PROJECTS------------------------//
+  getCandidateProjects(candidateId: string){
+    const cId= candidateId
+    if(cId){
+      this.projectService.getProjectByCandidateId(cId).subscribe((response: any) =>{
+        this.projects = response
+      })
+    }else{
+      console.error("Error fetching candidate id")
+    }
+  }
+
+
+  //--------------------------------GETTING CANDIDATE RESUME------------------------
+  getCandidateResume(candidateId: string){
+    const id = candidateId;
+    if(id){
+      this.resumeServices.getCandidateResume(id).subscribe((response: any) => {
+        this.resume = response
+      })
+    }else{
+      console.error("Error fetching candidate id")
+    }
+  }
+
+  //--------------------------------GETTING CANDIDATE ACADEMICS------------------------
+  getCandidateAcademics(candidateId: string){
+    const id = candidateId;
+    if(id){
+      this.academicService.getCandidateAcademicsById(id).subscribe((response: any) => {
+        this.academic = response
+        console.log(response)
+      })
+    }else{
+      console.error("Error fetching candidate id")
+    }
+  }
+
 
   menuItems = [
     { label: 'Dashboard', link: '/employer/dashboard', icon: faDashboard},

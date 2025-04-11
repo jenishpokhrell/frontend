@@ -21,10 +21,6 @@ export class AppliedJobsComponent {
   checkCircle = faCheckCircle; excCircle = faExclamationCircle; location = faLocationArrow; contact = faContactBook; mail = faMailForward; edit = faEdit; delete = faTrash
 
   collapsed = false;
-  user = {
-    name: 'Jane Doe',
-    role: 'Candidate'
-  };
 
   menuItems = [
     { label: 'Dashboard', link: '/candidate/dashboard', icon: faDashboard},

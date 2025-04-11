@@ -10,6 +10,7 @@ import { Token } from '../../model/token';
 import { Router } from '@angular/router';
 import { Register } from '../../model/register';
 import { GeneralResponse } from '../../model/response';
+import { ChangePassword } from '../../model/password';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,10 @@ export class AuthService {
 
   getUserById(id: string):Observable<UserModel>{
     return this.http.get<UserModel>(`${this.apiUrl}getuserbyid/${id}`)
+  }
+
+  changePassword(id: string, data: ChangePassword):Observable<GeneralResponse>{
+    return this.http.put<GeneralResponse>(`${this.apiUrl}changepassword/${id}`, data)
   }
 
 
