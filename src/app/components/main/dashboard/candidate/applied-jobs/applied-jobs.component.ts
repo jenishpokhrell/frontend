@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { faUser, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
@@ -6,6 +6,8 @@ import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { NgFor } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { MyJobApplications } from '../../../../../model/job';
+import { JobService } from '../../../../../services/job/job.service';
 
 @Component({
   selector: 'app-candidate',
@@ -35,20 +37,22 @@ export class AppliedJobsComponent {
 
   ];
 
-  appliedJobs = [
-    {jobId: 1, jobStatus: 'Pending', jobTitle: 'Frontend Intern', postedBy: 'shristi_sharma', Message: 'Your application is still pending.'},
-    {jobId: 2, jobStatus: 'Rejected', jobTitle: 'Fullstack Intern', postedBy: 'john_doe', Message: 'We are sorry to inform you that you have not been selected for further process.'},
-    {jobId: 3, jobStatus: 'Pending', jobTitle: 'Frontend Intern', postedBy: 'aman_dhakal', Message: 'Your application is still pending.'},
-    {jobId: 4, jobStatus: 'Shortlisted', jobTitle: 'Angular Developer Intern', postedBy: 'shristi_sharma', Message: "Congratulations, you've been selected for further process. We will get in touch with you soon."},
-  ]
+  appliedJobs : MyJobApplications[] = []
+  jobService = inject(JobService)
+  jobId! : number
+
+  ngOnInit(): void {
+      this.getMyJobApplications()
+  }
+
+  getMyJobApplications(){
+    this.jobService.getMyJobApplications().subscribe((response: any) => {
+      this.appliedJobs = response
+    })
+  }
 
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;
-  }
-
-  logout(): void {
-    console.log('Logout clicked');
-    // Implement logout logic
   }
 
 }

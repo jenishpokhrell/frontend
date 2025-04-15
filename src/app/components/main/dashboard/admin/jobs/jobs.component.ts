@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from "../../../../reusable/sidebar/sidebar.component";
 import { faTachometerAlt, faUserAlt, faUser, faUserClock, faBriefcase, faClipboardList } from '@fortawesome/free-solid-svg-icons';
 import { NgFor } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
+import { AllJobs } from '../../../../../model/job';
+import { JobService } from '../../../../../services/job/job.service';
 
 @Component({
   selector: 'app-admin',
@@ -13,14 +15,10 @@ import { HeaderComponent } from '../../../../reusable/header/header.component';
   styleUrl: './jobs.component.css'
 }) 
 
-export class JobsComponent {
+export class JobsComponent implements OnInit {
 
 
   collapsed = false;
-  user = {
-    name: 'Admin User',
-    role: 'Administrator'
-  };
 
   menuItems = [
     { label: 'Dashboard', link: '/admin/dashboard', icon: faTachometerAlt },
@@ -30,13 +28,21 @@ export class JobsComponent {
     { label: 'Logs', link: '/admin/logs', icon:  faClipboardList }
   ];
 
-  jobs = [
-    {jobTitle: 'Frontend Developer', postedBy: 'jenish_pokhrel', jobType: 'Full-Time', jobLevel: 'Junior', experience: '0 - 1 years', noOfOpening: 4, location: 'Pulchowk, Lalitpur', isActive: true},
-    {jobTitle: 'Backend Developer', postedBy: 'shristi_sharma', jobType: 'Full-Time', jobLevel: 'Mid-Level', experience: '0 - 1 years', noOfOpening: 2, location: 'Pulchowk, Lalitpur', isActive: false},
-    {jobTitle: 'FullStack Developer', postedBy: 'aman_dhakal', jobType: 'Full-Time', jobLevel: 'Junior', experience: '0 - 1 years', noOfOpening: 3, location: 'Pulchowk, Lalitpur', isActive: true},
-    {jobTitle: 'Frontend Developer', postedBy: 'jenish_pokhrel', jobType: 'Full-Time', jobLevel: 'Internship', experience: '0 - 1 years', noOfOpening: 1, location: 'Pulchowk, Lalitpur', isActive: true},
-    {jobTitle: 'Data Analyst', postedBy: 'jenish_pokhrel', jobType: 'Full-Time', jobLevel: 'Senior', experience: '0 - 1 years', noOfOpening: 2, location: 'Pulchowk, Lalitpur', isActive: false},
-  ]
+  jobs: AllJobs[] = []
+  jobService = inject(JobService)
+
+  ngOnInit(): void {
+    this.getAllJobs()
+  }
+
+  getAllJobs(){
+    this.jobService.getAllJobs().subscribe({
+      next: (response) => {
+        this.jobs = response
+      }
+    })
+  }
+  
 
   notifications = [
     { id: 1, message: 'New employer registration requires approval', time: '10 min ago', read: false },
@@ -48,7 +54,6 @@ export class JobsComponent {
     this.collapsed = !this.collapsed;
   }
 
-  logout(): void {
-    console.log('Logout clicked');
-  }
+  
+  
 }

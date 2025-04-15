@@ -316,6 +316,7 @@
       <div class="dark:text-gray-50 flex space-x-14 mt-10">
         <div>
           <button
+          (click)="updateJobApplicationStatus(jobApplicationId, 'Shortlisted')"
             class="p-4 bg-blue-900 rounded-full w-36 text-[13px] text-white"
           >
             Shortlist
@@ -323,6 +324,7 @@
         </div>
         <div>
           <button
+          (click)="updateJobApplicationStatus(jobApplicationId, 'Rejected')"
             class="p-4 bg-red-400 rounded-full w-36 text-[13px] text-white"
           >
             Reject

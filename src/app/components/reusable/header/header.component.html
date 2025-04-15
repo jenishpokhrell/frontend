@@ -23,8 +23,8 @@
       <!-- Right Side -->
       <div class="flex items-center space-x-4">
         <!-- Theme Toggle -->
-        <button (click)=toggleTheme() class="text-gray-600 dark:text-gray-300 hover:text-blue-600">
-          @if (themeService.isDarkMode()) {
+        <button (click)="toggleTheme()" class="text-gray-600 dark:text-gray-300 hover:text-blue-600">
+          @if (themeService.isDarkMode()) {  
             <fa-icon [icon] = 'sun' size="xl"></fa-icon>
           }@else {
             <fa-icon [icon] = 'moon' size="xl"></fa-icon>

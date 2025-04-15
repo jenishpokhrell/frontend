@@ -1,11 +1,9 @@
 <div class="flex h-screen w-full bg-gray-100 dark:bg-gray-900 ">
     <!-- Sidebar -->
     <app-sidebar
-      [user]="user"
       [menuItems]="menuItems"
       [collapsed]="collapsed"
       (toggleCollapse)="toggleSidebar()"
-      (logout)="logout()"
     ></app-sidebar>
   
     <!-- Main Content -->
@@ -55,7 +53,7 @@
                     <th
                       class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                     >
-                      Joined
+                      Address
                     </th>
                   </tr>
                 </thead>
@@ -69,7 +67,7 @@
                     <td
                       class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
                     >
-                      {{ user.name }}
+                      {{ user.firstname }} {{ user.lastname}}
                     </td>
                     <td
                       class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300"
@@ -81,17 +79,17 @@
                     >
                       <span
                         [class]="
-                          user.role === 'Employer'
+                          user?.roles?.includes('EMPLOYER')
                             ? 'bg-blue-100 text-blue-800 px-2 py-1 text-xs rounded-full '
                             : 'bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs'"
                       >
-                        {{ user.role }}
+                        {{ user.roles }}
                       </span>
                     </td>
                     <td
                       class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300"
                     >
-                      {{ user.joined }}
+                      {{ user.address }}
                     </td>
                   </tr>
                 </tbody>

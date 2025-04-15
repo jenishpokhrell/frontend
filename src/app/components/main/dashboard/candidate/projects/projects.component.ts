@@ -37,7 +37,7 @@ export class ProjectsComponent implements OnInit {
     { label: 'Projects', link: '/candidate/projects', icon: faProjectDiagram },
     { label: 'Applied Jobs', link: '/candidate/applied-jobs', icon: faFileAlt },
     { label: 'Saved Jobs', link: '/candidate/saved-jobs', icon: faBookmark },
-    { label: 'Update Profile', link: '/candidate/update-profile', icon: faUserEdit},
+    //{ label: 'Update Profile', link: '/candidate/update-profile', icon: faUserEdit},
     { label: 'Change Password', link: '/candidate/change-password', icon: faEdit}
 
   ];

@@ -16,6 +16,8 @@ import { Project } from '../../../../../model/project';
 import { ResumeService } from '../../../../../services/resume/resume.service';
 import { Resume } from '../../../../../model/resume';
 import { Academic } from '../../../../../model/academic';
+import { UpdateJobApplication } from '../../../../../model/job';
+import { JobService } from '../../../../../services/job/job.service';
 
 @Component({
   selector: 'app-candidate-profile',
@@ -37,24 +39,26 @@ export class CandidateProfileComponent implements OnInit {
   resume: Resume | null = null
 
   candidateId!: string
+  jobApplicationId!: number 
 
   authService = inject(AuthService)
   experienceService = inject(ExperiencesService)
   academicService = inject(AcademicService)
   projectService = inject(ProjectsService)
   resumeServices = inject(ResumeService)
+  jobService = inject(JobService)
 
   constructor(private activatedRoute: ActivatedRoute){}
 
   //--------------------------FETCHING USER DETAILS--------------------------
   ngOnInit(): void {
     this.getCandidateDetails()
-    //this.getExperiences()
+    this.getJobApplicationId()
   }
 
 
   getCandidateDetails(){
-    this.candidateId = this.activatedRoute.snapshot.paramMap.get('id')! 
+    this.candidateId = this.activatedRoute.snapshot.paramMap.get('userId')! 
     if(this.candidateId){
       this.authService.getUserById(this.candidateId).subscribe({
         next: (response) => {
@@ -117,6 +121,31 @@ export class CandidateProfileComponent implements OnInit {
       })
     }else{
       console.error("Error fetching candidate id")
+    }
+  }
+
+  getJobApplicationId(){
+    this.jobApplicationId = +this.activatedRoute.snapshot.paramMap.get('jobApplicationId')! 
+  }
+
+  updateJobApplicationStatus(jobApplicationId: number, jobStatus: string){
+    const data: UpdateJobApplication = {
+      jobStatus: jobStatus,
+      updatedAt: new Date()
+    }
+    if(confirm('Are you sure you want to change this job application status?')){
+      this.jobService.updateJobApplication(jobApplicationId, data).subscribe({
+        next: (response) => {
+          if(response.isSuccess){
+            alert(response.message)
+          }else{
+            alert('Error updating job status')
+          }
+        },
+        error: (err) => {
+          console.error(err)
+        }
+      })
     }
   }
 

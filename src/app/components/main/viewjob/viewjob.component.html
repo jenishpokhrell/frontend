@@ -40,7 +40,7 @@
               <fa-icon [icon] = 'beforesave' size="lg" ></fa-icon>
           </button>
             <div>
-              <button class="cursor-pointer bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" (click)="JobApply()">
+              <button class="cursor-pointer bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" (click)="jobApply(job.id)">
                 Apply now
               </button>
           </div>
@@ -55,7 +55,7 @@
             </button>
             </div>
             <div>
-              <button class="cursor-not-allowed opacity-60 bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" (click)="JobApply()" disabled>
+              <button class="cursor-not-allowed opacity-60 bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" disabled>
                 Apply now
               </button>
           </div>
@@ -124,7 +124,7 @@
             class=" flex space-x-6 relative text-[14px] lg:left-2 h-10  cursor-pointer"
           >
             <div>
-              <button class="cursor-pointer bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" (click)="JobApply()">
+              <button class="cursor-pointer bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" (click)="jobApply(job.id)">
                 Apply now
               </button>
             </div>
@@ -139,7 +139,7 @@
             class=" flex space-x-6 relative text-[14px] lg:left-2 h-10 cursor-not-allowed"
           >
             <div>
-              <button class="cursor-not-allowed opacity-60 bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" (click)="JobApply()" disabled>
+              <button class="cursor-not-allowed opacity-60 bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" disabled>
                 Apply now
               </button>
             </div>

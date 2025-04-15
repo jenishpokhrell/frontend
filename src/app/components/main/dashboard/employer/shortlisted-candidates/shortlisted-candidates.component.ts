@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { faUser, faTrash, faClose, faFilePdf,faBusinessTime, faBook, faBriefcase, faBookBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { GetShortlistedCandidate } from '../../../../../model/job';
+import { JobService } from '../../../../../services/job/job.service';
 
 @Component({
   selector: 'app-job-applications',
@@ -13,17 +15,11 @@ import { RouterLink } from '@angular/router';
   templateUrl: './shortlisted-candidates.component.html',
   styleUrls: ['./shortlisted-candidates.component.css']
 })
-export class ShortlistedCandidatesComponent {
-
-  title = 'My Academics'
+export class ShortlistedCandidatesComponent implements OnInit {
 
   checkCircle = faCheckCircle; excCircle = faExclamationCircle; location = faLocationArrow; contact = faContactBook; mail = faMailForward; edit = faEdit; delete = faTrash
 
   collapsed = false;
-  user = {
-    name: 'Shristi Sharma',
-    role: 'Employer' 
-  };
 
   menuItems = [
     { label: 'Dashboard', link: '/employer/dashboard', icon: faDashboard},
@@ -35,20 +31,32 @@ export class ShortlistedCandidatesComponent {
     { label: 'Change Password', link: '/employer/change-password', icon: faEdit}
   ];
 
-  shortlistedCandidates = [
-    { jobId: 1, name: 'John Doe', jobTitle: 'Frontend Intern',  status: 'Shortlisted' },
-    { jobId: 1, name: 'Jane Doe', jobTitle: 'Frontend Intern',  status: 'Shortlisted' },
-    { jobId: 2, name: 'Nina Dobrev', jobTitle: 'Frontend Developer',  status: 'Shortlisted' },
-    { jobId: 5, name: 'Dinesh Neupane', jobTitle: 'Angular Developer', status: 'Shortlisted' },
-  ];
+  // shortlistedCandidates = [
+  //   { jobId: 1, name: 'John Doe', jobTitle: 'Frontend Intern',  status: 'Shortlisted' },
+  //   { jobId: 1, name: 'Jane Doe', jobTitle: 'Frontend Intern',  status: 'Shortlisted' },
+  //   { jobId: 2, name: 'Nina Dobrev', jobTitle: 'Frontend Developer',  status: 'Shortlisted' },
+  //   { jobId: 5, name: 'Dinesh Neupane', jobTitle: 'Angular Developer', status: 'Shortlisted' },
+  // ];
+
+  candidates: GetShortlistedCandidate[] = []
+  jobService = inject(JobService)
+
+  ngOnInit(): void {
+    this.getshortlistedCandidates()
+  }
+
+  getshortlistedCandidates(){
+    this.jobService.getSavedCandidates().subscribe({
+      next: (response) => {
+        this.candidates = response
+      }
+    })
+  }
+
 
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;
   }
 
-  logout(): void {
-    console.log('Logout clicked');
-    // Implement logout logic
-  }
 
 }

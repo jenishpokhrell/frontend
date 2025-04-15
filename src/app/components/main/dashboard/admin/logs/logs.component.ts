@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from "../../../../reusable/sidebar/sidebar.component";
 import { faTachometerAlt, faUserAlt, faUser, faUserClock, faBriefcase, faClipboardList } from '@fortawesome/free-solid-svg-icons';
 import { NgFor } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
+import { LogsService } from '../../../../../services/logs/logs.service';
+import { Logs } from '../../../../../model/log';
 
 @Component({
   selector: 'app-admin',
@@ -13,16 +15,12 @@ import { HeaderComponent } from '../../../../reusable/header/header.component';
   styleUrl: './logs.component.css'
 }) 
 
-export class LogsComponent {
+export class LogsComponent implements OnInit {
 
   tachometer = faTachometerAlt; userAlt = faUserAlt; userIcon = faUser; userClock = faUserClock; userBriefCase = faBriefcase; clipboard = faClipboardList;
 
 
   collapsed = false;
-  user = {
-    name: 'Admin User',
-    role: 'Administrator'
-  };
 
   menuItems = [
     { label: 'Dashboard', link: '/admin/dashboard', icon: faTachometerAlt },
@@ -32,12 +30,6 @@ export class LogsComponent {
     { label: 'Logs', link: '/admin/logs', icon:  faClipboardList }
   ];
 
-  recentLogs = [
-    { id: 1, action: 'Login', user: 'Admin User', time: '10 minutes ago' },
-    { id: 2, action: 'Job Approved', user: 'Acme Corp', time: '1 hour ago' },
-    { id: 3, action: 'User Deleted', user: 'John Doe', time: '3 hours ago' },
-    { id: 4, action: 'Settings Updated', user: 'Admin User', time: '5 hours ago' }
-  ];
 
   notifications = [
     { id: 1, message: 'New employer registration requires approval', time: '10 min ago', read: false },
@@ -45,11 +37,24 @@ export class LogsComponent {
     { id: 3, message: 'System maintenance scheduled', time: '2 hours ago', read: true }
   ];
 
-  toggleSidebar(): void {
-    this.collapsed = !this.collapsed;
+  logService = inject(LogsService)
+  logs : Logs[] = []
+
+
+  ngOnInit(): void {
+    this.getAllLogs();
   }
 
-  logout(): void {
-    console.log('Logout clicked');
+  getAllLogs(){
+    this.logService.getAllLogs().subscribe({
+      next: (response) => {
+        this.logs = response
+      }
+    })
+  }
+
+
+  toggleSidebar(): void {
+    this.collapsed = !this.collapsed;
   }
 }

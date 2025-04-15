@@ -31,6 +31,9 @@ import { CandidateProfileComponent } from './components/main/dashboard/employer/
 import { PostJobComponent } from './components/main/dashboard/employer/post-job/post-job.component';
 import { UnauthorizedPageComponent } from './components/public/unauthorized-page/unauthorized-page.component';
 import { EditJobComponent } from './components/main/dashboard/employer/edit-job/edit-job.component';
+import { authGuard } from './guards/auth.guard';
+import { EditProfileComponent } from './components/main/dashboard/candidate/edit-profile/edit-profile.component';
+import { NotApprovedComponent } from './components/main/not-approved/not-approved.component';
 
 export const routes: Routes = [
     {
@@ -67,6 +70,7 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
+        canActivate: [authGuard],
         children: [
             {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
             {path: 'dashboard', loadComponent: () => AdminDashboardComponent},
@@ -78,6 +82,7 @@ export const routes: Routes = [
     },
     {
         path: 'employer',
+        canActivate: [authGuard],
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch:'full'},
             { path: 'dashboard', loadComponent: () => EmployerDashboardComponent},
@@ -87,13 +92,14 @@ export const routes: Routes = [
             { path: 'job-applications/:id', loadComponent: () => JobApplicationsComponent},
             { path: 'post-job', loadComponent: () => PostJobComponent},
             { path: 'edit-job/:id', loadComponent: () => EditJobComponent},
-            { path: 'candidate-profile/:id', loadComponent: () => CandidateProfileComponent},
+            { path: 'candidate-profile/:userId/:jobApplicationId', loadComponent: () => CandidateProfileComponent},
             { path: 'shortlisted-candidates', loadComponent: () => ShortlistedCandidatesComponent},
             { path: 'change-password', loadComponent: () => EmployerChangePasswordComponent},
         ]
     },
     {
         path: 'candidate',
+        canActivate: [authGuard],
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
             { path: 'dashboard', loadComponent: () => CandidateDashboardComponent},
@@ -103,11 +109,17 @@ export const routes: Routes = [
             { path: 'projects', loadComponent: () => ProjectsComponent},
             { path: 'applied-jobs', loadComponent: () => AppliedJobsComponent},
             { path: 'saved-jobs', loadComponent: () => SavedJobsComponent},
+            { path: 'update-profile/:id', loadComponent:() => EditProfileComponent},
             { path: 'change-password', loadComponent: () => ChangePasswordComponent},
         ]
     },
     {
         path: 'viewjob/:id',
+        canActivate: [authGuard],
         component: ViewjobComponent
     },
+    {
+        path: 'not-approved',
+        component: NotApprovedComponent
+    }
 ];

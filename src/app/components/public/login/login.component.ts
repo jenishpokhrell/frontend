@@ -30,8 +30,13 @@ export class LoginComponent implements OnInit {
       this.showPassword = !this.showPassword
     }
 
+    constructor(private router: Router) {}
+
     login(){
       this.authService.login(this.form.value).subscribe((response) => {
+        if(response.roles.includes('EMPLOYER') && response.isApproved === false){
+          this.router.navigate(['/not-approved'])
+        }
         console.log(response)
         location.replace("/")
       })

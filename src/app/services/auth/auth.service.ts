@@ -4,7 +4,7 @@ import { Login } from '../../model/login';
 import { map, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ThemeService } from '../theme/theme.service';
-import { UserModel } from '../../model/user';
+import { UpdateUser, UserModel } from '../../model/user';
 import { jwtDecode } from 'jwt-decode';
 import { Token } from '../../model/token';
 import { Router } from '@angular/router';
@@ -48,6 +48,18 @@ export class AuthService {
 
   getUserById(id: string):Observable<UserModel>{
     return this.http.get<UserModel>(`${this.apiUrl}getuserbyid/${id}`)
+  }
+
+  getAllUsers():Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}getallusers`)
+  }
+
+  getPendingEmployers():Observable<UserModel[]>{
+    return this.http.get<UserModel[]>(`${this.apiUrl}getpendingemployers`)
+  }
+
+  updateProfile(id: string, data: FormData): Observable<GeneralResponse>{
+    return this.http.put<GeneralResponse>(`${this.apiUrl}update-user/${id}`, data)
   }
 
   changePassword(id: string, data: ChangePassword):Observable<GeneralResponse>{

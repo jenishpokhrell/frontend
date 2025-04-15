@@ -9,6 +9,7 @@ import { JobService } from '../../../services/job/job.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserModel } from '../../../model/user';
+import { GeneralResponse } from '../../../model/response';
 
 @Component({
   selector: 'app-viewjob',
@@ -55,7 +56,20 @@ export class ViewjobComponent implements OnInit  {
   }
 
 
-  JobApply(){
-    window.confirm("thank you for applying")
+  jobApply(jobId: number){
+    const id = jobId
+    if(this.jobId){
+      if(confirm('Apply for job? Your profile will be then visible to employer.')){
+        this.jobService.applyForJob(id).subscribe((response: GeneralResponse) => {
+          if(response.isSuccess){
+            alert(response.message)
+          }else{
+            alert('Failed to apply for job.')
+          } 
+        })
+      }
+    }else{
+      console.error('Error fetching id')
+    }
   }
 }

@@ -1,10 +1,8 @@
 <div class="flex h-screen bg-gray-100 dark:bg-gray-900">
   <app-sidebar
-    [user]="user"
     [menuItems]="menuItems"
     [collapsed]="collapsed"
     (toggleCollapse)="toggleSidebar()"
-    (logout)="logout()"
   ></app-sidebar>
 
   <div
@@ -125,9 +123,10 @@
             >
               <div>
                 <button
+                  routerLink='/candidate/update-profile/{{user?.id}}' 
                   class="p-4 bg-blue-900 rounded-full w-36 text-[13px] text-white"
                 >
-                  Update Profile
+                  Edit Profile
                 </button>
               </div>
             </div>

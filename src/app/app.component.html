@@ -123,6 +123,8 @@
             <li class="px-4 py-2  cursor-pointer" routerLink="/candidate">Dashboard</li>
           }@else if(userModel?.roles?.includes('EMPLOYER')){
             <li class="px-4 py-2  cursor-pointer" routerLink="/employer">Dashboard</li>
+          }@else if (userModel?.roles?.includes('ADMIN')) {
+            <li class="px-4 py-2  cursor-pointer" routerLink="/admin">Dashboard</li>
           }
           <li class="px-4 py-2 cursor-pointer" (click)="logout()">Logout</li>
         </ul>

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { ThemeService } from '../../../services/theme/theme.service';
 import { NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -25,9 +25,10 @@ export class HeaderComponent {
   @Input() notifications: any[] = [];
   @Output() toggleSidebar = new EventEmitter<void>();
 
-  constructor(public themeService: ThemeService) {
+  //themeService = inject(ThemeService)
 
-  }
+  constructor(public themeService: ThemeService) {}
+
   toggleTheme(): void {
     this.themeService.toggleTheme();
   }

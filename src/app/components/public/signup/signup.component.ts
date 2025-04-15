@@ -36,7 +36,7 @@ export class SignupComponent {
     jobtitle: new FormControl(''),
     years_of_experience: new FormControl(''),
     profilePhoto: new FormControl(''),
-    password: new FormControl('')
+    password: new FormControl(''),
   })
 
   register(){
