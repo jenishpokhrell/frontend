@@ -6,11 +6,12 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { UserModel } from '../../../../../model/user';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pending-employers',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, NgFor, FaIconComponent, NgIf],
+  imports: [SidebarComponent, HeaderComponent, NgFor, FaIconComponent, NgIf, RouterLink],
   templateUrl: './pending-employers.component.html',
   styleUrl: './pending-employers.component.css'
 }) 
@@ -38,12 +39,13 @@ export class PendingEmployersComponent implements OnInit {
 
   authService = inject(AuthService)
   pendingEmployers: UserModel[] = []
+  employer: UserModel | null = null
+  employerId!: string
 
 
   ngOnInit(): void {
     this.getPendingEmployers();
   }
-
 
   getPendingEmployers(){
     this.authService.getPendingEmployers().subscribe({
@@ -52,6 +54,16 @@ export class PendingEmployersComponent implements OnInit {
       }
     })
   }
+
+  // getEmployersById(employerId: string){
+  //   const id = employerId
+  //   this.authService.getUserById(id).subscribe({
+  //     next: (response) => {
+  //       this.employer = response
+  //       console.log(response)
+  //     }
+  //   })
+  // }
 
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;

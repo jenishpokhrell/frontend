@@ -25,7 +25,6 @@ export class HeaderComponent {
   @Input() notifications: any[] = [];
   @Output() toggleSidebar = new EventEmitter<void>();
 
-  //themeService = inject(ThemeService)
 
   constructor(public themeService: ThemeService) {}
 

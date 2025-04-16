@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
   }
   
   constructor(private router: Router){
-    const hiddenRoutes = ['/admin', '/candidate', '/employer', '/notfound', '/unauthorized']
+    const hiddenRoutes = ['/admin', '/candidate', '/employer', '/notfound', '/unauthorized', '/not-approved']
     this.router.events.subscribe(() => {
       this.showNavbar = !hiddenRoutes.some(path => this.router.url.startsWith(path))
     })

@@ -85,9 +85,7 @@
                   <div>
                     <button class="p-4 bg-blue-900 rounded-full w-32 text-[12px] cursor-pointer" routerLink="/employer/edit-job/{{job.id}}">Edit Job</button>
                   </div>
-                  <div>
-                    <button class="p-4 bg-red-600 rounded-full w-32 text-[12px] cursor-pointer">Close Job</button>
-                  </div>
+                  
                 </div>
             </div>
             <div class="overflow-x-auto mb-10">
@@ -150,7 +148,7 @@
                 </table>
               </div>
               <div *ngIf="job.jobApplications.length === 0">
-                <h2>No one has applied for the job yet.</h2>
+                <h2 class="text-center text-[20px]">No one has applied for the job yet.</h2>
               </div>
         </div>
         </div>

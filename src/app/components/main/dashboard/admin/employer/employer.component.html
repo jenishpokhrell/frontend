@@ -1,0 +1,194 @@
+<div class="flex h-screen bg-gray-100 dark:bg-gray-900">
+    <app-sidebar
+      [menuItems]="menuItems"
+      [collapsed]="collapsed"
+      (toggleCollapse)="toggleSidebar()"
+    ></app-sidebar>
+  
+    <div
+      class="flex-1 flex flex-col overflow-hidden"
+      [class.ml-14]="!collapsed"
+      [class.ml-5]="collapsed"
+    >
+      <app-header
+        [title]="'Employer Profile'"
+        (toggleSidebar)="toggleSidebar()"
+      ></app-header>
+  
+      <main class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-800">
+        <div class="w-full">
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+              Personal Information
+            </h2>
+          </div>
+          <div class="mt-7 flex items-center justify-between">
+            <div class="flex justify-between items-center space-x-20">
+              @if(employer?.profilePhoto === null){
+              <div
+                class="bg-blue-900 text-white w-28 h-28 text-2xl font-bold p-2 text-center rounded-full ml-1 content-center"
+              >
+                {{ employer?.firstname?.charAt(0) }}
+              </div>
+              }@else{
+              <div
+                class="w-40 h-40 rounded-full flex items-center justify-center font-bold"
+              >
+                <img
+                  [src]="employer?.profilePhoto"
+                  alt="profile picture"
+                  width="300"
+                  class="rounded-full"
+                />
+              </div>
+              }
+            </div>
+            <div class="bg-gray-900 mr-10 p-10 w-[35%] drop-shadow-2xl">
+              <div class="mb-5">
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
+                  Contact Information
+                </h2>
+              </div>
+              <hr class="mb-5" />
+              <div class="text-gray-50 space-y-4 text-[14px]">
+                <p>
+                  <span class="mr-7"><fa-icon [icon]="location"></fa-icon></span>
+                  {{ employer?.address }}
+                </p>
+                <p>
+                  <span class="mr-7"><fa-icon [icon]="mail"></fa-icon></span>
+                  {{ employer?.email }}
+                </p>
+                <p>
+                  <span class="mr-7"><fa-icon [icon]="contact"></fa-icon></span>
+                  {{ employer?.contact }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="employer" class="flex w-full space-x-10 mt-5 text-[14px]">
+            <div class="w-1/2 p-4">
+              <div
+                class="dark:text-gray-50 flex justify-between space-x-20 mt-10"
+              >
+                <div class="w-1/2 space-y-2">
+                  <p class="font-bold">Firstname</p>
+                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">
+                    {{ employer.firstname }}
+                  </p>
+                </div>
+                <div class="w-1/2 space-y-2">
+                  <p class="font-bold">Lastname</p>
+                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">
+                    {{ employer.lastname }}
+                  </p>
+                </div>
+              </div>
+              <div
+                class="dark:text-gray-50 flex justify-between space-x-20 mt-10"
+              >
+                <div class="w-1/2 space-y-2">
+                  <p class="font-bold">Username</p>
+                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">
+                    {{ employer.username }}
+                  </p>
+                </div>
+                <div class="w-1/2 space-y-2">
+                  <p class="font-bold">Gender</p>
+                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">
+                    {{ employer.gender }}
+                  </p>
+                </div>
+              </div>
+              <div
+                class="dark:text-gray-50 flex justify-between space-x-20 mt-10"
+              >
+                <div class="w-1/2 space-y-2">
+                  <p class="font-bold">Position</p>
+                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">
+                    {{ employer.jobTitle }}
+                  </p>
+                </div>
+                <div class="w-1/2 space-y-2">
+                  <p class="font-bold">YOE</p>
+                  <p class="bg-gray-700 py-2 pl-4 rounded-3xl">
+                    {{ employer.years_Of_Experience }} years
+                  </p>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+
+
+          <div>
+            <div class="flex space-x-10">
+              <div class="w-1/2">
+                <div>
+                  <h2
+                    class="text-lg my-4 font-semibold text-gray-800 dark:text-white"
+                  >
+                    Work Experience
+                  </h2>
+                  <hr />
+                </div>
+                <div
+                  *ngFor="let experience of experiences"
+                  class="text-gray-50 mt-10 bg-gray-900 p-7 drop-shadow-2xl"
+                >
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <h2
+                        class="text-xl font-semibold text-gray-800 dark:text-white"
+                      >
+                        {{ experience.jobTitle }}
+                      </h2>
+                    </div>
+                  </div>
+                  <div>
+                    <p class="font-light text-[14px]">
+                      {{ experience.companyName }}
+                    </p>
+                  </div>
+                  @if(experience.to !== null){
+                  <div>
+                    <p class="font-light text-[14px]">
+                      {{ experience.from }} - {{ experience.to }}
+                    </p>
+                  </div>
+                  }@else {
+                  <div>
+                    <p class="font-light text-[14px]">
+                      {{ experience.from }} - <span class="italic">Present</span>
+                    </p>
+                  </div>
+                  }
+                  <div class="mt-7 text-[14px]">
+                    <p>{{ experience.jobDescription }}</p>
+                  </div>
+                </div>
+                <div *ngIf="experiences.length === 0">
+                  <p class="text-center text-gray-300 text-2xl italic my-20">No experiences to show.</p>
+                </div>
+            </div>
+            </div>
+          </div>
+          
+        </div>
+
+        <hr>
+
+        <div class="dark:text-gray-50 mt-10">
+          <div>
+            <button
+            (click)="approveEmployer(employerId)"
+              class="p-4 bg-blue-900 rounded-full w-36 text-[13px] text-white"
+            >
+              Approve
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  

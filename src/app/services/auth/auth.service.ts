@@ -58,6 +58,10 @@ export class AuthService {
     return this.http.get<UserModel[]>(`${this.apiUrl}getpendingemployers`)
   }
 
+  approveEmployer(id: string):Observable<GeneralResponse>{
+    return this.http.post<GeneralResponse>(`${this.apiUrl}approveemployer/${id}`, null)
+  }
+
   updateProfile(id: string, data: FormData): Observable<GeneralResponse>{
     return this.http.put<GeneralResponse>(`${this.apiUrl}update-user/${id}`, data)
   }
@@ -72,6 +76,15 @@ export class AuthService {
     if(!token) return false
 
     return !this.isTokenExpired()
+  }
+
+  getRoles = () : string[] | null => {
+    const token = this.getToken();
+    if(!token) return null
+
+    const decodedToken:any = jwtDecode(token)
+    const roles = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+    return Array.isArray(roles) ? roles : [roles]
   }
 
   private isTokenExpired(){

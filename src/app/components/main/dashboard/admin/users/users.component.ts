@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from "../../../../reusable/sidebar/sidebar.component";
 import { faTachometerAlt, faUserAlt, faUser, faUserClock, faBriefcase, faClipboardList } from '@fortawesome/free-solid-svg-icons';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { UserModel } from '../../../../../model/user';
@@ -10,7 +10,7 @@ import { AuthService } from '../../../../../services/auth/auth.service';
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, NgFor, FaIconComponent],
+  imports: [SidebarComponent, HeaderComponent, NgFor, FaIconComponent, NgIf],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 }) 

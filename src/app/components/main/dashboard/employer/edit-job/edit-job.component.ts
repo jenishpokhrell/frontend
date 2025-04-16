@@ -79,6 +79,22 @@ export class EditJobComponent implements OnInit {
     }
   }
 
+  closeJob(){
+    this.postJob.patchValue({ isActive: false})
+    const data = this.postJob.value
+    if(this.id){
+      this.jobService.updateJob(this.id, data).subscribe((response: GeneralResponse)=> {
+        if(response.isSuccess){
+          alert(response.message)
+        }else{
+          alert('Failed updating job')
+        }
+      })
+    }else{
+      console.error('Failed fetching id')
+    }
+  }
+
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;
   }

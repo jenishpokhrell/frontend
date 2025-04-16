@@ -6,6 +6,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { UserModel } from '../../../model/user';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -33,12 +34,15 @@ export class LoginComponent implements OnInit {
     constructor(private router: Router) {}
 
     login(){
-      this.authService.login(this.form.value).subscribe((response) => {
-        if(response.roles.includes('EMPLOYER') && response.isApproved === false){
+      this.authService.login(this.form.value).subscribe({
+        next: (response) => {
+          console.log(response)
+          location.replace("/")
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err)
           this.router.navigate(['/not-approved'])
         }
-        console.log(response)
-        location.replace("/")
       })
     }
 

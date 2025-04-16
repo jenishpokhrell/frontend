@@ -58,8 +58,10 @@ export class SignupComponent {
 
     return this.authService.register(formData).subscribe({
       next: (response) => {
-        console.log(response.message)
-        this.route.navigate(['/login'])
+        if(response.isSuccess){
+          alert(response.message)
+          this.route.navigate(['/login'])
+        }
       },
       error: (err) => {
         console.error("Error while registering", err)

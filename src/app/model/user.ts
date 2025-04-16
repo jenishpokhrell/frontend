@@ -10,7 +10,7 @@ export interface UserModel{
     profilePhoto: string;
     gender: string;
     jobTitle: string;
-    years_Of_Experience: number;
+    years_Of_Experience: number
     isApproved: boolean,
     roles: string[]
 }
