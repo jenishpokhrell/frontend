@@ -42,6 +42,10 @@ export class JobsComponent implements OnInit {
       }
     })
   }
+
+  noDelete(){
+    alert('You cannot delete active jobs')
+  }
   
 
   notifications = [

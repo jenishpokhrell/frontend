@@ -5,6 +5,8 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faSun, faMoon, faBell, faChartBar } from '@fortawesome/free-regular-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../../services/auth/auth.service';
+import { UserModel } from '../../../model/user';
 
 @Component({ 
   selector: 'app-header',
@@ -25,8 +27,23 @@ export class HeaderComponent {
   @Input() notifications: any[] = [];
   @Output() toggleSidebar = new EventEmitter<void>();
 
+  authService = inject(AuthService)
+  user : UserModel | null = null
+
 
   constructor(public themeService: ThemeService) {}
+
+  getMyDetails(){
+    this.authService.getMyDetails().subscribe({
+      next: (response) => {
+        this.user = response
+      }
+    })
+  }
+
+  isLoggedIn(){
+    this.authService.isLoggedIn()
+  }
 
   toggleTheme(): void {
     this.themeService.toggleTheme();

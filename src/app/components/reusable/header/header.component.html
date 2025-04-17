@@ -6,7 +6,7 @@
           <!-- <i class="fas fa-bars"></i> -->
           <fa-icon [icon] = 'bars'></fa-icon>
         </button>
-        <div>
+        <div *ngIf="user?.roles?.includes('CANDIDATE')"> 
           <img
             src="./assets/logo.png"
             alt="logo"

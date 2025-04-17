@@ -1,11 +1,9 @@
 <div class="flex h-screen w-full bg-gray-100 dark:bg-gray-900 ">
     <!-- Sidebar -->
     <app-sidebar
-      [user]="user"
       [menuItems]="menuItems"
       [collapsed]="collapsed"
       (toggleCollapse)="toggleSidebar()"
-      (logout)="logout()"
     ></app-sidebar>
   
     <!-- Main Content -->
@@ -20,28 +18,56 @@
                     (toggleSidebar)="toggleSidebar()"
                     ></app-header>
   
-      <!-- Main Content -->
       <main class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-800">
-        <!-- Stats Cards -->
+        <div class="bg-gradient-to-r from-[#5FA8F5] via-[#3094FF] to-blue-600 ... text-white rounded-lg p-6 mb-6">
+          <h2 class="text-2xl font-bold mb-2">Welcome back, ADMIN</h2>
+        </div>
+  
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-          <div
-            *ngFor="let stat of stats"
-            class="bg-white dark:bg-gray-700 rounded-lg p-6"
-          >
+          <div class="bg-white dark:bg-gray-700 rounded-lg shadow p-6">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-gray-500 dark:text-gray-300 text-sm font-medium">
-                  {{ stat.title }}
-                </p>
-                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">
-                  {{ stat.value }}
-                </h3>
+                <p class="text-gray-500 dark:text-gray-300 text-sm font-medium">All Users</p>
+                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ usersCount }}</h3>
               </div>
-              <div [class]="'rounded-full p-3 w-16 text-center ' + stat.color">
-                  <fa-icon [icon]="stat.icon"></fa-icon>
+              <div class="rounded-full p-3 w-16 text-center bg-blue-100 text-blue-600">
+                <fa-icon [icon]="fauser"></fa-icon>
               </div>
             </div>
           </div>
+          <div class="bg-white dark:bg-gray-700 rounded-lg shadow p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-500 dark:text-gray-300 text-sm font-medium">Active Jobs</p>
+                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">{{activeJobsCount}}</h3>
+              </div>
+              <div class="rounded-full p-3 w-16 text-center bg-yellow-100 text-yellow-600 ">
+                <fa-icon [icon]="briefcase"></fa-icon>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-gray-700 rounded-lg shadow p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-500 dark:text-gray-300 text-sm font-medium">Pending Employers</p>
+                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">{{pendingEmployersCount}}</h3>
+              </div>
+              <div class="rounded-full p-3 w-16 text-center bg-green-100 text-green-600 ">
+                <fa-icon [icon]="userClock"></fa-icon>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-gray-700 rounded-lg shadow p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-500 dark:text-gray-300 text-sm font-medium">Logs</p>
+                <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ logsCount }}</h3>
+              </div>
+              <div class="rounded-full p-3 w-16 text-center bg-red-100 text-red-600">
+                <fa-icon [icon]="clipboard"></fa-icon>
+              </div>
+            </div>
+          </div>  
         </div>
   
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
@@ -70,28 +96,29 @@
                       Email
                     </th>
                     <th
-                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                     >
-                      Role
-                    </th>
-                    <th
-                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
-                    >
-                      Joined
-                    </th>
+                    Address
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  >
+                    Role
+                  </th>
                   </tr>
                 </thead>
                 <tbody
+                *ngFor="let user of users | slice : 0:5"
                   class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600"
                 >
                   <tr
-                    *ngFor="let user of recentUsers"
+                  *ngIf="!user.roles.includes('ADMIN')"
                     class="hover:bg-gray-50 dark:hover:bg-gray-600"
                   >
                     <td
                       class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
                     >
-                      {{ user.name }}
+                      {{ user.firstname }} {{ user.lastname }}
                     </td>
                     <td
                       class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300"
@@ -101,32 +128,33 @@
                     <td
                       class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300"
                     >
-                      <span
-                        [class]="
-                          user.role === 'Employer'
-                            ? 'bg-blue-100 text-blue-800 px-2 py-1 text-xs rounded-full '
-                            : 'bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs'"
-                      >
-                        {{ user.role }}
-                      </span>
+                      {{ user.address }}
                     </td>
                     <td
                       class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300"
                     >
-                      {{ user.joined }}
+                      <span
+                        [class]="
+                          user?.roles?.includes('EMPLOYER')
+                            ? 'bg-blue-100 text-blue-800 px-2 py-1 text-xs rounded-full '
+                            : 'bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs'"
+                      >
+                        {{ user.roles }}
+                      </span>
                     </td>
+                    
                   </tr>
                 </tbody>
               </table>
             </div>
             <div
               class="px-6 py-4 border-t border-gray-200 dark:border-gray-600 text-right">
-              <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline"
-                >View All</a>
+              <p href="#" class="text-blue-600 dark:text-blue-400 cursor-pointer hover:underline"
+              routerLink="/admin/users"
+                >View All</p>
             </div>
           </div>
   
-          <!-- Recent Logs -->
           <div
             class="bg-white dark:bg-gray-700 rounded-lg shadow overflow-hidden"
           >
@@ -156,33 +184,29 @@
                     >
                       Time
                     </th>
-                    <th
-                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                      IP
-                    </th>
                   </tr>
                 </thead>
                 <tbody
                   class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600"
                 >
                   <tr
-                    *ngFor="let log of recentLogs"
+                    *ngFor="let log of logs | slice : 0: 5"
                     class="hover:bg-gray-50 dark:hover:bg-gray-600"
                   >
                     <td
                       class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
                     >
-                      {{ log.action }}
+                      {{ log.description }}
                     </td>
                     <td
                       class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300"
                     >
-                      {{ log.user }}
+                      {{ log.username }}
                     </td>
                     <td
                       class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300"
                     >
-                      {{ log.time }}
+                      {{ log.createdAt }}
                     </td>
                     
                   </tr>
@@ -192,9 +216,9 @@
             <div
               class="px-6 py-4 border-t border-gray-200 dark:border-gray-600 text-right"
             >
-              <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline"
-                >View All</a
-              >
+            <p href="#" class="text-blue-600 dark:text-blue-400 cursor-pointer hover:underline"
+            routerLink="/admin/logs"
+              >View All</p>
             </div>
           </div>
         </div>

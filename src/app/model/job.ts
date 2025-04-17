@@ -45,7 +45,9 @@ export interface MyJobApplications{
     job: {
       id: number,
       jobTitle: string,
-      postedBy: string
+      postedBy: string,
+      isActive: boolean,
+      jobType: string
     }
 }
 

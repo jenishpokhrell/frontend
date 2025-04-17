@@ -35,9 +35,17 @@ export class LoginComponent implements OnInit {
 
     login(){
       this.authService.login(this.form.value).subscribe({
-        next: (response) => {
-          console.log(response)
-          location.replace("/")
+        next: (response: any) => {
+         //console.log(response.userInfo.roles)
+          if(response?.userInfo?.roles?.includes('EMPLOYER')){
+            this.router.navigate(['/employer'])
+          }
+          else if(response?.userInfo?.roles?.includes('ADMIN')){
+            this.router.navigate(['/admin'])
+          }else{
+            this.router.navigate(['/'])
+            location.replace('/')
+          }
         },
         error: (err: HttpErrorResponse) => {
           console.log(err)

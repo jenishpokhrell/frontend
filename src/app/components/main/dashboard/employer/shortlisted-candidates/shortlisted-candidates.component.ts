@@ -31,12 +31,6 @@ export class ShortlistedCandidatesComponent implements OnInit {
     { label: 'Change Password', link: '/employer/change-password', icon: faEdit}
   ];
 
-  // shortlistedCandidates = [
-  //   { jobId: 1, name: 'John Doe', jobTitle: 'Frontend Intern',  status: 'Shortlisted' },
-  //   { jobId: 1, name: 'Jane Doe', jobTitle: 'Frontend Intern',  status: 'Shortlisted' },
-  //   { jobId: 2, name: 'Nina Dobrev', jobTitle: 'Frontend Developer',  status: 'Shortlisted' },
-  //   { jobId: 5, name: 'Dinesh Neupane', jobTitle: 'Angular Developer', status: 'Shortlisted' },
-  // ];
 
   candidates: GetShortlistedCandidate[] = []
   jobService = inject(JobService)

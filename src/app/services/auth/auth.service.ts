@@ -21,7 +21,7 @@ export class AuthService {
   private TokenKey = 'token'
   route = inject(Router)
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(data:Login):Observable<UserModel>{
     return this.http.post<UserModel>(`${this.apiUrl}Login`, data).pipe(map((response) => {
@@ -101,8 +101,7 @@ export class AuthService {
 
   logout():void{
     localStorage.removeItem(this.TokenKey)
-    window.location.reload()
-    location.replace("/login")
+    this.router.navigate(['/login'])
   }
 
   getToken = (): string | null => localStorage.getItem(this.TokenKey) || ''
