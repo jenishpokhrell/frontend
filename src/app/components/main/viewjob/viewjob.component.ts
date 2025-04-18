@@ -1,7 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FooterComponent } from "../../reusable/footer/footer.component";
 import { NgFor, NgIf } from '@angular/common';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 // import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark } from '@fortawesome/free-regular-svg-icons';
 import { GetJobForCandidate } from '../../../model/job';
@@ -10,11 +9,12 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserModel } from '../../../model/user';
 import { GeneralResponse } from '../../../model/response';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarModule, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-viewjob',
   standalone: true,
-  imports: [FooterComponent, NgFor, FaIconComponent, NgIf ],
+  imports: [FooterComponent, NgFor, NgIf, MatSnackBarModule],
   templateUrl: './viewjob.component.html',
   styleUrl: './viewjob.component.css'
 })
@@ -31,6 +31,11 @@ export class ViewjobComponent implements OnInit  {
   //id!: string
 
   constructor(private activatedRoute: ActivatedRoute){}
+
+  snackBar = inject(MatSnackBar)
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right'
+  verticalPosition: MatSnackBarVerticalPosition = 'top'
  
   ngOnInit(): void {
     this.getJobByIdForCandidate()
@@ -64,12 +69,36 @@ export class ViewjobComponent implements OnInit  {
           if(response.isSuccess){
             alert(response.message)
           }else{
-            alert('Failed to apply for job.')
+            alert(response.message)
           } 
         })
       }
     }else{
       console.error('Error fetching id')
+    }
+  }
+
+  saveJob(jobId: number){
+    const id = jobId
+    if(this.jobId){
+      if(confirm('Save this job?')){
+        this.jobService.saveJob(id).subscribe((response: GeneralResponse) => {
+          if(response.isSuccess){
+            this.snackBar.open(response.message, 'Close', {
+              duration: 5000, // in milliseconds
+              verticalPosition: 'top',
+              horizontalPosition: 'right'
+            })
+            //alert(response.message)
+          }else{
+            this.snackBar.open(response.message, 'Close', {
+              duration: 3000, 
+              verticalPosition: 'top',
+              horizontalPosition: 'right'
+            })
+          }
+        })
+      }
     }
   }
 }

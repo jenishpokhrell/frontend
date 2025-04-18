@@ -7,11 +7,12 @@ import { UserModel } from '../../../model/user';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true, 
-  imports: [RouterOutlet, RouterLink, FooterComponent, ReactiveFormsModule, FaIconComponent],
+  imports: [RouterOutlet, RouterLink, FooterComponent, ReactiveFormsModule, FaIconComponent, NgIf],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -34,9 +35,12 @@ export class LoginComponent implements OnInit {
     constructor(private router: Router) {}
 
     login(){
+      if(this.form.invalid){
+        this.form.markAllAsTouched()
+        return
+      }
       this.authService.login(this.form.value).subscribe({
         next: (response: any) => {
-         //console.log(response.userInfo.roles)
           if(response?.userInfo?.roles?.includes('EMPLOYER')){
             this.router.navigate(['/employer'])
           }

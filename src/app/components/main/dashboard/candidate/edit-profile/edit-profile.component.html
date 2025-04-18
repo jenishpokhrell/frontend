@@ -19,29 +19,37 @@
                         <div class="mb-3 md:w-1/2">
                             <label for="" class="font-bold">First Name</label>
                             <input type="text" placeholder="Enter your first name" class="w-full p-3 bg-gray-700 outline-none" formControlName="firstname">
+                            <p *ngIf="isInvalid('firstname')" class="text-red-500 text-sm mt-1">Firstname is required</p>
                         </div>
                         <div class="mb-3 md:w-1/2">
                             <label for="" class="font-bold">Last Name</label>
                             <input type="text" placeholder="Enter your last name" class="w-full p-3 bg-gray-700 outline-none" formControlName="lastname">
+                            <p *ngIf="isInvalid('lastname')" class="text-red-500 text-sm mt-1">Lastname is required</p>
                         </div>
                     </div>
                     <div class="md:mb-7 md:w-full md:flex md:space-x-10">
                         <div class="mb-3 md:w-1/2">
                             <label for="" class="font-bold">Username</label>
                             <input type="text" placeholder="Enter your username" class="w-full p-3 bg-gray-700 outline-none" formControlName="username">
+                            <p *ngIf="isInvalid('username')" class="text-red-500 text-sm mt-1">Username is required</p>
                         </div>
                         <div class=" mb-3 md:w-1/2">
                             <label for="" class="font-bold">Address</label>
                             <input type="text" placeholder="Enter your address" class="w-full p-3 bg-gray-700 outline-none" formControlName="address">
+                            <p *ngIf="isInvalid('address')" class="text-red-500 text-sm mt-1">Address is required</p>
                         </div>
                     </div>
                     <div class="md:mb-7 mb-3">
                         <label for="" class="font-bold">Email Address</label>
                         <input type="text" placeholder="Enter your email address" class="w-full p-3 bg-gray-700 outline-none" formControlName="email">
+                        <p *ngIf="update.get('email')?.touched && update.get('email')?.hasError('required')" class="text-red-500 text-sm mt-1">Email is required</p>
+                        <p *ngIf="update.get('email')?.touched && update.get('email')?.hasError('email')" class="text-red-500 text-sm mt-1">Invalid email format</p>
                     </div>
                     <div class="md:mb-8 mb-3">
                         <label for="" class="font-bold">Mobile Number</label>
                         <input type="text" placeholder="Enter your mobile number" class="w-full p-3 bg-gray-700 outline-none" formControlName="contact">
+                        <p *ngIf="update.get('contact')?.touched && update.get('contact')?.hasError('required')" class="text-red-500 text-sm mt-1">Contact is required</p>
+                        <p *ngIf="update.get('contact')?.touched && update.get('contact')?.hasError('pattern')" class="text-red-500 text-sm mt-1">Enter a valid number</p>
                     </div>
                     <div class="md:mb-8 mb-3">
                         <label for="" class="font-bold">Are you?</label>
@@ -57,21 +65,14 @@
                         <div class="mb-3 md:w-1/2">
                             <label for="" class="font-bold">Position</label>
                             <input type="text" placeholder="Enter your current position" class="w-full p-3 bg-gray-700 outline-none" formControlName="jobTitle">
+                            <p *ngIf="isInvalid('jobtitle')" class="text-red-500 text-sm mt-1">Position is required</p>
                         </div>
                         <div class="mb-3 md:w-1/2">
                             <label for="" class="font-bold">Years of experience</label>
                             <input type="text" placeholder="Enter your experience in years" class="w-full p-3 bg-gray-700 outline-none" formControlName="years_Of_Experience">
+                            <p *ngIf="isInvalid('years_of_experience')" class="text-red-500 text-sm mt-1">Years of experience is required</p>
                         </div>
                     </div>
-        
-                    <!-- <div class="md:mb-8 mb-3">
-                        <label for="" class="font-bold">Select Profile Photo</label>
-                        <input type="file" accept=".png, .jpg, .jpeg" class="md:w-full" formControlName="profilePhoto">
-                        <p class="text-slate-400 mt-2">Only .jpg or .png file is accepted</p>
-                    </div>
-                    <div *ngIf="selectedImage" class="mb-8">
-                        <img [src]="selectedImage" alt="Selected Image" width="250" formControlName="profilePhoto">
-                    </div> -->
         
                     <div class="flex space-x-14">
                         <div class="mt-10font-bold text-[14px] text-white cursor-pointer rounded-full">

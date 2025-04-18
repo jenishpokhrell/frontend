@@ -62,6 +62,7 @@ export class ProfileComponent implements OnInit {
       this.authService.getMyDetails().subscribe({
         next: (response) => {
           this.user = response
+          console.log(this.user.roles)
         },
         error: (err) => {
           console.error("Error fetching data", err)

@@ -20,36 +20,49 @@
                 <form [formGroup]="postJob" (ngSubmit)="postJobDetails()">
                     <div class="mb-5">
                         <label for="" class="font-bold">Job Title</label>
-                        <input type="text" placeholder="Add Job title, role, vacancy, etc" class="w-full p-3 bg-gray-700 outline-none" formControlName = "jobTitle">
+                        <input type="text" placeholder="Add Job title, role, vacancy, etc" class="w-full p-3 bg-gray-700 outline-none" formControlName = "jobTitle"
+                        [ngClass] = "{'border-red-700' : isInvalid('jobTitle'), 'border-green-500' : isValid('jobTitle')}">
+                        <p *ngIf="isInvalid('jobTitle')" class="text-red-500 text-sm mt-1">Job title is required</p>
                     </div>  
                     <div class="mb-5">
                         <label for="" class="font-bold">Requirements</label>
-                        <input type="text" placeholder="Add tags, keywords..." class="w-full p-3 bg-gray-700 outline-none" formControlName = "requirements">
+                        <input type="text" placeholder="Add tags, keywords..." class="w-full p-3 bg-gray-700 outline-none" formControlName = "requirements"
+                        [ngClass]="{'border-red-700' : isInvalid('requirements'), 'border-green-500' : isValid('requirements')}"
+                        >
+                        <p *ngIf="isInvalid('requirements')" class="text-red-500 text-sm mt-1">Requirements must not be blank</p>
                     </div>
                     <p class="font-bold my-4">Salary</p>
                     <div class="flex w-full space-x-10 mb-5">
                         <div class="w-2/4">
                             <label for="" class="font-bold">Min Salary</label>
-                            <input type="text" placeholder="Minimum salary" class="w-full p-3 bg-gray-700 outline-none" formControlName = "minimumSalary">
+                            <input type="text" placeholder="Minimum salary" class="w-full p-3 bg-gray-700 outline-none" formControlName = "minimumSalary"
+                            [ngClass]="{'border-red-700' : isInvalid('minimumSalary'), 'border-green-500' : isValid('minimumSalary')}"
+                            >
+                            <p *ngIf="isInvalid('minimumSalary')" class="text-red-500 text-sm mt-1">Salary must be mentioned</p>
                         </div>
                         <div class="w-2/4">
                             <label for="" class="font-bold">Max Salary</label>
-                            <input type="text" placeholder="Maximum salary" class="w-full p-3 bg-gray-700 outline-none" formControlName = "maximumSalary">
+                            <input type="text" placeholder="Maximum salary" class="w-full p-3 bg-gray-700 outline-none" formControlName = "maximumSalary"
+                            [ngClass]="{'border-red-700' : isInvalid('maximumSalary'), 'border-green-500' : isValid('maximumSalary')}">
+                            <p *ngIf="isInvalid('maximumSalary')" class="text-red-500 text-sm mt-1">Salary must be mentioned</p>
                         </div>
                     </div>
                     <div class="flex w-full space-x-10">
                         <div class="w-1/2">
                             <label for="" class="font-bold">Job Type</label>
-                            <select name="JobType" id="" class="w-full p-3 bg-gray-700 outline-none" formControlName = "jobType">
+                            <select name="JobType" id="" class="w-full p-3 bg-gray-700 outline-none" formControlName = "jobType"
+                            [ngClass]="{'border-red-700' : isInvalid('jobType'), 'border-green-500' : isValid('jobType')}">
                                 <option value="">-- Select Job Type --</option>
                                 <option value="Full-Time">Full-Time</option>
                                 <option value="Part-Time">Part-Time</option>
                                 <option value="Contract">Contract</option>
                             </select>
+                            <p *ngIf="isInvalid('jobType')" class="text-red-500 text-sm mt-1">Job Type is required</p>
                         </div>
                         <div class="w-1/2">
                             <label for="" class="font-bold">Job Level</label>
-                            <select name="JobType" id="" class="w-full p-3 bg-gray-700 outline-none" formControlName = "jobLevel">
+                            <select name="JobType" id="" class="w-full p-3 bg-gray-700 outline-none" formControlName = "jobLevel"
+                            [ngClass]="{'border-red-700' : isInvalid('jobLevel'), 'border-green-500' : isValid('jobLevel')}">
                                 <option value="">-- Select Job Level --</option>
                                 <option value="Junior">Junior</option>
                                 <option value="Mid-Level">Mid-level</option>
@@ -58,29 +71,40 @@
                                 <option value="Junior">Trainee</option>
                                 <option value="Internship">Internship</option>
                             </select>
+                            <p *ngIf="isInvalid('jobLevel')" class="text-red-500 text-sm mt-1">Job Level is required</p>
                         </div>
                     </div>
                     <div class="my-5">
                         <label for="" class="font-bold">Location</label>
-                        <input type="text" placeholder="Enter location " class="w-full p-3 bg-gray-700 outline-none" formControlName = "location">
+                        <input type="text" placeholder="Enter location " class="w-full p-3 bg-gray-700 outline-none" formControlName = "location"
+                        [ngClass]="{'border-red-700' : isInvalid('location'), 'border-green-500' : isValid('location')}">
+                        <p *ngIf="isInvalid('location')" class="text-red-500 text-sm mt-1">Location must not be empty</p>
                     </div>
                     <div class="flex w-full my-4 space-x-10 mb-5">
                         <div class="w-1/2">
                             <label for="" class="font-bold">No. of openings</label>
-                            <input type="text" placeholder="Enter no. of vacancies " class="w-full p-3 bg-gray-700 outline-none" formControlName = "no_of_Openings">
+                            <input type="text" placeholder="Enter no. of vacancies " class="w-full p-3 bg-gray-700 outline-none" formControlName = "no_of_Openings"
+                            [ngClass]="{'border-red-700' : isInvalid('no_of_Openings'), 'border-green-500' : isValid('no_of_Openings')}">
+                            <p *ngIf="isInvalid('no_of_Openings')" class="text-red-500 text-sm mt-1">No. of vacancies must be mentioned</p>
                         </div>
                         <div class="w-1/2">
                             <label for="" class="font-bold">Minimum Experience Required</label>
-                            <input type="text" placeholder="Enter min experience required" class="w-full p-3 bg-gray-700 outline-none" formControlName = "min_Years_of_Experience_Required">
+                            <input type="text" placeholder="Enter min experience required" class="w-full p-3 bg-gray-700 outline-none" formControlName = "min_Years_of_Experience_Required"
+                            [ngClass]="{'border-red-700' : isInvalid('min_Years_of_Experience_Required'), 'border-green-500' : isValid('min_Years_of_Experience_Required')}">
+                            <p *ngIf="isInvalid('min_Years_of_Experience_Required')" class="text-red-500 text-sm mt-1">Minimum experience required must be mentioned</p>
                         </div>
                         <div class="w-1/2">
                             <label for="" class="font-bold">Maximum Experience Required</label>
-                            <input type="text" placeholder="Enter max experience required" class="w-full p-3 bg-gray-700 outline-none" formControlName = "max_Years_of_Experience_Required">
+                            <input type="text" placeholder="Enter max experience required" class="w-full p-3 bg-gray-700 outline-none" formControlName = "max_Years_of_Experience_Required"
+                            [ngClass]="{'border-red-700' : isInvalid('max_Years_of_Experience_Required'), 'border-green-500' : isValid('max_Years_of_Experience_Required')}">
+                            <p *ngIf="isInvalid('max_Years_of_Experience_Required')" class="text-red-500 text-sm mt-1">Maximum experience required must be mentioned</p>
                         </div>
                     </div>
                     <div>
                         <label for="" class="font-bold">Job Description</label>
-                        <textarea name="" id="" cols="30" rows="10" placeholder="Add your description..." class="w-full p-3 bg-gray-700 outline-none" formControlName = "jobDescription"></textarea>
+                        <textarea name="" id="" cols="30" rows="10" placeholder="Add your description..." class="w-full p-3 bg-gray-700 outline-none" formControlName = "jobDescription"
+                        [ngClass]="{'border-red-700' : isInvalid('jobDescription'), 'border-green-500' : isValid('jobDescription')}"></textarea>
+                        <p *ngIf="isInvalid('jobDescription')" class="text-red-500 text-sm mt-1">Job Description is required</p>
                     </div>
                     <div class="flex items-center space-x-5 mt-10">
                         <div>

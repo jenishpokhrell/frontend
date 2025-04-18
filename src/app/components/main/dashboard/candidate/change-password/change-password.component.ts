@@ -3,7 +3,7 @@ import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { faUser, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook,
    faMailForward, faUserEdit, faEdit, faTrash, faEyeSlash, faEye, faBook, faBusinessTime, faBookBookmark, faGraduationCap} from '@fortawesome/free-solid-svg-icons';
-import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { GeneralResponse } from '../../../../../model/response';
@@ -31,7 +31,6 @@ export class ChangePasswordComponent implements OnInit {
     { label: 'Projects', link: '/candidate/projects', icon: faProjectDiagram },
     { label: 'Applied Jobs', link: '/candidate/applied-jobs', icon: faFileAlt },
     { label: 'Saved Jobs', link: '/candidate/saved-jobs', icon: faBookmark },
-    //{ label: 'Update Profile', link: '/candidate/update-profile', icon: faUserEdit},
     { label: 'Change Password', link: '/candidate/change-password', icon: faEdit}
 
   ];
@@ -41,8 +40,8 @@ export class ChangePasswordComponent implements OnInit {
   id! : string
 
   password: FormGroup = new FormGroup({
-    currentPassword: new FormControl(''),
-    newPassword: new FormControl('')
+    currentPassword: new FormControl('', [Validators.required]),
+    newPassword: new FormControl('', [Validators.required])
   })
 
   ngOnInit(): void {
@@ -58,6 +57,10 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   changePassword(){
+    if(this.password.invalid){
+      this.password.markAllAsTouched()
+      return
+    }
     const data = this.password.value
     if(this.id){
       this.authService.changePassword(this.id, data).subscribe((response: GeneralResponse) => {

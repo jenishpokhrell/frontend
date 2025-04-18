@@ -37,6 +37,7 @@ export class HeaderComponent {
     this.authService.getMyDetails().subscribe({
       next: (response) => {
         this.user = response
+        console.log(this.user.roles)
       }
     })
   }

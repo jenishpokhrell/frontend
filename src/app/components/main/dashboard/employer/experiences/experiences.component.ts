@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { faUser, faGraduationCap, faBriefcase, faBook, faBookBookmark, faBusinessTime,  faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
-import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Experience } from '../../../../../model/experience';
@@ -41,11 +41,11 @@ export class EmployerExperiencesComponent implements OnInit {
   editMode: boolean = false
 
   editExperience: FormGroup = new FormGroup({
-    jobTitle: new FormControl(''),
-    companyName: new FormControl(''),
-    jobDescription: new FormControl(''),
-    from: new FormControl(''),
-    to: new FormControl('')
+    jobTitle: new FormControl('', [Validators.required]),
+    companyName: new FormControl('', [Validators.required]),
+    jobDescription: new FormControl('', [Validators.required]),
+    from: new FormControl('', [Validators.required]),
+    to: new FormControl('', [Validators.required])
   })
 
 
@@ -75,6 +75,10 @@ export class EmployerExperiencesComponent implements OnInit {
   }
 
   saveExperiences(){
+    if(this.editExperience.invalid){
+      this.editExperience.markAllAsTouched()
+      return
+    }
     const experience = this.editExperience.value;
     this.experienceService.saveExperiences(experience).subscribe((response: GeneralResponse) => {
       if(response.isSuccess){
@@ -87,6 +91,10 @@ export class EmployerExperiencesComponent implements OnInit {
   }
 
   updateExperiences(){
+    if(this.editExperience.invalid){
+      this.editExperience.markAllAsTouched()
+      return
+    }
     const experience = this.editExperience.value
     if(this.id){
       this.experienceService.updateExperiences(this.id, experience).subscribe((response: GeneralResponse) => {
@@ -113,6 +121,11 @@ export class EmployerExperiencesComponent implements OnInit {
         }
       })
     }
+  }
+
+  isInvalid(field: string){
+    const value = this.editExperience.get(field)
+    return !!(value && value.touched && value.invalid)
   }
 
   toggleSidebar(): void {

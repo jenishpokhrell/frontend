@@ -19,19 +19,23 @@
                   <div class="mb-6">
                       <label for="" class="font-bold">Institution Name</label>
                       <input type="text" placeholder="Enter your institution name" class="w-full p-3 bg-gray-700 outline-none" formControlName="institutionName">
+                      <p *ngIf="isInvalid('institutionName')" class="text-red-500 text-sm mt-1">Institution name is required</p>
                   </div>
                   <div class="mb-6">
                     <label for="" class="font-bold">Stream</label>
                     <input type="text" placeholder="Enter your stream" class="w-full p-3 bg-gray-700 outline-none " formControlName="stream">
+                    <p *ngIf="isInvalid('stream')" class="text-red-500 text-sm mt-1">Please Mention stream</p>
                 </div>
                   <div class="flex space-x-10 w-full mb-6">
                       <div class="w-1/2">
                           <label for="" class="font-bold">Start Year</label>
                           <input type="text" placeholder="Enter starting year (eg. 2024)" class="w-full p-3 bg-gray-700 outline-none " formControlName="startYear">
+                          <p *ngIf="isInvalid('startYear')" class="text-red-500 text-sm mt-1">Provide starting year</p>
                       </div>
                       <div class="w-1/2">
                           <label for="" class="font-bold">Graduation Year</label>
                           <input type="text" placeholder="Enter graduation year (eg. 2028)" class="w-full p-3 bg-gray-700 outline-none " formControlName="graduationYear">
+                          <p *ngIf="isInvalid('graduationYear')" class="text-red-500 text-sm mt-1">Provide graduating year</p>
                       </div>
                   </div>
                   <div class="mb-6">
@@ -41,6 +45,7 @@
                         <option value="Bachelor's" class="">Bachelors</option>
                         <option value="Masters">Masters</option>
                     </select>
+                    <p *ngIf="isInvalid('degreeType')" class="text-red-500 text-sm mt-1">Mention your degree type</p>
                   </div>
                   <div class="mb-6">
                     <label for="" class="font-bold">Current Semester</label>
@@ -56,6 +61,7 @@
                       <option value="8th">8th</option>
                       <option value="Graduated">Graduated</option>
                   </select>
+                  <p *ngIf="isInvalid('currentSemester')" class="text-red-500 text-sm mt-1">Mention your current semester</p>
                 </div>
                   <div class="flex items-center space-x-5">
                     @if(academics === null){

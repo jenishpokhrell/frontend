@@ -36,9 +36,9 @@
         <div
           class=" flex items-center space-x-8 relative text-[14px] lg:left-2 h-10  cursor-pointer"
         >
-          <button class="bg-gray-100 w-12 p-3 rounded-full text-black text-center ">
+          <!-- <button class="bg-gray-100 w-12 p-3 rounded-full text-black text-center ">
               <fa-icon [icon] = 'beforesave' size="lg" ></fa-icon>
-          </button>
+          </button> -->
             <div>
               <button class="cursor-pointer bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" (click)="jobApply(job.id)">
                 Apply now
@@ -50,9 +50,9 @@
           class=" flex space-x-6 relative text-[14px] lg:left-2 h-10 cursor-not-allowed"
         >
           <div>
-            <button class="bg-gray-100 opacity-60 w-12 p-3 rounded-full text-black text-center cursor-not-allowed">
+            <!-- <button class="bg-gray-100 opacity-60 w-12 p-3 rounded-full text-black text-center cursor-not-allowed">
                 <fa-icon [icon] = 'beforesave' size="lg" ></fa-icon>
-            </button>
+            </button> -->
             </div>
             <div>
               <button class="cursor-not-allowed opacity-60 bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" disabled>
@@ -129,7 +129,7 @@
               </button>
             </div>
             <div>
-              <button class="cursor-pointer bg-gray-100  p-3 md:w-36 w-72 rounded-full">
+              <button class="cursor-pointer bg-gray-100  p-3 md:w-36 w-72 rounded-full" (click) = "saveJob(job.id)" >
                 Save Job
               </button>
             </div>

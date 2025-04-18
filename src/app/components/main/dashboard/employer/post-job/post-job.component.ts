@@ -2,8 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { faUser, faTrash, faClose, faFilePdf,faBusinessTime, faBook, faBriefcase, faBookBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
-import { NgFor } from '@angular/common';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { JobService } from '../../../../../services/job/job.service';
 import { GeneralResponse } from '../../../../../model/response';
@@ -12,32 +12,30 @@ import { GetMyJob, Job } from '../../../../../model/job';
 //import * as districts from '../../../../../../assets/en.json'
 
 @Component({
-  selector: 'app-candidate',
+  selector: 'app-post-job',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, FaIconComponent],
+  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, NgClass, NgIf],
   templateUrl: './post-job.component.html',
   styleUrls: ['./post-job.component.css']
 })
 export class PostJobComponent implements OnInit {
-
-  title = 'My Academics'
 
   checkCircle = faCheckCircle; excCircle = faExclamationCircle; location = faLocationArrow; contact = faContactBook; mail = faMailForward; edit = faEdit; delete = faTrash
 
   collapsed = false;
 
   postJob: FormGroup = new FormGroup({
-    jobTitle: new FormControl(''),
-    requirements: new FormControl(''),
-    minimumSalary: new FormControl(),
-    maximumSalary: new FormControl(),
-    min_Years_of_Experience_Required: new FormControl(),
-    max_Years_of_Experience_Required: new FormControl(),
-    no_of_Openings: new FormControl(),
-    jobType: new FormControl(''),
-    jobLevel: new FormControl(''),
-    location: new FormControl(''),
-    jobDescription: new FormControl(''),
+    jobTitle: new FormControl('', [Validators.required]),
+    requirements: new FormControl('', [Validators.required]),
+    minimumSalary: new FormControl(null, [Validators.required]),
+    maximumSalary: new FormControl(null, [Validators.required]),
+    min_Years_of_Experience_Required: new FormControl(null, [Validators.required]),
+    max_Years_of_Experience_Required: new FormControl(null, [Validators.required]),
+    no_of_Openings: new FormControl(null, [Validators.required]),
+    jobType: new FormControl('', [Validators.required]),
+    jobLevel: new FormControl('', [Validators.required]),
+    location: new FormControl('', [Validators.required]),
+    jobDescription: new FormControl('', [Validators.required]),
     isActive: new FormControl(true)
   })
 
@@ -69,6 +67,10 @@ export class PostJobComponent implements OnInit {
 
 
   postJobDetails(){
+    if(this.postJob.invalid){
+      this.postJob.markAllAsTouched()
+      return 
+    }
     const data = this.postJob.value
     this.jobService.postJob(data).subscribe((response: GeneralResponse) => {
       if(response.isSuccess){
@@ -93,6 +95,16 @@ export class PostJobComponent implements OnInit {
     }else{
       console.error('Failed fetching id')
     }
+  }
+
+  isInvalid(field: string){
+    const value = this.postJob.get(field)
+    return !!(value && value.touched && value.invalid)
+  }
+
+  isValid(field: string){
+    const value = this.postJob.get(field)
+    return !!(value && value.touched && value.valid)
   }
 
   toggleSidebar(): void {

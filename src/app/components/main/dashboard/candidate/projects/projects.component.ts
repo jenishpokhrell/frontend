@@ -2,8 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { faUser, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit, faTrash, faArrowsLeftRightToLine} from '@fortawesome/free-solid-svg-icons';
-import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
-import { NgFor } from '@angular/common';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { RouterLink } from '@angular/router';
 import { Project } from '../../../../../model/project';
@@ -13,7 +13,7 @@ import { GeneralResponse } from '../../../../../model/response';
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, FaIconComponent],
+  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, FaIconComponent, NgIf],
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css']
 })
@@ -37,15 +37,14 @@ export class ProjectsComponent implements OnInit {
     { label: 'Projects', link: '/candidate/projects', icon: faProjectDiagram },
     { label: 'Applied Jobs', link: '/candidate/applied-jobs', icon: faFileAlt },
     { label: 'Saved Jobs', link: '/candidate/saved-jobs', icon: faBookmark },
-    //{ label: 'Update Profile', link: '/candidate/update-profile', icon: faUserEdit},
     { label: 'Change Password', link: '/candidate/change-password', icon: faEdit}
 
   ];
 
   projectForm: FormGroup = new FormGroup({
-    projectName: new FormControl(''),
-    projectURL: new FormControl(''),
-    projectDescription: new FormControl('')
+    projectName: new FormControl('', [Validators.required]),
+    projectURL: new FormControl('', [Validators.required]),
+    projectDescription: new FormControl('', [Validators.required])
   })
 
 
@@ -75,6 +74,10 @@ export class ProjectsComponent implements OnInit {
   }
 
   saveProject(){
+    if(this.projectForm.invalid){
+      this.projectForm.markAllAsTouched()
+      return;
+    }
     const project = this.projectForm.value
     this.projectService.saveProject(project).subscribe((response: GeneralResponse) => {
       if(response.isSuccess){
@@ -87,6 +90,10 @@ export class ProjectsComponent implements OnInit {
   }
 
   updateProject(){
+    if(this.projectForm.invalid){
+      this.projectForm.markAllAsTouched()
+      return;
+    }
     const project = this.projectForm.value
     if(this.id){
       this.projectService.updateProject(this.id, project).subscribe((response: GeneralResponse) => {
@@ -112,6 +119,11 @@ export class ProjectsComponent implements OnInit {
           alert('Project Removed Successfully.')
         }
       })
+  }
+
+  isInvalid(field: string){
+    const value = this.projectForm.get(field)
+    return !!(value && value.touched && value.invalid)
   }
 
   toggleSidebar(): void {

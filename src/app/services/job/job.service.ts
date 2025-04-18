@@ -53,6 +53,10 @@ export class JobService {
     return this.http.post<GeneralResponse>(`${this.apiUrl}job/applyforjob/${id}`, null)
   }
 
+  saveJob(id: number):Observable<GeneralResponse>{
+    return this.http.post<GeneralResponse>(`${this.apiUrl}savedjob/savejobs/${id}`, null)
+  }
+
   updateJob(id: number, data: Job):Observable<GeneralResponse>{
     return this.http.put<GeneralResponse>(`${this.apiUrl}job/update-job/${id}`, data)
   }

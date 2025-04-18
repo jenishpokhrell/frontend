@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { FooterComponent } from "../../reusable/footer/footer.component";
@@ -8,7 +8,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [NgIf, RouterOutlet, RouterLink, FooterComponent,  ReactiveFormsModule],
+  imports: [NgIf, RouterOutlet, RouterLink, FooterComponent,  ReactiveFormsModule, NgClass],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
@@ -25,21 +25,31 @@ export class SignupComponent {
   showPassword : boolean = false;
 
   signUp: FormGroup = new FormGroup({
-    roles: new FormControl(''),
+    roles: new FormControl('', [Validators.required]),
     firstname: new FormControl('', [Validators.required]),
-    lastname: new FormControl(''),
-    username: new FormControl(''),
-    address: new FormControl(''),
-    email: new FormControl(''),
-    contact: new FormControl(''),
-    gender: new FormControl(''),
-    jobtitle: new FormControl(''),
-    years_of_experience: new FormControl(''),
+    lastname: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
+    address: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    contact: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[0-9]{10}$/) // Assuming 10-digit mobile numbers
+    ]),
+    gender: new FormControl('', [Validators.required]),
+    jobtitle: new FormControl('', [Validators.required]),
+    years_of_experience: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[0-9]+$/)
+    ]),
     profilePhoto: new FormControl(''),
-    password: new FormControl(''),
-  })
+    password: new FormControl('', [Validators.required, Validators.minLength(8)])
+  });
 
   register(){
+    if(this.signUp.invalid){
+      this.signUp.markAllAsTouched()
+      return;
+    }
     const formData = new FormData()
 
     Object.keys(this.signUp.controls).forEach(controlName => {
@@ -91,5 +101,17 @@ export class SignupComponent {
     }
     togglePasswordVisibility(): void{
       this.showPassword = !this.showPassword
+    }
+
+    // ------------------------- HELPER METHOD FOR ADDING VALIDATORS -------------------------------
+
+    isInvalid(field: string){
+      const value = this.signUp.get(field);
+      return !!(value && value.touched && value.invalid)
+    }
+
+    isValid(field: string){
+      const value = this.signUp.get(field);
+      return !!(value && value.touched && value.valid)
     }
 }

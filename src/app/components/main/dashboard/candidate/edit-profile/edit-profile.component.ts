@@ -6,14 +6,15 @@ import { faUser, faClose, faFilePdf, faGraduationCap, faBriefcase, faProjectDiag
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { UpdateUser, UserModel } from '../../../../../model/user';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { GeneralResponse } from '../../../../../model/response';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, FaIconComponent, PdfViewerModule, ReactiveFormsModule],
+  imports: [SidebarComponent, HeaderComponent, FaIconComponent, PdfViewerModule, ReactiveFormsModule, NgIf],
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.css']
 })
@@ -45,18 +46,22 @@ export class EditProfileComponent implements OnInit {
   ];
 
   update: FormGroup = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    username: new FormControl(''),
-    address: new FormControl(''),
-    email: new FormControl(''),
-    contact: new FormControl(''),
-    gender: new FormControl(''),
-    jobTitle: new FormControl(''),
-    years_Of_Experience: new FormControl(),
-    profilePhoto: new FormControl(''),
-
-  })
+    firstname: new FormControl('', [Validators.required]),
+    lastname: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
+    address: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    contact: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[0-9]{10}$/) // Assuming 10-digit mobile numbers
+    ]),
+    gender: new FormControl('', [Validators.required]),
+    jobTitle: new FormControl('', [Validators.required]),
+    years_Of_Experience: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[0-9]+$/)
+    ]),
+  });
 
   ngOnInit(): void {
     this.userId = this.activatedRoute.snapshot.paramMap.get('id')!
@@ -68,6 +73,11 @@ export class EditProfileComponent implements OnInit {
   }
 
   updateProfile(){
+    if(this.update.invalid){
+      this.update.markAllAsTouched()
+      return;
+    }
+
     const formData = new FormData()
     
     Object.keys(this.update.controls).forEach(controlName => {
@@ -102,6 +112,12 @@ export class EditProfileComponent implements OnInit {
   //     reader.readAsDataURL(file)
 
   //   }
+
+
+  isInvalid(field: string){
+    const value = this.update.get(field);
+    return !!(value && value.touched && value.invalid)
+  }
 
 
   toggleSidebar(): void {

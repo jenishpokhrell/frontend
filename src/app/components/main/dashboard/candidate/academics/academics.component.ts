@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { faUser, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Academic } from '../../../../../model/academic';
 import { AcademicService } from '../../../../../services/academic/academic.service';
 import { NgIf } from '@angular/common';
@@ -46,12 +46,12 @@ export class AcademicsComponent implements OnInit {
   ];
 
   academic: FormGroup = new FormGroup({
-    institutionName: new FormControl(''),
-    stream: new FormControl(''),
-    startYear: new FormControl(''),
-    graduationYear: new FormControl(''),
-    degreeType: new FormControl(''),
-    currentSemester: new FormControl(''),
+    institutionName: new FormControl('', [Validators.required]),
+    stream: new FormControl('', [Validators.required]),
+    startYear: new FormControl('', [Validators.required]),
+    graduationYear: new FormControl('', [Validators.required]),
+    degreeType: new FormControl('', [Validators.required]),
+    currentSemester: new FormControl('', [Validators.required]),
   })
   
   academicId! : number
@@ -80,6 +80,10 @@ export class AcademicsComponent implements OnInit {
   }
 
   saveAcademics(){
+    if(this.academic.invalid){
+      this.academic.markAllAsTouched()
+      return;
+    }
     const academic = this.academic.value
     this.academicServices.saveAcademics(academic).subscribe((response : GeneralResponse) => { 
       if(response.isSuccess){
@@ -92,6 +96,10 @@ export class AcademicsComponent implements OnInit {
   }
 
   updateAcademics(): void{
+    if(this.academic.invalid){
+      this.academic.markAllAsTouched()
+      return;
+    }
     const academic = this.academic.value
     if(this.academicId){
       this.academicServices.updateAcademics(this.academicId, academic).subscribe((response: GeneralResponse) => {
@@ -120,6 +128,11 @@ export class AcademicsComponent implements OnInit {
         }
       })
     }
+  }
+
+  isInvalid(field: string){
+    const value = this.academic.get(field)
+    return !!(value && value.touched && value.invalid)
   }
 
   toggleSidebar(): void {

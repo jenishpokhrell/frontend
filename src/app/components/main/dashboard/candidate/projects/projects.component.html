@@ -42,14 +42,17 @@
                         <div class="mb-6">
                             <label for="" class="font-bold">Project Title</label>
                             <input type="text" placeholder="Enter your project name" class="w-full p-3 bg-gray-700 outline-none " formControlName="projectName">
+                            <p *ngIf="isInvalid('projectName')" class="text-red-500 text-sm mt-1">Project name is required</p>
                         </div>
                         <div class="mb-6">
                           <label for="" class="font-bold">Project URL</label>
                           <input type="text" placeholder="Enter project url" class="w-full p-3 bg-gray-700 outline-none " formControlName="projectURL">
+                          <p *ngIf="isInvalid('projectURL')" class="text-red-500 text-sm mt-1">Project URL is required</p>
                         </div>
                         <div>
                             <label for="" class="font-bold">Project Description</label>
                             <textarea name="" id="" cols="30" rows="10" placeholder="Describe your project..." class=" w-full p-3 bg-gray-700 outline-none" formControlName="projectDescription"></textarea>
+                            <p *ngIf="isInvalid('projectDescription')" class="text-red-500 text-sm mt-1">Project Description is required</p>
                         </div>
                         <div class="flex items-center space-x-5 mt-5">
                                 <button type="submit" class="rounded-full bg-blue-900 w-36 text-[13px] p-4 font-semibold">

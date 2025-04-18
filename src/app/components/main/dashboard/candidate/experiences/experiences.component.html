@@ -46,28 +46,33 @@
                         <div class="mb-6">
                             <label for="" class="font-bold">Job Title</label>
                             <input type="text" placeholder="Enter job title" class="w-full p-3 bg-gray-700 outline-none " formControlName="jobTitle">
+                            <p *ngIf="isInvalid('jobTitle')" class="text-red-500 text-sm mt-1">Job title is required</p>
                         </div>
                         <div class="mb-6">
                           <label for="" class="font-bold">Company Name</label>
                           <input type="text" placeholder="Enter company name" class="w-full p-3 bg-gray-700 outline-none " formControlName="companyName">
+                          <p *ngIf="isInvalid('companyName')" class="text-red-500 text-sm mt-1">Company name is required</p>
                       </div>
                         <div class="flex space-x-10 w-full mb-6">
                             <div class="w-1/2">
                                 <label for="" class="font-bold">From</label>
                                 <input type="text" placeholder="Enter starting date (eg. 2023-01-01)" class="w-full p-3 bg-gray-700 outline-none " formControlName="from">
+                                <p *ngIf="isInvalid('from')" class="text-red-500 text-sm mt-1">Required</p>
                             </div>
                             <div class="w-1/2">
                                 <label for="" class="font-bold">To</label>
                                 <input type="text" placeholder="Enter end date (eg. 2023-04-01)" class="w-full p-3 bg-gray-700 outline-none " formControlName="to">
-                                <div class="flex items-center space-x-3">
+                                <p *ngIf="isInvalid('to')" class="text-red-500 text-sm mt-1">Required</p>
+                                <!-- <div class="flex items-center space-x-3">
                                     <input type="checkbox" name="isWorking" value="I am currently working here." formControlName="to">
                                     <p>I am currently working here</p>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div>
                             <label for="" class="font-bold">Job Description</label>
                             <textarea name="" id="" cols="30" rows="10" placeholder="Add your description..." class=" w-full p-3 bg-gray-700 outline-none" formControlName="jobDescription"></textarea>
+                            <p *ngIf="isInvalid('jobDescription')" class="text-red-500 text-sm mt-1">Job description is required</p>
                         </div>
                         <div class="flex items-center space-x-5 mt-5">
                             <div>
