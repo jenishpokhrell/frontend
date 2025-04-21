@@ -36,6 +36,7 @@ import { NotApprovedComponent } from './components/main/not-approved/not-approve
 import { EmployerComponent } from './components/main/dashboard/admin/employer/employer.component';
 import { EmployerProfileComponent } from './components/main/dashboard/employer/profile/profile.component';
 import { roleGuard } from './guards/role/role.guard';
+import { EditEmployerProfileComponent } from './components/main/dashboard/employer/edit-employer-profile/edit-employer-profile.component';
 
 export const routes: Routes = [
     {
@@ -109,6 +110,7 @@ export const routes: Routes = [
             { path: 'job-applications/:id', loadComponent: () => JobApplicationsComponent},
             { path: 'post-job', loadComponent: () => PostJobComponent},
             { path: 'edit-job/:id', loadComponent: () => EditJobComponent},
+            { path: 'edit-profile/:id', loadComponent: () => EditEmployerProfileComponent },
             { path: 'candidate-profile/:userId', loadComponent: () => CandidateProfileComponent},
             { path: 'candidate-profile/:userId/:jobApplicationId', loadComponent: () => CandidateProfileComponent},
             { path: 'shortlisted-candidates', loadComponent: () => ShortlistedCandidatesComponent},

@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faUser, faClose, faFilePdf, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faClose, faFilePdf, faBook, faBusinessTime, faBookBookmark, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { UpdateUser, UserModel } from '../../../../../model/user';
@@ -12,13 +12,13 @@ import { GeneralResponse } from '../../../../../model/response';
 import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-edit-profile',
+  selector: 'app-edit-employer-profile',
   standalone: true,
   imports: [SidebarComponent, HeaderComponent, FaIconComponent, PdfViewerModule, ReactiveFormsModule, NgIf],
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.css']
+  templateUrl: './edit-employer-profile.component.html',
+  styleUrls: ['./edit-employer-profile.component.css']
 })
-export class EditProfileComponent implements OnInit {
+export class EditEmployerProfileComponent implements OnInit {
 
   checkCircle = faCheckCircle; excCircle = faExclamationCircle; location = faLocationArrow; contact = faContactBook; mail = faMailForward; close = faClose; pdf = faFilePdf
 
@@ -35,15 +35,13 @@ export class EditProfileComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private router: Router ){}
   
   menuItems = [
-    { label: 'Dashboard', link: '/candidate/dashboard', icon: faDashboard},
-    { label: 'Profile', link: '/candidate/profile', icon: faUser },
-    { label: 'Academics', link: '/candidate/academics', icon: faGraduationCap },
-    { label: 'Experiences', link: '/candidate/experiences', icon: faBriefcase },
-    { label: 'Projects', link: '/candidate/projects', icon: faProjectDiagram },
-    { label: 'Applied Jobs', link: '/candidate/applied-jobs', icon: faFileAlt },
-    { label: 'Saved Jobs', link: '/candidate/saved-jobs', icon: faBookmark },
-    { label: 'Change Password', link: '/candidate/change-password', icon: faEdit}
-
+    { label: 'Dashboard', link: '/employer/dashboard', icon: faDashboard},
+    { label: 'Profile', link: '/employer/profile', icon: faUser },
+    { label: 'Experiences', link: '/employer/experiences', icon: faBriefcase },
+    { label: 'Post Job', link: '/employer/post-job', icon: faBook },
+    { label: 'My Jobs', link: '/employer/jobs', icon: faBusinessTime },
+    { label: 'Shortlisted Candidates', link: '/employer/shortlisted-candidates', icon: faBookBookmark},
+    { label: 'Change Password', link: '/employer/change-password', icon: faEdit}
   ];
 
   update: FormGroup = new FormGroup({

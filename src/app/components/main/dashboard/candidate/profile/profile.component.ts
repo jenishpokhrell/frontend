@@ -1,18 +1,22 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, NgModule, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faUser, faClose, faFilePdf, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { UserModel } from '../../../../../model/user';
 import { RouterLink } from '@angular/router';
+import { Skills } from '../../../../../model/skill';
+import { SkillsService } from '../../../../../services/skills/skills.service';
+import { FormControl, NgModel } from '@angular/forms';
+import { GeneralResponse } from '../../../../../model/response';
 
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, FaIconComponent, NgFor, PdfViewerModule, RouterLink],
+  imports: [SidebarComponent, HeaderComponent, FaIconComponent, NgFor, NgIf, PdfViewerModule, RouterLink],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
@@ -25,6 +29,77 @@ export class ProfileComponent implements OnInit {
 
   user : UserModel | null = null
   authService = inject(AuthService)
+  skillService = inject(SkillsService)
+
+  skills: Skills[] = []
+  mySkills: Skills[] = []
+
+  selectedSkills: number[] = []
+
+  skillControl = new FormControl('')
+
+  ngOnInit(): void {
+    this.getMyDetails()
+    this.getAvailableSkills()
+    this.getMySkills()
+  }
+
+  getAvailableSkills(){
+    this.skillService.getAvailableSkills().subscribe({
+      next: (response) => {
+        this.skills = response
+      }
+    })
+
+    this.skillControl.valueChanges.subscribe((skillId: any) => {
+      if(skillId && !this.selectedSkills.includes(skillId)){
+        this.selectedSkills.push(skillId)
+      }
+      this.skillControl.setValue('')
+    })
+  }
+
+  removeSkills(skillId: number){
+    this.selectedSkills = this.selectedSkills.filter((id) => id !== skillId)
+  }
+
+  getSkillNameById(id: number): string {
+    const skill = this.skills.find(s => s.skillId === id);
+    return skill ? skill.skill : 'Unknown';
+  }
+  
+
+  addCandidateSkills(){
+    this.skillService.addSkills(this.selectedSkills).subscribe((response: GeneralResponse) => {
+      if(response.isSuccess){
+        this.selectedSkills = []
+        alert(response.message)
+      }
+      else{
+        alert(response.message)
+      }
+    })
+  }
+
+  
+onSkillSelect(event: Event): void {
+  const selectedId = +(event.target as HTMLSelectElement).value;
+  if (selectedId && !this.selectedSkills.includes(selectedId)) {
+    this.selectedSkills.push(selectedId);
+  }
+}
+
+  getMySkills(){
+    this.skillService.getMySkills().subscribe({
+      next: (response) => {
+        this.mySkills = response
+      },
+      error: (err) => {
+        console.error(err)
+      }
+    })
+  }
+
   
   menuItems = [
     { label: 'Dashboard', link: '/candidate/dashboard', icon: faDashboard},
@@ -39,22 +114,6 @@ export class ProfileComponent implements OnInit {
 
   ];
 
-  skills = [
-    {id: 1, skill: 'Frontend'},
-    {id: 2, skill: 'Angular'},
-    {id: 3, skill: 'ReactJs'},
-    {id: 4, skill: 'jQuery'},
-    {id: 5, skill: 'Communication'},
-    {id: 6, skill: 'Teamwork and collaboration'},
-    {id: 7, skill: 'Javascript'},
-    {id: 7, skill: 'HTML/CSS'},
-    {id: 6, skill: 'Adaptability'},
-    {id: 6, skill: 'Time management'},
-  ]
-
-  ngOnInit(): void {
-    this.getMyDetails()
-  }
 
   getMyDetails(){
     const token = localStorage.getItem('token')

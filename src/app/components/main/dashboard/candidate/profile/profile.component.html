@@ -139,13 +139,47 @@
             </div>
             <hr class="mb-5" />
             <div>
-                <div class="mb-5 text-gray-50 grid grid-rows-3 grid-flow-col gap-3 rounded-full text-[13px]">
-                    <div  *ngFor="let skill of skills" class="bg-gray-900 h-fit w-fit rounded-full">
+              <div class="text-gray-50">
+                <label for="" class="text-[17px] font-semibold mb-10">Add Skills</label>
+                <div >
+                  <select 
+                  (change)="onSkillSelect($event)" formControlName="skills" class=" p-3 w-full bg-gray-700">
+                        <option value="">-- Select Skills --</option>
+                        <option *ngFor="let skill of skills" [value]="skill.skillId"> {{skill.skill}} </option>
+                    </select>
+                </div>
+                <div *ngIf="selectedSkills.length > 0">
+                  <h4 class="font-medium mt-4">Selected Skills:</h4>
+                  <ul class="space-y-1 mt-2">
+                    <li 
+                      *ngFor="let id of selectedSkills" 
+                      class="bg-gray-900 p-3 w-fit h-fit rounded-full"
+                    >
+                      
+                    {{ getSkillNameById(id) }}
+                      <button 
+                        (click)="removeSkills(id)" 
+                        class="text-red-500 hover:text-red-700"
+                      >✖</button>
+                    </li>
+                  </ul>
+                </div>
+              
+                <!-- Submit Button -->
+                <button 
+                  *ngIf="selectedSkills.length > 0"
+                  (click)="addCandidateSkills()"
+                  class="p-4 bg-blue-900 rounded-full w-36 text-[13px] text-white"
+                >
+                  Add Skills
+                </button>
+              </div>
+                <div class="my-5 text-gray-50 grid grid-cols-3 grid-flow-rows gap-3 rounded-full w-full text-[13px]">
+                    <div *ngFor="let skill of mySkills" class="bg-gray-900 w-fit h-fit rounded-full">
                         <p class="p-3 ">{{skill.skill}}
                           <fa-icon [icon]='close' class=" ml-2 text-gray-400 opacity-80 cursor-pointer" size="lg"></fa-icon>
                         </p>
-                    </div>
-                    
+                    </div>       
                 </div>
                 <hr>
                 <div class="my-5">

@@ -7,10 +7,11 @@ import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angula
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { GeneralResponse } from '../../../../../model/response';
+import { NgIf } from '@angular/common';
 @Component({
-  selector: 'app-candidate',
+  selector: 'app-change-password',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent,ReactiveFormsModule, FaIconComponent],
+  imports: [SidebarComponent, HeaderComponent,ReactiveFormsModule, FaIconComponent, NgIf],
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.css']
 })
@@ -76,6 +77,10 @@ export class ChangePasswordComponent implements OnInit {
     }
   }
 
+  isInvalid(field: string){
+    const value = this.password.get(field)
+    return !!(value && value.touched && value.invalid)
+  }
 
   toggleCurrentPasswordVisibility() : void{
     this.showCurrentPassword = !this.showCurrentPassword

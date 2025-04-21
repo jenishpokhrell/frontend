@@ -18,6 +18,9 @@ import { Resume } from '../../../../../model/resume';
 import { Academic } from '../../../../../model/academic';
 import { UpdateJobApplication } from '../../../../../model/job';
 import { JobService } from '../../../../../services/job/job.service';
+import { SkillsService } from '../../../../../services/skills/skills.service';
+import { Skills } from '../../../../../model/skill';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-candidate-profile',
@@ -37,6 +40,8 @@ export class CandidateProfileComponent implements OnInit {
   projects: Project[] = []
   academic: Academic | null = null
   resume: Resume | null = null
+  skills: Skills[] = []
+  
 
   candidateId!: string
   jobApplicationId!: number 
@@ -47,6 +52,7 @@ export class CandidateProfileComponent implements OnInit {
   projectService = inject(ProjectsService)
   resumeServices = inject(ResumeService)
   jobService = inject(JobService)
+  skillService = inject(SkillsService)
 
   constructor(private activatedRoute: ActivatedRoute){}
 
@@ -67,6 +73,7 @@ export class CandidateProfileComponent implements OnInit {
           this.getCandidateProjects(response.id)
           this.getCandidateResume(response.id)
           this.getCandidateAcademics(response.id)
+          this.getCandidatesSkills(response.id)
         }
       })
     }
@@ -124,6 +131,15 @@ export class CandidateProfileComponent implements OnInit {
     }
   }
 
+  getCandidatesSkills(candidateId: string){
+    const id = candidateId;
+    if(id){
+      this.skillService.getCandidateSkills(id).subscribe((response: any) => {
+        this.skills = response
+      })
+    }
+  }
+
   getJobApplicationId(){
     this.jobApplicationId = +this.activatedRoute.snapshot.paramMap.get('jobApplicationId')! 
   }
@@ -160,19 +176,6 @@ export class CandidateProfileComponent implements OnInit {
     { label: 'Change Password', link: '/employer/change-password', icon: faEdit}
   ];
   
-  skills = [
-    {id: 1, skill: 'Frontend'},
-    {id: 2, skill: 'Angular'},
-    {id: 3, skill: 'ReactJs'},
-    {id: 4, skill: 'jQuery'},
-    {id: 5, skill: 'Communication'},
-    {id: 6, skill: 'Teamwork and collaboration'},
-    {id: 7, skill: 'Javascript'},
-    {id: 7, skill: 'HTML/CSS'},
-    {id: 6, skill: 'Adaptability'},
-    {id: 6, skill: 'Time management'},
-  ]
-
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;
   }
