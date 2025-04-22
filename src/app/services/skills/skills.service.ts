@@ -37,4 +37,8 @@ export class SkillsService {
   getCandidateSkills(id: string):Observable<any[]>{
     return this.http.get<any[]>(`${this.apiUrl}getcandidateskills/${id}`)
   }
+  
+  deletSkill(id: number):Observable<GeneralResponse>{
+    return this.http.delete<GeneralResponse>(`${this.apiUrl}removeskill/${id}`)
+  }
 }

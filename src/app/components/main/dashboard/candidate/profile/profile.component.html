@@ -132,14 +132,15 @@
             </div>
           </div>
           <div class=" mt-5 p-10 w-1/2 drop-shadow-2xl">
-            <div class="mb-5">
+            <div class="mb-5 flex items-center space-x-10">
               <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
                 Skills
               </h2>
+              <fa-icon [icon]='add' class=" text-gray-50 opacity-80 cursor-pointer" size="lg" (click) = 'toggleAddSkillVisibility()' ></fa-icon>
             </div>
-            <hr class="mb-5" />
+            <hr class="mb-5"/>
             <div>
-              <div class="text-gray-50">
+              <div *ngIf="addSkill" class="text-gray-50">
                 <label for="" class="text-[17px] font-semibold mb-10">Add Skills</label>
                 <div >
                   <select 
@@ -155,32 +156,30 @@
                       *ngFor="let id of selectedSkills" 
                       class="bg-gray-900 p-3 w-fit h-fit rounded-full"
                     >
-                      
+
                     {{ getSkillNameById(id) }}
-                      <button 
-                        (click)="removeSkills(id)" 
-                        class="text-red-500 hover:text-red-700"
-                      >✖</button>
+                    <fa-icon [icon]='close' class=" text-gray-400 opacity-80 cursor-pointer ml-4" size="lg" (click) = "removeSkills(id)"></fa-icon>
                     </li>
                   </ul>
                 </div>
-              
-                <!-- Submit Button -->
                 <button 
                   *ngIf="selectedSkills.length > 0"
                   (click)="addCandidateSkills()"
-                  class="p-4 bg-blue-900 rounded-full w-36 text-[13px] text-white"
+                  class="p-4 bg-blue-900 rounded-full w-36 mt-5 text-[13px] text-white"
                 >
                   Add Skills
                 </button>
+                <hr class="my-5">
               </div>
-                <div class="my-5 text-gray-50 grid grid-cols-3 grid-flow-rows gap-3 rounded-full w-full text-[13px]">
-                    <div *ngFor="let skill of mySkills" class="bg-gray-900 w-fit h-fit rounded-full">
-                        <p class="p-3 ">{{skill.skill}}
-                          <fa-icon [icon]='close' class=" ml-2 text-gray-400 opacity-80 cursor-pointer" size="lg"></fa-icon>
-                        </p>
-                    </div>       
-                </div>
+                <div class="my-5 text-gray-50 grid grid-cols-3 grid-flow-rows gap-3 w-full text-[13px]">
+                    <div *ngFor="let skill of mySkills" class="bg-gray-900 p-4 w-fit h-fit rounded-full flex items-center space-x-5">
+                        <p class="">{{skill.skill}}</p>
+                        <fa-icon [icon]='close' class=" text-gray-400 opacity-80 cursor-pointer" size="lg" (click) = "deleteSkill(skill.skillId)"></fa-icon>
+                    </div>   
+                  </div>
+                  <div *ngIf="mySkills.length === 0" class=" mb-5 text-gray-50 w-full text-justify text-[15px] italic font-light">
+                    <p>You haven't added your skills yet. Add your skills and move one step towards getting shortlisted.</p>
+                  </div>    
                 <hr>
                 <div class="my-5">
                     <div>
