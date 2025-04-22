@@ -6,6 +6,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { AllJobs } from '../../../../../model/job';
 import { JobService } from '../../../../../services/job/job.service';
+import { GeneralResponse } from '../../../../../model/response';
 
 @Component({
   selector: 'app-admin',
@@ -29,7 +30,9 @@ export class JobsComponent implements OnInit {
   ];
 
   jobs: AllJobs[] = []
+  job: AllJobs | null = null
   jobService = inject(JobService)
+  jobId!: number
 
   ngOnInit(): void {
     this.getAllJobs()
@@ -43,8 +46,35 @@ export class JobsComponent implements OnInit {
     })
   }
 
+  // getJobById(jobId: number){
+  //   const id = jobId
+  //   if(id){
+  //     this.jobService.getJobById(id).subscribe({
+  //       next: (response: any) => {
+  //         console.log(response)
+  //         this.jobId = response.id
+  //       }
+  //     })
+  //   }
+  // }
+
   noDelete(){
     alert('You cannot delete active jobs')
+  }
+
+  deleteJob(jobId: number): void{
+    if(jobId){
+      this.jobService.deleteJob(jobId).subscribe((response: GeneralResponse) => {
+        if(response.isSuccess){
+          this.jobs = this.jobs.filter(job => job.id !== jobId)
+          alert(response.message)
+        }else{
+          alert(response.message)
+        }
+      })
+    }else{
+      console.error("Error fetching job data")
+    }
   }
   
 

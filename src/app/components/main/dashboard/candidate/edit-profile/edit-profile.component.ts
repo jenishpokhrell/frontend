@@ -129,6 +129,24 @@ export class EditProfileComponent implements OnInit {
       })
   }
 
+  deleteProfile(userId: string){
+    const id = userId;
+    if(id){
+      if(confirm('Are you sure you want to delete your profile?')){
+        this.authService.deleteUser(id).subscribe((response: GeneralResponse) => {
+          if(response.isSuccess){
+            alert(response.message)
+            this.router.navigate(['/login'])
+          }else{
+            alert(response.message)
+          }
+        })
+      }
+    }else{
+      console.log("Error fetching id")
+    }
+  }
+
 
 
   isInvalid(field: string){

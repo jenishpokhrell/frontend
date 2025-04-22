@@ -70,6 +70,10 @@ export class AuthService {
     return this.http.put<GeneralResponse>(`${this.apiUrl}changepassword/${id}`, data)
   }
 
+  deleteUser(id:string):Observable<GeneralResponse>{
+    return this.http.delete<GeneralResponse>(`${this.apiUrl}deleteuser/${id}`)
+  }
+
 
   isLoggedIn = () : boolean => {
     const token = this.getToken()

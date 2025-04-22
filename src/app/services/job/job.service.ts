@@ -45,6 +45,10 @@ export class JobService {
     return this.http.get<any>(`${this.apiUrl}job/getalljobs`)
   }
 
+  getJobById(id: number):Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}job/getjobbyid/${id}`)
+  }
+
   postJob(data: Job):Observable<GeneralResponse>{
     return this.http.post<GeneralResponse>(`${this.apiUrl}job/post-job`, data)
   }
@@ -64,4 +68,8 @@ export class JobService {
   updateJobApplication(jobApplicationId: number, data: UpdateJobApplication):Observable<GeneralResponse>{
     return this.http.put<GeneralResponse>(`${this.apiUrl}jobapplication/updatejobapplicationstatus/${jobApplicationId}`, data);
   } 
+
+  deleteJob(id: number):Observable<GeneralResponse>{
+    return this.http.delete<GeneralResponse>(`${this.apiUrl}delete-job/${id}`)
+  }
 }
