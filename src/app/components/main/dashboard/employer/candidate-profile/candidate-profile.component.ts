@@ -21,6 +21,7 @@ import { JobService } from '../../../../../services/job/job.service';
 import { SkillsService } from '../../../../../services/skills/skills.service';
 import { Skills } from '../../../../../model/skill';
 import { FormControl } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-candidate-profile',
@@ -149,20 +150,42 @@ export class CandidateProfileComponent implements OnInit {
       jobStatus: jobStatus,
       updatedAt: new Date()
     }
-    if(confirm('Are you sure you want to change this job application status?')){
-      this.jobService.updateJobApplication(jobApplicationId, data).subscribe({
-        next: (response) => {
-          if(response.isSuccess){
-            alert(response.message)
-          }else{
-            alert('Error updating job status')
+    Swal.fire({
+      title: "Do you want to update the job application status?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Update",
+      denyButtonText: `No`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.jobService.updateJobApplication(jobApplicationId, data).subscribe({
+          next: (response) => {
+            if(response.isSuccess){
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: response.message,
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }else{
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: response.message,
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }
+          },
+          error: (err) => {
+            console.error(err)
           }
-        },
-        error: (err) => {
-          console.error(err)
-        }
-      })
-    }
+        })
+      } else if (result.isDenied) {
+        Swal.fire("Operation cancelled", "OKKK", "error");
+      }
+    });
   }
 
 

@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
 import { Project } from '../../../../../model/project';
 import { ProjectsService } from '../../../../../services/projects/projects.service';
 import { GeneralResponse } from '../../../../../model/response';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-candidate',
@@ -81,10 +82,22 @@ export class ProjectsComponent implements OnInit {
     const project = this.projectForm.value
     this.projectService.saveProject(project).subscribe((response: GeneralResponse) => {
       if(response.isSuccess){
-        alert(response.message)
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
         location.reload()
       }else{
-        alert("Error adding project.")
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     })
   }
@@ -98,10 +111,22 @@ export class ProjectsComponent implements OnInit {
     if(this.id){
       this.projectService.updateProject(this.id, project).subscribe((response: GeneralResponse) => {
         if(response.isSuccess){
-          alert(response.message)
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 1500
+          });
           location.reload()
         }else{
-          alert("Error updating project")
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
       })
     }else{
@@ -110,17 +135,36 @@ export class ProjectsComponent implements OnInit {
   }
 
   deleteProject(id: number){
-    if(confirm('Are you sure you want to delete this project?'))
-      this.projectService.deleteProject(id).subscribe((response: GeneralResponse) => {
-        if(response.isSuccess){
-          alert(response.message)
-          location.reload()
-        }else{
-          alert('Project Removed Successfully.')
-        }
-      })
-  }
-
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.projectService.deleteProject(id)
+          .subscribe((response: GeneralResponse) => {
+            if (response.isSuccess) {
+              Swal.fire({
+                title: 'Deleted!',
+                text: response.message,
+                icon: 'success',
+              });
+            } else {
+              Swal.fire({
+                title: 'Error!',
+                text: response.message,
+                icon: 'error',
+              });
+            }
+          });
+      }
+    });
+    }
+    
   isInvalid(field: string){
     const value = this.projectForm.get(field)
     return !!(value && value.touched && value.invalid)

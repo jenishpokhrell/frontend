@@ -12,6 +12,7 @@ import { Skills } from '../../../../../model/skill';
 import { SkillsService } from '../../../../../services/skills/skills.service';
 import { FormControl, NgModel } from '@angular/forms';
 import { GeneralResponse } from '../../../../../model/response';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-candidate',
@@ -81,11 +82,23 @@ export class ProfileComponent implements OnInit {
     this.skillService.addSkills(this.selectedSkills).subscribe((response: GeneralResponse) => {
       if(response.isSuccess){
         this.selectedSkills = []
-        alert(response.message)
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
         this.router.navigate(['/candidate/profile'])
       }
       else{
-        alert(response.message)
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     })
   }
@@ -93,15 +106,25 @@ export class ProfileComponent implements OnInit {
   deleteSkill(skillId: number){
     const id = skillId
     if(id){
-      if(confirm('Are you sure you want to delete this skill?')){
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
         this.skillService.deletSkill(id).subscribe((response: GeneralResponse) => {
-          if(response.isSuccess){
-            alert(response.message)
-          }else{
-            alert(response.message)
+              Swal.fire({
+                title: "Deleted!",
+                text: response.message,
+                icon: "success"
+              });
+            })
           }
-        })
-      }
+      });
     }else{
       console.error('Error fetching skill id')
     }

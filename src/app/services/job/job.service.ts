@@ -70,6 +70,6 @@ export class JobService {
   } 
 
   deleteJob(id: number):Observable<GeneralResponse>{
-    return this.http.delete<GeneralResponse>(`${this.apiUrl}delete-job/${id}`)
+    return this.http.delete<GeneralResponse>(`${this.apiUrl}job/delete-job/${id}`)
   }
 }

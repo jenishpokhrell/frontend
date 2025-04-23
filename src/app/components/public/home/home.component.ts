@@ -25,27 +25,30 @@ export class HomeComponent implements OnInit {
   jobService = inject(JobService)
   jobs : GetJobForCandidate[] = []
   sortedJobs: GetJobForCandidate[] = []
+  featuredJobs: GetJobForCandidate[] = []
   userDetails: UserModel | null = null
   userId!: string 
 
 ngOnInit(): void {
   this.getMyDetails();
   this.getJobForCandidates()
-  //this.sortedJobs = this.jobs.sort((a, b) => new Date(b.))
 }
 
-getMyDetails(){
-    this.authService.getMyDetails().subscribe({
-      next: (response) => {
-        this.userDetails = response
-      }
-    })
-  }
 
-  getJobForCandidates(){
-    this.jobService.getJobsForCandidate().subscribe({
-      next: (response) => {
-        this.jobs = response
+getMyDetails(){
+  this.authService.getMyDetails().subscribe({
+    next: (response) => {
+      this.userDetails = response
+    }
+  })
+}
+
+getJobForCandidates(){
+  this.jobService.getJobsForCandidate().subscribe({
+    next: (response) => {
+      this.jobs = response
+      this.sortedJobs = this.jobs.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      this.featuredJobs = this.jobs.filter(job => job.max_Years_of_Experience_Required > 3 && job.maximumSalary > 90000)
       }
     })
   }

@@ -232,9 +232,8 @@
 
     <!-- JOBS SECTION -->
      <div class="w-[70%]">
-       <div *ngFor="let job of jobs" class="mx-auto my-20 space-y-14">
-         @if (searchJob === '' || job.jobTitle.toLowerCase().includes(searchJob)) {
-         <div class="border border-gray-100 shadow-2xl p-8 space-y-3">
+       <div *ngIf="filteredJobs.length > 0; else noJobsFound"  class="mx-auto my-20 space-y-14">
+         <div *ngFor="let job of filteredJobs" class="border border-gray-100 shadow-2xl p-8 space-y-3"> 
            <div class="flex items-center space-x-4">
              <div>
                <fa-icon [icon]="user" size="xl"></fa-icon>
@@ -292,8 +291,11 @@
              </div>
            </div>
          </div>
-         }
        </div>
+       <ng-template #noJobsFound>
+        <h2 class="text-center mt-[28%] text-5xl font-bold italic">OOPS!</h2>
+        <h2 class="text-center mt-[2%] text-4xl font-bold italic">We don't have the job you're looking for. Keep visiting.</h2>
+       </ng-template>
      </div>
     </div>
 </div>

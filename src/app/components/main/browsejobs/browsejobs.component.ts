@@ -27,6 +27,13 @@ export class BrowsejobsComponent implements OnInit{
   jobs: GetJobForCandidate[] = []
   jobService = inject(JobService)
 
+  jobTitle: string | null = null
+  jobType: string | null = null
+  jobLevel: string | null = null
+
+
+  selectedJobs: GetJobForCandidate[] = []
+
   ngOnInit(): void {
     this.getJobsForCandidates()
   }
@@ -51,5 +58,20 @@ export class BrowsejobsComponent implements OnInit{
   showFilterBar() {
     this.showFilter = !this.showFilter
     this.toggleBodyScroll(this.showFilter)
+  }
+
+  get filteredJobs(){
+    return this.jobs.filter(job => 
+      this.searchJob === '' ||
+      job.jobTitle.toLowerCase().includes(this.searchJob.toLowerCase())
+    )
+  }
+
+  toggleFilter(event: any, filterType: 'title' | 'type' | 'level'){
+    
+  }
+
+  filterJobs(){
+    this.selectedJobs = this.jobs.filter(job => job.jobTitle == this.jobTitle)
   }
 }

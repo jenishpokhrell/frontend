@@ -10,6 +10,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralResponse } from '../../../../../model/response';
 import { NgIf } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-profile',
@@ -121,10 +122,22 @@ export class EditProfileComponent implements OnInit {
 
       return this.authService.updateProfile(this.userId, formData).subscribe((response: GeneralResponse) => {
         if(response.isSuccess){
-          alert(response.message)
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 1500
+          });
           this.router.navigate(['/candidate/profile'])
         }else{
-          alert('Error updating profile')
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
       })
   }
@@ -132,16 +145,34 @@ export class EditProfileComponent implements OnInit {
   deleteProfile(userId: string){
     const id = userId;
     if(id){
-      if(confirm('Are you sure you want to delete your profile?')){
-        this.authService.deleteUser(id).subscribe((response: GeneralResponse) => {
-          if(response.isSuccess){
-            alert(response.message)
-            this.router.navigate(['/login'])
-          }else{
-            alert(response.message)
-          }
-        })
-      }
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.authService.deleteUser(id)
+            .subscribe((response: GeneralResponse) => {
+              if (response.isSuccess) {
+                Swal.fire({
+                  title: 'Deleted!',
+                  text: response.message,
+                  icon: 'success',
+                });
+              } else {
+                Swal.fire({
+                  title: 'Error!',
+                  text: response.message,
+                  icon: 'error',
+                });
+              }
+            });
+        }
+      });
     }else{
       console.log("Error fetching id")
     }

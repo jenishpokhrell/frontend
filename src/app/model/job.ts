@@ -13,7 +13,8 @@ export interface GetJobForCandidate {
     location: string,
     isActive: boolean,
     employerId: string,
-    postedBy: string
+    postedBy: string,
+    createdAt: Date,
 }
 
 export interface GetMyJob{

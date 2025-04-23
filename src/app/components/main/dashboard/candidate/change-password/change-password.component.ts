@@ -8,6 +8,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { GeneralResponse } from '../../../../../model/response';
 import { NgIf } from '@angular/common';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-change-password',
   standalone: true,
@@ -49,7 +50,6 @@ export class ChangePasswordComponent implements OnInit {
     this.authService.getMyDetails().subscribe({
       next: (response) => {
         this.id = response.id
-        console.log(this.id)
       },
       error: (err) => {
         console.error(err)
@@ -66,10 +66,22 @@ export class ChangePasswordComponent implements OnInit {
     if(this.id){
       this.authService.changePassword(this.id, data).subscribe((response: GeneralResponse) => {
         if(response.isSuccess){
-          alert(response.message)
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 1500
+          });
           this.authService.logout()
         }else{
-          console.log('Error in updating password.')
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
       })
     }else{

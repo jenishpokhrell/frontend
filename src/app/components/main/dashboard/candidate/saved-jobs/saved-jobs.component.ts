@@ -9,7 +9,7 @@ import { JobService } from '../../../../../services/job/job.service';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-candidate',
+  selector: 'app-saved-jobs',
   standalone: true, 
   imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, RouterLink, RouterOutlet],
   templateUrl: './saved-jobs.component.html',
@@ -32,19 +32,9 @@ export class SavedJobsComponent implements OnInit {
     { label: 'Projects', link: '/candidate/projects', icon: faProjectDiagram },
     { label: 'Applied Jobs', link: '/candidate/applied-jobs', icon: faFileAlt },
     { label: 'Saved Jobs', link: '/candidate/saved-jobs', icon: faBookmark },
-    //{ label: 'Update Profile', link: '/candidate/update-profile', icon: faUserEdit},
     { label: 'Change Password', link: '/candidate/change-password', icon: faEdit}
 
   ];
-
-  
-
-  // savedJobs = [
-  //   {jobTitle: 'Frontend Intern', jobType: 'Full-Time', jobLevel: 'Internship', postedBy: 'shristi_sharma', Status: true},
-  //   {jobTitle: 'Fullstack Intern', jobType: 'Full-Time',jobLevel: 'Internship', postedBy: 'john_doe', Status: true},
-  //   {jobTitle: 'Frontend Developer', jobType: 'Full-Time', jobLevel: 'Trainee',  postedBy: 'aman_dhakal', Status: false},
-  //   { jobTitle: 'Angular Developer', jobType: 'Full-Time', jobLevel: 'Junior', postedBy: 'shristi_sharma', Status: true},
-  // ]
 
   ngOnInit(): void {
     this.getMySavedJobs()
@@ -60,11 +50,6 @@ export class SavedJobsComponent implements OnInit {
 
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;
-  }
-
-  logout(): void {
-    console.log('Logout clicked');
-    // Implement logout logic
   }
 
 }

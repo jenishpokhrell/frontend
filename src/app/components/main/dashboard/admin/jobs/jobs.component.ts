@@ -65,8 +65,8 @@ export class JobsComponent implements OnInit {
   deleteJob(jobId: number): void{
     if(jobId){
       this.jobService.deleteJob(jobId).subscribe((response: GeneralResponse) => {
+        this.jobs = this.jobs.filter(job => job.id !== jobId)
         if(response.isSuccess){
-          this.jobs = this.jobs.filter(job => job.id !== jobId)
           alert(response.message)
         }else{
           alert(response.message)

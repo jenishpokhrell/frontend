@@ -8,6 +8,7 @@ import { AcademicService } from '../../../../../services/academic/academic.servi
 import { NgIf } from '@angular/common';
 import { GeneralResponse } from '../../../../../model/response';
 import { AuthService } from '../../../../../services/auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-candidate',
@@ -87,10 +88,22 @@ export class AcademicsComponent implements OnInit {
     const academic = this.academic.value
     this.academicServices.saveAcademics(academic).subscribe((response : GeneralResponse) => { 
       if(response.isSuccess){
-        alert(response.message)
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
         location.reload()
       }else{
-        alert("Failed to save academic experience.")
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     })
   }
@@ -104,11 +117,23 @@ export class AcademicsComponent implements OnInit {
     if(this.academicId){
       this.academicServices.updateAcademics(this.academicId, academic).subscribe((response: GeneralResponse) => {
         if(response.isSuccess){
-          alert(response.message)
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 1500
+          });
           this.academic.disable()
           location.reload()
         }else{
-          alert("Failed to update academic experience.")
+          Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
         }
       })
     }else{
@@ -118,16 +143,33 @@ export class AcademicsComponent implements OnInit {
 
   deleteAcademics(academicId: number){
     const id = academicId
-    if(confirm('Are you sure you want to delete this academics?')){
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
       this.academicServices.deleteAcademics(id).subscribe((response: GeneralResponse) => {
         if(response.isSuccess){
-          alert(response.message)
-          location.reload()
+          Swal.fire({
+            title: "Deleted!",
+            text: response.message,
+            icon: "success"
+          });
         }else{
-          console.log("Failed to delete academics")
+          Swal.fire({
+            title: "Deleted!",
+            text: response.message,
+            icon: "error"
+          });
         }
-      })
-    }
+          })
+        }
+    });
   }
 
   isInvalid(field: string){

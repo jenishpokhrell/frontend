@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserModel } from '../../../model/user';
 import { GeneralResponse } from '../../../model/response';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-viewjob',
@@ -56,15 +57,37 @@ export class ViewjobComponent implements OnInit  {
   jobApply(jobId: number){
     const id = jobId
     if(this.jobId){
-      if(confirm('Apply for job? Your profile will be then visible to employer.')){
-        this.jobService.applyForJob(id).subscribe((response: GeneralResponse) => {
-          if(response.isSuccess){
-            alert(response.message)
-          }else{
-            alert(response.message)
-          } 
-        })
-      }
+      Swal.fire({
+        title: "Do you want to apply for the job? Employer then will be able to access your profile.",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Apply",
+        denyButtonText: `Go Back`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.jobService.applyForJob(id).subscribe((response: GeneralResponse) => {
+            if(response.isSuccess){
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: response.message,
+                showConfirmButton: false,
+                timer: 3000
+              });
+            }else{
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: response.message,
+                showConfirmButton: false,
+                timer: 3000
+              });
+            }
+          })
+        } else if (result.isDenied) {
+          Swal.fire("Operation cancelled", "", "error");
+        }
+      });
     }else{
       console.error('Error fetching id')
     }
@@ -72,16 +95,38 @@ export class ViewjobComponent implements OnInit  {
 
   saveJob(jobId: number){
     const id = jobId
-    if(this.jobId){
-      if(confirm('Save this job?')){
-        this.jobService.saveJob(id).subscribe((response: GeneralResponse) => {
-          if(response.isSuccess){
-            alert(response.message)
-          }else{
-            alert(response.message)
-          }
-        })
-      }
+    if(id){
+      Swal.fire({
+        title: "Do you want to save this job?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `Don't save`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.jobService.saveJob(id).subscribe((response: GeneralResponse) => {
+            if(response.isSuccess){
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: response.message,
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }else{
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: response.message,
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }
+          })
+        } else if (result.isDenied) {
+          Swal.fire("Operation cancelled", "", "error");
+        }
+      });
     }
   }
 }
