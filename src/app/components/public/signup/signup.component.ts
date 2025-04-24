@@ -5,6 +5,7 @@ import { FooterComponent } from "../../reusable/footer/footer.component";
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
 import Swal from 'sweetalert2';
+import { GeneralResponse } from '../../../model/response';
 
 @Component({
   selector: 'app-signup',
@@ -67,9 +68,8 @@ export class SignupComponent {
       console.error("No vaild profile photo is selected.")
     }
 
-    return this.authService.register(formData).subscribe({
-      next: (response) => {
-        if(response.isSuccess){
+    this.authService.register(formData).subscribe((response: GeneralResponse) => {
+        if(response.isSuccess){ 
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -78,12 +78,17 @@ export class SignupComponent {
             timer: 3000
           });
           this.route.navigate(['/login'])
+        }else{
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 3000
+          });
         }
-      },
-      error: (err) => {
-        console.error("Error while registering", err)
       }
-    })
+    )
   } 
 
   onFileSelected(event:Event) : void{

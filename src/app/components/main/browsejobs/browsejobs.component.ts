@@ -4,7 +4,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faFilter, faSearch, faClose, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FooterComponent } from "../../reusable/footer/footer.component";
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { GetJobForCandidate } from '../../../model/job';
 import { JobService } from '../../../services/job/job.service';
 
@@ -24,6 +24,11 @@ export class BrowsejobsComponent implements OnInit{
 
   searchJob : string = ""
 
+  searchQuery: string = ''
+
+  constructor(private activatedRoute: ActivatedRoute){}
+
+
   jobs: GetJobForCandidate[] = []
   jobService = inject(JobService)
 
@@ -31,11 +36,31 @@ export class BrowsejobsComponent implements OnInit{
   jobType: string | null = null
   jobLevel: string | null = null
 
+  getJobs: GetJobForCandidate[] = []
+
 
   selectedJobs: GetJobForCandidate[] = []
+  searchedJobs: GetJobForCandidate[] = []
 
   ngOnInit(): void {
     this.getJobsForCandidates()
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.searchQuery = params['search'] || ''
+      this.getJobs = this.jobs
+      this.searchJobs(this.searchQuery)
+    })
+  }
+
+  searchJobs(query: string){
+    if(!query){
+      this.searchedJobs = this.getJobs
+      return
+    }
+
+    const lowerQuery = query.toLowerCase()
+    this.searchedJobs = this.getJobs.filter(job => 
+      job.jobTitle.toLowerCase().includes(lowerQuery)
+    )
   }
 
   getJobsForCandidates(){

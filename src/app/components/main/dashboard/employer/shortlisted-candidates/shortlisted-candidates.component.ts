@@ -47,7 +47,6 @@ export class ShortlistedCandidatesComponent implements OnInit {
     })
   }
 
-
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;
   }

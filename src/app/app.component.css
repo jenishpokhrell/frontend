@@ -1,3 +1,7 @@
 .navbar li.active-link{
     font-weight: 600;
 }
+
+.showDropdown:hover .dropdown{
+    opacity: 1;
+}

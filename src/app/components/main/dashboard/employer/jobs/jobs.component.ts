@@ -49,14 +49,6 @@ export class MyJobsComponent implements OnInit{
   }
 
 
-  // savedJobs = [
-  //   {jobTitle: 'Frontend Intern', jobType: 'Full-Time', jobLevel: 'Internship', noOfOpenings: 3, experienceRequired: 0, Status: true},
-  //   {jobTitle: 'Fullstack Intern', jobType: 'Full-Time',jobLevel: 'Internship', noOfOpenings: 2, experienceRequired: 0, Status: true},
-  //   {jobTitle: 'Frontend Developer', jobType: 'Full-Time', jobLevel: 'Trainee',  noOfOpenings: 4, experienceRequired: 1, Status: false},
-  //   { jobTitle: 'Angular Developer', jobType: 'Full-Time', jobLevel: 'Junior', noOfOpenings: 3, experienceRequired: 1, Status: true},
-  // ]
-
-
 
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;

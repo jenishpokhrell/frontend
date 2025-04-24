@@ -10,6 +10,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralResponse } from '../../../../../model/response';
 import { NgIf } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-employer-profile',
@@ -117,14 +118,26 @@ export class EditEmployerProfileComponent implements OnInit {
       console.error("No vaild profile photo is selected.")
     }
 
-      return this.authService.updateProfile(this.userId, formData).subscribe((response: GeneralResponse) => {
-        if(response.isSuccess){
-          alert(response.message)
-          this.router.navigate(['/candidate/profile'])
-        }else{
-          alert('Error updating profile')
-        }
-      })
+    return this.authService.updateProfile(this.userId, formData).subscribe((response: GeneralResponse) => {
+      if(response.isSuccess){
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.router.navigate(['/candidate/profile'])
+      }else{
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    })
   }
 
 

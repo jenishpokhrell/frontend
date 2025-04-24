@@ -171,7 +171,7 @@ export class CandidateProfileComponent implements OnInit {
             }else{
               Swal.fire({
                 position: "top-end",
-                icon: "success",
+                icon: "error",
                 title: response.message,
                 showConfirmButton: false,
                 timer: 1500

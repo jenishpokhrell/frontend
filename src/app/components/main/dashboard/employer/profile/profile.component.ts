@@ -61,8 +61,4 @@ export class EmployerProfileComponent implements OnInit {
     this.collapsed = !this.collapsed;
   }
 
-  logout(): void {
-    console.log('Logout clicked');
-    // Implement logout logic
-  }
 }

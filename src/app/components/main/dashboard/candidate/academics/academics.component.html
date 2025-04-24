@@ -68,7 +68,7 @@
                       <div>
                           <button type="submit" class="rounded-full bg-blue-900 w-36 text-[13px] p-4 font-semibold">Save</button>
                       </div>
-                    }@else if(academic.disabled) {
+                    }@else if(academic.disabled){
                       <div>
                         <button type="button" (click) = "enableForm()" class="rounded-full bg-blue-900 w-36 text-[13px] p-4 font-semibold">Edit</button>
                     </div>
@@ -78,7 +78,7 @@
                     </div>
                     }
                     <div>
-                        <button class="rounded-full bg-gray-200 text-black w-36 text-[13px] p-4 font-semibold" (click) = "deleteAcademics(academicId)" >Delete</button>
+                        <button type="button" class="rounded-full bg-gray-200 text-black w-36 text-[13px] p-4 font-semibold" (click) = "deleteAcademics(academicId)" >Delete</button>
                     </div>
                   </div>
               </form>

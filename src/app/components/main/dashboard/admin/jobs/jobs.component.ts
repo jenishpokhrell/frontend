@@ -7,6 +7,7 @@ import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { AllJobs } from '../../../../../model/job';
 import { JobService } from '../../../../../services/job/job.service';
 import { GeneralResponse } from '../../../../../model/response';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin',
@@ -46,20 +47,14 @@ export class JobsComponent implements OnInit {
     })
   }
 
-  // getJobById(jobId: number){
-  //   const id = jobId
-  //   if(id){
-  //     this.jobService.getJobById(id).subscribe({
-  //       next: (response: any) => {
-  //         console.log(response)
-  //         this.jobId = response.id
-  //       }
-  //     })
-  //   }
-  // }
-
   noDelete(){
-    alert('You cannot delete active jobs')
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: 'You cannot delete active jobs',
+      showConfirmButton: false,
+      timer: 3000
+    });
   }
 
   deleteJob(jobId: number): void{
@@ -67,9 +62,21 @@ export class JobsComponent implements OnInit {
       this.jobService.deleteJob(jobId).subscribe((response: GeneralResponse) => {
         this.jobs = this.jobs.filter(job => job.id !== jobId)
         if(response.isSuccess){
-          alert(response.message)
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 3000
+          });
         }else{
-          alert(response.message)
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 3000
+          });
         }
       })
     }else{

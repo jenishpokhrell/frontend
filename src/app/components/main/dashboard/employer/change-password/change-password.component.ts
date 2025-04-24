@@ -8,6 +8,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { GeneralResponse } from '../../../../../model/response';
 import { NgIf } from '@angular/common';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-candidate',
   standalone: true,
@@ -63,10 +64,22 @@ export class EmployerChangePasswordComponent implements OnInit {
     if(this.id){
       this.authService.changePassword(this.id, data).subscribe((response: GeneralResponse) => {
         if(response.isSuccess){
-          alert(response.message)
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 3000
+          });
           this.authService.logout()
         }else{
-          console.log('Error in updating password.')
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 3000
+          });
         }
       })
     }else{

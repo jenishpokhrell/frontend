@@ -9,6 +9,7 @@ import { JobService } from '../../../../../services/job/job.service';
 import { GeneralResponse } from '../../../../../model/response';
 import { ActivatedRoute } from '@angular/router';
 import { GetMyJob, Job } from '../../../../../model/job';
+import Swal from 'sweetalert2';
 //import * as districts from '../../../../../../assets/en.json'
 
 @Component({
@@ -74,9 +75,21 @@ export class PostJobComponent implements OnInit {
     const data = this.postJob.value
     this.jobService.postJob(data).subscribe((response: GeneralResponse) => {
       if(response.isSuccess){
-        alert(response.message)
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: response.message,
+          showConfirmButton: false,
+          timer: 3000
+        });
       }else{
-        alert("Error posting job.")
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: response.message,
+          showConfirmButton: false,
+          timer: 3000
+        });
       }
     })
   }
@@ -87,9 +100,21 @@ export class PostJobComponent implements OnInit {
     if(this.id){
       this.jobService.updateJob(this.id, data).subscribe((response: GeneralResponse) => {
         if(response.isSuccess){
-          alert(response.message)
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 3000
+          });
         }else{
-          alert('Failed updating job')
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 3000
+          });
         }
       })
     }else{

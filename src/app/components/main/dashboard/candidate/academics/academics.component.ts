@@ -122,7 +122,7 @@ export class AcademicsComponent implements OnInit {
             icon: "success",
             title: response.message,
             showConfirmButton: false,
-            timer: 1500
+            timer: 3000
           });
           this.academic.disable()
           location.reload()
@@ -132,7 +132,7 @@ export class AcademicsComponent implements OnInit {
           icon: "error",
           title: response.message,
           showConfirmButton: false,
-          timer: 1500
+          timer: 3000
         });
         }
       })
@@ -153,7 +153,7 @@ export class AcademicsComponent implements OnInit {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-      this.academicServices.deleteAcademics(id).subscribe((response: GeneralResponse) => {
+        this.academicServices.deleteAcademics(id).subscribe((response: GeneralResponse) => {
         if(response.isSuccess){
           Swal.fire({
             title: "Deleted!",

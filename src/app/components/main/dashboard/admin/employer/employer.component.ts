@@ -14,6 +14,7 @@ import { Experience } from '../../../../../model/experience';
 import { JobService } from '../../../../../services/job/job.service';
 import { GeneralResponse } from '../../../../../model/response';
 import { faThinkPeaks } from '@fortawesome/free-brands-svg-icons';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employer',
@@ -72,16 +73,37 @@ export class EmployerComponent implements OnInit {
   approveEmployer(employerId: string){
     const id = employerId;
     if(id){
-      if(confirm('Are you sure you want to approve this employer?')){
-        this.authService.approveEmployer(id).subscribe((response: GeneralResponse) => {
-          if(response.isSuccess){
-            alert(response.message)
-            this.router.navigate(['/admin/users'])
-          }else{
-            alert('Employer already approved')
-          }
-        })
-      }
+      Swal.fire({
+        title: "Do you want to approve this employer?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Approve",
+        denyButtonText: `Hold!`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.authService.approveEmployer(id).subscribe((response: GeneralResponse) => {
+            if(response.isSuccess){
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: response.message,
+                showConfirmButton: false,
+                timer: 3000
+              });
+            }else{
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: response.message,
+                showConfirmButton: false,
+                timer: 3000
+              });
+            }
+          })
+        } else if (result.isDenied) {
+          Swal.fire("Operation cancelled", "", "error");
+        }
+      });
     }else{
       console.error('Error fetching id')
     }

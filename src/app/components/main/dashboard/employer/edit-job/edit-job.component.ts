@@ -9,6 +9,7 @@ import { JobService } from '../../../../../services/job/job.service';
 import { GeneralResponse } from '../../../../../model/response';
 import { ActivatedRoute } from '@angular/router';
 import { GetMyJob, Job } from '../../../../../model/job';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-job',
@@ -73,9 +74,21 @@ export class EditJobComponent implements OnInit {
     if(this.id){
       this.jobService.updateJob(this.id, data).subscribe((response: GeneralResponse) => {
         if(response.isSuccess){
-          alert(response.message)
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 3000
+          });
         }else{
-          alert('Failed updating job')
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 3000
+          });
         }
       })
     }else{

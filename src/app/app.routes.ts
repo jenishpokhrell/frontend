@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './components/public/login/login.component';
 import { HomeComponent } from './components/public/home/home.component';
 import { SignupComponent } from './components/public/signup/signup.component';
-import { PostjobsComponent } from './components/main/postjobs/postjobs.component';
 import { PagenotfoundComponent } from './components/public/pagenotfound/pagenotfound.component';
 import { BrowsejobsComponent } from './components/main/browsejobs/browsejobs.component';
 import { AboutUsComponent } from './components/public/about-us/about-us.component';
@@ -37,6 +36,7 @@ import { EmployerComponent } from './components/main/dashboard/admin/employer/em
 import { EmployerProfileComponent } from './components/main/dashboard/employer/profile/profile.component';
 import { roleGuard } from './guards/role/role.guard';
 import { EditEmployerProfileComponent } from './components/main/dashboard/employer/edit-employer-profile/edit-employer-profile.component';
+import { SearchjobsComponent } from './components/main/search-jobs/search-jobs.component';
 
 export const routes: Routes = [
     {
@@ -56,20 +56,20 @@ export const routes: Routes = [
         component: SignupComponent
     },
     {
-        path: 'postjobs',
-        canActivate: [authGuard, roleGuard],
-        data: {
-            roles: ["EMPLOYER"]
-        },
-        component: PostjobsComponent
-    },
-    {
         path: 'browsejobs',
         canActivate: [authGuard, roleGuard],
         data: {
             roles: ["CANDIDATE"]
         },
         component: BrowsejobsComponent
+    },
+    {
+        path: 'searchjobs',
+        canActivate: [authGuard, roleGuard],
+        data: {
+            roles: ["CANDIDATE"]
+        },
+        component: SearchjobsComponent
     },
     {
         path:'notfound',
@@ -143,10 +143,6 @@ export const routes: Routes = [
     },
     {
         path: 'not-approved',
-        canActivate: [authGuard, roleGuard],
-        data: {
-            roles: ["EMPLOYER"]
-        },
         component: NotApprovedComponent
     }
 ];

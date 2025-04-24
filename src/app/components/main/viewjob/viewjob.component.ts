@@ -56,7 +56,7 @@ export class ViewjobComponent implements OnInit  {
 
   jobApply(jobId: number){
     const id = jobId
-    if(this.jobId){
+    if(id){
       Swal.fire({
         title: "Do you want to apply for the job? Employer then will be able to access your profile.",
         showDenyButton: true,

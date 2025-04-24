@@ -1,10 +1,8 @@
 <div class="flex h-screen bg-gray-100 dark:bg-gray-900">
   <app-sidebar
-    [user]="user"
     [menuItems]="menuItems"
     [collapsed]="collapsed"
     (toggleCollapse)="toggleSidebar()"
-    (logout)="logout()"
   ></app-sidebar>
 
   <div

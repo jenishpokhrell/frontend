@@ -9,6 +9,7 @@ import { Experience } from '../../../../../model/experience';
 import { ExperiencesService } from '../../../../../services/experiences/experiences.service';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { GeneralResponse } from '../../../../../model/response';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-candidate',
@@ -82,10 +83,22 @@ export class EmployerExperiencesComponent implements OnInit {
     const experience = this.editExperience.value;
     this.experienceService.saveExperiences(experience).subscribe((response: GeneralResponse) => {
       if(response.isSuccess){
-        alert(response.message)
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: response.message,
+          showConfirmButton: false,
+          timer: 3000
+        });
         location.reload()
       }else{
-        alert("Failed to save academics")
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: response.message,
+          showConfirmButton: false,
+          timer: 3000
+        });
       }
     })
   }
@@ -99,10 +112,22 @@ export class EmployerExperiencesComponent implements OnInit {
     if(this.id){
       this.experienceService.updateExperiences(this.id, experience).subscribe((response: GeneralResponse) => {
         if(response.isSuccess){
-          alert(response.message)
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 3000
+          });
           location.reload()
         }else{
-          alert("Error updating experiences")
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: response.message,
+            showConfirmButton: false,
+            timer: 3000
+          });
         }
       })
     }else{
@@ -110,17 +135,34 @@ export class EmployerExperiencesComponent implements OnInit {
     }
   }
 
-  deleteExperiences(id: number){
-    if(confirm('Are you sure you want to delete this work experience?')){
-      this.experienceService.deleteExperiences(id).subscribe((response: GeneralResponse) => {
-        if(response.isSuccess){
-          alert(response.message)
-          location.reload()
-        }else{
-          alert("Failed to delete work experience.")
-        }
-      })
-    }
+  deleteExperiences(id: number){      
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.experienceService.deleteExperiences(id).subscribe((response: GeneralResponse) => {
+          if(response.isSuccess){
+            Swal.fire({
+              title: "Deleted!",
+              text: response.message,
+              icon: "success"
+            });
+          }else{
+            Swal.fire({
+              title: "Oops",
+              text: response.message,
+              icon: "error"
+            });
+          }
+        })
+      }
+    });
   }
 
   isInvalid(field: string){
