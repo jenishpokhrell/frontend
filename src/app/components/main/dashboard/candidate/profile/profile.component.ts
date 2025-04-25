@@ -13,6 +13,8 @@ import { SkillsService } from '../../../../../services/skills/skills.service';
 import { FormControl, NgModel } from '@angular/forms';
 import { GeneralResponse } from '../../../../../model/response';
 import Swal from 'sweetalert2';
+import { ResumeService } from '../../../../../services/resume/resume.service';
+import { Resume } from '../../../../../model/resume';
 
 @Component({
   selector: 'app-candidate',
@@ -28,14 +30,17 @@ export class ProfileComponent implements OnInit {
   collapsed = false;
 
   addSkill: boolean = false
+  addResume: boolean = false
   
 
   user : UserModel | null = null
   authService = inject(AuthService)
   skillService = inject(SkillsService)
+  resumeService = inject(ResumeService)
 
   skills: Skills[] = []
   mySkills: Skills[] = []
+  resume: Resume | null = null
 
   selectedSkills: number[] = []
 
@@ -47,7 +52,32 @@ export class ProfileComponent implements OnInit {
     this.getMyDetails()
     this.getAvailableSkills()
     this.getMySkills()
+    this.getMyResume();
   }
+
+  getMyResume(){
+    this.resumeService.getMyResume().subscribe((response: any) => {
+      this.resume = response
+    })
+  }
+
+  getMyDetails(){
+    const token = localStorage.getItem('token')
+    if(token){
+      this.authService.getMyDetails().subscribe({
+        next: (response) => {
+          this.user = response
+          console.log(this.user.roles)
+        },
+        error: (err) => {
+          console.error("Error fetching data", err)
+        }
+      })
+    }else{
+      console.error('Token not found')
+    }
+  }
+
 
   getAvailableSkills(){
     this.skillService.getAvailableSkills().subscribe({
@@ -76,7 +106,10 @@ export class ProfileComponent implements OnInit {
   toggleAddSkillVisibility(){
     this.addSkill = !this.addSkill
   }
-  
+
+  toggleAddResumeVisibility(){
+    this.addResume = !this.addResume
+  }
 
   addCandidateSkills(){
     this.skillService.addSkills(this.selectedSkills).subscribe((response: GeneralResponse) => {
@@ -158,28 +191,9 @@ onSkillSelect(event: Event): void {
     { label: 'Projects', link: '/candidate/projects', icon: faProjectDiagram },
     { label: 'Applied Jobs', link: '/candidate/applied-jobs', icon: faFileAlt },
     { label: 'Saved Jobs', link: '/candidate/saved-jobs', icon: faBookmark },
-    //{ label: 'Update Profile', link: '/candidate/update-profile', icon: faUserEdit},
     { label: 'Change Password', link: '/candidate/change-password', icon: faEdit}
 
   ];
-
-
-  getMyDetails(){
-    const token = localStorage.getItem('token')
-    if(token){
-      this.authService.getMyDetails().subscribe({
-        next: (response) => {
-          this.user = response
-          console.log(this.user.roles)
-        },
-        error: (err) => {
-          console.error("Error fetching data", err)
-        }
-      })
-    }else{
-      console.error('Token not found')
-    }
-  }
 
 
   toggleSidebar(): void {

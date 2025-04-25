@@ -14,4 +14,8 @@ export class ResumeService {
   getCandidateResume(id: string):Observable<any>{
     return this.http.get<any>(`${this.apiUrl}getresumebycandidateid/${id}`)
   }
+
+  getMyResume():Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}getmyresume`)
+  }
 }

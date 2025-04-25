@@ -95,7 +95,6 @@ export class AcademicsComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         });
-        location.reload()
       }else{
         Swal.fire({
           position: "top-end",
@@ -125,7 +124,6 @@ export class AcademicsComponent implements OnInit {
             timer: 3000
           });
           this.academic.disable()
-          location.reload()
         }else{
           Swal.fire({
           position: "top-end",

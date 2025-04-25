@@ -182,19 +182,26 @@
                   </div>    
                 <hr>
                 <div class="my-5">
-                    <div>
+                    <div class="flex items-center space-x-10">
                         <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
                           My Resume
                         </h2>
+                        <fa-icon [icon]='add' class=" text-gray-50 opacity-80 cursor-pointer" size="lg" (click) = 'toggleAddResumeVisibility()' ></fa-icon>
                     </div>
-                    <div class="my-2 w-fit">
-                        <a href="https://res.cloudinary.com/dnu3li5lc/raw/upload/v1741599125/resumes/85a9516d-ec33-40b7-9361-d13224f0a46e.pdf" target="_blank">
+                    <div *ngIf="addResume" class="text-gray-50 my-5">
+                      <input type="file" name="" id="">
+                    </div>
+                    <div *ngIf="resume; else notFound" class="my-2 w-fit">
+                        <a [href]="resume.candidateResume" target="_blank">
                             <img src="./assets/pdf.png" alt="resume" class="w-20 ">
                         </a>
-                    </div>
-                    <div>
-                        <p class="text-gray-50">Click to view resume</p>
-                    </div>
+                        <div>
+                            <p class="text-gray-50 mt-2">Click to view resume</p>
+                        </div>
+                      </div>
+                    <ng-template #notFound>
+                      <p class=" mt-5 text-gray-50 w-full text-justify text-[15px] italic font-light">You haven't added your resume yet. Add your resume so the employer can know you better.</p>
+                    </ng-template>
                 </div>
             </div>
           </div>
