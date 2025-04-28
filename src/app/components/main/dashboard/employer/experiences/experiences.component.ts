@@ -90,7 +90,6 @@ export class EmployerExperiencesComponent implements OnInit {
           showConfirmButton: false,
           timer: 3000
         });
-        location.reload()
       }else{
         Swal.fire({
           position: "top-end",
@@ -119,7 +118,6 @@ export class EmployerExperiencesComponent implements OnInit {
             showConfirmButton: false,
             timer: 3000
           });
-          location.reload()
         }else{
           Swal.fire({
             position: "top-end",

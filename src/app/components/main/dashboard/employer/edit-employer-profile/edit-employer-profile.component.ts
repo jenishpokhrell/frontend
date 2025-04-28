@@ -127,7 +127,7 @@ export class EditEmployerProfileComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         });
-        this.router.navigate(['/candidate/profile'])
+        this.router.navigate(['/employer/profile'])
       }else{
         Swal.fire({
           position: "top-end",

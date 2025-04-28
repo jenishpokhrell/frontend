@@ -89,7 +89,6 @@ export class ProjectsComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         });
-        location.reload()
       }else{
         Swal.fire({
           position: "top-end",
@@ -118,7 +117,6 @@ export class ProjectsComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           });
-          location.reload()
         }else{
           Swal.fire({
             position: "top-end",
