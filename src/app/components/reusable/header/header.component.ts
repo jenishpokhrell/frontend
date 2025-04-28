@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
-import { ThemeService } from '../../../services/theme/theme.service';
 import { NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faSun, faMoon, faBell, faChartBar } from '@fortawesome/free-regular-svg-icons';
@@ -30,14 +29,11 @@ export class HeaderComponent {
   authService = inject(AuthService)
   user : UserModel | null = null
 
-
-  constructor(public themeService: ThemeService) {}
-
   getMyDetails(){
     this.authService.getMyDetails().subscribe({
       next: (response) => {
         this.user = response
-        console.log(this.user.roles)
+        console.log(response)
       }
     })
   }
@@ -45,9 +41,4 @@ export class HeaderComponent {
   isLoggedIn(){
     this.authService.isLoggedIn()
   }
-
-  toggleTheme(): void {
-    this.themeService.toggleTheme();
-  }
-
 }

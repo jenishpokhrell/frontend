@@ -35,7 +35,7 @@ export class SignupComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     contact: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^[0-9]{10}$/) // Assuming 10-digit mobile numbers
+      Validators.pattern(/^[0-9]{10}$/) //Assuming 10-digit mobile numbers
     ]),
     gender: new FormControl('', [Validators.required]),
     jobtitle: new FormControl('', [Validators.required]),
@@ -98,7 +98,7 @@ export class SignupComponent {
       return;
 
     const file = input.files[0]
-      const reader = new FileReader();
+    const reader = new FileReader();
 
       reader.onload = () => {
         this.selectedImage = reader.result as string | ArrayBuffer
@@ -111,6 +111,8 @@ export class SignupComponent {
       })
 
     }
+
+
     togglePasswordVisibility(): void{
       this.showPassword = !this.showPassword
     }

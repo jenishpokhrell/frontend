@@ -89,6 +89,8 @@ export class ProjectsComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         });
+        this.getMyProjects()
+        this.projectForm.reset()
       }else{
         Swal.fire({
           position: "top-end",
@@ -117,6 +119,8 @@ export class ProjectsComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           });
+          this.getMyProjects()
+          this.projectForm.reset()
         }else{
           Swal.fire({
             position: "top-end",
@@ -151,6 +155,7 @@ export class ProjectsComponent implements OnInit {
                 text: response.message,
                 icon: 'success',
               });
+              this.getMyProjects()
             } else {
               Swal.fire({
                 title: 'Error!',

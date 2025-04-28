@@ -89,7 +89,7 @@
         </div>
         <div
           class="bg-[#6BA1FF] text-white
-          border-[] md:p-2 md:w-28 w-[25%] p-2 text-[13px] text-center rounded-full drop-shadow-xl hover:drop-shadow-none transition-all"
+          md:p-2 md:w-28 w-[25%] p-2 text-[13px] text-center rounded-full drop-shadow-xl hover:drop-shadow-none transition-all"
           routerLink="/signup"
         >
           <button>Sign up</button>
@@ -97,7 +97,12 @@
       </div>
     }@else{
       <div *ngIf="userModel" class="m-3 p-2 bg-[#6BA1FF] rounded-full flex items-center justify-center space-x-2 transition-all cursor-pointer" 
-      (click) = "toggleDropdown()">
+      [routerLink]="
+      userModel?.roles?.includes('CANDIDATE') ? '/candidate' : 
+      userModel?.roles?.includes('EMPLOYER') ? '/employer' : 
+      '/admin'
+    "
+      >
       @if(userModel.profilePhoto === null){
         <div class="bg-blue-900 text-white font-bold p-2 w-10 text-center rounded-full ml-1">
           {{userModel.firstname.charAt(0)}}
@@ -116,27 +121,13 @@
           <p class="font-semibold text-white text-[14px]"> {{userModel.firstname}} {{userModel.lastname}}</p>
         </div>
 
+        <div class="ml-6 p-2" (click) = "logout()">
+          <fa-icon [icon]="signout" size="lg" class="text-white"></fa-icon>
+        </div>
+
       </div>
-      <div *ngIf="showDropdown" class="absolute right-[11%] top-[6%] mt-2 w-48 bg-[#6BA1FF] rounded-lg shadow-lg transition-all">
-        <ul class="text-white">
-          @if(userModel?.roles?.includes('CANDIDATE')){
-            <li class="px-4 py-2  cursor-pointer" routerLink="/candidate">Dashboard</li>
-          }@else if(userModel?.roles?.includes('EMPLOYER')){
-            <li class="px-4 py-2  cursor-pointer" routerLink="/employer">Dashboard</li>
-          }@else if (userModel?.roles?.includes('ADMIN')) {
-            <li class="px-4 py-2  cursor-pointer" routerLink="/admin">Dashboard</li>
-          }
-          <li class="px-4 py-2 cursor-pointer" (click)="logout()">Logout</li>
-        </ul>
-      </div>
-      <!-- <div>
-        <button (click)="logout()"><fa-icon [icon] = 'signout'></fa-icon></button>
-      </div> -->
     }
   </div>
 </div>
 
 <router-outlet></router-outlet>
-
-
-<!-- [ngClass]="{'block': isMenuOpen, 'hidden' : !isMenuOpen}" -->

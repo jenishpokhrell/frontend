@@ -20,17 +20,8 @@
       <div class=" text-center mr-40 text-white font-bold">
         <h1 class="text-xl font-semibold text-gray-800 dark:text-white">{{ title }}</h1>
       </div>
-      <!-- Right Side -->
+
       <div class="flex items-center space-x-4">
-        <!-- Theme Toggle -->
-        <button (click)="toggleTheme()" class="text-gray-600 dark:text-gray-300 hover:text-blue-600">
-          @if (themeService.isDarkMode()) {  
-            <fa-icon [icon] = 'sun' size="xl"></fa-icon>
-          }@else {
-            <fa-icon [icon] = 'moon' size="xl"></fa-icon>
-          }
-        </button>
-  
         <!-- Notifications -->
         <div class="relative" *ngIf="notifications.length > 0">
           <button class="text-gray-600 dark:text-gray-300 hover:text-blue-600 relative">

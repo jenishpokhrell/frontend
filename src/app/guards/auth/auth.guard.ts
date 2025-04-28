@@ -7,6 +7,6 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true;
   }
 
-  console.log('You cant access this page without logging in.')
+  // console.log('You cant access this page without logging in.')
   return false
 };

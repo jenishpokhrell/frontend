@@ -79,7 +79,6 @@ export class EditEmployerProfileComponent implements OnInit {
       if(input.files && input.files.length > 0){
         this.selectedImage = input.files[0]
 
-      // this.selectedImage = input.files[0]
       const reader = new FileReader();
 
       reader.onload = (e: ProgressEvent<FileReader>) => {
@@ -140,16 +139,50 @@ export class EditEmployerProfileComponent implements OnInit {
     })
   }
 
-
+  deleteProfile(userId: string) {
+    const id = userId;
+    if (id) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.authService
+            .deleteUser(id)
+            .subscribe((response: GeneralResponse) => {
+              if (response.isSuccess) {
+                Swal.fire({
+                  title: 'Deleted!',
+                  text: response.message,
+                  icon: 'success',
+                });
+                this.authService.logout()
+              } else {
+                Swal.fire({
+                  title: 'Error!',
+                  text: response.message,
+                  icon: 'error',
+                });
+              }
+            });
+        }
+      });
+    } else {
+      console.log('Error fetching id');
+    }
+  }
 
   isInvalid(field: string){
     const value = this.update.get(field);
     return !!(value && value.touched && value.invalid)
   }
 
-
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;
   }
-
 }

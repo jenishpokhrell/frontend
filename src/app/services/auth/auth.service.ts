@@ -1,14 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { Login } from '../../model/login';
 import { map, Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ThemeService } from '../theme/theme.service';
-import { UpdateUser, UserModel } from '../../model/user';
+import { HttpClient } from '@angular/common/http';
+import { UserModel } from '../../model/user';
 import { jwtDecode } from 'jwt-decode';
-import { Token } from '../../model/token';
 import { Router } from '@angular/router';
-import { Register } from '../../model/register';
 import { GeneralResponse } from '../../model/response';
 import { ChangePassword } from '../../model/password';
 

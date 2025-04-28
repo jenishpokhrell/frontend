@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
 
   showNavbar : boolean = true;
   isMenuOpen = false
-  showDropdown : boolean = false
 
   userModel : UserModel | null = null
   token : Token | null = null
@@ -28,21 +27,21 @@ export class AppComponent implements OnInit {
   authService = inject(AuthService)
   route = inject(Router)
 
-  isLoggedIn(){
-    return this.authService.isLoggedIn()
-
-  }
-
+  
   ngOnInit(): void {
-     this.getMyDetails()
+    this.getMyDetails()
   }
   
+  isLoggedIn(){
+    return this.authService.isLoggedIn()
+  }
+
   getMyDetails(){
     const myToken = localStorage.getItem('token')
     if(myToken){
       this.authService.getMyDetails().subscribe({
         next: (response) =>{
-          console.log(response)
+          // console.log(response)
           this.userModel = response
         },
         error: (err) => {
@@ -55,8 +54,7 @@ export class AppComponent implements OnInit {
   }
 
   logout(){
-    return this.authService.logout()
-    
+    return this.authService.logout() 
   }
   
   constructor(private router: Router){
@@ -69,9 +67,5 @@ export class AppComponent implements OnInit {
 
   toggleMenu(){
     this.isMenuOpen = !this.isMenuOpen
-  }
-
-  toggleDropdown(){
-    this.showDropdown = !this.showDropdown
   }
 }

@@ -25,18 +25,22 @@
         <div class="mt-7 flex items-center justify-between">
           <div class="flex items-center space-x-20">
             @if(user?.profilePhoto === null){
-              <div class="bg-blue-900 text-white w-28 h-28 text-2xl font-bold p-2 text-center rounded-full ml-1 content-center">
-                {{user?.firstname?.charAt(0)}}
-              </div>
+            <div
+              class="bg-blue-900 text-white w-28 h-28 text-2xl font-bold p-2 text-center rounded-full ml-1 content-center"
+            >
+              {{ user?.firstname?.charAt(0) }}
+            </div>
             }@else {
-              <div class="w-40 h-40 rounded-full flex items-center justify-center font-bold">
-                <img
+            <div
+              class="w-40 h-40 rounded-full flex items-center justify-center font-bold"
+            >
+              <img
                 [src]="user?.profilePhoto"
                 alt="profile picture"
                 width="300"
                 class="rounded-full"
               />
-              </div>
+            </div>
             }
             <div class="space-y-5">
               <div>
@@ -65,65 +69,75 @@
             <div class="text-gray-50 space-y-4 text-[14px]">
               <p>
                 <span class="mr-7"><fa-icon [icon]="location"></fa-icon></span>
-                {{user?.address}}
+                {{ user?.address }}
               </p>
               <p>
                 <span class="mr-7"><fa-icon [icon]="mail"></fa-icon></span>
-                {{user?.email}}
+                {{ user?.email }}
               </p>
               <p>
                 <span class="mr-7"><fa-icon [icon]="contact"></fa-icon></span>
-                {{user?.contact}}
+                {{ user?.contact }}
               </p>
             </div>
           </div>
         </div>
         <div class="flex w-full space-x-10 mt-5 text-[14px]">
-          <div class="w-1/2 p-4 ">
+          <div class="w-1/2 p-4">
             <div
               class="dark:text-gray-50 flex justify-between space-x-20 mt-10"
             >
               <div class="w-1/2 space-y-2">
                 <p class="font-bold">Firstname</p>
-                <p class="bg-gray-700 py-2 pl-4 rounded-3xl">{{user?.firstname}}</p>
+                <p class="bg-gray-700 py-2 pl-4 rounded-3xl">
+                  {{ user?.firstname }}
+                </p>
               </div>
               <div class="w-1/2 space-y-2">
                 <p class="font-bold">Lastname</p>
-                <p class="bg-gray-700 py-2 pl-4 rounded-3xl">{{user?.lastname}}</p>
+                <p class="bg-gray-700 py-2 pl-4 rounded-3xl">
+                  {{ user?.lastname }}
+                </p>
               </div>
             </div>
             <div
-              class="dark:text-gray-50 flex justify-between space-x-20 mt-10 "
+              class="dark:text-gray-50 flex justify-between space-x-20 mt-10"
             >
               <div class="w-1/2 space-y-2">
                 <p class="font-bold">Username</p>
-                <p class="bg-gray-700 py-2 pl-4 rounded-3xl">{{user?.username}}</p>
+                <p class="bg-gray-700 py-2 pl-4 rounded-3xl">
+                  {{ user?.username }}
+                </p>
               </div>
               <div class="w-1/2 space-y-2">
                 <p class="font-bold">Gender</p>
-                <p class="bg-gray-700 py-2 pl-4 rounded-3xl">{{user?.gender}}</p>
+                <p class="bg-gray-700 py-2 pl-4 rounded-3xl">
+                  {{ user?.gender }}
+                </p>
               </div>
             </div>
             <div
-              class="dark:text-gray-50 flex justify-between space-x-20 mt-10 "
+              class="dark:text-gray-50 flex justify-between space-x-20 mt-10"
             >
               <div class="w-1/2 space-y-2">
                 <p class="font-bold">Position</p>
                 <p class="bg-gray-700 py-2 pl-4 rounded-3xl">
-                  {{user?.jobTitle}}
+                  {{ user?.jobTitle }}
                 </p>
               </div>
               <div class="w-1/2 space-y-2">
                 <p class="font-bold">YOE</p>
-                <p class="bg-gray-700 py-2 pl-4 rounded-3xl">{{user?.years_Of_Experience}}</p>
+                <p class="bg-gray-700 py-2 pl-4 rounded-3xl">
+                  {{ user?.years_Of_Experience }}
+                </p>
               </div>
             </div>
             <div
-              class="dark:text-gray-50 flex justify-between space-x-20 mt-10 "
+              class="dark:text-gray-50 flex justify-between space-x-20 mt-10"
             >
               <div>
                 <button
-                  routerLink='/candidate/update-profile/{{user?.id}}' 
+                  routerLink="/candidate/update-profile/{{ user?.id }}"
                   class="p-4 bg-blue-900 rounded-full w-36 text-[13px] text-white"
                 >
                   Edit Profile
@@ -131,82 +145,143 @@
               </div>
             </div>
           </div>
-          <div class=" mt-5 p-10 w-1/2 drop-shadow-2xl">
+          <div class="mt-5 p-10 w-1/2 drop-shadow-2xl">
             <div class="mb-5 flex items-center space-x-10">
               <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
                 Skills
               </h2>
-              <fa-icon [icon]='add' class=" text-gray-50 opacity-80 cursor-pointer" size="lg" (click) = 'toggleAddSkillVisibility()' ></fa-icon>
+              <fa-icon
+                [icon]="add"
+                class="text-gray-50 opacity-80 cursor-pointer"
+                size="lg"
+                (click)="toggleAddSkillVisibility()"
+              ></fa-icon>
             </div>
-            <hr class="mb-5"/>
+            <hr class="mb-5" />
             <div>
               <div *ngIf="addSkill" class="text-gray-50">
-                <label for="" class="text-[17px] font-semibold mb-10">Add Skills</label>
-                <div >
-                  <select 
-                  (change)="onSkillSelect($event)" formControlName="skills" class=" p-3 w-full bg-gray-700">
-                        <option value="">-- Select Skills --</option>
-                        <option *ngFor="let skill of skills" [value]="skill.skillId"> {{skill.skill}} </option>
-                    </select>
+                <label for="" class="text-[17px] font-semibold mb-10"
+                  >Add Skills</label
+                >
+                <div>
+                  <select
+                    (change)="onSkillSelect($event)"
+                    formControlName="skills"
+                    class="p-3 w-full bg-gray-700"
+                  >
+                    <option value="">-- Select Skills --</option>
+                    <option
+                      *ngFor="let skill of skills"
+                      [value]="skill.skillId"
+                    >
+                      {{ skill.skill }}
+                    </option>
+                  </select>
                 </div>
                 <div *ngIf="selectedSkills.length > 0">
                   <h4 class="font-medium mt-4">Selected Skills:</h4>
                   <ul class="space-y-1 mt-2">
-                    <li 
-                      *ngFor="let id of selectedSkills" 
+                    <li
+                      *ngFor="let id of selectedSkills"
                       class="bg-gray-900 p-3 w-fit h-fit rounded-full"
                     >
-
-                    {{ getSkillNameById(id) }}
-                    <fa-icon [icon]='close' class=" text-gray-400 opacity-80 cursor-pointer ml-4" size="lg" (click) = "removeSkills(id)"></fa-icon>
+                      {{ getSkillNameById(id) }}
+                      <fa-icon
+                        [icon]="close"
+                        class="text-gray-400 opacity-80 cursor-pointer ml-4"
+                        size="lg"
+                        (click)="removeSkills(id)"
+                      ></fa-icon>
                     </li>
                   </ul>
                 </div>
-                <button 
+                <button
                   *ngIf="selectedSkills.length > 0"
                   (click)="addCandidateSkills()"
                   class="p-4 bg-blue-900 rounded-full w-36 mt-5 text-[13px] text-white"
                 >
                   Add Skills
                 </button>
-                <hr class="my-5">
+                <hr class="my-5" />
               </div>
-                <div class="my-5 text-gray-50 grid grid-cols-3 grid-flow-rows gap-3 w-full text-[13px]">
-                    <div *ngFor="let skill of mySkills" class="bg-gray-900 p-4 w-fit h-fit rounded-full flex items-center space-x-5">
-                        <p class="">{{skill.skill}}</p>
-                        <fa-icon [icon]='close' class=" text-gray-400 opacity-80 cursor-pointer" size="lg" (click) = "deleteSkill(skill.skillId)"></fa-icon>
-                    </div>   
-                  </div>
-                  <div *ngIf="mySkills.length === 0" class=" mb-5 text-gray-50 w-full text-justify text-[15px] italic font-light">
-                    <p>You haven't added your skills yet. Add your skills and move one step towards getting shortlisted.</p>
-                  </div>    
-                <hr>
-                <div class="my-5">
-                    <div class="flex items-center space-x-10">
-                        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">
-                          My Resume
-                        </h2>
-                        <fa-icon [icon]='add' class=" text-gray-50 opacity-80 cursor-pointer" size="lg" (click) = 'toggleAddResumeVisibility()' ></fa-icon>
-                    </div>
-                    <div *ngIf="addResume" class="text-gray-50 my-5">
-                      <input type="file" name="" id="">
-                    </div>
-                    <div *ngIf="resume; else notFound" class="my-2 w-fit">
-                        <a [href]="resume.candidateResume" target="_blank">
-                            <img src="./assets/pdf.png" alt="resume" class="w-20 ">
-                        </a>
-                        <div>
-                            <p class="text-gray-50 mt-2">Click to view resume</p>
-                        </div>
-                      </div>
-                    <ng-template #notFound>
-                      <p class=" mt-5 text-gray-50 w-full text-justify text-[15px] italic font-light">You haven't added your resume yet. Add your resume so the employer can know you better.</p>
-                    </ng-template>
+              <div
+                class="my-5 text-gray-50 grid grid-cols-3 grid-flow-rows gap-3 w-full text-[13px]"
+              >
+                <div
+                  *ngFor="let skill of mySkills"
+                  class="bg-gray-900 p-4 w-fit h-fit rounded-full flex items-center space-x-5"
+                >
+                  <p class="">{{ skill.skill }}</p>
+                  <fa-icon
+                    [icon]="close"
+                    class="text-gray-400 opacity-80 cursor-pointer"
+                    size="lg"
+                    (click)="deleteSkill(skill.skillId)"
+                  ></fa-icon>
                 </div>
+              </div>
+              <div
+                *ngIf="mySkills.length === 0"
+                class="mb-5 text-gray-50 w-full text-justify text-[15px] italic font-light"
+              >
+                <p>
+                  You haven't added your skills yet. Add your skills and move
+                  one step towards getting shortlisted.
+                </p>
+              </div>
+              <hr />
+              <div class="my-5">
+                <div class="flex items-center space-x-10">
+                  <h2
+                    class="text-lg font-semibold text-gray-800 dark:text-white"
+                  >
+                    My Resume
+                  </h2>
+                  <fa-icon
+                    [icon]="add"
+                    class="text-gray-50 opacity-80 cursor-pointer"
+                    size="lg"
+                    (click)="toggleAddResumeVisibility()"
+                  ></fa-icon>
+                  <fa-icon
+                  *ngIf="resume"
+                    [icon]="trash"
+                    class="text-gray-50 opacity-80 cursor-pointer"
+                    size="lg"
+                    (click)="deleteResume()"
+                  ></fa-icon>
+                </div>
+                <div *ngIf="addResume" class="text-gray-50 my-5">
+                  <input type="file" name="" id="" accept=".pdf" (change) = "onPdfSelected($event)" />
+                  <button
+                    *ngIf="showAddButton"
+                    class="p-4 bg-blue-900 rounded-full w-36 mt-5 text-[13px] text-white"
+                    (click) = "addMyResume()"
+                  >
+                    Add Resume
+                  </button>
+                </div>
+                <div *ngIf="resume; else notFound" class="my-2 w-fit">
+                  <a [href]="resume.candidateResume" target="_blank">
+                    <img src="./assets/pdf.png" alt="resume" class="w-20" />
+                  </a>
+                  <div>
+                    <p class="text-gray-50 mt-2">Click to view resume</p>
+                  </div>
+                </div>
+                <ng-template #notFound>
+                  <p
+                    class="mt-5 text-gray-50 w-full text-justify text-[15px] italic font-light"
+                  >
+                    You haven't added your resume yet. Add your resume so the
+                    employer can know you better.
+                  </p>
+                </ng-template>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </main>
   </div>
-</div>  
+</div>

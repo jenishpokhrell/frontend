@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
           response?.userInfo?.isApproved === true
         ) {
           this.router.navigate(['/employer']);
+          this.authService.getMyDetails()
         } else if (
           response?.userInfo?.roles?.includes('EMPLOYER') &&
           response?.userInfo?.isApproved === false

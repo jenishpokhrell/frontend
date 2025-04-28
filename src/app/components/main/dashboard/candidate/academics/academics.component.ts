@@ -95,6 +95,7 @@ export class AcademicsComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         });
+        this.getMyAcademics()
       }else{
         Swal.fire({
           position: "top-end",
@@ -124,6 +125,7 @@ export class AcademicsComponent implements OnInit {
             timer: 3000
           });
           this.academic.disable()
+          this.getMyAcademics()
         }else{
           Swal.fire({
           position: "top-end",
@@ -158,6 +160,7 @@ export class AcademicsComponent implements OnInit {
             text: response.message,
             icon: "success"
           });
+          this.getMyAcademics()
         }else{
           Swal.fire({
             title: "Deleted!",

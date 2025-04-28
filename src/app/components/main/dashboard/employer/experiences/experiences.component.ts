@@ -90,6 +90,8 @@ export class EmployerExperiencesComponent implements OnInit {
           showConfirmButton: false,
           timer: 3000
         });
+        this.getMyExperiences()
+        this.editExperience.reset()
       }else{
         Swal.fire({
           position: "top-end",
@@ -118,6 +120,8 @@ export class EmployerExperiencesComponent implements OnInit {
             showConfirmButton: false,
             timer: 3000
           });
+          this.getMyExperiences()
+          this.editExperience.reset()
         }else{
           Swal.fire({
             position: "top-end",
@@ -151,6 +155,7 @@ export class EmployerExperiencesComponent implements OnInit {
               text: response.message,
               icon: "success"
             });
+            this.getMyExperiences()
           }else{
             Swal.fire({
               title: "Oops",

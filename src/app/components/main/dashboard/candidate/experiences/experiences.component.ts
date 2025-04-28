@@ -29,10 +29,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Experience } from '../../../../../model/experience';
 import { ExperiencesService } from '../../../../../services/experiences/experiences.service';
 import { AuthService } from '../../../../../services/auth/auth.service';
-import { ActivatedRoute } from '@angular/router';
-import { ThemeService } from '../../../../../services/theme/theme.service';
 import { GeneralResponse } from '../../../../../model/response';
-import { generate } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -129,6 +126,8 @@ export class ExperiencesComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500,
           });
+          this.getMyExperiences()
+          this.editExperience.reset()
         } else {
           Swal.fire({
             position: 'top-end',
@@ -159,6 +158,8 @@ export class ExperiencesComponent implements OnInit {
               showConfirmButton: false,
               timer: 1500,
             });
+            this.getMyExperiences()
+            this.editExperience.reset()
           } else {
             Swal.fire({
               position: 'top-end',
@@ -193,6 +194,8 @@ export class ExperiencesComponent implements OnInit {
                 text: response.message,
                 icon: 'success',
               });
+              this.getMyExperiences()
+              this.editExperience.reset()
             } else {
               Swal.fire({
                 title: 'Error!',

@@ -23,9 +23,9 @@
   
         <!-- Candidates Section -->
         <div class="md:flex md:flex-col md:items-start mb-5">
-          <h3 class="text-[17px] font-bold md:mb-5">Candidates</h3>
+          <h3 class="text-[17px] font-bold md:mb-5" >Candidates</h3>
           <div class="text-gray-800 flex flex-col gap-y-2">
-            <p class="cursor-pointer">Candidate Dashboard</p>
+            <p class="cursor-pointer" routerLink="/candidate">Candidate Dashboard</p>
             <p
               class="cursor-pointer"
               routerLink="/browsejobs"
@@ -34,13 +34,13 @@
             >
               Browse Jobs
             </p>
-            <p class="cursor-pointer">Applied Jobs</p>
-            <p class="cursor-pointer">Saved Jobs</p>
+            <p class="cursor-pointer" routerLink="candidate/applied-jobs">Applied Jobs</p>
+            <p class="cursor-pointer" routerLink="/candidate/saved-jobs">Saved Jobs</p>
           </div>
         </div>
   
         <!-- Employers Section -->
-        <div class="md:flex md:flex-col md:items-start mb-5">
+        <!-- <div class="md:flex md:flex-col md:items-start mb-5">
           <h3 class="text-[17px] font-bold md:mb-5">Employers</h3>
           <div class="text-gray-800 flex flex-col gap-y-2">
             <p class="cursor-pointer">Employers Dashboard</p>
@@ -55,15 +55,15 @@
             <p class="cursor-pointer">Saved Candidates</p>
             <p class="cursor-pointer">Posted Jobs</p>
           </div>
-        </div>
+        </div> -->
   
         <!-- Support Section -->
         <div class="md:flex md:flex-col md:items-start mb-5">
           <h3 class="text-[17px] font-bold md:mb-5">Support</h3>
           <div class="text-gray-800 flex flex-col gap-y-2">
-            <p class="cursor-pointer">FAQs</p>
+            <p class="cursor-pointer" routerLink="/notfound">FAQs</p>
             <p class="cursor-pointer" routerLink="/notfound">Privacy Policy</p>
-            <p class="cursor-pointer">Terms & Conditions</p>
+            <p class="cursor-pointer" routerLink="/notfound">Terms & Conditions</p>
           </div>
         </div>
       </div>
@@ -76,13 +76,13 @@
         </div>
         <div class="flex items-center justify-around md:mr-16 md:mt-1 mt-4">
           <div class="md:mr-7 hover:scale-125 transition">
-            <fa-icon [icon]="facebook" size="xl" class="text-white"></fa-icon> 
+            <a href="https://www.facebook.com/" target="_blank"><fa-icon [icon]="facebook" size="xl" class="text-white"></fa-icon> </a>
           </div>
           <div class="md:mr-7 hover:scale-125 transition">
-            <fa-icon [icon]="instagram" size="xl" class="text-white"></fa-icon> 
+            <a href="https://www.instagram.com/" target="_blank"><fa-icon [icon]="instagram" size="xl" class="text-white"></fa-icon> </a>
           </div>
           <div class="md:mr-7 hover:scale-125 transition">
-            <fa-icon [icon]="linkedin" size="xl" class="text-white"></fa-icon> 
+            <a href="https://www.linkedin.com/" target="_blank"><fa-icon [icon]="linkedin" size="xl" class="text-white"></fa-icon> </a>
           </div>
         </div>
       </div>

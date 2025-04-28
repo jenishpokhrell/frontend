@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { GeneralResponse } from '../../model/response';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,13 @@ export class ResumeService {
 
   getMyResume():Observable<any>{
     return this.http.get<any>(`${this.apiUrl}getmyresume`)
+  }
+
+  addResume(formData: FormData):Observable<GeneralResponse>{
+    return this.http.post<GeneralResponse>(`${this.apiUrl}add-resume`, formData)
+  }
+
+  deleteResume():Observable<GeneralResponse>{
+    return this.http.delete<GeneralResponse>(`${this.apiUrl}deleteresume`)
   }
 }
