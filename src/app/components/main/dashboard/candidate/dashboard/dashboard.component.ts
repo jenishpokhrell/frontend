@@ -100,28 +100,7 @@ export class CandidateDashboardComponent implements OnInit{
     { label: 'Applied Jobs', link: '/candidate/applied-jobs', icon: faFileAlt },
     { label: 'Saved Jobs', link: '/candidate/saved-jobs', icon: faBookmark },
     { label: 'Change Password', link: '/candidate/change-password', icon: faEdit}
-  ];
-
-  // this.stats = [
-  //   { title: 'Available Jobs', value: 2, icon: faBriefcase, color: 'bg-blue-100 text-blue-600' },
-  //   { title: 'Applied Jobs', value: 7, icon: faFileAlt, color: 'bg-green-100 text-green-600' },
-  //   { title: 'Saved Jobs', value: 8, icon: faBookmark, color: 'bg-yellow-100 text-yellow-600' },
-  //   { title: 'Shortlisted', value: this.shortlistedCount, icon: faUserCheck, color: 'bg-purple-100 text-purple-600' }
-  // ];
-
-  recentApplications = [
-    { id: 1, title: 'Senior Angular Developer', company: 'Tech Solutions', status: 'Shortlisted', applied: '2 days ago' },
-    { id: 2, title: 'UX Designer', company: 'Creative Minds', status: 'Applied', applied: '1 week ago' },
-    { id: 3, title: 'Backend Developer', company: 'Data Systems', status: 'Rejected', applied: '2 weeks ago' },
-    { id: 4, title: 'Product Manager', company: 'Innovate Inc', status: 'Interview', applied: '3 weeks ago' }
-  ];
-
-  recommendedJobs = [
-    { id: 1, title: 'Frontend Developer', company: 'WebTech', location: 'Remote', posted: '1 day ago' },
-    { id: 2, title: 'Full Stack Engineer', company: 'CodeCraft', location: 'New York', posted: '3 days ago' },
-    { id: 3, title: 'UI/UX Designer', company: 'DesignHub', location: 'San Francisco', posted: '5 days ago' },
-    { id: 4, title: 'JavaScript Developer', company: 'Script Masters', location: 'Chicago', posted: '1 week ago' }
-  ];
+  ]
 
   
 

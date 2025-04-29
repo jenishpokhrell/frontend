@@ -82,6 +82,7 @@ export class PostJobComponent implements OnInit {
           showConfirmButton: false,
           timer: 3000
         });
+        this.postJob.reset()
       }else{
         Swal.fire({
           position: "top-end",
@@ -107,6 +108,7 @@ export class PostJobComponent implements OnInit {
             showConfirmButton: false,
             timer: 3000
           });
+          this.postJob.reset()
         }else{
           Swal.fire({
             position: "top-end",

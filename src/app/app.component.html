@@ -98,11 +98,11 @@
     }@else{
       <div *ngIf="userModel" class="m-3 p-2 bg-[#6BA1FF] rounded-full flex items-center justify-center space-x-2 transition-all cursor-pointer" 
       [routerLink]="
-      userModel?.roles?.includes('CANDIDATE') ? '/candidate' : 
-      userModel?.roles?.includes('EMPLOYER') ? '/employer' : 
+      userModel.roles.includes('CANDIDATE') ? '/candidate' : 
+      userModel.roles.includes('EMPLOYER') ? '/employer' : 
       '/admin'
     "
-      >
+      > 
       @if(userModel.profilePhoto === null){
         <div class="bg-blue-900 text-white font-bold p-2 w-10 text-center rounded-full ml-1">
           {{userModel.firstname.charAt(0)}}
