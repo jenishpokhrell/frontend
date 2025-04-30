@@ -81,6 +81,7 @@ export class EditJobComponent implements OnInit {
             showConfirmButton: false,
             timer: 3000
           });
+          this.postJob.reset()
         }else{
           Swal.fire({
             position: "top-end",

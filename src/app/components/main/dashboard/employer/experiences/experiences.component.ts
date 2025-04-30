@@ -122,6 +122,7 @@ export class EmployerExperiencesComponent implements OnInit {
           });
           this.getMyExperiences()
           this.editExperience.reset()
+          this.editMode = false
         }else{
           Swal.fire({
             position: "top-end",

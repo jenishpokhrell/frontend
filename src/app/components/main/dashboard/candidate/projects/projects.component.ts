@@ -121,6 +121,7 @@ export class ProjectsComponent implements OnInit {
           });
           this.getMyProjects()
           this.projectForm.reset()
+          this.editForm = false
         }else{
           Swal.fire({
             position: "top-end",
