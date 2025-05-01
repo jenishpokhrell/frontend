@@ -35,6 +35,7 @@ export class UsersComponent implements OnInit{
   ];
 
   recentUsers: UserModel[] = []
+  users: UserModel[] = []
   authService = inject(AuthService)
 
   ngOnInit(): void {
@@ -46,6 +47,7 @@ export class UsersComponent implements OnInit{
     this.authService.getAllUsers().subscribe({
       next: (response) => {
         this.recentUsers = response
+        this.users = this.recentUsers.filter(user => !user.roles.includes('ADMIN'))
       }
     })
   }

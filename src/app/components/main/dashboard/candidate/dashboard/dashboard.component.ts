@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf, SlicePipe } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faUser, faGraduationCap, faBriefcase, faUserCheck, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faUserEdit, faEdit  } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../../../../services/auth/auth.service';
@@ -12,7 +12,7 @@ import { GetJobForCandidate, MyJobApplications } from '../../../../../model/job'
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent,NgFor, FaIconComponent, NgIf],
+  imports: [SidebarComponent, HeaderComponent,NgFor, FaIconComponent, NgIf, SlicePipe],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
@@ -35,7 +35,8 @@ export class CandidateDashboardComponent implements OnInit{
   user: UserModel | null = null
   jobApplications: MyJobApplications[] = []
   mySavedJobs : GetJobForCandidate[] = []
-  jobs: [] = []
+  jobs: GetJobForCandidate[] = []
+  sortedJobs: GetJobForCandidate[] = []
 
   getMyDetails(){
     this.authService.getMyDetails().subscribe({
@@ -49,6 +50,7 @@ export class CandidateDashboardComponent implements OnInit{
     this.jobService.getJobsForCandidate().subscribe({
       next: (response) => {
         this.jobs = response
+        this.sortedJobs = this.jobs.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
         this.jobsCount = this.jobs.length
         this.stats.push(
           { title: 'Available Jobs', value: this.jobsCount, icon: faFileAlt, color: 'bg-green-100 text-green-600' },
@@ -101,8 +103,6 @@ export class CandidateDashboardComponent implements OnInit{
     { label: 'Saved Jobs', link: '/candidate/saved-jobs', icon: faBookmark },
     { label: 'Change Password', link: '/candidate/change-password', icon: faEdit}
   ]
-
-  
 
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;

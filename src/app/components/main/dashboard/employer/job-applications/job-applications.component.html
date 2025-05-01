@@ -52,10 +52,18 @@
                           </p>
                         </div>
                         <div class="space-y-5">
-                          <p>
-                            Experience required: {{ job.min_Years_of_Experience_Required }} to
-                            {{ job.max_Years_of_Experience_Required }} years
+                          <p *ngIf="job.max_Years_of_Experience_Required === 0">
+                            <span 
+                              >Experience required:
+                            </span>
+                            Freshers
                           </p>
+                          <p *ngIf="job.max_Years_of_Experience_Required > 0">
+                           <span
+                             >Experience required:
+                           </span>
+                           {{ job.min_Years_of_Experience_Required }} to {{job.max_Years_of_Experience_Required}} years
+                         </p>
                           <p>Location: Pulchowk, Lalitpur</p>
                           @if (job.isActive == true) {
                           <p>Status: <span class="text-green-600">Active</span></p>

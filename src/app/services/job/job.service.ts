@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GetJobForCandidate, GetMyJob, GetShortlistedCandidate, Job, UpdateJobApplication } from '../../model/job';
+import { GetJobForCandidate, GetMyJob, GetShortlistedCandidate, Job, MyJobApplications, UpdateJobApplication } from '../../model/job';
 import { GeneralResponse } from '../../model/response';
 
 @Injectable({
@@ -13,8 +13,8 @@ export class JobService {
 
   constructor(private http: HttpClient) { }
 
-  getJobsForCandidate(){
-    return this.http.get<any>(`${this.apiUrl}job/GetAllJobsForCandidate`)
+  getJobsForCandidate():Observable<GetJobForCandidate[]>{
+    return this.http.get<GetJobForCandidate[]>(`${this.apiUrl}job/GetAllJobsForCandidate`)
   }
 
   getJobByIdForCandidate(id: number):Observable<GetJobForCandidate>{
@@ -37,9 +37,9 @@ export class JobService {
     return this.http.get<any>(`${this.apiUrl}job/getmyjobbyid/${id}`)
   }
 
-  getMyJobApplications():Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}jobapplication/getmyjobapplications`)
-  }
+    getMyJobApplications():Observable<MyJobApplications[]>{
+      return this.http.get<MyJobApplications[]>(`${this.apiUrl}jobapplication/getmyjobapplications`)
+    }
 
   getAllJobs():Observable<any>{
     return this.http.get<any>(`${this.apiUrl}job/getalljobs`)

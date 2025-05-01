@@ -87,7 +87,13 @@
                       <td
                       class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
                     >
-                      {{ job.min_Years_of_Experience_Required}} - {{job.max_Years_of_Experience_Required}}
+                    <p *ngIf="job.max_Years_of_Experience_Required === 0">
+
+                      Freshers
+                    </p>
+                    <p *ngIf="job.max_Years_of_Experience_Required > 0">
+                     {{ job.min_Years_of_Experience_Required }} to {{job.max_Years_of_Experience_Required}} years
+                   </p>
                     </td>
                       <td
                         class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
