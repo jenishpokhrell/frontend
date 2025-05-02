@@ -33,6 +33,12 @@ export class AcademicsComponent implements OnInit {
   academicServices = inject(AcademicService)
   authService = inject(AuthService)
 
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
+
   menuItems = [
     { label: 'Dashboard', link: '/candidate/dashboard', icon: faDashboard},
     { label: 'Profile', link: '/candidate/profile', icon: faUser },

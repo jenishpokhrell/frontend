@@ -34,6 +34,12 @@ export class EditEmployerProfileComponent implements OnInit {
   previewImage : string = ''
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router ){}
+
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
   
   menuItems = [
     { label: 'Dashboard', link: '/employer/dashboard', icon: faDashboard},

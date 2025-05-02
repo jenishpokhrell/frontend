@@ -36,6 +36,12 @@ export class AppliedJobsComponent {
 
   ];
 
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
+
   appliedJobs : MyJobApplications[] = []
   jobService = inject(JobService)
   jobId! : number

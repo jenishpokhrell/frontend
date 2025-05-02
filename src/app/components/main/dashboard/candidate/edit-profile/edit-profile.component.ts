@@ -223,6 +223,12 @@ export class EditProfileComponent implements OnInit {
     return !!(value && value.touched && value.invalid);
   }
 
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
+
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;
   }

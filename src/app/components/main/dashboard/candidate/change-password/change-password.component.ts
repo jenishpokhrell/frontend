@@ -46,6 +46,12 @@ export class ChangePasswordComponent implements OnInit {
     newPassword: new FormControl('', [Validators.required])
   })
 
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
+
   ngOnInit(): void {
     this.authService.getMyDetails().subscribe({
       next: (response) => {

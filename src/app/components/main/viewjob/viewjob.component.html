@@ -1,16 +1,16 @@
-<div>
+<div class="w-full">
   <div class="h-16 bg-gray-200">
-    <div class="w-[80%] mx-auto flex justify-between items-center py-5">
+    <div class="w-[90%] md:w-[80%] mx-auto flex justify-between items-center py-5">
       <div class="ml-2">
-        <p class="font-bold">Job Details</p>
+        <p class="font-bold text-[13px] md:text-lg">Job Details</p>
       </div>
       <div class="mr-7 text-[14px]">
-        <p>Home / Browse Jobs / <span class="font-bold">Job Details</span></p>
+        <p class="text-[13px] md:text-lg">Home / Browse Jobs / <span class="font-bold">Job Details</span></p>
       </div>
     </div>
   </div>
 
-  <div class="w-[80%] mx-auto drop-shadow-2xl my-14">
+  <div class="w-[80%] hidden md:block mx-auto drop-shadow-2xl my-14">
     <img
       src="../assets/teams.jpg"
       alt="teams"
@@ -18,13 +18,13 @@
     />
   </div>
 
-  <div class="w-[80%] mx-auto">
+  <div class="w-[90%] md:w-[80%] mx-auto">
     <div
       *ngIf="job"
       class="flex items-center justify-between my-10"
     >
       <div class="">
-        <h1 class="text-3xl font-bold text-blue-900 uppercase">
+        <h1 class="text-2xl md:text-3xl font-bold text-blue-900 uppercase">
           {{ job.jobTitle }}
         </h1>
         <div class="flex space-x-10 font-extralight text-[14px]">
@@ -34,12 +34,9 @@
       </div>
       @if (job.isActive == true) {
         <div
-          class=" flex items-center space-x-8 relative text-[14px] lg:left-2 h-10  cursor-pointer"
+          class=" space-x-8 relative text-[14px] lg:left-2 h-10  cursor-pointer"
         >
-          <!-- <button class="bg-gray-100 w-12 p-3 rounded-full text-black text-center ">
-              <fa-icon [icon] = 'beforesave' size="lg" ></fa-icon>
-          </button> -->
-            <div>
+            <div class="hidden md:block">
               <button class="cursor-pointer bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" (click)="jobApply(job.id)">
                 Apply now
               </button>
@@ -50,9 +47,6 @@
           class=" flex space-x-6 relative text-[14px] lg:left-2 h-10 cursor-not-allowed"
         >
           <div>
-            <!-- <button class="bg-gray-100 opacity-60 w-12 p-3 rounded-full text-black text-center cursor-not-allowed">
-                <fa-icon [icon] = 'beforesave' size="lg" ></fa-icon>
-            </button> -->
             </div>
             <div>
               <button class="cursor-not-allowed opacity-60 bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" disabled>
@@ -65,15 +59,15 @@
 
     <hr />
 
-    <div *ngIf="job" class="my-10 flex items-start space-x-20">
-      <div class="my-10 w-[70%]">
-        <div class="border border-gray-300 rounded-xl px-10 py-5">
+    <div *ngIf="job" class="my-10 md:flex md:items-start space-x-20">
+      <div class="my-10 w-full">
+        <div class="border border-gray-300 rounded-xl px-5 py-3 md:px-10 md:py-5">
           <div class="my-5">
             <h2 class="text-2xl font-bold text-blue-900">Job Information</h2>
           </div>
           <hr />
-          <div>
-            <div class="flex justify-between mt-5">
+          <div class="md:text-[17px] text-sm ">
+            <div class="md:flex md:justify-between mt-5">
               <div class="space-y-5">
                 <p>
                   Job Type: <span>{{ job.jobType }}</span>
@@ -97,7 +91,7 @@
                   Freshers
                 </p>
                 <p *ngIf="job.max_Years_of_Experience_Required > 0">
-                 <span class="font-bold text-[#2f4f70]"
+                 <span
                    >Experience required:
                  </span>
                  {{ job.min_Years_of_Experience_Required }} to {{job.max_Years_of_Experience_Required}} years
@@ -129,7 +123,7 @@
         <div class="my-10">
           @if (job.isActive == true) {
           <div
-            class=" flex space-x-6 relative text-[14px] lg:left-2 h-10  cursor-pointer"
+            class=" flex space-x-6 relative text-[14px] lg:left-2 h-10 cursor-pointer"
           >
             <div>
               <button class="cursor-pointer bg-[#6BA1FF] text-white p-3 md:w-36 w-72 rounded-full" (click)="jobApply(job.id)">

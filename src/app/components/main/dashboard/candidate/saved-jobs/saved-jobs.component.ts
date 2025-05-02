@@ -3,7 +3,7 @@ import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { faUser, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { GetJobForCandidate } from '../../../../../model/job';
 import { JobService } from '../../../../../services/job/job.service';
 import { RouterLink, RouterOutlet } from '@angular/router';
@@ -11,7 +11,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-saved-jobs',
   standalone: true, 
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, RouterLink, RouterOutlet],
+  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, RouterLink, RouterOutlet, NgIf],
   templateUrl: './saved-jobs.component.html',
   styleUrls: ['./saved-jobs.component.css']
 })
@@ -23,6 +23,12 @@ export class SavedJobsComponent implements OnInit {
 
   savedJobs : GetJobForCandidate[] = []
   jobService = inject(JobService)
+
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
 
   menuItems = [
     { label: 'Dashboard', link: '/candidate/dashboard', icon: faDashboard},

@@ -84,6 +84,12 @@ export class ProfileComponent implements OnInit {
     candidateResume: new FormControl('')
   })
 
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
+
   ngOnInit(): void {
     this.getMyDetails();
     this.getAvailableSkills();

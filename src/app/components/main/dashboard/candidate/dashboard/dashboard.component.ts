@@ -38,6 +38,12 @@ export class CandidateDashboardComponent implements OnInit{
   jobs: GetJobForCandidate[] = []
   sortedJobs: GetJobForCandidate[] = []
 
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
+
   getMyDetails(){
     this.authService.getMyDetails().subscribe({
       next: (response) => {

@@ -49,6 +49,12 @@ export class EmployerExperiencesComponent implements OnInit {
     to: new FormControl('', [Validators.required])
   })
 
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
+
 
   ngOnInit(): void {
     this.getMyExperiences()

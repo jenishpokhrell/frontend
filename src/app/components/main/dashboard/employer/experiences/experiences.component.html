@@ -1,91 +1,150 @@
-<div class="flex h-screen bg-gray-100 dark:bg-gray-900">
-    <app-sidebar [menuItems]="menuItems" 
-                 [collapsed]="collapsed"
-                 (toggleCollapse)="toggleSidebar()"></app-sidebar>
+<div class="flex flex-col md:flex-row h-screen bg-gray-100 dark:bg-gray-900">
+  <div *ngIf="mobileSidebarVisible" class="fixed inset-0 z-40 md:hidden" (click)="toggleMobileSidebar()">
+    <div class="absolute inset-0 bg-gray-600 opacity-75"></div>
+  </div>
+  <app-sidebar
+    [menuItems]="menuItems"
+    [collapsed]="collapsed"
+    (toggleCollapse)="toggleSidebar()"
+    class="hidden md:block"
+    [class.md:w-64]="!collapsed"
+    [class.md:w-20]="collapsed"
+  ></app-sidebar>
+
+
+  <div *ngIf="mobileSidebarVisible" class="fixed inset-y-0 left-0 z-50 w-64 bg-gray-800 md:hidden overflow-y-auto">
+    <app-sidebar
+      [menuItems]="menuItems"
+      [collapsed]="false"
+      class="h-full"
+    ></app-sidebar>
+  </div>
+
+  <div class="flex-1 flex flex-col min-h-0 transition-all duration-300"
+    [class.md:ml-20]="!collapsed"
+    [class.md:ml-20]="collapsed"
+  >
+    <app-header
+      [title]="'Candidate Dashboard'"
+      (toggleSidebar)="toggleMobileSidebar()"
+    ></app-header>
+    
+      <main class="flex-1 overflow-y-auto p-4 sm:p-6 bg-gray-50 dark:bg-gray-800">
+        <div class="mx-auto">
+          <!-- Page Title -->
+          <div class="mb-6">
+            <h2 class="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">
+              My Experiences
+            </h2>
+          </div>
   
-    <div class="flex-1 flex flex-col overflow-hidden" [class.ml-14]="!collapsed" [class.ml-5]="collapsed">
-      <app-header [title]="'Experiences'"
-                  (toggleSidebar)="toggleSidebar()"></app-header>
+          <!-- Experience Content - Stack on mobile/tablet -->
+          <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Experience List -->
+            <div class="w-full lg:w-1/2 space-y-4">
+              <div *ngFor="let experience of experiences" class="bg-gray-900 p-5 sm:p-7 rounded-lg shadow-lg">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <div>
+                    <h3 class="text-lg sm:text-xl font-semibold text-white">{{experience.jobTitle}}</h3>
+                    <p class="text-gray-300 text-sm sm:text-base">{{experience.companyName}}</p>
+                  </div>
+                  <div class="flex gap-3 sm:gap-5">
+                    <fa-icon 
+                      [icon]="edit" 
+                      class="text-gray-300 hover:text-blue-400 cursor-pointer transition-colors"
+                      (click)="getExperienceById(experience.experienceId)">
+                    </fa-icon>
+                    <fa-icon 
+                      [icon]="delete" 
+                      class="text-gray-300 hover:text-red-400 cursor-pointer transition-colors"
+                      (click)="deleteExperiences(experience.experienceId)">
+                    </fa-icon>
+                  </div>
+                </div>
+                
+                <div class="mt-3">
+                  @if(experience.to !== null){
+                    <p class="text-gray-300 text-sm sm:text-base">{{experience.from}} - {{experience.to}}</p>
+                  }@else {
+                    <p class="text-gray-300 text-sm sm:text-base">{{experience.from}} - <span class="italic">Present</span></p>
+                  }
+                </div>
+                
+                <div class="mt-4">
+                  <p class="text-gray-300 text-sm sm:text-base">{{experience.jobDescription}}</p>
+                </div>
+              </div>
+            </div>
   
-      <main class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-800">
-        <div class="w-full">
-            <div> 
-                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">My Experiences</h2>
-            </div>
-            <div class="flex w-full space-x-20">
-                <div class="w-1/2">
-                    <div *ngFor="let experience of experiences" class="text-gray-50 mt-14 bg-gray-900 p-7 drop-shadow-2xl">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <h2 class="text-xl font-semibold text-gray-800 dark:text-white">{{experience.jobTitle}}</h2>
-                            </div>
-                            <div class="space-x-5">
-                                <fa-icon [icon] = 'edit' size="lg" class="cursor-pointer" (click) = "getExperienceById(experience.experienceId)"></fa-icon>
-                                <fa-icon [icon] = 'delete' size="lg" class="cursor-pointer" (click) = "deleteExperiences(experience.experienceId)" ></fa-icon>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="font-light text-[14px]">{{experience.companyName}}</p>
-                        </div> 
-                        @if(experience.to !== null){
-                            <div>
-                                <p class="font-light text-[14px]">{{experience.from}} - {{experience.to}}</p>
-                            </div>
-                        }@else {
-                            <div>
-                                <p class="font-light text-[14px]">{{experience.from}} - <span class="italic">Present</span></p>
-                            </div>
-                        }
-                        <div class="mt-7 text-[14px]">
-                            <p>{{experience.jobDescription}}</p>
-                        </div>
-                    </div>
+            <!-- Experience Form -->
+            <div class="w-full lg:w-1/2 bg-gray-900 p-5 sm:p-7 rounded-lg shadow-lg">
+              <form [formGroup]="editExperience" (ngSubmit)="editMode ? updateExperiences() : saveExperiences()">
+                <!-- Job Title -->
+                <div class="mb-4 sm:mb-6">
+                  <label class="block font-bold text-white mb-2">Job Title</label>
+                  <input 
+                    type="text" 
+                    placeholder="Enter job title" 
+                    class="w-full p-3 text-[14px] bg-gray-700 dark:bg-gray-600 text-white rounded outline-none"
+                    formControlName="jobTitle">
+                  <p *ngIf="isInvalid('jobTitle')" class="text-red-500 text-sm mt-1">Job title is required</p>
                 </div>
-                <div class="text-gray-50 mt-10 text-[14px] w-1/2 mr-20 bg-gray-900 p-7 drop-shadow-2xl">
-                    <form [formGroup]="editExperience" (ngSubmit)="editMode ? updateExperiences() : saveExperiences()">
-                        <div class="mb-6">
-                            <label for="" class="font-bold">Job Title</label>
-                            <input type="text" placeholder="Enter job title" class="w-full p-3 bg-gray-700 outline-none " formControlName="jobTitle">
-                            <p *ngIf="isInvalid('jobTitle')" class="text-red-500 text-sm mt-1">Job title is required</p>
-                        </div>
-                        <div class="mb-6">
-                          <label for="" class="font-bold">Company Name</label>
-                          <input type="text" placeholder="Enter company name" class="w-full p-3 bg-gray-700 outline-none " formControlName="companyName">
-                          <p *ngIf="isInvalid('companyName')" class="text-red-500 text-sm mt-1">Company name is required</p>
-                      </div>
-                        <div class="flex space-x-10 w-full mb-6">
-                            <div class="w-1/2">
-                                <label for="" class="font-bold">From</label>
-                                <input type="text" placeholder="Enter starting date (eg. 2023-01-01)" class="w-full p-3 bg-gray-700 outline-none " formControlName="from">
-                                <p *ngIf="isInvalid('from')" class="text-red-500 text-sm mt-1">Required</p>
-                            </div>
-                            <div class="w-1/2">
-                                <label for="" class="font-bold">To</label>
-                                <input type="text" placeholder="Enter end date (eg. 2023-04-01)" class="w-full p-3 bg-gray-700 outline-none " formControlName="to">
-                                <p *ngIf="isInvalid('to')" class="text-red-500 text-sm mt-1">Required</p>
-                                <!-- <div class="flex items-center space-x-3">
-                                    <input type="checkbox" name="isWorking" value="I am currently working here." formControlName="to">
-                                    <p>I am currently working here</p>
-                                </div> -->
-                            </div>
-                        </div>
-                        <div>
-                            <label for="" class="font-bold">Job Description</label>
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Add your description..." class=" w-full p-3 bg-gray-700 outline-none" formControlName="jobDescription"></textarea>
-                            <p *ngIf="isInvalid('jobDescription')" class="text-red-500 text-sm mt-1">Job description is required</p>
-                        </div>
-                        <div class="flex items-center space-x-5 mt-5">
-                            <div>
-                                <button type="submit" class="rounded-full bg-blue-900 w-36 text-[13px] p-4 font-semibold">
-                                    {{editMode ? 'Update' : 'Save'}}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+  
+                <!-- Company Name -->
+                <div class="mb-4 sm:mb-6">
+                  <label class="block font-bold text-white mb-2">Company Name</label>
+                  <input 
+                    type="text" 
+                    placeholder="Enter company name" 
+                    class="w-full p-3 text-[14px] bg-gray-700 dark:bg-gray-600 text-white rounded outline-none"
+                    formControlName="companyName">
+                  <p *ngIf="isInvalid('companyName')" class="text-red-500 text-sm mt-1">Company name is required</p>
                 </div>
+  
+                <!-- Date Range - Stack on mobile -->
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-4 sm:mb-6">
+                  <div class="w-full sm:w-1/2">
+                    <label class="block font-bold text-white mb-2">From</label>
+                    <input 
+                      type="text" 
+                      placeholder="YYYY-MM-DD" 
+                      class="w-full p-3 text-[14px] bg-gray-700 dark:bg-gray-600 text-white rounded outline-none"
+                      formControlName="from">
+                    <p *ngIf="isInvalid('from')" class="text-red-500 text-sm mt-1">Required</p>
+                  </div>
+                  <div class="w-full sm:w-1/2">
+                    <label class="block font-bold text-white mb-2">To</label>
+                    <input 
+                      type="text" 
+                      placeholder="YYYY-MM-DD or 'Present' if currently working" 
+                      class="w-full p-3 text-[14px] bg-gray-600 text-white rounded outline-none"
+                      formControlName="to">
+                    <p *ngIf="isInvalid('to')" class="text-red-500 text-sm mt-1">Required</p>
+                  </div>
+                </div>
+  
+                <div class="mb-6">
+                  <label class="block font-bold text-white mb-2">Job Description</label>
+                  <textarea 
+                    placeholder="Describe your responsibilities and achievements..." 
+                    rows="5"
+                    class="w-full p-3 text-[14px] bg-gray-700 dark:bg-gray-600 text-white rounded outline-none"
+                    formControlName="jobDescription"></textarea>
+                  <p *ngIf="isInvalid('jobDescription')" class="text-red-500 text-sm mt-1">Job description is required</p>
+                </div>
+  
+                <!-- Submit Button -->
+                <div class="flex justify-start">
+                  <button 
+                    type="submit"
+                    class="px-6 py-3 bg-blue-900 rounded-full text-sm text-white">
+                    {{editMode ? 'Update Experience' : 'Save Experience'}}
+                  </button>
+                </div>
+              </form>
             </div>
+          </div>
         </div>
-        
       </main>
-    </div> 
+    </div>
   </div>

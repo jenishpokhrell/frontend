@@ -14,7 +14,7 @@ import { SkillsService } from '../../../../../services/skills/skills.service';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, FaIconComponent, NgFor, PdfViewerModule, RouterLink],
+  imports: [SidebarComponent, HeaderComponent, FaIconComponent, NgFor, PdfViewerModule, RouterLink, NgIf],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
@@ -30,6 +30,12 @@ export class EmployerProfileComponent implements OnInit {
   user: UserModel | null = null
   skills: Skills[] = []
   mySkills : Skills[] = []
+
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
 
   ngOnInit(): void {
     this.getMyDetails()

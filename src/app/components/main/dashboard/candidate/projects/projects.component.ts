@@ -48,6 +48,12 @@ export class ProjectsComponent implements OnInit {
     projectDescription: new FormControl('', [Validators.required])
   })
 
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
+
 
   ngOnInit(): void {
     this.getMyProjects()
