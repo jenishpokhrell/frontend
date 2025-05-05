@@ -127,4 +127,10 @@ export class EditJobComponent implements OnInit {
     this.collapsed = !this.collapsed;
   }
 
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
+
 }

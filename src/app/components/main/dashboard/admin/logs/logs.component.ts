@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from "../../../../reusable/sidebar/sidebar.component";
 import { faTachometerAlt, faUserAlt, faUser, faUserClock, faBriefcase, faClipboardList } from '@fortawesome/free-solid-svg-icons';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { LogsService } from '../../../../../services/logs/logs.service';
@@ -10,7 +10,7 @@ import { Logs } from '../../../../../model/log';
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, NgFor, FaIconComponent],
+  imports: [SidebarComponent, HeaderComponent, NgFor, FaIconComponent, NgIf],
   templateUrl: './logs.component.html',
   styleUrl: './logs.component.css'
 }) 
@@ -39,6 +39,12 @@ export class LogsComponent implements OnInit {
 
   logService = inject(LogsService)
   logs : Logs[] = []
+
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
 
 
   ngOnInit(): void {

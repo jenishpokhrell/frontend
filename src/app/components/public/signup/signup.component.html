@@ -1,131 +1,178 @@
-<div class="mx-7 md:mx-auto my-20 md:w-[50%] ">
+<div class="mx-4 md:mx-auto my-10 md:my-20 w-full md:w-[90%] lg:w-[70%] xl:w-[50%] px-4">
     <div>
-        <h1 class="text-3xl font-semibold">Registration Form</h1>
+        <h1 class="text-2xl md:text-3xl font-semibold">Registration Form</h1>
     </div>
     <div>
-        <p class="font-light mt-1">Register yourself and connect with us || Already have an account? 
-            <span class="font-bold text-[#3094FF] cursor-pointer" routerLink="/login">Login here</span>
+        <p class="font-light mt-1 text-sm md:text-base">Register yourself and connect with us || Already have an account? 
+            <span class="font-bold text-[#3094FF] hover:underline cursor-pointer" routerLink="/login">Login here</span>
         </p>
     </div>
-    <div class="mt-12">
-        <form [formGroup]="signUp" (submit)="register()">
-            <div class="mb-8">
-                <label for="" class="font-bold">Are you a?</label>
-                <div class="flex space-x-8 mt-1">
-                    <select id="roles" formControlName="roles" class="border-2 p-4 w-full bg-transparent"
-                    [ngClass]="{'border-red-700': isInvalid('roles'), 'border-green-500' : isValid('roles')}">
-                        <option value="">-- Select Role --</option>
-                        <option value="Employer">Employer</option>
-                        <option value="Candidate">Candidate</option>
-                      </select>
-                    </div>
-                    <p *ngIf="isInvalid('roles')" class="text-red-500 text-sm mt-1">Role is required</p>
+    
+    <div class="mt-8 md:mt-12">
+        <form [formGroup]="signUp" (submit)="register()" class="space-y-6">
+            <!-- Role Selection -->
+            <div>
+                <label class="font-bold block mb-2">Are you a?</label>
+                <select id="roles" formControlName="roles" 
+                    class="border-2 p-3 md:p-4 w-full bg-transparent rounded"
+                    [ngClass]="{'border-red-700': isInvalid('roles'), 'border-green-500': isValid('roles')}">
+                    <option value="">-- Select Role --</option>
+                    <option value="Employer">Employer</option>
+                    <option value="Candidate">Candidate</option>
+                </select>
+                <p *ngIf="isInvalid('roles')" class="text-red-500 text-sm mt-1">Role is required</p>
             </div>
-            <div class="md:mb-7 md:w-full md:flex md:space-x-10">
-                <div class="mb-3 md:w-1/2">
-                    <label for="" class="font-bold">First Name</label>
-                    <input type="text" placeholder="Enter your first name" class="border-2 p-4 w-full" formControlName="firstname"
-                    [ngClass]="{'border-red-700': isInvalid('firstname'), 'border-green-500' : isValid('firstname')}"
-                    >
+
+            <!-- Name Fields -->
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="flex-1">
+                    <label class="font-bold block mb-2">First Name</label>
+                    <input type="text" placeholder="Enter your first name" 
+                        class="border-2 p-3 md:p-4 w-full rounded"
+                        formControlName="firstname"
+                        [ngClass]="{'border-red-700': isInvalid('firstname'), 'border-green-500': isValid('firstname')}">
                     <p *ngIf="isInvalid('firstname')" class="text-red-500 text-sm mt-1">Firstname is required</p>
                 </div>
-                <div class="mb-3 md:w-1/2">
-                    <label for="" class="font-bold">Last Name</label>
-                    <input type="text" placeholder="Enter your last name" class="border-2 p-4 w-full" formControlName="lastname"
-                    [ngClass]="{'border-red-700': isInvalid('lastname'), 'border-green-500' : isValid('lastname')}"
-                    >
+                <div class="flex-1">
+                    <label class="font-bold block mb-2">Last Name</label>
+                    <input type="text" placeholder="Enter your last name" 
+                        class="border-2 p-3 md:p-4 w-full rounded"
+                        formControlName="lastname"
+                        [ngClass]="{'border-red-700': isInvalid('lastname'), 'border-green-500': isValid('lastname')}">
                     <p *ngIf="isInvalid('lastname')" class="text-red-500 text-sm mt-1">Lastname is required</p>
                 </div>
             </div>
-            <div class="md:mb-7 md:w-full md:flex md:space-x-10">
-                <div class="mb-3 md:w-1/2">
-                    <label for="" class="font-bold">Username</label>
-                    <input type="text" placeholder="Enter your username" class="border-2 p-4 w-full" formControlName="username"
-                    [ngClass]="{'border-red-700': isInvalid('username'), 'border-green-500' : isValid('username')}"
-                    >
+
+            <!-- Username and Address -->
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="flex-1">
+                    <label class="font-bold block mb-2">Username</label>
+                    <input type="text" placeholder="Enter your username" 
+                        class="border-2 p-3 md:p-4 w-full rounded"
+                        formControlName="username"
+                        [ngClass]="{'border-red-700': isInvalid('username'), 'border-green-500': isValid('username')}">
                     <p *ngIf="isInvalid('username')" class="text-red-500 text-sm mt-1">Username is required</p>
                 </div>
-                <div class=" mb-3 md:w-1/2">
-                    <label for="" class="font-bold">Address</label>
-                    <input type="text" placeholder="Enter your address" class="border-2 p-4 w-full" formControlName="address"
-                    [ngClass]="{'border-red-700': isInvalid('address'), 'border-green-500' : isValid('address')}">
+                <div class="flex-1">
+                    <label class="font-bold block mb-2">Address</label>
+                    <input type="text" placeholder="Enter your address" 
+                        class="border-2 p-3 md:p-4 w-full rounded"
+                        formControlName="address"
+                        [ngClass]="{'border-red-700': isInvalid('address'), 'border-green-500': isValid('address')}">
                     <p *ngIf="isInvalid('address')" class="text-red-500 text-sm mt-1">Address is required</p>
                 </div>
             </div>
-            <div class="md:mb-7 mb-3">
-                <label for="" class="font-bold">Email Address</label>
-                <input type="text" placeholder="Enter your email address" class="border-2 p-4 w-full" formControlName="email"
-                [ngClass]="{'border-red-700': isInvalid('email'), 'border-green-500' : isValid('email')}">
-                <p *ngIf="signUp.get('email')?.touched && signUp.get('email')?.hasError('required')" class="text-red-500 text-sm mt-1">Email is required</p>
-              <p *ngIf="signUp.get('email')?.touched && signUp.get('email')?.hasError('email')" class="text-red-500 text-sm mt-1">Invalid email format</p>
-                <p *ngIf="signUp.get('roles')?.value === 'Candidate'" class="text-slate-400 mt-2">Job Application Update will be sent to you on this email id</p>
+
+            <!-- Email -->
+            <div>
+                <label class="font-bold block mb-2">Email Address</label>
+                <input type="text" placeholder="Enter your email address" 
+                    class="border-2 p-3 md:p-4 w-full rounded"
+                    formControlName="email"
+                    [ngClass]="{'border-red-700': isInvalid('email'), 'border-green-500': isValid('email')}">
+                <p *ngIf="signUp.get('email')?.touched && signUp.get('email')?.hasError('required')" 
+                   class="text-red-500 text-sm mt-1">Email is required</p>
+                <p *ngIf="signUp.get('email')?.touched && signUp.get('email')?.hasError('email')" 
+                   class="text-red-500 text-sm mt-1">Invalid email format</p>
+                <p *ngIf="signUp.get('roles')?.value === 'Candidate'" class="text-gray-500 text-sm mt-2">
+                    Job Application Update will be sent to you on this email id
+                </p>
             </div>
-            <div class="md:mb-8 mb-3">
-                <label for="" class="font-bold">Mobile Number</label>
-                <input type="text" placeholder="Enter your mobile number" class="border-2 p-4 w-full" formControlName="contact"
-                [ngClass]="{'border-red-700': isInvalid('contact'), 'border-green-500' : isValid('contact')}">
-                <p *ngIf="signUp.get('contact')?.touched && signUp.get('contact')?.hasError('required')" class="text-red-500 text-sm mt-1">Contact is required</p>
-              <p *ngIf="signUp.get('contact')?.touched && signUp.get('contact')?.hasError('pattern')" class="text-red-500 text-sm mt-1">Enter a valid number</p>
-                <p *ngIf="signUp.get('roles')?.value === 'Candidate'" class="text-slate-400 mt-2">Recruiters will contact you on this number</p>
+
+            <!-- Mobile Number -->
+            <div>
+                <label class="font-bold block mb-2">Mobile Number</label>
+                <input type="text" placeholder="Enter your mobile number" 
+                    class="border-2 p-3 md:p-4 w-full rounded"
+                    formControlName="contact"
+                    [ngClass]="{'border-red-700': isInvalid('contact'), 'border-green-500': isValid('contact')}">
+                <p *ngIf="signUp.get('contact')?.touched && signUp.get('contact')?.hasError('required')" 
+                   class="text-red-500 text-sm mt-1">Contact is required</p>
+                <p *ngIf="signUp.get('contact')?.touched && signUp.get('contact')?.hasError('pattern')" 
+                   class="text-red-500 text-sm mt-1">Enter a valid number</p>
+                <p *ngIf="signUp.get('roles')?.value === 'Candidate'" class="text-gray-500 text-sm mt-2">
+                    Recruiters will contact you on this number
+                </p>
             </div>
-            <div class="md:mb-8 mb-3">
-                <label for="" class="font-bold">Are you?</label>
-                <div class="flex space-x-8 mt-1">
-                    <select id="gender" formControlName="gender" class="border-2 p-4 w-full bg-transparent"
-                    [ngClass]="{'border-red-700': isInvalid('gender'), 'border-green-500' : isValid('gender')}">
-                        <option value="">-- Select Role --</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
+
+            <!-- Gender -->
+            <div>
+                <label class="font-bold block mb-2">Are you?</label>
+                <select id="gender" formControlName="gender" 
+                    class="border-2 p-3 md:p-4 w-full bg-transparent rounded"
+                    [ngClass]="{'border-red-700': isInvalid('gender'), 'border-green-500': isValid('gender')}">
+                    <option value="">-- Select Gender --</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
                 <p *ngIf="isInvalid('gender')" class="text-red-500 text-sm mt-1">Gender is required</p>
             </div>
-            <div class="md:mb-7 md:w-full md:flex md:space-x-10">
-                <div class="mb-3 md:w-1/2">
-                    <label for="" class="font-bold">Position</label>
-                    <input type="text" placeholder="Enter your current position" class="border-2 p-4 w-full" formControlName="jobtitle"
-                    [ngClass]="{'border-red-700': isInvalid('jobtitle'), 'border-green-500' : isValid('jobtitle')}">
+
+            <!-- Position and Experience -->
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="flex-1">
+                    <label class="font-bold block mb-2">Position</label>
+                    <input type="text" placeholder="Enter your current position" 
+                        class="border-2 p-3 md:p-4 w-full rounded"
+                        formControlName="jobtitle"
+                        [ngClass]="{'border-red-700': isInvalid('jobtitle'), 'border-green-500': isValid('jobtitle')}">
                     <p *ngIf="isInvalid('jobtitle')" class="text-red-500 text-sm mt-1">Position is required</p>
                 </div>
-                <div class="mb-3 md:w-1/2">
-                    <label for="" class="font-bold">Years of experience</label>
-                    <input type="text" placeholder="Enter your experience in years" class="border-2 p-4 w-full" formControlName="years_of_experience"
-                    [ngClass]="{'border-red-700': isInvalid('years_of_experience'), 'border-green-500' : isValid('years_of_experience')}">
+                <div class="flex-1">
+                    <label class="font-bold block mb-2">Years of experience</label>
+                    <input type="text" placeholder="Enter your experience in years" 
+                        class="border-2 p-3 md:p-4 w-full rounded"
+                        formControlName="years_of_experience"
+                        [ngClass]="{'border-red-700': isInvalid('years_of_experience'), 'border-green-500': isValid('years_of_experience')}">
                     <p *ngIf="isInvalid('years_of_experience')" class="text-red-500 text-sm mt-1">Years of experience is required</p>
                 </div>
             </div>
 
-            <div class="md:mb-8 mb-3">
-                <label for="" class="font-bold">Select Profile Photo</label>
-                <input type="file" (change) = "onFileSelected($event)" accept=".png, .jpg, .jpeg" class="md:w-full" formControlName="profilePhoto"
-                [ngClass]="{'border-red-700': isInvalid('profilePhoto'), 'border-green-500' : isValid('profilePhoto')}">
-                <p *ngIf="isInvalid('profilePhoto')" class="text-red-500 text-sm mt-1">Photo is required</p>
-                <p class="text-slate-400 mt-2">Only .jpg or .png file is accepted</p>
-            </div>
-            <div *ngIf="selectedImage" class="mb-8">
-                <img [src]="selectedImage" alt="Selected Image" width="250">
-              </div>
-
-            <div class="mb-10">
-                <label for="" class="font-bold">Password</label>
-                <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter password" class="border-2 p-4 w-full" formControlName="password"
-                [ngClass]="{'border-red-700': isInvalid('password'), 'border-green-500' : isValid('password')}">
-                <p *ngIf="signUp.get('password')?.touched && signUp.get('password')?.hasError('required')" class="text-red-500 text-sm mt-1">Password is required</p>
-              <p *ngIf="signUp.get('password')?.touched && signUp.get('password')?.hasError('minlength')" class="text-red-500 text-sm mt-1">Minimum 8 characters</p>
-                <div class="flex">
-                    <input type="checkbox" id="showPassword" (click)="togglePasswordVisibility()" value="Show your password">
-                    <label for="showPassword" class="ml-2">Show your password</label>
-                </div>
-            </div>
-
+            <!-- Profile Photo -->
             <div>
-                <div>
-                    <p class="text-slate-600">By Registring, you agree to the <span class="text-[#3094FF]">Terms and Conditions</span> & 
-                        <span class="text-[#3094FF]">Privacy Policy
-                    </span> of Career Dev</p>
+                <label class="font-bold block mb-2">Select Profile Photo</label>
+                <input type="file" (change)="onFileSelected($event)" accept=".png, .jpg, .jpeg" 
+                    class="w-full p-2 border rounded"
+                    formControlName="profilePhoto"
+                    [ngClass]="{'border-red-700': isInvalid('profilePhoto'), 'border-green-500': isValid('profilePhoto')}">
+                <p *ngIf="isInvalid('profilePhoto')" class="text-red-500 text-sm mt-1">Photo is required</p>
+                <p class="text-gray-500 text-sm mt-2">Only .jpg or .png file is accepted</p>
+                <div *ngIf="selectedImage" class="mt-4">
+                    <img [src]="selectedImage" alt="Selected Image" class="max-w-[250px] rounded">
                 </div>
-                <div class="mt-10 text-center font-bold text-[14px] text-white">
-                    <button type="submit" class="bg-[#6BA1FF] rounded-full p-4 w-fit cursor-pointer">Register now</button>
+            </div>
+
+            <!-- Password -->
+            <div>
+                <label class="font-bold block mb-2">Password</label>
+                <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter password" 
+                    class="border-2 p-3 md:p-4 w-full rounded"
+                    formControlName="password"
+                    [ngClass]="{'border-red-700': isInvalid('password'), 'border-green-500': isValid('password')}">
+                <p *ngIf="signUp.get('password')?.touched && signUp.get('password')?.hasError('required')" 
+                   class="text-red-500 text-sm mt-1">Password is required</p>
+                <p *ngIf="signUp.get('password')?.touched && signUp.get('password')?.hasError('minlength')" 
+                   class="text-red-500 text-sm mt-1">Minimum 8 characters</p>
+                <div class="flex items-center mt-2">
+                    <input type="checkbox" id="showPassword" (click)="togglePasswordVisibility()" 
+                           class="h-4 w-4">
+                    <label for="showPassword" class="ml-2 text-sm">Show your password</label>
+                </div>
+            </div>
+
+            <!-- Terms and Submit -->
+            <div class="space-y-6">
+                <p class="text-gray-600 text-sm md:text-base">
+                    By Registring, you agree to the 
+                    <span class="text-[#3094FF] hover:underline cursor-pointer">Terms and Conditions</span> & 
+                    <span class="text-[#3094FF] hover:underline cursor-pointer">Privacy Policy</span> 
+                    of Career Dev
+                </p>
+                <div class="text-center">
+                    <button type="submit" 
+                        class="bg-[#6BA1FF] hover:bg-[#3094FF] text-white font-bold py-3 px-8 rounded-full transition-colors">
+                        Register now
+                    </button>
                 </div>
             </div>
         </form>
@@ -133,6 +180,5 @@
 </div>
 
 <app-footer></app-footer>
-
 
 <router-outlet></router-outlet>

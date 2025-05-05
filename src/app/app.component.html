@@ -1,133 +1,249 @@
-<div
-  *ngIf="showNavbar"
-  class=" md:h-20 bg-gradient-to-r from-[#5FA8F5] via-[#3094FF] to-blue-600 ...  md:content-center" >
-  <div class="md:w-[80%] md:p-0 lg:p-0 p-4 md:flex md:items-center md:justify-between md:mx-auto">
-    <div>
-      <img
-        src="./assets/logo.png"
-        alt="logo"
-        height="70"
-        class="cursor-pointer sm:w-52 m-0 md:w-64 w-52"
-        routerLink=""
-      />
-    </div>
+<div *ngIf="showNavbar" class="bg-gradient-to-r from-[#5FA8F5] via-[#3094FF] to-blue-600 h-20 sticky w-full z-50">
+  <div class="w-[90%] md:w-[80%] p-0 mx-auto h-full flex items-center justify-between relative">
+    <!-- Logo -->
+    <img
+      src="./assets/logo.png"
+      alt="logo"
+      height="70"
+      class="cursor-pointer w-44 md:w-64"
+      routerLink=""
+    />
 
-    <div class="absolute right-10 top-6 ">
-      <button class="lg:hidden md:hidden text-white" (click)="toggleMenu()">
-        <span class="text-3xl">
-          {{!isMenuOpen ? '&#9776;' : '&times;'}}
-          </span>
-      </button>
-    </div>
-    <div>
-      <nav [ngClass]="{'block': isMenuOpen, 'hidden' : !isMenuOpen}" class="navbar md:block text-center transition md:text-[14px] text-white text-[15px] " >
-        <hr class="md:hidden lg:hidden mt-4">
-        <ul class="md:flex md:m-3">
+    <div class="hidden md:flex items-center h-full">
+      <nav class="text-white text-[14px] h-full flex items-center">
+        <ul class="flex m-3 h-full items-center">
           <li
-            class="md:mr-14 my-4 cursor-pointer"
+            class="mr-14 h-full flex items-center cursor-pointer"
             routerLink=""
             routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: true }"
           >
             Home
           </li>
-          <hr class="md:hidden lg:hidden mt-4 w-32 mx-auto ">
           <li
-            class="md:mr-14 my-4 cursor-pointer"
+            class="mr-14 h-full flex items-center cursor-pointer"
             routerLink="/about-us"
             routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: true }"
           >
             About
           </li>
-          <hr class="md:hidden lg:hidden mt-4 w-32 mx-auto">
-          @if( isLoggedIn()){
+          @if(isLoggedIn()) {
             <li
-            *ngIf="userModel?.roles?.includes('CANDIDATE')"
-            class="md:mr-14 my-4 cursor-pointer"
-            routerLink="/browsejobs" 
-          >
-            Browse Jobs
-          </li>
-          }@else {
+              *ngIf="userModel?.roles?.includes('CANDIDATE')"
+              class="mr-14 h-full flex items-center cursor-pointer"
+              routerLink="/browsejobs" 
+            >
+              Browse Jobs
+            </li>
+          } @else {
             <li
-            class="md:mr-14 my-4 cursor-pointer"
-            routerLink="/login"
-          >
-            Browse Jobs
-          </li>
+              class="mr-14 h-full flex items-center cursor-pointer"
+              routerLink="/login"
+            >
+              Browse Jobs
+            </li>
           }
-          <hr class="md:hidden lg:hidden mt-4 w-32 mx-auto">
-          @if(isLoggedIn()){
+          @if(isLoggedIn()) {
             <li
-            *ngIf="userModel?.roles?.includes('EMPLOYER')"
-              class="md:mr-14 my-4 cursor-pointer"
+              *ngIf="userModel?.roles?.includes('EMPLOYER')"
+              class="mr-14 h-full flex items-center cursor-pointer"
               routerLink="/postjobs"
             >
               Post Job
             </li>
-          }@else {
+          } @else {
             <li
-              class="md:mr-14 my-4 cursor-pointer"
+              class="mr-14 h-full flex items-center cursor-pointer"
               routerLink="/login"
             >
               Post Job
             </li>
           }
-          <hr class="md:hidden lg:hidden mt-4 m-4">
         </ul>
       </nav>
-    </div>
-    @if(!isLoggedIn()){
-      <div [ngClass]="{'block': isMenuOpen, 'hidden' : !isMenuOpen}" class="md:flex md:items-center md:justify-center  md:space-x-4 flex space-x-10 justify-center" >
-        <div
-          class="bg-[#6BA1FF] text-white
-          border-none md:p-2 md:w-28 w-[20%] p-2 text-[13px] text-center rounded-full cursor-pointer drop-shadow-xl hover:drop-shadow-none transition-all"
-          routerLink="/login"
-        >
-          <button>Login</button>
+
+      @if(!isLoggedIn()) {
+        <div class="flex items-center space-x-4">
+          <button
+            class="bg-[#6BA1FF] text-white p-2 w-28 text-[13px] rounded-full drop-shadow-xl hover:drop-shadow-none transition-all"
+            routerLink="/login"
+          >
+            Login
+          </button>
+          <button
+            class="bg-[#6BA1FF] text-white p-2 w-28 text-[13px] rounded-full drop-shadow-xl hover:drop-shadow-none transition-all"
+            routerLink="/signup"
+          >
+            Sign up
+          </button>
         </div>
-        <div
-          class="bg-[#6BA1FF] text-white
-          md:p-2 md:w-28 w-[25%] p-2 text-[13px] text-center rounded-full drop-shadow-xl hover:drop-shadow-none transition-all"
-          routerLink="/signup"
-        >
-          <button>Sign up</button>
-        </div>
-      </div>
-    }@else{
-      <div *ngIf="userModel" class="m-3 p-2 bg-[#6BA1FF] rounded-full flex items-center justify-center space-x-2 transition-all cursor-pointer" 
-      [routerLink]="
-      userModel.roles.includes('CANDIDATE') ? '/candidate' : 
-      userModel.roles.includes('EMPLOYER') ? '/employer' : 
-      '/admin'
-    "
-      > 
-      @if(userModel.profilePhoto === null){
-        <div class="bg-blue-900 text-white font-bold p-2 w-10 text-center rounded-full ml-1">
-          {{userModel.firstname.charAt(0)}}
-        </div>
-      }@else {
-        <div class="w-10 h-8 rounded-full flex items-center justify-center font-bold">
-          <img
-          [src]="userModel.profilePhoto"
-          alt="profile picture"
-          width="200"
-          class="rounded-full"
-        />
+      } @else {
+        <div 
+          *ngIf="userModel" 
+          class="m-3 p-2 bg-[#6BA1FF] rounded-full flex items-center justify-center space-x-2 transition-all cursor-pointer"
+          [routerLink]="
+            userModel.roles.includes('CANDIDATE') ? '/candidate' : 
+            userModel.roles.includes('EMPLOYER') ? '/employer' : 
+            '/admin'
+          "
+        > 
+          @if(userModel.profilePhoto === null) {
+            <div class="bg-blue-900 text-white font-bold p-2 w-10 text-center rounded-full ml-1">
+              {{userModel.firstname.charAt(0)}}
+            </div>
+          } @else {
+            <div class="w-10 h-8 rounded-full flex items-center justify-center font-bold">
+              <img
+                [src]="userModel.profilePhoto"
+                alt="profile picture"
+                width="200"
+                class="rounded-full"
+              />
+            </div>
+          }
+          <div>
+            <p class="font-semibold text-white text-[14px]"> {{userModel.firstname}} {{userModel.lastname}}</p>
+          </div>
+          <div class="ml-6 p-2" (click)="logout()">
+            <fa-icon [icon]="signout" size="lg" class="text-white"></fa-icon>
+          </div>
         </div>
       }
-        <div>
-          <p class="font-semibold text-white text-[14px]"> {{userModel.firstname}} {{userModel.lastname}}</p>
-        </div>
+    </div>
 
-        <div class="ml-6 p-2" (click) = "logout()">
-          <fa-icon [icon]="signout" size="lg" class="text-white"></fa-icon>
-        </div>
+    <button 
+      class="md:hidden text-white text-3xl absolute right-4 top-1/2 transform -translate-y-1/2"
+      (click)="toggleMenu()"
+      aria-label="Toggle menu"
+    >
+      {{!isMenuOpen ? '&#9776;' : '&times;'}}
+    </button>
+  </div>
 
-      </div>
-    }
+  <div 
+    *ngIf="isMenuOpen"
+    class="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40 mt-20"
+    (click)="toggleMenu()"
+  ></div>
+
+  <div 
+    [ngClass]="{
+      'fixed top-20 left-0 right-0 bg-gradient-to-r from-[#5FA8F5] via-[#3094FF] to-blue-600 z-50 py-4 px-6 shadow-lg': isMenuOpen,
+      'hidden': !isMenuOpen
+    }"
+  >
+    <nav class="text-white text-[15px]">
+      <ul class="space-y-4">
+        <li
+          class="cursor-pointer py-2"
+          routerLink=""
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="isMenuOpen = false"
+        >
+          Home
+        </li>
+        <li
+          class="cursor-pointer py-2"
+          routerLink="/about-us"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="isMenuOpen = false"
+        >
+          About
+        </li>
+        @if(isLoggedIn()) {
+          <li
+            *ngIf="userModel?.roles?.includes('CANDIDATE')"
+            class="cursor-pointer py-2"
+            routerLink="/browsejobs"
+            (click)="isMenuOpen = false"
+          >
+            Browse Jobs
+          </li>
+        } @else {
+          <li
+            class="cursor-pointer py-2"
+            routerLink="/login"
+            (click)="isMenuOpen = false"
+          >
+            Browse Jobs
+          </li>
+        }
+        @if(isLoggedIn()) {
+          <li
+            *ngIf="userModel?.roles?.includes('EMPLOYER')"
+            class="cursor-pointer py-2"
+            routerLink="/postjobs"
+            (click)="isMenuOpen = false"
+          >
+            Post Job
+          </li>
+        } @else {
+          <li
+            class="cursor-pointer py-2"
+            routerLink="/login"
+            (click)="isMenuOpen = false"
+          >
+            Post Job
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <div class="mt-6 flex flex-col space-y-4">
+      @if(!isLoggedIn()) {
+        <button
+          class="bg-[#6BA1FF] text-white p-2 w-full text-[13px] rounded-full drop-shadow-xl hover:drop-shadow-none transition-all"
+          routerLink="/login"
+          (click)="isMenuOpen = false"
+        >
+          Login
+        </button>
+        <button
+          class="bg-[#6BA1FF] text-white p-2 w-full text-[13px] rounded-full drop-shadow-xl hover:drop-shadow-none transition-all"
+          routerLink="/signup"
+          (click)="isMenuOpen = false"
+        >
+          Sign up
+        </button>
+      } @else {
+        <div 
+          *ngIf="userModel" 
+          class="p-2 bg-[#6BA1FF] rounded-full flex items-center justify-between transition-all cursor-pointer"
+          [routerLink]="
+            userModel.roles.includes('CANDIDATE') ? '/candidate' : 
+            userModel.roles.includes('EMPLOYER') ? '/employer' : 
+            '/admin'
+          "
+          (click)="isMenuOpen = false"
+        > 
+          <div class="flex items-center space-x-2">
+            @if(userModel.profilePhoto === null) {
+              <div class="bg-blue-900 text-white font-bold p-2 w-10 text-center rounded-full">
+                {{userModel.firstname.charAt(0)}}
+              </div>
+            } @else {
+              <div class="w-10 h-8 rounded-full flex items-center justify-center font-bold">
+                <img
+                  [src]="userModel.profilePhoto"
+                  alt="profile picture"
+                  width="200"
+                  class="rounded-full"
+                />
+              </div>
+            }
+            <p class="font-semibold text-white text-[14px]"> {{userModel.firstname}} {{userModel.lastname}}</p>
+          </div>
+          <div class="p-2" (click)="logout()">
+            <fa-icon [icon]="signout" size="lg" class="text-white"></fa-icon>
+          </div>
+        </div>
+      }
+    </div>
   </div>
 </div>
+
 
 <router-outlet></router-outlet>

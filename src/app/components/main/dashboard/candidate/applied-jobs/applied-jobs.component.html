@@ -25,21 +25,20 @@
     [class.md:ml-20]="collapsed"
   >
     <app-header
-      [title]="'Candidate Dashboard'"
+      [title]="'Applied Jobs'"
       (toggleSidebar)="toggleMobileSidebar()"
     ></app-header>
 
     <main class="flex-1 overflow-y-auto p-4 sm:p-6 bg-gray-50 dark:bg-gray-800">
       <div class="mx-auto">
-        <!-- Page Title -->
         <div class="mb-4 sm:mb-6">
           <h2 class="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white">
             My Applied Jobs
           </h2>
         </div>
 
-        <!-- Applied Jobs Table - Card layout on mobile -->
-        <div class="hidden md:block"> <!-- Desktop Table -->
+        <!-- Desktop View -->
+        <div class="hidden md:block">
           <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
               <thead class="bg-gray-50 dark:bg-gray-600">
@@ -105,7 +104,7 @@
           </div>
         </div>
 
-        <!-- Mobile Cards -->
+        <!-- Mobile View-->
         <div class="md:hidden space-y-4">
           <div *ngFor="let appliedJob of appliedJobs" class="bg-white dark:bg-gray-700 rounded-lg shadow p-4">
             <div class="flex justify-between items-start">
@@ -132,7 +131,7 @@
               <p class="text-gray-600 dark:text-gray-300">
                 <span class="font-medium">Posted By:</span> {{ appliedJob.job.postedBy }}
               </p>
-              <p class="mt-1">
+              <!-- <p class="mt-1">
                 @if(appliedJob.jobStatus === 'Pending'){
                   <span class="text-yellow-600 dark:text-yellow-300">{{appliedJob.message}}</span>
                 }@else if(appliedJob.jobStatus === 'Shortlisted'){
@@ -140,7 +139,7 @@
                 }@else {
                   <span class="text-red-600 dark:text-red-300">{{appliedJob.message}}</span>
                 }
-              </p>
+              </p> -->
             </div>
 
             <div class="mt-4 flex justify-end">

@@ -1,165 +1,193 @@
-<div class="flex h-screen bg-gray-100 dark:bg-gray-900">
-    <app-sidebar [menuItems]="menuItems" 
-                 [collapsed]="collapsed"
-                 (toggleCollapse)="toggleSidebar()"></app-sidebar>
-  
-    <div class="flex-1 flex flex-col overflow-hidden" [class.ml-14]="!collapsed" [class.ml-5]="collapsed">
-      <app-header [title]="'Job Applications'"
-                  (toggleSidebar)="toggleSidebar()"></app-header>
-  
-      <main class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-800">
-        <div class="w-full">
-            <div *ngIf="job" class=" text-gray-50">
-              <div
-                
-                class="flex items-center justify-between my-5"
-              >
-                <div class="">
-                  <h1 class="text-3xl font-bold text-gray-50 uppercase">
-                    {{ job.jobTitle }}
-                  </h1>
-                  <div class="flex space-x-10 font-extralight text-[14px]">
-                    <p>{{ job.jobType }}</p>
-                    <p>{{ job.no_of_Openings }} Vacancies</p>
-                  </div>
-                </div>
-              </div>
-          
-              <hr />
-          
-              <div class="my-5 flex items-start justify-between space-x-20">
-                <div class="my-5 w-[70%]">
-                  <div class="bg-gray-900 rounded-xl px-10 py-5">
-                    <div class="my-5">
-                      <h2 class="text-2xl font-bold text-gray-50">Job Information</h2>
-                    </div>
-                    <hr />
-                    <div>
-                      <div class="flex justify-between mt-5">
-                        <div class="space-y-5">
-                          <p>
-                            Job Type: <span>{{ job.jobType }}</span>
-                          </p>
-                          <p>
-                            Job Level: <span>{{ job.jobLevel }}</span>
-                          </p>
-                          <p>
-                            No. of openings: <span>{{ job.no_of_Openings }}</span>
-                          </p>
-                          <p>
-                            Salary:
-                            <span>Nrs. {{ job.minimumSalary }} to {{ job.maximumSalary }}</span>
-                          </p>
-                        </div>
-                        <div class="space-y-5">
-                          <p *ngIf="job.max_Years_of_Experience_Required === 0">
-                            <span 
-                              >Experience required:
-                            </span>
-                            Freshers
-                          </p>
-                          <p *ngIf="job.max_Years_of_Experience_Required > 0">
-                           <span
-                             >Experience required:
-                           </span>
-                           {{ job.min_Years_of_Experience_Required }} to {{job.max_Years_of_Experience_Required}} years
-                         </p>
-                          <p>Location: Pulchowk, Lalitpur</p>
-                          @if (job.isActive == true) {
-                          <p>Status: <span class="text-green-600">Active</span></p>
-                          }@else{
-                          <p>Status: <span class="text-red-600">Closed </span></p>
-                          }
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="my-10 bg-gray-900 rounded-xl px-10 py-5 space-y-4"
-                  >
-                    <h2 class="text-2xl font-bold text-gray-50">Description</h2>
-                    <hr />
-                    <p class="text-justify leading-8">{{ job.jobDescription }}</p>
-                  </div>
-                  <div
-                    class="mt-10 bg-gray-900 rounded-xl px-10 py-5 space-y-4"
-                  >
-                    <h2 class="text-2xl font-bold text-gray-50">Requirements</h2>
-                    <hr />
-                    <p class="text-justify leading-8">{{ job.requirements }}</p>
-                  </div>
-                </div>
-                <div class="my-5 mr-10 space-y-5">
-                  <div>
-                    <button class="p-4 bg-blue-900 rounded-full w-32 text-[12px] cursor-pointer" routerLink="/employer/edit-job/{{job.id}}">Edit Job</button>
-                  </div>
-                  
-                </div>
-            </div>
-            <div class="overflow-x-auto mb-10">
-              <div> 
-                <h2 class="text-lg font-semibold text-gray-800 dark:text-white mb-5 uppercase">Applications</h2>
-              </div>
-                <table
-                  class="min-w-full divide-y divide-gray-200 dark:divide-gray-600"
-                >
-                  <thead class="bg-gray-50 dark:bg-gray-600">
-                    <tr>
-                      <th
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
-                      >
-                        Status
-                      </th>
-                      <th
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
-                      >
-                        Candidate username
-                    </th>
-                      <th
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
-                      >
-                        
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody
-                  
-                  class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600 cursor-pointer"
-                  >
-                  <tr
-                  *ngFor="let job of job.jobApplications"
-                      class="hover:bg-gray-50 dark:hover:bg-gray-600"
-                    >
-                      <td 
-                        class="px-6 py-4 whitespace-nowrap text-[10px] font-medium text-gray-800 dark:text-white"
-                      >
-                      @if(job.jobStatus === 'Pending'){
-                        <span class="bg-yellow-100 p-2 text-gray-900 rounded-full">{{job.jobStatus}}</span>
-                      }@else if(job.jobStatus === 'Shortlisted'){
-                        <span class="bg-green-200 p-2 text-gray-900 rounded-full">{{job.jobStatus}}</span>
-                      }@else {
-                        <span class="bg-red-200 p-2 text-gray-900 rounded-full">{{job.jobStatus}}</span>
-                      }     
-                      </td>
-                      <td
-                      class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
-                    >
-                      {{ job.candidateName }}
-                    </td>
-                    <td
-                      class="px-6 py-4 whitespace-nowrap text-gray-500 dark:text-gray-300 space-x-4"
-                    >
-                      <button class="p-4 bg-blue-900 rounded-full w-fit text-[12px]" routerLink="/employer/candidate-profile/{{job.candidateId}}/{{job.id}}">View Profile</button>
-                    </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div *ngIf="job.jobApplications.length === 0">
-                <h2 class="text-center text-[20px]">No one has applied for the job yet.</h2>
-              </div>
-        </div>
-        </div>
-      </main>
-    </div> 
+<div class="flex flex-col md:flex-row h-screen bg-gray-100 dark:bg-gray-900">
+  <!-- Mobile Sidebar Overlay -->
+  <div *ngIf="mobileSidebarVisible" class="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 md:hidden" (click)="toggleMobileSidebar()"></div>
+
+  <!-- Sidebar -->
+  <app-sidebar 
+    [menuItems]="menuItems"
+    [collapsed]="collapsed"
+    (toggleCollapse)="toggleSidebar()"
+    class="hidden md:block"
+  ></app-sidebar>
+
+  <!-- Mobile Sidebar -->
+  <div *ngIf="mobileSidebarVisible" class="fixed inset-y-0 left-0 z-50 w-64 bg-gray-800 md:hidden">
+    <app-sidebar
+      [menuItems]="menuItems"
+      [collapsed]="false"
+      (toggleCollapse)="toggleMobileSidebar()"
+    ></app-sidebar>
   </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 flex flex-col overflow-hidden"
+    [class.md:ml-14]="!collapsed"
+    [class.md:ml-5]="collapsed">
+    
+    <!-- Header -->
+    <app-header 
+      [title]="'Job Applications'"
+      (toggleSidebar)="toggleMobileSidebar()"
+    ></app-header>
+
+    <!-- Page Content -->
+    <main class="flex-1 overflow-y-auto p-4 sm:p-6 bg-gray-50 dark:bg-gray-800">
+      <div *ngIf="job" class="w-full text-gray-800 dark:text-gray-50">
+        <!-- Job Title Section -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6">
+          <div>
+            <h1 class="text-xl sm:text-2xl md:text-3xl font-bold uppercase">
+              {{ job.jobTitle }}
+            </h1>
+            <div class="flex flex-wrap gap-x-4 gap-y-2 text-sm sm:text-[14px] font-light mt-1 sm:mt-2">
+              <p>{{ job.jobType }}</p>
+              <p>{{ job.no_of_Openings }} Vacancies</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="border-gray-300 dark:border-gray-600 mb-4 sm:mb-6">
+
+        <!-- Job Details Section -->
+        <div class="flex flex-col lg:flex-row gap-6">
+          <!-- Left Column (Job Info) -->
+          <div class="w-full lg:w-[70%] space-y-6">
+            <!-- Job Information Card -->
+            <div class="bg-gray-200 dark:bg-gray-900 rounded-xl p-4 sm:p-6">
+              <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Job Information</h2>
+              <hr class="border-gray-300 dark:border-gray-600 mb-4 sm:mb-5">
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                <div class="space-y-3">
+                  <p><span class="font-medium">Job Type:</span> {{ job.jobType }}</p>
+                  <p><span class="font-medium">Job Level:</span> {{ job.jobLevel }}</p>
+                  <p><span class="font-medium">No. of openings:</span> {{ job.no_of_Openings }}</p>
+                  <p>
+                    <span class="font-medium">Salary:</span> 
+                    Nrs. {{ job.minimumSalary }} to {{ job.maximumSalary }}
+                  </p>
+                </div>
+                <div class="space-y-3">
+                  <p *ngIf="job.max_Years_of_Experience_Required === 0">
+                    <span class="font-medium">Experience required:</span> Freshers
+                  </p>
+                  <p *ngIf="job.max_Years_of_Experience_Required > 0">
+                    <span class="font-medium">Experience required:</span>
+                    {{ job.min_Years_of_Experience_Required }} to {{job.max_Years_of_Experience_Required}} years
+                  </p>
+                  <p><span class="font-medium">Location:</span> Pulchowk, Lalitpur</p>
+                  <p>
+                    <span class="font-medium">Status:</span> 
+                    <span [class]="job.isActive ? 'text-green-600' : 'text-red-600'">
+                      {{ job.isActive ? 'Active' : 'Closed' }}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Description Card -->
+            <div class="bg-gray-200 dark:bg-gray-900 rounded-xl p-4 sm:p-6">
+              <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Description</h2>
+              <hr class="border-gray-300 dark:border-gray-600 mb-4 sm:mb-5">
+              <p class="text-justify leading-relaxed">{{ job.jobDescription }}</p>
+            </div>
+
+            <!-- Requirements Card -->
+            <div class="bg-gray-200 dark:bg-gray-900 rounded-xl p-4 sm:p-6">
+              <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Requirements</h2>
+              <hr class="border-gray-300 dark:border-gray-600 mb-4 sm:mb-5">
+              <p class="text-justify leading-relaxed">{{ job.requirements }}</p>
+            </div>
+          </div>
+
+          <!-- Right Column (Actions) -->
+          <div class="w-full lg:w-[30%] space-y-4">
+            <div class="sticky top-4 space-y-4">
+              <button 
+                class="w-full py-3 px-4 bg-blue-900 text-white rounded-full text-sm sm:text-[12px] transition-colors"
+                routerLink="/employer/edit-job/{{job.id}}">
+                Edit Job
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Applications Section -->
+        <div class="mt-8 sm:mt-10">
+          <h2 class="text-lg sm:text-xl font-semibold mb-4 sm:mb-5 uppercase">Applications</h2>
+          
+          <div *ngIf="job.jobApplications.length === 0" class="text-center py-8">
+            <p class="text-lg sm:text-xl text-gray-500 dark:text-gray-400">
+              No one has applied for the job yet.
+            </p>
+          </div>
+
+          <div *ngIf="job.jobApplications.length > 0" class="overflow-x-auto">
+            <!-- Desktop Table -->
+            <table class="hidden sm:table min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+              <thead class="bg-gray-100 dark:bg-gray-600">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    Status
+                  </th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    Candidate
+                  </th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600">
+                <tr *ngFor="let application of job.jobApplications" class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <td class="px-4 py-4 whitespace-nowrap">
+                    @if(application.jobStatus === 'Pending'){
+                      <span class="inline-block px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full">{{application.jobStatus}}</span>
+                    }@else if(application.jobStatus === 'Shortlisted'){
+                      <span class="inline-block px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full">{{application.jobStatus}}</span>
+                    }@else {
+                      <span class="inline-block px-3 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded-full">{{application.jobStatus}}</span>
+                    }  
+                  </td>
+                  <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white">
+                    {{ application.candidateName }}
+                  </td>
+                  <td class="px-4 py-4 whitespace-nowrap">
+                    <button 
+                      class="px-3 py-3 bg-blue-900 text-white rounded-full text-xs"
+                      routerLink="/employer/candidate-profile/{{application.candidateId}}/{{application.id}}">
+                      View Profile
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="sm:hidden space-y-3">
+              <div *ngFor="let application of job.jobApplications" class="bg-white dark:bg-gray-700 rounded-lg shadow p-4">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h3 class="font-medium text-gray-800 dark:text-white">{{ application.candidateName }}</h3>
+                    @if(application.jobStatus === 'Pending'){
+                      <span class="inline-block px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full">{{application.jobStatus}}</span>
+                    }@else if(application.jobStatus === 'Shortlisted'){
+                      <span class="inline-block px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full">{{application.jobStatus}}</span>
+                    }@else {
+                      <span class="inline-block px-3 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded-full">{{application.jobStatus}}</span>
+                    }  
+                  </div>
+                  <button 
+                    class="px-3 py-1 bg-blue-900 hover:bg-blue-700 text-white rounded-full text-xs"
+                    routerLink="/employer/candidate-profile/{{application.candidateId}}/{{application.id}}">
+                    View
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

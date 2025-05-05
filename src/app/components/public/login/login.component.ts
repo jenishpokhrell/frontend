@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
+
   constructor(private router: Router) {}
 
   login() {
@@ -72,7 +73,8 @@ export class LoginComponent implements OnInit {
         } else if (response?.userInfo?.roles?.includes('ADMIN')) {
           this.router.navigate(['/admin']);
         } else {
-          this.router.navigate(['/']);
+          window.location.replace('/')
+          //this.router.navigate(['/']);
         }
       },
       error: (err: HttpErrorResponse) => {

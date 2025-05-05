@@ -1,76 +1,61 @@
-<div *ngIf="user" class="flex h-[100dvh] px-2">
-    <div class="flex flex-col h-full transition-all duration-300 ease-in-out" 
-         [class.w-64]="!collapsed" 
-         [class.w-20]="collapsed"
-         >
-      
-         
-      <div class="p-4 flex items-center space-x-3 border-b border-blue-400" *ngIf="!collapsed">
-        <div class=" flex items-center justify-center text-white font-bold">
-          @if(user?.profilePhoto === null){
-            <div class="bg-blue-900 w-10 h-10 text-white font-bold p-2 text-center rounded-full ml-1 content-center">
-              {{user?.firstname?.charAt(0)}}
-            </div>
-          }@else {
-            <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold">
-              <img
+<div *ngIf="user" class="flex h-[100dvh]">
+  <div class="flex flex-col h-full transition-all duration-300 ease-in-out bg-gray-900" 
+       [class.w-64]="!collapsed" 
+       [class.w-20]="collapsed">
+    
+    <!-- Profile Section -->
+    <div class="p-4 flex items-center border-b border-blue-500">
+      <div class="flex-shrink-0">
+        @if(user?.profilePhoto === null){
+          <div class="bg-blue-900 w-10 h-10 text-white font-bold p-2 text-center rounded-full flex items-center justify-center">
+            {{user?.firstname?.charAt(0)}}
+          </div>
+        }@else {
+          <div class="w-10 h-10 rounded-full">
+            <img
               [src]="user?.profilePhoto"
               alt="profile picture"
-              width="200"
-              class="rounded-full"
+              class="w-full h-full object-cover"
             />
-            </div>
-          }
+          </div>
+        }
+      </div>
+      @if (!collapsed) {
+        <div class="ml-3 overflow-hidden">
+          <p class="text-white font-medium truncate"> {{user?.firstname}} {{user?.lastname}} </p>
+          <p class="text-blue-200 text-xs truncate">{{user?.roles}}</p>
         </div>
-        <div>
-          <p class="text-white font-medium"> {{user?.firstname}} {{user?.lastname}} </p>
-          <p class="text-blue-200 text-xs">{{user?.roles}}</p>
-        </div>  
-      </div>
-      
-      <div class="p-4 flex items-center justify-center border-b border-blue-500" *ngIf="collapsed">
-        <div class=" flex items-center justify-center text-white font-bold">
-          @if(user?.profilePhoto === null){
-            <div class="bg-blue-900 w-10 h-10 text-white font-bold p-2 text-center rounded-full ml-1 content-center">
-              {{user?.firstname?.charAt(0)}}
-            </div>
-          }@else {
-            <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold">
-              <img
-              [src]="user?.profilePhoto"
-              alt="profile picture"
-              width="200"
-              class="rounded-full"
-            />
-            </div>
-          }
-        </div>
-      </div>
-  
-      <nav class="p-4 flex-1 overflow-y-auto text-[14px]">
-        <ul>
-          <li *ngFor="let item of menuItems">
-            <a [routerLink]="item.link" 
-               class="flex items-center p-3 text-white hover:bg-blue-500 transition-colors duration-200">
-              <span class="mr-3">
-                <fa-icon [icon]="item.icon"></fa-icon>
-              </span>
-              <span *ngIf="!collapsed">{{ item.label }}</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-  
-      <div class="p-4 border-t border-blue-500">
-        <button (click)="logout()" 
-        routerLink="/"
-                class="w-full flex items-center p-2 text-white hover:bg-blue-500 rounded transition-colors duration-200">
-          <span class="mr-3">
-            <fa-icon [icon]="signout"></fa-icon>
-          </span>
-          <span *ngIf="!collapsed">Logout</span>
-        </button>
-      </div>
-  
+      }
+    </div>
+    
+    <!-- Navigation Menu -->
+    <nav class="p-2 flex-1 overflow-y-auto">
+      <ul>
+        <li *ngFor="let item of menuItems">
+          <a [routerLink]="item.link" 
+             class="flex items-center p-3 text-white hover:bg-blue-500 rounded transition-colors duration-200">
+            <span class="w-6 text-center">
+              <fa-icon [icon]="item.icon"></fa-icon>
+            </span>
+            @if (!collapsed) {
+              <span class="ml-3 text-[15px] truncate">{{ item.label }}</span>
+            }
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Logout Button -->
+    <div class="p-2 border-t border-blue-500">
+      <button (click)="logout()" 
+              class="w-full flex items-center p-3 text-white hover:bg-blue-500 rounded transition-colors duration-200">
+        <span class="w-6 text-center">
+          <fa-icon [icon]="signout"></fa-icon>
+        </span>
+        @if (!collapsed) {
+          <span class="ml-3">Logout</span>
+        }
+      </button>
     </div>
   </div>
+</div>

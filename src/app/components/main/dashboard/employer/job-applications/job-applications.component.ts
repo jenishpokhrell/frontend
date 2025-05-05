@@ -43,6 +43,12 @@ export class JobApplicationsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute){}
 
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
+
   ngOnInit(): void {
     this.getMyJobById()
   }

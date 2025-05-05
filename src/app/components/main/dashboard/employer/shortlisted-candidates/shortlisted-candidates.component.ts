@@ -3,7 +3,7 @@ import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { faUser, faTrash, faClose, faFilePdf,faBusinessTime, faBook, faBriefcase, faBookBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { GetShortlistedCandidate } from '../../../../../model/job';
 import { JobService } from '../../../../../services/job/job.service';
@@ -11,7 +11,7 @@ import { JobService } from '../../../../../services/job/job.service';
 @Component({
   selector: 'app-job-applications',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, RouterLink],
+  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, RouterLink, NgIf],
   templateUrl: './shortlisted-candidates.component.html',
   styleUrls: ['./shortlisted-candidates.component.css']
 })
@@ -49,6 +49,12 @@ export class ShortlistedCandidatesComponent implements OnInit {
 
   toggleSidebar(): void {
     this.collapsed = !this.collapsed;
+  }
+
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
   }
 
 

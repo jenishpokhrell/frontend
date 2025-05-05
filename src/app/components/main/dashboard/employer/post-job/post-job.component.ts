@@ -57,6 +57,12 @@ export class PostJobComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute){}
 
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
+
   ngOnInit(): void {
     this.id = +this.activatedRoute.snapshot.paramMap.get('id')!
     if(this.id){

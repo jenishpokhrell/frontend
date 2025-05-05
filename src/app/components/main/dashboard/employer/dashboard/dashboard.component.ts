@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { faUser, faBriefcase, faBusinessTime, faBook, faUserCheck, faDashboard, faEdit, faBookBookmark, faFileAlt, faUserTimes  } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { AuthService } from '../../../../../services/auth/auth.service';
@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-employer',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, NgFor, FaIconComponent, RouterLink],
+  imports: [SidebarComponent, HeaderComponent, NgFor, FaIconComponent, RouterLink, NgIf],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
@@ -43,6 +43,12 @@ export class EmployerDashboardComponent implements OnInit {
   jobApplicationsCount : number = 0
   shortlistedCount : number = 0;
   rejectedCount : number = 0
+
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
 
   getMyDetails(){
     this.authService.getMyDetails().subscribe({

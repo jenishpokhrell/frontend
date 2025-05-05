@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from "../../../../reusable/sidebar/sidebar.component";
 import { faTachometerAlt, faUserAlt, faUser, faUserClock, faBriefcase, faClipboardList } from '@fortawesome/free-solid-svg-icons';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { AllJobs } from '../../../../../model/job';
@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, NgFor, FaIconComponent],
+  imports: [SidebarComponent, HeaderComponent, NgFor, FaIconComponent, NgIf],
   templateUrl: './jobs.component.html',
   styleUrl: './jobs.component.css'
 }) 
@@ -20,7 +20,7 @@ import Swal from 'sweetalert2';
 export class JobsComponent implements OnInit {
 
 
-  collapsed = false;
+  collapsed = false; 
 
   menuItems = [
     { label: 'Dashboard', link: '/admin/dashboard', icon: faTachometerAlt },
@@ -34,6 +34,12 @@ export class JobsComponent implements OnInit {
   job: AllJobs | null = null
   jobService = inject(JobService)
   jobId!: number
+
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
 
   ngOnInit(): void {
     this.getAllJobs()

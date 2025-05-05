@@ -1,37 +1,35 @@
-<header class=" bg-gray-100 dark:bg-gray-800 shadow-sm">
-    <div class="flex items-center justify-between px-6 py-4">
-      <!-- Left Side -->
-      <div class="flex items-center space-x-4">
-        <button (click)="toggleSidebar.emit()" class="text-gray-600 dark:text-gray-300 hover:text-blue-600">
-          <fa-icon [icon] = 'bars'></fa-icon>
-        </button>
-        <div (click)="navigateHome()">
-          <img
-            src="./assets/logo.png"
-            alt="logo"
-            height="70"
-            class="cursor-pointer sm:w-52 m-0 md:w-64 w-52"
-            
-          />
-        </div>
-      </div>
-  
-      <div class=" text-center mr-40 text-white font-bold">
-        <h1 class="text-xl font-semibold text-gray-800 dark:text-white">{{ title }}</h1>
-      </div>
-
-      <div class="flex items-center space-x-4">
-        <!-- Notifications -->
-        <div class="relative" *ngIf="notifications.length > 0">
-          <button class="text-gray-600 dark:text-gray-300 hover:text-blue-600 relative">
-            <fa-icon [icon] = 'bell' size="xl"></fa-icon>
-            <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
-              {{ notifications.length }}
-            </span>
-          </button>
-        </div>
-        
+<header class="bg-gray-100 dark:bg-gray-800 shadow-sm">
+  <div class="flex items-center justify-between px-4 py-3 sm:px-6">
+    <!-- Left Side -->
+    <div class="flex items-center space-x-2 sm:space-x-4">
+      <button (click)="toggleSidebar.emit()" class="text-gray-600 dark:text-gray-300 hover:text-blue-600">
+        <fa-icon [icon]="bars"></fa-icon>
+      </button>
+      <div (click)="navigateHome()" class="cursor-pointer">
+        <img
+          src="./assets/logo.png"
+          alt="logo"
+          class="h-10 sm:h-12 object-contain"
+        />
       </div>
     </div>
-  </header>
-  <hr>
+
+    <!-- Center Title - Hidden on small screens if there's not enough space -->
+    <div class="hidden sm:block text-center mx-2 flex-1">
+      <h1 class="text-lg font-semibold text-gray-800 dark:text-white truncate">{{ title }}</h1>
+    </div>
+
+    <!-- Right Side -->
+    <div class="flex items-center space-x-2 sm:space-x-4">
+      <!-- Notifications -->
+      <div class="relative" *ngIf="notifications.length > 0">
+        <button class="text-gray-600 dark:text-gray-300 hover:text-blue-600 relative">
+          <fa-icon [icon]="bell" size="lg"></fa-icon>
+          <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+            {{ notifications.length }}
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

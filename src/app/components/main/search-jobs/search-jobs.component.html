@@ -1,17 +1,16 @@
 <div>
   <div class="h-16 bg-gray-200">
-    <div class="w-[80%] mx-auto flex justify-between items-center py-5">
+    <div class="w-[90%] md:w-[80%] mx-auto flex justify-between items-center py-5">
       <div class="ml-2">
-        <p class="font-bold">Searched jobs</p>
+        <p class="font-bold text-[13px] md:text-lg">Searched jobs</p>
       </div>
       <div class="mr-7">
-        <p>Home / <span class="font-bold"> Search jobs</span></p>
+        <p class="text-[13px] md:text-lg">Home / <span class="font-bold "> Browse jobs</span></p>
       </div>
     </div>
   </div>
 
-  <div>
-    <!--SEARCHED JOBS SECTION -->
+  <!-- <div>
     <div class="w-[70%] mx-auto">
       <div *ngIf="searchedJobs.length > 0; else noResults">
         <div
@@ -84,7 +83,75 @@
         </p>
       </ng-template>
     </div>
-  </div>
+  </div> -->
+
+  <div class="w-[90%] sm:w-[90%] md:w-[80%] mx-auto">
+    <!-- JOBS SECTION -->
+    <div class="text-xl my-[5%] md:text-3xl text-gray-500 font-semibold">
+      <h2>"Search results for '{{searchQuery}}' " </h2>
+    </div>
+       <div *ngIf="searchedJobs.length > 0; else noResults"  class="md:grid md:grid-cols-2 gap-10 mx-auto my-10 w-full">
+         <div *ngFor="let job of searchedJobs" class="border border-gray-200 shadow-2xl my-10 md:my-0 p-3 md:p-8 space-y-3"> 
+           <div class="flex items-center space-x-4">
+             <div>
+               <fa-icon [icon]="user" size="xl"></fa-icon>
+             </div>
+             <div>
+               <h1 class="text-[15px] md:text-[23px] font-bold text-[#3094FF]">
+                 {{ job.jobTitle }}
+               </h1>
+               <p class="text-[15px] md:text-[17px]">{{ job.postedBy }}</p>
+             </div>
+           </div>
+           <hr />
+           <div class="md:flex md:justify-between text-[14px] md:text-[17px]">
+             <div class="space-y-2 ml-4 md:ml-8 text-justify">
+               <p>
+                 <span class="font-bold text-[#2f4f70]">JobType: </span
+                 >{{ job.jobType }}
+               </p>
+               <p>
+                 <span class="font-bold text-[#2f4f70]">JobLevel: </span
+                 >{{ job.jobLevel }}
+               </p>
+               <p *ngIf="job.max_Years_of_Experience_Required === 0">
+                 <span class="font-bold text-[#2f4f70]"
+                   >Experience required:
+                 </span>
+                 Freshers
+               </p>
+               <p *ngIf="job.max_Years_of_Experience_Required > 0">
+                <span class="font-bold text-[#2f4f70]"
+                  >Experience required:
+                </span>
+                {{ job.min_Years_of_Experience_Required }} to {{job.max_Years_of_Experience_Required}} years
+              </p>
+               <p>
+                 <span class="font-bold text-[#2f4f70]">No. of openings: </span>
+                 {{ job.no_of_Openings }}
+               </p>
+               <p class="tracking-tight">
+                 <span class="font-bold text-[#2f4f70]">Location: </span
+                 >{{ job.location }}
+               </p>
+             </div>
+             <div class="content-end ">
+               <div
+                 class="mt-3 float-end text-white relative text-[13px] md:text-[14px] h-10 rounded-full" routerLink="/viewjob/{{job.id}}"
+               >
+                 <button class=" bg-[#6BA1FF] p-2 md:w-32 w-28 text-center cursor-pointer rounded-full">View Job</button>
+               </div>
+               
+             </div>
+           </div>
+         </div>
+       </div>
+       <ng-template #noResults>
+        <p class="text-gray-500 text-center text-5xl my-60 font-semibold">
+          No jobs found for "{{ searchQuery }}"
+        </p>
+      </ng-template>
+    </div>
 </div>
 
 <app-footer></app-footer>

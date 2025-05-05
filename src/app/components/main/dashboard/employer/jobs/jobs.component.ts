@@ -40,6 +40,12 @@ export class MyJobsComponent implements OnInit{
     this.getMyJobs()
   }
 
+  mobileSidebarVisible: boolean = false
+
+  toggleMobileSidebar(){
+    this.mobileSidebarVisible = !this.mobileSidebarVisible
+  }
+
   getMyJobs(){
     this.jobService.getMyJobs().subscribe({
       next: (response) => {

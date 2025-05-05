@@ -3,7 +3,7 @@ import { SidebarComponent } from '../../../../reusable/sidebar/sidebar.component
 import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { faUser, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MyJobApplications } from '../../../../../model/job';
@@ -12,7 +12,7 @@ import { JobService } from '../../../../../services/job/job.service';
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, FaIconComponent, RouterOutlet, RouterLink],
+  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, FaIconComponent, RouterOutlet, RouterLink, NgIf],
   templateUrl: './applied-jobs.component.html',
   styleUrls: ['./applied-jobs.component.css']
 })
