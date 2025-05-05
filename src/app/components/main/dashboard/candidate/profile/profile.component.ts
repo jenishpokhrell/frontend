@@ -25,7 +25,7 @@ import {
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { UserModel } from '../../../../../model/user';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Skills } from '../../../../../model/skill';
 import { SkillsService } from '../../../../../services/skills/skills.service';
 import { FormControl, FormGroup, NgModel } from '@angular/forms';
@@ -45,6 +45,7 @@ import { Resume } from '../../../../../model/resume';
     NgIf,
     PdfViewerModule,
     RouterLink,
+    RouterOutlet
   ],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],

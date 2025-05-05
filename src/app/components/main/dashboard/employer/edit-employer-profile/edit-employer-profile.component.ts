@@ -7,7 +7,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { UpdateUser, UserModel } from '../../../../../model/user';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { GeneralResponse } from '../../../../../model/response';
 import { NgIf } from '@angular/common';
 import Swal from 'sweetalert2';
@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-edit-employer-profile',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, FaIconComponent, PdfViewerModule, ReactiveFormsModule, NgIf],
+  imports: [SidebarComponent, HeaderComponent, FaIconComponent, PdfViewerModule, ReactiveFormsModule, NgIf, RouterOutlet],
   templateUrl: './edit-employer-profile.component.html',
   styleUrls: ['./edit-employer-profile.component.css']
 })

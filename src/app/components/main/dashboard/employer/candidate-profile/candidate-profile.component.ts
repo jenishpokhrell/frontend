@@ -6,7 +6,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faUser, faTrash, faClose, faFilePdf,faBusinessTime, faBook, faBriefcase, faBookBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { UserModel } from '../../../../../model/user';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { ExperiencesService } from '../../../../../services/experiences/experiences.service';
 import { AcademicService } from '../../../../../services/academic/academic.service';
@@ -26,7 +26,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-candidate-profile',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, FaIconComponent, NgFor, NgIf, PdfViewerModule],
+  imports: [SidebarComponent, HeaderComponent, FaIconComponent, NgFor, NgIf, PdfViewerModule, RouterOutlet],
   templateUrl: './candidate-profile.component.html',
   styleUrls: ['./candidate-profile.component.css']
 })

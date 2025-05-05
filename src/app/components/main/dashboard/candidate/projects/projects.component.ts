@@ -5,7 +5,7 @@ import { faUser, faGraduationCap, faBriefcase, faProjectDiagram, faFileAlt, faBo
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { Project } from '../../../../../model/project';
 import { ProjectsService } from '../../../../../services/projects/projects.service';
 import { GeneralResponse } from '../../../../../model/response';
@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, FaIconComponent, NgIf],
+  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, FaIconComponent, NgIf, RouterOutlet],
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css']
 })

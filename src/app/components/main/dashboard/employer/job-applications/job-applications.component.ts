@@ -4,7 +4,7 @@ import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { faUser, faTrash, faClose, faFilePdf,faBusinessTime, faBook, faBriefcase, faBookBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit, faTachographDigital } from '@fortawesome/free-solid-svg-icons';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { GetMyJob } from '../../../../../model/job';
 import { UserModel } from '../../../../../model/user';
 import { JobService } from '../../../../../services/job/job.service';
@@ -13,7 +13,7 @@ import { AuthService } from '../../../../../services/auth/auth.service';
 @Component({
   selector: 'app-job-applications',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, NgIf, RouterLink],
+  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, NgIf, RouterLink, RouterOutlet],
   templateUrl: './job-applications.component.html',
   styleUrls: ['./job-applications.component.css']
 })

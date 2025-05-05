@@ -7,14 +7,14 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { JobService } from '../../../../../services/job/job.service';
 import { GeneralResponse } from '../../../../../model/response';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { GetMyJob, Job } from '../../../../../model/job';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-job',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, NgClass, NgIf],
+  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, NgClass, NgIf, RouterOutlet],
   templateUrl: './edit-job.component.html',
   styleUrls: ['./edit-job.component.css']
 })

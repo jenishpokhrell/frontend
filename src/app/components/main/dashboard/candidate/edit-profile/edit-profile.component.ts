@@ -29,7 +29,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { GeneralResponse } from '../../../../../model/response';
 import { NgIf } from '@angular/common';
 import Swal from 'sweetalert2';
@@ -44,6 +44,7 @@ import Swal from 'sweetalert2';
     PdfViewerModule,
     ReactiveFormsModule,
     NgIf,
+    RouterOutlet
   ],
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.css'],

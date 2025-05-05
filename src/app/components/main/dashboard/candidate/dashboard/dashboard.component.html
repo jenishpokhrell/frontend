@@ -34,7 +34,7 @@
     ></app-header>
 
     <main class="flex-1 overflow-y-auto p-4 bg-gray-50 dark:bg-gray-800">
-      <!-- Welcome Banner -->
+      <router-outlet></router-outlet>
       <div class="bg-gradient-to-r from-[#5FA8F5] via-[#3094FF] to-blue-600 text-white rounded-lg p-4 mb-4">
         <h2 class="text-xl md:text-2xl font-bold mb-2">
           Welcome, {{ user?.firstname }} {{ user?.lastname }}

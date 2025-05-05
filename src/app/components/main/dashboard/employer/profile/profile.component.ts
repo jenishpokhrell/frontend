@@ -7,14 +7,14 @@ import { faUser, faClose, faFilePdf,faBusinessTime, faBook, faBriefcase, faBookB
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { UserModel } from '../../../../../model/user';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { Skills } from '../../../../../model/skill';
 import { SkillsService } from '../../../../../services/skills/skills.service';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, FaIconComponent, NgFor, PdfViewerModule, RouterLink, NgIf],
+  imports: [SidebarComponent, HeaderComponent, FaIconComponent, NgFor, PdfViewerModule, RouterLink, NgIf, RouterOutlet], 
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })

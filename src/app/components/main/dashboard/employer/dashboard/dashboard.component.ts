@@ -8,12 +8,12 @@ import { AuthService } from '../../../../../services/auth/auth.service';
 import { JobService } from '../../../../../services/job/job.service';
 import { UserModel } from '../../../../../model/user';
 import { GetMyJob } from '../../../../../model/job';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-employer',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, NgFor, FaIconComponent, RouterLink, NgIf],
+  imports: [SidebarComponent, HeaderComponent, NgFor, FaIconComponent, RouterLink, NgIf, RouterOutlet],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })

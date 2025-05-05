@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router) {}
 
   login() {
-    if (this.form.invalid) {
+    if(this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }

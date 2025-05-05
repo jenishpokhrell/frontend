@@ -8,11 +8,12 @@ import { AuthService } from '../../../../../services/auth/auth.service';
 import { UserModel } from '../../../../../model/user';
 import { JobService } from '../../../../../services/job/job.service';
 import { GetJobForCandidate, MyJobApplications } from '../../../../../model/job';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent,NgFor, FaIconComponent, NgIf, SlicePipe],
+  imports: [SidebarComponent, HeaderComponent,NgFor, FaIconComponent, NgIf, SlicePipe, RouterOutlet],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })

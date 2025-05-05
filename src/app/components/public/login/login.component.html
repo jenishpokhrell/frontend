@@ -1,4 +1,4 @@
-<div class="mx-auto py-10 md:my-20 2xl:my-44 w-full px-4 sm:px-6 md:w-[80%] lg:w-[60%] xl:w-[50%]">
+<div class="mx-auto py-10 md:my-20 2xl:my-44 w-full px-4 sm:px-6 md:w-[80%] lg:w-[60%] xl:w-[50%] pt-28 md:pt-16">
   <div class="text-3xl md:text-[40px] font-bold text-center md:text-left">
     <h1>Welcome to <span class="text-[#3094FF]">career dev!</span></h1>
   </div>
@@ -18,13 +18,13 @@
           <input 
             type="text" 
             id="username"
-            placeholder="Enter your username" 
+            placeholder="Enter your username or email" 
             class="border-2 p-3 md:p-4 w-full outline-none rounded"
             formControlName="username"
           >
           <div *ngIf="form.get('username')?.touched && form.get('username')?.hasError('required')" 
                class="text-red-700 text-sm md:text-[16px] mt-1">
-            Username is required
+            This field is required
           </div>
         </div>
         
@@ -59,7 +59,7 @@
           <button 
             type="submit" 
             class="bg-[#6BA1FF] hover:bg-[#3094FF] text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-full transition-colors w-full sm:w-auto"
-            [disabled]="form.invalid"
+            
           >
             Login
           </button>

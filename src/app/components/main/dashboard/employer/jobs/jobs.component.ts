@@ -4,14 +4,14 @@ import { HeaderComponent } from '../../../../reusable/header/header.component';
 import { faUser, faTrash, faClose, faFilePdf,faBusinessTime, faBook, faBriefcase, faBookBookmark, faCheckCircle, faExclamationCircle, faDashboard, faLocationArrow, faContactBook, faMailForward, faUserEdit, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { GetMyJob } from '../../../../../model/job';
 import { JobService } from '../../../../../services/job/job.service';
 
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, RouterLink, NgIf],
+  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, RouterLink, NgIf, RouterOutlet],
   templateUrl: './jobs.component.html',
   styleUrls: ['./jobs.component.css']
 })

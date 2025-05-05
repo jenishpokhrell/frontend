@@ -31,6 +31,7 @@ import { ExperiencesService } from '../../../../../services/experiences/experien
 import { AuthService } from '../../../../../services/auth/auth.service';
 import { GeneralResponse } from '../../../../../model/response';
 import Swal from 'sweetalert2';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-candidate',
@@ -42,6 +43,7 @@ import Swal from 'sweetalert2';
     NgFor,
     NgIf,
     FaIconComponent,
+    RouterOutlet
   ],
   templateUrl: './experiences.component.html',
   styleUrls: ['./experiences.component.css'],

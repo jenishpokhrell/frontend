@@ -9,10 +9,11 @@ import { AuthService } from '../../../../../services/auth/auth.service';
 import { GeneralResponse } from '../../../../../model/response';
 import { NgIf } from '@angular/common';
 import Swal from 'sweetalert2';
+import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent,ReactiveFormsModule, FaIconComponent, NgIf],
+  imports: [SidebarComponent, HeaderComponent,ReactiveFormsModule, FaIconComponent, NgIf, RouterOutlet],
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.css']
 })

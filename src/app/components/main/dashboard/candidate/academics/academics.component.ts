@@ -9,16 +9,17 @@ import { NgIf } from '@angular/common';
 import { GeneralResponse } from '../../../../../model/response';
 import { AuthService } from '../../../../../services/auth/auth.service';
 import Swal from 'sweetalert2';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-candidate',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgIf],
+  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgIf, RouterOutlet],
   templateUrl: './academics.component.html',
   styleUrls: ['./academics.component.css']
 })
 export class AcademicsComponent implements OnInit {
-
+ 
   title = 'My Academics'
 
   checkCircle = faCheckCircle; excCircle = faExclamationCircle; location = faLocationArrow; contact = faContactBook; mail = faMailForward;
