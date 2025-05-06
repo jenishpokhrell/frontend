@@ -1,12 +1,16 @@
 <div>
   <!-- Breadcrumb Header -->
   <div class="h-16 bg-gray-200">
-    <div class="w-[90%] md:w-[80%] mx-auto flex justify-between items-center py-5">
+    <div
+      class="w-[90%] md:w-[80%] mx-auto flex justify-between items-center py-5"
+    >
       <div class="ml-2">
         <p class="font-bold text-[13px] md:text-lg">Job Details</p>
       </div>
       <div class="mr-7 text-[14px]">
-        <p class="text-[13px] md:text-lg">Home / Browse Jobs / <span class="font-bold">Job Details</span></p>
+        <p class="text-[13px] md:text-lg">
+          Home / Browse Jobs / <span class="font-bold">Job Details</span>
+        </p>
       </div>
     </div>
   </div>
@@ -23,65 +27,98 @@
   <!-- Job Content -->
   <div class="w-[90%] md:w-[80%] mx-auto">
     <!-- Job Title and Apply Button -->
-    <div *ngIf="job" class="flex flex-col md:flex-row items-start md:items-center justify-between my-8 md:my-10 gap-4">
+    <div
+      *ngIf="job"
+      class="flex flex-col md:flex-row items-start md:items-center justify-between my-8 md:my-10 gap-4"
+    >
       <div>
         <h1 class="text-2xl md:text-3xl font-bold text-blue-900 uppercase">
           {{ job.jobTitle }}
         </h1>
-        <div class="flex flex-row items-center space-x-10 font-extralight text-sm md:text-[14px]">
+        <div
+          class="flex flex-row items-center space-x-10 font-extralight text-sm md:text-[14px]"
+        >
           <p>{{ job.jobType }}</p>
           <p>{{ job.no_of_Openings }} Vacancies</p>
         </div>
       </div>
-      
+
       @if (job.isActive == true) {
-        <div class="hidden md:block  text-sm md:text-[14px]">
-          <button class="bg-[#6BA1FF] hover:bg-[#3094FF] text-white p-3 w-full md:w-36 rounded-full transition-colors" 
-                  (click)="jobApply(job.id)">
-            Apply now
-          </button>
-        </div>
+      <div class="hidden md:block text-sm md:text-[14px]">
+        <button
+          class="bg-[#6BA1FF] hover:bg-[#3094FF] text-white p-3 w-full md:w-36 rounded-full transition-colors"
+          (click)="jobApply(job.id)"
+        >
+          Apply now
+        </button>
+      </div>
       } @else {
-        <div class="flex space-x-4 md:space-x-6 text-sm md:text-[14px]">
-          <button class="bg-[#6BA1FF] opacity-60 text-white p-3 w-full md:w-36 rounded-full cursor-not-allowed" disabled>
-            Apply now
-          </button>
-        </div>
+      <div class="flex space-x-4 md:space-x-6 text-sm md:text-[14px]">
+        <button
+          class="bg-[#6BA1FF] opacity-60 text-white p-3 w-full md:w-36 rounded-full cursor-not-allowed"
+          disabled
+        >
+          Apply now
+        </button>
+      </div>
       }
     </div>
 
-    <hr class="my-6 md:my-8"/>
+    <hr class="my-6 md:my-8" />
 
     <!-- Job Details -->
-    <div *ngIf="job" class="flex flex-col lg:flex-row items-start gap-8 md:gap-20">
+    <div
+      *ngIf="job"
+      class="flex flex-col lg:flex-row items-start gap-8 md:gap-20"
+    >
       <!-- Main Job Content -->
       <div class="w-full lg:w-[70%] my-6 md:my-10">
         <!-- Job Information -->
         <div class="border border-gray-300 rounded-xl px-6 md:px-10 py-5">
           <div class="my-4 md:my-5">
-            <h2 class="text-xl md:text-2xl font-bold text-blue-900">Job Information</h2>
+            <h2 class="text-xl md:text-2xl font-bold text-blue-900">
+              Job Information
+            </h2>
           </div>
           <hr />
           <div class="mt-4 md:mt-5">
             <div class="flex flex-col md:flex-row justify-between gap-6">
               <div class="space-y-3 md:space-y-5">
-                <p>Job Type: <span class="font-medium">{{ job.jobType }}</span></p>
-                <p>Job Level: <span class="font-medium">{{ job.jobLevel }}</span></p>
-                <p>No. of openings: <span class="font-medium">{{ job.no_of_Openings }}</span></p>
-                <p>Salary: <span class="font-medium">Nrs. {{ job.minimumSalary }} to {{ job.maximumSalary }}</span></p>
+                <p>
+                  Job Type: <span>{{ job.jobType }}</span>
+                </p>
+                <p>
+                  Job Level: <span>{{ job.jobLevel }}</span>
+                </p>
+                <p>
+                  No. of openings: <span>{{ job.no_of_Openings }}</span>
+                </p>
+                <p>
+                  Salary:
+                  <span
+                    >Nrs. {{ job.minimumSalary }} to
+                    {{ job.maximumSalary }}</span
+                  >
+                </p>
               </div>
               <div class="space-y-3 md:space-y-5">
                 <p *ngIf="job.max_Years_of_Experience_Required === 0">
-                  Experience required: <span class="font-medium">Freshers</span>
+                  Experience required: <span>Freshers</span>
                 </p>
                 <p *ngIf="job.max_Years_of_Experience_Required > 0">
-                  Experience required: <span class="font-medium">{{ job.min_Years_of_Experience_Required }} to {{job.max_Years_of_Experience_Required}} years</span>
+                  Experience required:
+                  <span
+                    >{{ job.min_Years_of_Experience_Required }} to
+                    {{ job.max_Years_of_Experience_Required }} years</span
+                  >
                 </p>
-                <p>Location: <span class="font-medium">Pulchowk, Lalitpur</span></p>
+                <p>
+                  Location: <span>{{ job.location }}</span>
+                </p>
                 @if (job.isActive == true) {
-                  <p>Status: <span class="text-green-600 font-medium">Active</span></p>
+                <p>Status: <span class="text-green-600">Active</span></p>
                 } @else {
-                  <p>Status: <span class="text-red-600 font-medium">Closed</span></p>
+                <p>Status: <span class="text-red-600">Closed</span></p>
                 }
               </div>
             </div>
@@ -89,64 +126,96 @@
         </div>
 
         <!-- Job Description -->
-        <div class="my-8 md:my-10 border border-gray-300 rounded-xl px-6 md:px-10 py-5 space-y-4">
-          <h2 class="text-xl md:text-2xl font-bold text-blue-900">Description</h2>
+        <div
+          class="my-8 md:my-10 border border-gray-300 rounded-xl px-6 md:px-10 py-5 space-y-4"
+        >
+          <h2 class="text-xl md:text-2xl font-bold text-blue-900">
+            Description
+          </h2>
           <hr />
-          <p class="text-justify leading-relaxed md:leading-8">{{ job.jobDescription }}</p>
+          <p class="text-justify leading-relaxed md:leading-8">
+            {{ job.jobDescription }}
+          </p>
         </div>
 
         <!-- Job Requirements -->
-        <div class="my-8 md:my-10 border border-gray-300 rounded-xl px-6 md:px-10 py-5 space-y-4">
-          <h2 class="text-xl md:text-2xl font-bold text-blue-900">Requirements</h2>
+        <div
+          class="my-8 md:my-10 border border-gray-300 rounded-xl px-6 md:px-10 py-5 space-y-4"
+        >
+          <h2 class="text-xl md:text-2xl font-bold text-blue-900">
+            Requirements
+          </h2>
           <hr />
-          <p class="text-justify leading-relaxed md:leading-8">{{ job.requirements }}</p>
+          <p class="text-justify leading-relaxed md:leading-8">
+            {{ job.requirements }}
+          </p>
         </div>
 
         <!-- Apply/Save Buttons -->
         <div class="my-8 md:my-10">
           @if (job.isActive == true) {
-            <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
-              <button class="bg-[#6BA1FF] hover:bg-[#3094FF] text-white p-3 w-full md:w-36 rounded-full transition-colors" 
-                      (click)="jobApply(job.id)">
-                Apply now
-              </button>
-              <button class="bg-gray-100 hover:bg-gray-200 p-3 w-full md:w-36 rounded-full transition-colors" 
-                      (click)="saveJob(job.id)">
-                Save Job
-              </button>
-            </div>
+          <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
+            <button
+              class="bg-[#6BA1FF] hover:bg-[#3094FF] text-white p-3 w-full md:w-36 rounded-full transition-colors"
+              (click)="jobApply(job.id)"
+            >
+              Apply now
+            </button>
+            <button
+              class="bg-gray-100 hover:bg-gray-200 p-3 w-full md:w-36 rounded-full transition-colors"
+              (click)="saveJob(job.id)"
+            >
+              Save Job
+            </button>
+          </div>
           } @else {
-            <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
-              <button class="bg-[#6BA1FF] opacity-60 text-white p-3 w-full md:w-36 rounded-full cursor-not-allowed" disabled>
-                Apply now
-              </button>
-              <button class="bg-gray-100 opacity-60 p-3 w-full md:w-36 rounded-full cursor-not-allowed" disabled>
-                Save Job
-              </button>
-            </div>
+          <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
+            <button
+              class="bg-[#6BA1FF] opacity-60 text-white p-3 w-full md:w-36 rounded-full cursor-not-allowed"
+              disabled
+            >
+              Apply now
+            </button>
+            <button
+              class="bg-gray-100 opacity-60 p-3 w-full md:w-36 rounded-full cursor-not-allowed"
+              disabled
+            >
+              Save Job
+            </button>
+          </div>
           }
         </div>
       </div>
 
       <!-- Employer Info (Right Sidebar) -->
-      <div *ngIf="user" class="w-full lg:w-[30%] my-6 md:my-10 border border-gray-300 rounded-xl px-6 md:px-10 py-5 space-y-5">
+      <div
+        *ngIf="user"
+        class="w-full lg:w-[30%] my-6 md:my-10 border border-gray-300 rounded-xl px-6 md:px-10 py-5 space-y-5"
+      >
         <div class="flex flex-col items-center">
-          <h2 class="text-xl md:text-2xl font-bold text-blue-900 text-center">Employer</h2>
+          <h2 class="text-xl md:text-2xl font-bold text-blue-900 text-center">
+            Employer
+          </h2>
           <hr class="my-4 md:my-5 w-full" />
           <img
             [src]="user.profilePhoto"
             alt="Employer photo"
             class="rounded-full size-32 md:size-40 object-cover"
           />
-          <p class="font-bold text-blue-900 text-lg md:text-[20px] mt-4 md:mt-5 text-center">
-            {{user.firstname}} {{user.lastname}}
+          <p
+            class="font-bold text-blue-900 text-lg md:text-[20px] mt-4 md:mt-5 text-center"
+          >
+            {{ user.firstname }} {{ user.lastname }}
           </p>
         </div>
         <div class="space-y-4 md:space-y-7">
-          <p><span class="font-medium">Position:</span> {{user.jobTitle}}</p>
-          <p><span class="font-medium">Experience:</span> {{user.years_Of_Experience}} years</p>
-          <p><span class="font-medium">Contact:</span> {{user.contact}}</p>
-          <p><span class="font-medium">Email:</span> {{user.email}}</p>
+          <p><span class="font-medium">Position:</span> {{ user.jobTitle }}</p>
+          <p>
+            <span class="font-medium">Experience:</span>
+            {{ user.years_Of_Experience }} years
+          </p>
+          <p><span class="font-medium">Contact:</span> {{ user.contact }}</p>
+          <p><span class="font-medium">Email:</span> {{ user.email }}</p>
         </div>
       </div>
     </div>

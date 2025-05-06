@@ -56,7 +56,7 @@
             <p><span class="font-medium">Location:</span> Pulchowk, Lalitpur</p>
             <p>
               <span class="font-medium">Status:</span>
-              <span [class]="job.isActive ? 'text-green-600' : 'text-red-600'">
+              <span [class]="job.isActive ? 'text-green-200' : 'text-red-600'">
                 {{ job.isActive ? "Active" : "Closed" }}
               </span>
             </p>
@@ -136,22 +136,17 @@
             class="hover:bg-gray-50 dark:hover:bg-gray-600"
           >
             <td class="px-4 py-4 whitespace-nowrap">
-              @if(application.jobStatus === 'Pending'){
               <span
-                class="inline-block px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full"
-                >{{ application.jobStatus }}</span
+                [class]="
+                  application.jobStatus === 'Shortlisted'
+                    ? 'px-2 py-1 rounded-full text-green-300'
+                    : application.jobStatus === 'Rejected'
+                    ? 'px-2 py-1 rounded-full text-red-600'
+                    : 'px-2 py-1 rounded-full text-yellow-300'
+                "
               >
-              }@else if(application.jobStatus === 'Shortlisted'){
-              <span
-                class="inline-block px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full"
-                >{{ application.jobStatus }}</span
-              >
-              }@else {
-              <span
-                class="inline-block px-3 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded-full"
-                >{{ application.jobStatus }}</span
-              >
-              }
+                {{ application.jobStatus }}
+              </span>
             </td>
             <td
               class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-white"
