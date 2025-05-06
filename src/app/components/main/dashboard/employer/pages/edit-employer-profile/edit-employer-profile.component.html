@@ -1,0 +1,204 @@
+<div class="mx-auto text-gray-800 dark:text-gray-100">
+  <div class="mb-6">
+    <h1 class="text-xl sm:text-2xl font-semibold">Update your profile</h1>
+  </div>
+  <form [formGroup]="update">
+    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-4 sm:mb-6">
+      <div class="w-full sm:w-1/2">
+        <label class="block font-bold mb-2">First Name</label>
+        <input
+          type="text"
+          placeholder="Enter your first name"
+          class="w-full p-3 text-[14px] bg-gray-600"
+          formControlName="firstname"
+        />
+        <p *ngIf="isInvalid('firstname')" class="text-red-500 text-sm mt-1">
+          Firstname is required
+        </p>
+      </div>
+      <div class="w-full sm:w-1/2">
+        <label class="block font-bold mb-2">Last Name</label>
+        <input
+          type="text"
+          placeholder="Enter your last name"
+          class="w-full p-3 text-[14px] bg-gray-600"
+          formControlName="lastname"
+        />
+        <p *ngIf="isInvalid('lastname')" class="text-red-500 text-sm mt-1">
+          Lastname is required
+        </p>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-4 sm:mb-6">
+      <div class="w-full sm:w-1/2">
+        <label class="block font-bold mb-2">Username</label>
+        <input
+          type="text"
+          placeholder="Enter your username"
+          class="w-full p-3 text-[14px] bg-gray-600"
+          formControlName="username"
+        />
+        <p *ngIf="isInvalid('username')" class="text-red-500 text-sm mt-1">
+          Username is required
+        </p>
+      </div>
+      <div class="w-full sm:w-1/2">
+        <label class="block font-bold mb-2">Address</label>
+        <input
+          type="text"
+          placeholder="Enter your address"
+          class="w-full p-3 text-[14px] bg-gray-600"
+          formControlName="address"
+        />
+        <p *ngIf="isInvalid('address')" class="text-red-500 text-sm mt-1">
+          Address is required
+        </p>
+      </div>
+    </div>
+
+    <div class="mb-4 sm:mb-6">
+      <label class="block font-bold mb-2">Email Address</label>
+      <input
+        type="email"
+        placeholder="Enter your email address"
+        class="w-full p-3 text-[14px] bg-gray-600"
+        formControlName="email"
+      />
+      <p
+        *ngIf="
+          update.get('email')?.touched &&
+          update.get('email')?.hasError('required')
+        "
+        class="text-red-500 text-sm mt-1"
+      >
+        Email is required
+      </p>
+      <p
+        *ngIf="
+          update.get('email')?.touched && update.get('email')?.hasError('email')
+        "
+        class="text-red-500 text-sm mt-1"
+      >
+        Invalid email format
+      </p>
+    </div>
+    <div class="mb-4 sm:mb-6">
+      <label class="block font-bold mb-2">Mobile Number</label>
+      <input
+        type="tel"
+        placeholder="Enter your mobile number"
+        class="w-full p-3 text-[14px] bg-gray-600"
+        formControlName="contact"
+      />
+      <p
+        *ngIf="
+          update.get('contact')?.touched &&
+          update.get('contact')?.hasError('required')
+        "
+        class="text-red-500 text-sm mt-1"
+      >
+        Contact is required
+      </p>
+      <p
+        *ngIf="
+          update.get('contact')?.touched &&
+          update.get('contact')?.hasError('pattern')
+        "
+        class="text-red-500 text-sm mt-1"
+      >
+        Enter a valid number
+      </p>
+    </div>
+
+    <div class="mb-4 sm:mb-6">
+      <label class="block font-bold mb-2">Gender</label>
+      <select
+        id="gender"
+        formControlName="gender"
+        class="w-full p-3 text-[14px] bg-gray-600"
+      >
+        <option value="">-- Select Gender --</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+
+    <!-- Profile Picture -->
+    <div class="mb-4 sm:mb-6">
+      <label class="block font-bold mb-2">Profile Picture</label>
+      <div class="flex flex-col sm:flex-row items-center gap-6">
+        <div
+          *ngIf="previewImage"
+          class="w-32 h-32 rounded-full overflow-hidden"
+        >
+          <img
+            [src]="previewImage"
+            alt="profile picture"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class="flex-1">
+          <input
+            type="file"
+            (change)="onFileSelected($event)"
+            accept=".png, .jpg, .jpeg"
+            class="block w-full text-sm text-gray-900 dark:text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:bg-blue-900 file:text-white"
+          />
+          <p class="text-gray-400 text-sm mt-2">
+            Optional: Upload a new photo to update
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-6 sm:mb-8">
+      <div class="w-full sm:w-1/2">
+        <label class="block font-bold mb-2">Position</label>
+        <input
+          type="text"
+          placeholder="Enter your current position"
+          class="w-full p-3 text-[14px] bg-gray-600"
+          formControlName="jobTitle"
+        />
+        <p *ngIf="isInvalid('jobTitle')" class="text-red-500 text-sm mt-1">
+          Position is required
+        </p>
+      </div>
+      <div class="w-full sm:w-1/2">
+        <label class="block font-bold mb-2">Years of experience</label>
+        <input
+          type="number"
+          placeholder="Enter your experience in years"
+          class="w-full p-3 text-[14px] bg-gray-600"
+          formControlName="years_Of_Experience"
+        />
+        <p
+          *ngIf="isInvalid('years_Of_Experience')"
+          class="text-red-500 text-sm mt-1"
+        >
+          Years of experience is required
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4 sm:pt-6"
+    >
+      <button
+        type="button"
+        (click)="updateProfile()"
+        class="flex-1 rounded-full bg-blue-900 text-[13px] p-4 font-semibold"
+      >
+        Update Profile
+      </button>
+      <button
+        type="button"
+        (click)="deleteProfile(userId)"
+        class="flex-1 rounded-full bg-red-600 text-[13px] p-4 font-semibold"
+      >
+        Delete
+      </button>
+    </div>
+  </form>
+</div>

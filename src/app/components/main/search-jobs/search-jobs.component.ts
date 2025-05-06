@@ -38,6 +38,7 @@ export class SearchjobsComponent implements OnInit{
     })
   }
   
+  //------------------- method for getting all jobs for candidates -------------------
   getAllJobs(){
     this.jobService.getJobsForCandidate().subscribe({
       next:(response) => {
@@ -47,12 +48,14 @@ export class SearchjobsComponent implements OnInit{
     })
   }
 
+  // -------------------------- QUERY FOR SEARCHING JOBS ---------------------------------
   searchJobs(query: string){
     if(!query){
       this.searchedJobs = this.getJobs
       return
     }
 
+    // ------------------ search jobs based on job title, level, location, type
     const lowerQuery = query.toLowerCase()
     this.searchedJobs = this.getJobs.filter(job => 
       job.jobTitle.toLowerCase().includes(lowerQuery) ||

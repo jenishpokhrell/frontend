@@ -14,6 +14,8 @@
             - A portal of hope
           </p>
         </div>
+
+        <!-- ---------------------- FORM FOR SEARCHING JOBS ------------------- -->
         <form (submit)="onSearch()">
           <div class="flex flex-col justify-between md:flex-row items-center w-full md:w-[90%] relative mt-5 top-7 md:top-28 2xl:top-40 p-3 shadow-2xl">
             <div class="flex items-center w-full">
@@ -98,6 +100,8 @@
 </section>
 <hr />
 
+<!-- ------------------------------- SHOWS RECENT JOBS -------------------------- -->
+<!-- --------------- IS VISIBLE IF THE USER IS LOGGED IN AND IS A CANDIDATE --------------------- -->
 <section *ngIf="isLoggedIn() && userDetails?.roles?.includes('CANDIDATE')" class="p-4 md:p-16 w-full">
   <div class="w-[90%] md:w-[80%] mx-auto">
     <div>
@@ -131,6 +135,8 @@
   </div>
 </section>
 
+
+<!-- -------------------------- VISIBLE IF NO ONE IS LOGGED IN ---------------------- -->
 <section *ngIf="!isLoggedIn()" class="p-4 md:p-16 w-full">
   <div class="w-[90%] md:w-[80%] text-center mx-auto">
     <div>
@@ -227,6 +233,8 @@
 </section>
 <hr />
 
+<!-- ------------------------------- SHOWS FEATURED JOBS -------------------------- -->
+<!-- --------------- IS VISIBLE IF THE USER IS LOGGED IN AND IS A CANDIDATE --------------------- -->
 <section *ngIf="isLoggedIn() && userDetails?.roles?.includes('CANDIDATE')" class="p-4 md:p-16 w-full">
   <div class="w-[90%] md:w-[80%] mx-auto">
     <div>
@@ -258,6 +266,7 @@
   </div>
 </section>
 
+<!-- -------------------------- VISIBLE IF NO ONE IS LOGGED IN ---------------------- -->
 <section *ngIf="!isLoggedIn()" class="p-4 md:p-16 w-full">
   <div class="w-[90%] md:w-[80%] text-center mx-auto">
     <div>
@@ -307,6 +316,8 @@
 </section>
 
 <hr>
+
+<!-- -------------------------- VISIBLE IF NO ONE IS LOGGED IN ---------------------- -->
 <app-member *ngIf="!isLoggedIn()"></app-member>
 
 <!-- ------------------------------------FOOTER SECTION--------------------------------- -->

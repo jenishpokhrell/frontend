@@ -40,6 +40,7 @@ searchQuery: string = ''
 
 constructor(private router: Router){}
 
+// ------------------ getting currently loggedInUser details
 getMyDetails(){
   this.authService.getMyDetails().subscribe({
     next: (response) => {
@@ -48,22 +49,28 @@ getMyDetails(){
   })
 }
 
+// ------------------------ getting jobs for candidates ------------------
 getJobForCandidates(){
   this.jobService.getJobsForCandidate().subscribe({
     next: (response) => {
       this.jobs = response
+      // --------------- filter jobs on the basis of date its posted  ----------------
       this.sortedJobs = this.jobs.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+
+      // -------------------- filter jobs on the basis of experience required and salary --------------
       this.featuredJobs = this.jobs.filter(job => job.max_Years_of_Experience_Required > 3 && job.maximumSalary > 90000)
       }
     })
   }
 
+  // ----------------- navigates to searched jobs page ---------------------
   onSearch(){
     if(this.searchQuery.trim()){
       this.router.navigate(['/searchjobs'], {queryParams: {search: this.searchQuery}})
     }
   }
 
+  // ---------------- checks if user is currwntly loggedIn
   isLoggedIn(){
     return this.authService.isLoggedIn()
   }

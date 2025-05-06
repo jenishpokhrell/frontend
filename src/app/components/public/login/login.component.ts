@@ -1,9 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import {
-  Router,
-  RouterLink,
-  RouterOutlet,
-} from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../../reusable/footer/footer.component';
 import {
   FormBuilder,
@@ -49,45 +45,55 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-
   constructor(private router: Router) {}
 
+  // -------------------------------------------------- LOGIN METHOD -------------------------------
   login() {
-    if(this.form.invalid) {
+    if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
     this.authService.login(this.form.value).subscribe({
       next: (response: any) => {
+        // if the current loggedInUser role is employer and if they've been approved, navigates to employer dashboard if TRUE
         if (
           response?.userInfo?.roles?.includes('EMPLOYER') &&
           response?.userInfo?.isApproved === true
         ) {
-          this.router.navigate(['/employer']);
-          this.authService.getMyDetails()
-        } else if (
+          this.router.navigate(['/employer']); //navigates to employer dashboard if TRUE
+          this.authService.getMyDetails();
+        }
+
+        //navigates to not-approved page if above condition matches
+        else if (
           response?.userInfo?.roles?.includes('EMPLOYER') &&
-          response?.userInfo?.isApproved === false
+          response?.userInfo?.isApproved === false // same condition as above
         ) {
           this.router.navigate(['/not-approved']);
-        } else if (response?.userInfo?.roles?.includes('ADMIN')) {
-          this.router.navigate(['/admin']);
-        } else {
-          window.location.replace('/')
-          //this.router.navigate(['/']);
+        } 
+        
+        // navigate to admin dashboard if the loggedInUser role is admin
+        else if (response?.userInfo?.roles?.includes('ADMIN')) {
+          this.router.navigate(['/admin']); // navigates to admin dashboard if it matches above condition
+        }
+        
+        // assume user is candidate and navigate to home page
+        else {
+          window.location.replace('/'); 
         }
       },
       error: (err: HttpErrorResponse) => {
-        if(err.status === 403){
-          this.router.navigate(['/not-approved'])
-        }else{
+        if (err.status === 403) {
+          this.router.navigate(['/not-approved']); // navigates to not-approved page if the employer is not approved by admin
+        } else {
+          // error alert
           Swal.fire({
             icon: 'error',
             title: 'Login Failed',
-            text: err.error?.message || 'An unexpected error occurred'
+            text: err.error?.message || 'An unexpected error occurred',
           });
         }
-      }
+      },
     });
   }
 

@@ -26,6 +26,8 @@ export class SignupComponent {
 
   showPassword : boolean = false;
 
+
+  // --------------------------------- SIGN UP FORM -------------------------------
   signUp: FormGroup = new FormGroup({
     roles: new FormControl('', [Validators.required]),
     firstname: new FormControl('', [Validators.required]),
@@ -35,7 +37,7 @@ export class SignupComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     contact: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^[0-9]{10}$/) //Assuming 10-digit mobile numbers
+      Validators.pattern(/^[0-9]{10}$/)
     ]),
     gender: new FormControl('', [Validators.required]),
     jobtitle: new FormControl('', [Validators.required]),
@@ -47,6 +49,8 @@ export class SignupComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(8)])
   });
 
+
+  //-------------------------------------- Method for registering user-----------------
   register(){
     if(this.signUp.invalid){
       this.signUp.markAllAsTouched()
@@ -91,6 +95,7 @@ export class SignupComponent {
     )
   } 
 
+  //--------------------------------------- Method for File selection and preview --------------------------------
   onFileSelected(event:Event) : void{
     const input = event.target as HTMLInputElement
 
@@ -113,6 +118,7 @@ export class SignupComponent {
     }
 
 
+    // ----------------------- TOGGLE METHOD FOR PASSWORD VISIBILITY
     togglePasswordVisibility(): void{
       this.showPassword = !this.showPassword
     }

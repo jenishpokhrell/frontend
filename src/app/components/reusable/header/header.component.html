@@ -2,7 +2,7 @@
   <div class="flex items-center justify-between px-4 py-3 sm:px-6">
     <!-- Left Side -->
     <div class="flex items-center space-x-2 sm:space-x-4">
-      <button (click)="toggleSidebar.emit()" class="text-gray-600 dark:text-gray-300 hover:text-blue-600">
+      <button (click)="toggleSidebar.emit()" class="block md:hidden text-gray-600 dark:text-gray-300 hover:text-blue-600">
         <fa-icon [icon]="bars"></fa-icon>
       </button>
       <div (click)="navigateHome()" class="cursor-pointer">

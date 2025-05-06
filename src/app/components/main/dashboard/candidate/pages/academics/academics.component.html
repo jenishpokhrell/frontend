@@ -1,0 +1,154 @@
+<div class="mx-auto">
+  <div class="mb-6">
+    <h2 class="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white">
+      My Academics
+    </h2>
+  </div>
+
+  <div *ngIf="academic" class="text-gray-50 mt-6 w-full">
+    <form
+      [formGroup]="academic"
+      (submit)="academics === null ? saveAcademics() : updateAcademics()"
+      class="bg-gray-900 rounded-lg p-4 sm:p-6"
+    >
+      <div class="mb-4 sm:mb-6">
+        <label class="block font-bold mb-2">Institution Name</label>
+        <input
+          type="text"
+          placeholder="Enter your institution name"
+          class="w-full p-3 text-[14px] bg-gray-600 outline-none rounded"
+          formControlName="institutionName"
+        />
+        <p
+          *ngIf="isInvalid('institutionName')"
+          class="text-red-500 text-sm mt-1"
+        >
+          Institution name is required
+        </p>
+      </div>
+
+      <!-- Stream -->
+      <div class="mb-4 sm:mb-6">
+        <label class="block font-bold mb-2">Stream</label>
+        <input
+          type="text"
+          placeholder="Enter your stream"
+          class="w-full p-3 text-[14px] bg-gray-600 outline-none rounded"
+          formControlName="stream"
+        />
+        <p *ngIf="isInvalid('stream')" class="text-red-500 text-sm mt-1">
+          Please mention stream
+        </p>
+      </div>
+
+      <!-- Year Inputs - Stack on mobile, side-by-side on larger screens -->
+      <div class="flex flex-col sm:flex-row sm:space-x-4 mb-4 sm:mb-6">
+        <div class="w-full sm:w-1/2 mb-4 sm:mb-0">
+          <label class="block font-bold mb-2">Start Year</label>
+          <input
+            type="text"
+            placeholder="Enter starting year (eg. 2024)"
+            class="w-full p-3 text-[14px] bg-gray-600 outline-none rounded"
+            formControlName="startYear"
+          />
+          <p *ngIf="isInvalid('startYear')" class="text-red-500 text-sm mt-1">
+            Provide starting year
+          </p>
+        </div>
+        <div class="w-full sm:w-1/2">
+          <label class="block font-bold mb-2">Graduation Year</label>
+          <input
+            type="text"
+            placeholder="Enter graduation year (eg. 2028)"
+            class="w-full p-3 text-[14px] bg-gray-600 outline-none rounded"
+            formControlName="graduationYear"
+          />
+          <p
+            *ngIf="isInvalid('graduationYear')"
+            class="text-red-500 text-sm mt-1"
+          >
+            Provide graduating year
+          </p>
+        </div>
+      </div>
+
+      <!-- Degree Type -->
+      <div class="mb-4 sm:mb-6">
+        <label class="block font-bold mb-2">Degree Type</label>
+        <select
+          class="w-full p-3 text-[14px] bg-gray-600 outline-none rounded"
+          formControlName="degreeType"
+        >
+          <option value="">-- Select Degree Type--</option>
+          <option value="Bachelor's">Bachelors</option>
+          <option value="Masters">Masters</option>
+        </select>
+        <p *ngIf="isInvalid('degreeType')" class="text-red-500 text-sm mt-1">
+          Mention your degree type
+        </p>
+      </div>
+
+      <!-- Current Semester -->
+      <div class="mb-6 sm:mb-8">
+        <label class="block font-bold mb-2">Current Semester</label>
+        <select
+          class="w-full p-3 text-[14px] bg-gray-600 outline-none rounded"
+          formControlName="currentSemester"
+        >
+          <option value="">-- Select Current Semester--</option>
+          <option value="1st">1st</option>
+          <option value="2nd">2nd</option>
+          <option value="3rd">3rd</option>
+          <option value="4th">4th</option>
+          <option value="5th">5th</option>
+          <option value="6th">6th</option>
+          <option value="7th">7th</option>
+          <option value="8th">8th</option>
+          <option value="Graduated">Graduated</option>
+        </select>
+        <p
+          *ngIf="isInvalid('currentSemester')"
+          class="text-red-500 text-sm mt-1"
+        >
+          Mention your current semester
+        </p>
+      </div>
+
+      <!-- Action Buttons - Stack on mobile, side-by-side on larger screens -->
+      <div
+        class="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0"
+      >
+        @if(academics === null) {
+        <button
+          type="submit"
+          class="w-full sm:w-auto px-6 py-3 bg-blue-700 hover:bg-blue-800 rounded-full text-sm font-semibold text-center transition-colors"
+        >
+          Save
+        </button>
+        } @else if(academic.disabled) {
+        <button
+          type="button"
+          (click)="enableForm()"
+          class="w-full sm:w-auto px-6 py-3 bg-blue-700 hover:bg-blue-800 rounded-full text-sm font-semibold text-center transition-colors"
+        >
+          Edit
+        </button>
+        } @else {
+        <button
+          type="submit"
+          class="w-full sm:w-auto px-6 py-3 bg-blue-700 hover:bg-blue-800 rounded-full text-sm font-semibold text-center transition-colors"
+        >
+          Update
+        </button>
+        }
+        <button
+          type="button"
+          (click)="deleteAcademics(academicId)"
+          class="w-full sm:w-auto px-6 py-3 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-black dark:text-white rounded-full text-sm font-semibold text-center transition-colors"
+        >
+          Delete
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

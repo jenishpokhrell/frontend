@@ -69,31 +69,12 @@ export class BrowsejobsComponent implements OnInit{
     })
   }
 
-
-  showFilter : boolean = false
-  
-  private toggleBodyScroll(disable: boolean){
-    if(disable){
-      document.body.style.overflow = 'hidden'
-    }else{
-      document.body.style.overflow = ''
-    }
-  }
-
-  showFilterBar() {
-    this.showFilter = !this.showFilter
-    this.toggleBodyScroll(this.showFilter)
-  }
-
+// --------------------------- GETS FILTERED JOBS BASED ON JOB TITLE ------------------------------
   get filteredJobs(){
     return this.jobs.filter(job => 
       this.searchJob === '' ||
       job.jobTitle.toLowerCase().includes(this.searchJob.toLowerCase())
     )
-  }
-
-  toggleFilter(event: any, filterType: 'title' | 'type' | 'level'){
-    
   }
 
   filterJobs(){
