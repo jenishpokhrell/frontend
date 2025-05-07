@@ -16,14 +16,9 @@ export class LogsComponent implements OnInit {
 
   tachometer = faTachometerAlt; userAlt = faUserAlt; userIcon = faUser; userClock = faUserClock; userBriefCase = faBriefcase; clipboard = faClipboardList;
 
-  notifications = [
-    { id: 1, message: 'New employer registration requires approval', time: '10 min ago', read: false },
-    { id: 2, message: '3 new jobs posted today', time: '1 hour ago', read: false },
-    { id: 3, message: 'System maintenance scheduled', time: '2 hours ago', read: true }
-  ];
-
   logService = inject(LogsService)
   logs : Logs[] = []
+  sortedLogs: Logs[] = []
 
   ngOnInit(): void {
     this.getAllLogs();
@@ -33,6 +28,7 @@ export class LogsComponent implements OnInit {
     this.logService.getAllLogs().subscribe({
       next: (response) => {
         this.logs = response
+        this.sortedLogs = this.logs.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
       }
     })
   }

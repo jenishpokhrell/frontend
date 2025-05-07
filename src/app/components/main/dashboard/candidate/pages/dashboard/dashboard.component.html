@@ -16,10 +16,20 @@
   <div class="bg-white dark:bg-gray-700 rounded-lg shadow p-4 sm:p-6">
     <div class="flex items-center justify-between">
       <div>
-        <p class="text-gray-500 dark:text-gray-300 text-xs sm:text-sm font-medium">Available Jobs</p>
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ jobsCount }}</h3>
+        <p
+          class="text-gray-500 dark:text-gray-300 text-xs sm:text-sm font-medium"
+        >
+          Available Jobs
+        </p>
+        <h3
+          class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mt-1"
+        >
+          {{ jobsCount }}
+        </h3>
       </div>
-      <div class="rounded-full p-2 sm:p-3 w-12 sm:w-16 flex items-center justify-center bg-purple-100 text-purple-600">
+      <div
+        class="rounded-full p-2 sm:p-3 w-12 sm:w-16 flex items-center justify-center bg-purple-100 text-purple-600"
+      >
         <fa-icon [icon]="file"></fa-icon>
       </div>
     </div>
@@ -29,23 +39,43 @@
   <div class="bg-white dark:bg-gray-700 rounded-lg shadow p-4 sm:p-6">
     <div class="flex items-center justify-between">
       <div>
-        <p class="text-gray-500 dark:text-gray-300 text-xs sm:text-sm font-medium">Total Applications</p>
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ applicationsCount }}</h3>
+        <p
+          class="text-gray-500 dark:text-gray-300 text-xs sm:text-sm font-medium"
+        >
+          Total Applications
+        </p>
+        <h3
+          class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mt-1"
+        >
+          {{ applicationsCount }}
+        </h3>
       </div>
-      <div class="rounded-full p-2 sm:p-3 w-12 sm:w-16 flex items-center justify-center bg-blue-900 text-blue-200">
+      <div
+        class="rounded-full p-2 sm:p-3 w-12 sm:w-16 flex items-center justify-center bg-blue-900 text-blue-200"
+      >
         <fa-icon [icon]="file"></fa-icon>
       </div>
     </div>
-  </div> 
+  </div>
 
   <!-- Shortlisted -->
   <div class="bg-white dark:bg-gray-700 rounded-lg shadow p-4 sm:p-6">
     <div class="flex items-center justify-between">
       <div>
-        <p class="text-gray-500 dark:text-gray-300 text-xs sm:text-sm font-medium">Shortlisted</p>
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ shortlistedCount }}</h3>
+        <p
+          class="text-gray-500 dark:text-gray-300 text-xs sm:text-sm font-medium"
+        >
+          Shortlisted
+        </p>
+        <h3
+          class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mt-1"
+        >
+          {{ shortlistedCount }}
+        </h3>
       </div>
-      <div class="rounded-full p-2 sm:p-3 w-12 sm:w-16 flex items-center justify-center bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-200">
+      <div
+        class="rounded-full p-2 sm:p-3 w-12 sm:w-16 flex items-center justify-center bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-200"
+      >
         <fa-icon [icon]="check"></fa-icon>
       </div>
     </div>
@@ -55,10 +85,20 @@
   <div class="bg-gray-700 rounded-lg shadow p-4 sm:p-6">
     <div class="flex items-center justify-between">
       <div>
-        <p class="text-gray-500 dark:text-gray-300 text-xs sm:text-sm font-medium">Saved Jobs</p>
-        <h3 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ savedJobsCount }}</h3>
+        <p
+          class="text-gray-500 dark:text-gray-300 text-xs sm:text-sm font-medium"
+        >
+          Saved Jobs
+        </p>
+        <h3
+          class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mt-1"
+        >
+          {{ savedJobsCount }}
+        </h3>
       </div>
-      <div class="rounded-full p-2 sm:p-3 w-12 sm:w-16 flex items-center justify-center bg-yellow-100 text-yellow-600">
+      <div
+        class="rounded-full p-2 sm:p-3 w-12 sm:w-16 flex items-center justify-center bg-yellow-100 text-yellow-600"
+      >
         <fa-icon [icon]="saved"></fa-icon>
       </div>
     </div>
@@ -154,12 +194,12 @@
     <div
       class="px-4 py-4 border-t border-gray-200 dark:border-gray-600 text-right"
     >
-      <a
-        href="#"
-        class="text-blue-600 dark:text-blue-400 hover:underline text-sm"
+      <p
+        routerLink="/candidate/applied-jobs"
+        class="text-blue-600 dark:text-blue-400 hover:underline text-sm cursor-pointer"
       >
-        View All Applications
-      </a>
+        View All Jobs
+      </p>
     </div>
   </div>
 
@@ -244,12 +284,12 @@
     <div
       class="px-4 py-4 border-t border-gray-200 dark:border-gray-600 text-right"
     >
-      <a
-        href="#"
-        class="text-blue-600 dark:text-blue-400 hover:underline text-sm"
+      <p
+        routerLink="/browsejobs"
+        class="text-blue-600 dark:text-blue-400 hover:underline text-sm cursor-pointer"
       >
         View All Jobs
-      </a>
+      </p>
     </div>
   </div>
 </div>

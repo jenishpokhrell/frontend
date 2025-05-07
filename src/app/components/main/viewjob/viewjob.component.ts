@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-viewjob',
   standalone: true,
-  imports: [FooterComponent, NgFor, NgIf, RouterLink],
+  imports: [FooterComponent, NgIf, RouterLink],
   templateUrl: './viewjob.component.html',
   styleUrl: './viewjob.component.css'
 })

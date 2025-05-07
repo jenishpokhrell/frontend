@@ -10,7 +10,7 @@ import { UserModel } from '../../../model/user';
 @Component({ 
   selector: 'app-header',
   standalone: true,
-  imports: [NgIf, FaIconComponent, RouterLink],
+  imports: [NgIf, FaIconComponent],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })

@@ -13,7 +13,7 @@
       <nav class="text-white text-[14px] h-full flex items-center">
         <ul class="flex m-3 h-full items-center">
           <li
-            class="mr-14 h-full flex items-center cursor-pointer"
+            class="mr-14 flex items-center cursor-pointer"
             routerLink=""
             routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -21,7 +21,7 @@
             Home
           </li>
           <li
-            class="mr-14 h-full flex items-center cursor-pointer"
+            class="mr-14 flex items-center cursor-pointer"
             routerLink="/about-us"
             routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -31,14 +31,14 @@
           @if(isLoggedIn()) {
             <li
               *ngIf="userModel?.roles?.includes('CANDIDATE')"
-              class="mr-14 h-full flex items-center cursor-pointer"
+              class="mr-14 flex items-center cursor-pointer"
               routerLink="/browsejobs" 
             >
               Browse Jobs
             </li>
           } @else {
             <li
-              class="mr-14 h-full flex items-center cursor-pointer"
+              class="mr-14 flex items-center cursor-pointer"
               routerLink="/login"
             >
               Browse Jobs
@@ -47,14 +47,14 @@
           @if(isLoggedIn()) {
             <li
               *ngIf="userModel?.roles?.includes('EMPLOYER')"
-              class="mr-14 h-full flex items-center cursor-pointer"
+              class="mr-14 flex items-center cursor-pointer"
               routerLink="/postjobs"
             >
               Post Job
             </li>
           } @else {
             <li
-              class="mr-14 h-full flex items-center cursor-pointer"
+              class="mr-14 flex items-center cursor-pointer"
               routerLink="/login"
             >
               Post Job
@@ -136,7 +136,7 @@
     <nav class="text-white text-[15px]">
       <ul class="space-y-4">
         <li
-          class="cursor-pointer py-2"
+          class="cursor-pointer my-2"
           routerLink=""
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
@@ -145,7 +145,7 @@
           Home
         </li>
         <li
-          class="cursor-pointer py-2"
+          class="cursor-pointer my-2"
           routerLink="/about-us"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
@@ -156,7 +156,7 @@
         @if(isLoggedIn()) {
           <li
             *ngIf="userModel?.roles?.includes('CANDIDATE')"
-            class="cursor-pointer py-2"
+            class="cursor-pointer my-2"
             routerLink="/browsejobs"
             (click)="isMenuOpen = false"
           >
@@ -164,7 +164,7 @@
           </li>
         } @else {
           <li
-            class="cursor-pointer py-2"
+            class="cursor-pointer my-2"
             routerLink="/login"
             (click)="isMenuOpen = false"
           >
@@ -174,7 +174,7 @@
         @if(isLoggedIn()) {
           <li
             *ngIf="userModel?.roles?.includes('EMPLOYER')"
-            class="cursor-pointer py-2"
+            class="cursor-pointer my-2"
             routerLink="/postjobs"
             (click)="isMenuOpen = false"
           >
@@ -182,7 +182,7 @@
           </li>
         } @else {
           <li
-            class="cursor-pointer py-2"
+            class="cursor-pointer my-2"
             routerLink="/login"
             (click)="isMenuOpen = false"
           >
