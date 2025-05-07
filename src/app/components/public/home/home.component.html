@@ -108,7 +108,7 @@
       <h1 class="text-2xl md:text-3xl font-bold text-center p-5 mb-8 md:mb-12">Recent <span class="text-[#3094FF]">Jobs</span></h1>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10">
-      <div *ngFor="let job of sortedJobs | slice: 0:4" class="p-4 md:p-5 border border-gray-100 shadow-xl">
+      <div *ngFor="let job of sortedJobs | slice: 0:8" class="p-4 md:p-5 border border-gray-100 shadow-xl">
         <div>
           <div>
             <h2 class="text-xl md:text-2xl lg:text-[20px] font-bold text-[#3094FF]">{{job.jobTitle}}</h2>
@@ -241,7 +241,7 @@
       <h1 class="text-2xl md:text-3xl font-bold text-center p-5 mb-8 md:mb-12">Featured <span class="text-[#3094FF]">Jobs</span></h1>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10">
-      <div *ngFor="let job of featuredJobs | slice: 0:4" class="p-4 md:p-5 border border-gray-100 shadow-xl">
+      <div *ngFor="let job of featuredJobs | slice: 0:8" class="p-4 md:p-5 border border-gray-100 shadow-xl">
         <div>
           <h2 class="text-xl md:text-2xl lg:text-[20px] font-bold text-[#3094FF]">{{job.jobTitle}}</h2>
         </div>

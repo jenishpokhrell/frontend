@@ -47,12 +47,12 @@
               [type]="showPassword ? 'text' : 'password'"
               id="password"
               placeholder="Enter your password"
-              class="w-full border-2 p-3 md:p-4 outline-none rounded-l rounded-r-none"
+              class="w-full border-y-2 border-l-2 p-3 md:p-4 outline-none rounded-l rounded-r-none"
               formControlName="password"
             />
             <button
               type="button"
-              class="bg-gray-100 border-y-2 border-r-2 p-3 md:p-4 rounded-r text-[#3094FF]"
+              class="border-y-2 border-r-2 p-3 md:p-4 rounded-r text-[#3094FF]"
               (click)="togglePasswordVisibility()"
             >
               <fa-icon
@@ -85,7 +85,7 @@
   </div>
 </div>
 
- <!-- ------------------------------------ REUSABLE FOOTER COMPONENT ---------------------- -->
+<!-- ------------------------------------ REUSABLE FOOTER COMPONENT ---------------------- -->
 <app-footer></app-footer>
 
 <router-outlet></router-outlet>

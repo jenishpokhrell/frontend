@@ -4,7 +4,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { faBookmark } from '@fortawesome/free-regular-svg-icons';
 import { GetJobForCandidate } from '../../../model/job';
 import { JobService } from '../../../services/job/job.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserModel } from '../../../model/user';
 import { GeneralResponse } from '../../../model/response';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-viewjob',
   standalone: true,
-  imports: [FooterComponent, NgFor, NgIf],
+  imports: [FooterComponent, NgFor, NgIf, RouterLink],
   templateUrl: './viewjob.component.html',
   styleUrl: './viewjob.component.css'
 })
