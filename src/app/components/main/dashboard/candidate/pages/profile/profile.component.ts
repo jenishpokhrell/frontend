@@ -33,7 +33,7 @@ import { Resume } from '../../../../../../model/resume';
     FaIconComponent,
     NgFor,
     NgIf,
-    PdfViewerModule,
+    // PdfViewerModule,
     RouterLink,
   ],
   templateUrl: './profile.component.html',

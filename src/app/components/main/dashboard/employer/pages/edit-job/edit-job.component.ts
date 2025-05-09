@@ -90,13 +90,42 @@ export class EditJobComponent implements OnInit {
     this.postJob.patchValue({ isActive: false})
     const data = this.postJob.value
     if(this.id){
-      this.jobService.updateJob(this.id, data).subscribe((response: GeneralResponse)=> {
-        if(response.isSuccess){
-          alert(response.message)
-        }else{
-          alert('Failed updating job')
+      Swal.fire({
+        title: "Do you want to deactivate the job?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Update",
+        denyButtonText: `No`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.jobService.updateJob(this.id, data).subscribe({
+            next: (response) => {
+              if(response.isSuccess){
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: response.message,
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+              }else{
+                Swal.fire({
+                  position: "top-end",
+                  icon: "error",
+                  title: response.message,
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+              }
+            },
+            error: (err) => {
+              console.error(err)
+            }
+          })
+        } else if (result.isDenied) {
+          Swal.fire("Operation cancelled", "OKKK", "error");
         }
-      })
+      });
     }else{
       console.error('Failed fetching id')
     }

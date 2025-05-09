@@ -41,6 +41,7 @@ import { SidebarComponent } from './components/reusable/sidebar/sidebar.componen
 import { CandidateLayoutComponent } from './components/main/dashboard/candidate/candidatelayout/candidatelayout.component';
 import { EmployerlayoutComponent } from './components/main/dashboard/employer/employerlayout/employerlayout.component';
 import { AdminlayoutComponent } from './components/main/dashboard/admin/adminlayout/adminlayout.component';
+import { EmployerprofileforcandidateComponent } from './components/main/dashboard/candidate/pages/employerprofileforcandidate/employerprofileforcandidate.component';
 
 export const routes: Routes = [
     {
@@ -139,6 +140,7 @@ export const routes: Routes = [
             { path: 'projects', loadComponent: () => ProjectsComponent},
             { path: 'applied-jobs', loadComponent: () => AppliedJobsComponent},
             { path: 'saved-jobs', loadComponent: () => SavedJobsComponent},
+            { path: 'employerprofile/:userId', loadComponent: () => EmployerprofileforcandidateComponent},
             { path: 'update-profile/:id', loadComponent:() => EditProfileComponent},
             { path: 'change-password', loadComponent: () => ChangePasswordComponent},
         ]

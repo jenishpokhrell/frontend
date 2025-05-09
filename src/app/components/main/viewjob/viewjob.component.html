@@ -208,6 +208,14 @@
           <p><span class="font-medium">Contact:</span> {{ user.contact }}</p>
           <p><span class="font-medium">Email:</span> {{ user.email }}</p>
         </div>
+        <div>
+          <button
+                class="bg-[#6BA1FF] text-white p-2 w-full md:w-36 rounded-full cursor-pointer"
+                routerLink="/candidate/employerprofile/{{user.id}}"
+              >
+                View Profile
+              </button>
+        </div>
       </div>
     </div>
   </div>
