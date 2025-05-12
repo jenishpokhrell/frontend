@@ -8,7 +8,7 @@ import { NgIf } from '@angular/common';
 import Swal from 'sweetalert2';
 import { RouterOutlet } from '@angular/router';
 @Component({
-  selector: 'app-candidate',
+  selector: 'app-change-password',
   standalone: true,
   imports: [ReactiveFormsModule, FaIconComponent, NgIf, RouterOutlet],
   templateUrl: './change-password.component.html',

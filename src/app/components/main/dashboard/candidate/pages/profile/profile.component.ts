@@ -27,7 +27,7 @@ import { ResumeService } from '../../../../../../services/resume/resume.service'
 import { Resume } from '../../../../../../model/resume';
 
 @Component({
-  selector: 'app-candidate',
+  selector: 'app-profile',
   standalone: true,
   imports: [
     FaIconComponent,

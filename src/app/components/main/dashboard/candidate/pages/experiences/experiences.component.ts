@@ -34,7 +34,7 @@ import Swal from 'sweetalert2';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-candidate',
+  selector: 'app-experiences',
   standalone: true,
   imports: [
     SidebarComponent,

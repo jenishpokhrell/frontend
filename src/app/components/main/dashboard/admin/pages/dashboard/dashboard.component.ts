@@ -13,7 +13,7 @@ import { LogsService } from '../../../../../../services/logs/logs.service';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-admin',
+  selector: 'app-dashboard',
   standalone: true,
   imports: [NgFor, FaIconComponent, SlicePipe, NgIf, RouterLink],
   templateUrl: './dashboard.component.html',

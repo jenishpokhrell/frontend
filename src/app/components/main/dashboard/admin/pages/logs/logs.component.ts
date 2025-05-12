@@ -5,7 +5,7 @@ import { LogsService } from '../../../../../../services/logs/logs.service';
 import { Logs } from '../../../../../../model/log';
 
 @Component({
-  selector: 'app-admin',
+  selector: 'app-logs',
   standalone: true,
   imports: [ NgFor, ],
   templateUrl: './logs.component.html',

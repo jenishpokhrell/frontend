@@ -8,7 +8,7 @@ import { MyJobApplications } from '../../../../../../model/job';
 import { JobService } from '../../../../../../services/job/job.service';
 
 @Component({
-  selector: 'app-candidate',
+  selector: 'app-applied-jobs',
   standalone: true,
   imports: [ ReactiveFormsModule, NgFor, FaIconComponent, RouterOutlet, RouterLink, NgIf],
   templateUrl: './applied-jobs.component.html',

@@ -11,7 +11,7 @@ import { GetMyJob } from '../../../../../../model/job';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-employer',
+  selector: 'app-dashboard',
   standalone: true,
   imports: [SidebarComponent, HeaderComponent, NgFor, FaIconComponent, RouterLink, NgIf, RouterOutlet],
   templateUrl: './dashboard.component.html',

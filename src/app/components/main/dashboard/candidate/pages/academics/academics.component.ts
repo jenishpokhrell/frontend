@@ -12,9 +12,9 @@ import Swal from 'sweetalert2';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-candidate',
+  selector: 'app-academics',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgIf, RouterOutlet],
+  imports: [ReactiveFormsModule, NgIf, RouterOutlet],
   templateUrl: './academics.component.html',
   styleUrls: ['./academics.component.css']
 })

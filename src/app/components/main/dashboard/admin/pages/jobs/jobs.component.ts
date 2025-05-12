@@ -6,7 +6,7 @@ import { GeneralResponse } from '../../../../../../model/response';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-admin',
+  selector: 'app-jobs',
   standalone: true,
   imports: [NgFor],
   templateUrl: './jobs.component.html',

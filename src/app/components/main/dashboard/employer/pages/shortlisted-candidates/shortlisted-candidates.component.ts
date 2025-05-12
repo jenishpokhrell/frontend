@@ -7,7 +7,7 @@ import { GetShortlistedCandidate } from '../../../../../../model/job';
 import { JobService } from '../../../../../../services/job/job.service';
 
 @Component({
-  selector: 'app-job-applications',
+  selector: 'app-shortlisted-candidates',
   standalone: true,
   imports: [ReactiveFormsModule, NgFor, RouterLink, NgIf, RouterOutlet],
   templateUrl: './shortlisted-candidates.component.html',

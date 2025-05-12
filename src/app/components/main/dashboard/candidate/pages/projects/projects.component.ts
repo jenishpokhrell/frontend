@@ -12,9 +12,9 @@ import { GeneralResponse } from '../../../../../../model/response';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-candidate',
+  selector: 'app-projects',
   standalone: true,
-  imports: [SidebarComponent, HeaderComponent, ReactiveFormsModule, NgFor, FaIconComponent, NgIf, RouterOutlet],
+  imports: [ ReactiveFormsModule, NgFor, FaIconComponent, NgIf],
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css']
 })
