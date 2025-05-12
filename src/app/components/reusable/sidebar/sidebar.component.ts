@@ -8,7 +8,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [NgIf, NgFor, RouterLink, FaIconComponent, RouterOutlet], 
+  imports: [NgIf, NgFor, RouterLink, FaIconComponent], 
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })

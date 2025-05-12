@@ -14,7 +14,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-academics',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, RouterOutlet],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './academics.component.html',
   styleUrls: ['./academics.component.css']
 })

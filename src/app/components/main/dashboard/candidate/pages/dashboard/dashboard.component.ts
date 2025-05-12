@@ -51,10 +51,7 @@ export class CandidateDashboardComponent implements OnInit{
       next: (response) => {
         this.jobs = response
         this.sortedJobs = this.jobs.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-        this.jobsCount = this.jobs.length
-        this.stats.push(
-          { title: 'Available Jobs', value: this.jobsCount, icon: faFileAlt, color: 'bg-green-100 text-green-600' },
-        )
+        this.jobsCount = this.jobs.filter(job => job.isActive === true).length
       }
     })
   }
@@ -64,9 +61,7 @@ export class CandidateDashboardComponent implements OnInit{
       next: (response) => {
         this.mySavedJobs = response
         this.savedJobsCount = this.mySavedJobs.length
-        this.stats.push(
-          { title: 'Saved Jobs', value: this.savedJobsCount, icon: faBookmark, color: 'bg-yellow-100 text-yellow-600' },
-        )
+        
       }
     })
   }
@@ -77,20 +72,17 @@ export class CandidateDashboardComponent implements OnInit{
         this.jobApplications = response
         this.applicationsCount = this.jobApplications.length
         this.shortlistedCount = response.filter((item:any) => item.jobStatus === 'Shortlisted').length
-        this.stats.push(
-          { title: 'Applied Jobs', value: this.applicationsCount, icon: faFileAlt, color: 'bg-green-100 text-green-600' },
-          { title: 'Shortlisted', value: this.shortlistedCount, icon: faUserCheck, color: 'bg-purple-100 text-purple-600' }
-        )
+        
       }
     })
   }
 
   
-  async ngOnInit() {
+  ngOnInit() {
     this.getMyDetails()
-    await this.getJobs()
-    await this.getMySavedJobs()
-    await this.getMyJobApplications()
+    this.getJobs()
+    this.getMySavedJobs()
+    this.getMyJobApplications()
   }
 
 }
